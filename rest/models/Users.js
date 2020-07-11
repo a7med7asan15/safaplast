@@ -1,0 +1,46 @@
+const mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
+
+
+var Schema = mongoose.Schema;
+const UsersSchema = mongoose.Schema({
+    firstname: { type: String, required: true},
+    lastname: { type: String, required: true},
+    email:{type:String,required:true},
+    pin: { type: String, required: true},
+    mobileNo:{ type: String},
+    gender: { type: String, lowercase: true},
+    role:{type:Number,default:1},
+    stores:[
+      {
+        storeName: {type:String},
+        
+      }
+    ]
+});
+
+UsersSchema.pre('save', function(next) {
+    var user = this;
+    if (!user.isModified('pin')) return next();
+
+    bcrypt.genSalt(10, function(err, salt) {
+      if (err) return next(err);
+      bcrypt.hash(user.pin, salt, null, function(err, hash) {
+        if (err) return next(err);
+        user.pin = hash;
+        next();
+      });
+    });
+  });
+
+  UsersSchema.methods.comparePassword = async function(pin) {
+  try{
+   return await bcrypt.compareSync(pin, this.pin);
+  }catch(err){
+    throw new Error(error)
+  }
+  }
+  
+
+module.exports = mongoose.model('UsersModel', UsersSchema);
+

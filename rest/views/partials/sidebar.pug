@@ -1,0 +1,58 @@
+aside.main-sidebar.sidebar-light-primary.elevation-4
+  a.brand-link(href="index3.html")
+    span.brand-text.font-weight-light Jolibien 
+  .sidebar
+    .user-panel.mt-3.pb-3.mb-3.d-flex
+      .image
+        img.img-circle.elevation-2(src="dist/img/user2-160x160.jpg", alt="User Image")
+      .info
+        a.d-block(href="#") Mohamed Hussam
+    nav.mt-2
+      ul.nav.nav-pills.nav-sidebar.flex-column(data-widget="treeview", role="menu", data-accordion="false")
+        li.nav-item.has-treeview.menu-open
+          a.nav-link(href="#")
+            i.left.pr-2.fas.fa-user-circle
+            p
+              | Accounts 
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
+            //  Sub Menu Item  
+            li.nav-item
+              a.nav-link(href="/users")
+                i.left.pr-2.fas.fa-users
+                p All Accounts
+            //  Sub Menu Item  
+            li.nav-item
+              a.nav-link(href="/users/add")
+                i.left.pr-2.fas.fa-user-plus
+                p Add New Account
+        li.nav-item.has-treeview.menu-open
+          a.nav-link(href="#")
+            i.left.pr-2.fas.fa-store-alt
+            p
+              | Stores
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link(href="/stores")
+                i.left.pr-2.fas.fa-store
+                p All Stores
+            li.nav-item
+              a.nav-link(href="/stores/add")
+                i.left.pr-2.fas.fa-cart-plus
+                p Add New Store
+        li.nav-item
+          a.nav-link(href="/service")
+            i.left.pr-2.fas.fa-th
+            p Services
+              
+        li.nav-item
+          a.nav-link(href="/city")
+            i.left.pr-2.fas.fa-th
+            p City
+              
+        li.nav-item
+          a.nav-link(href="/area")
+            i.left.pr-2.fas.fa-th
+            p Areas
+              
