@@ -39,7 +39,9 @@ app.use('/api/checker', checkerController);
 app.get('/', function (req, res) {
 res.render('screens/homeScreen', { title: 'Hey', message: 'Hello there!' })
 })
-app.use(bodyParser.urlenc`oded({ extended: false }));
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
