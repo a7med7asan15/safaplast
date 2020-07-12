@@ -48,6 +48,6 @@ app.use(bodyParser.json());
 seedUser()
 
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log('Server is running');
+app.listen(process.env.PRODUCTION === true ? process.env.PORT : 3001, () => {
+  console.log(`Server is running ${process.env.PRODUCTION === true ? process.env.PORT : 3001}`);
 });
