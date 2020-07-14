@@ -1,0 +1,38 @@
+extends ../../emptyLayout.pug
+
+block content        
+        .login-box
+            .login-logo
+                a(href="../../index2.html")
+                b Admin
+                | LTE
+            .card
+                .card-body.login-card-body
+                    p.login-box-msg Sign in to start your session
+                    form#loginForm(action="/dashboard/login", method="post")
+                        .input-group.mb-3
+                            input.form-control(type="email", name="email" ,placeholder="Email")
+                            .input-group-append
+                                .input-group-text
+                                    span.fas.fa-envelope
+                        .input-group.mb-3
+                            input.form-control(type="password", name="password" ,placeholder="Password")
+                            .input-group-append
+                                .input-group-text
+                                    span.fas.fa-lock
+                        .row
+                            .col-8
+                                .icheck-primary
+                                    input#remember(type="checkbox")
+                                    label(for="remember").ml-2 Remember Me
+                            .col-4
+                                button.btn.btn-primary.btn-block(type="submit") Sign In
+
+                        p.mb-1
+                            a(href="forgot-password.html") I forgot my password
+                        p.mb-0
+                            a.text-center(href="register.html") Register a new membership
+
+block scripts 
+         script(src="/static/login.js", type="text/javascript")
+

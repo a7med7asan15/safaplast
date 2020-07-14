@@ -49,19 +49,18 @@ const seedAreas = ()=>{
 }
 
 const seedUser = async ()=>{
-    // const fin = await CategoryParentSchema.findOne({ 'childCategory._id' : '5f09ab1d2dbd1c53e0d16c12' });
-    // console.log(fin);
+
    const user =  await User.findOne({email:'admin@admin.com'})
    if(!user){
        const newUser = new User({
-        firstname: 'Mohamed',
-        lastname: 'Hussam',
+        index:'1',
+        username: 'Admin',
         email:'admin@admin.com',
         pin: '1234',
         role:0
        })
       await newUser.save()
-      return console.log('Created New User admin@admin.com ,1234') 
+      return console.log('Created New User admin@admin.com , 1234') 
     }
     return console.log('User Already There') 
 

@@ -4,9 +4,11 @@ const  Joi = require('@hapi/joi');
 module.exports  = {
     validationBody: (schemas)=>{
         return (req,res,next)=>{
+            console.log(req.url);
             const result  = schemas.validate(req.body)
             if (result.error){
-                return res.status(200).json({er:true, no:1, message:'validation Error',validationEr:result,token:'' })
+                req.flash('error', result.error.details)
+                return res.redirect('/dashboard' + req.url)
             }
             if(!req.value){ req.value= {}}
             req.value['body'] = result.value;
@@ -14,12 +16,13 @@ module.exports  = {
         }
     },
     schemas:{
-        registerSchema:Joi.object().keys({
-            firstname:Joi.string().min(3).max(30).required(),
-            lastname:Joi.string().min(3).max(30).required(),
-            mobileNo: Joi.string().min(11).max(11).pattern(new RegExp(/['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)).required(),
-            natId: Joi.string().min(14).max(14).required(),
-            pin :Joi.string().min(4).required(),
+        addUserSchema:Joi.object().keys({
+            username:Joi.string().min(3).max(30).required(),
+            email:Joi.string().email().required(),
+            password:Joi.string().min(3).max(30).required(),
+            mobilenumber: Joi.string().min(11).max(11).pattern(new RegExp(/['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)).required(),
+            _csrf:Joi.string(),
+            userrole:Joi.string()
         }),
         loginSchema :Joi.object().keys({
             email: Joi.string().email().required(),

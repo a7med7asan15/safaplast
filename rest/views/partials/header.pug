@@ -79,10 +79,21 @@ nav.main-header.navbar.navbar-expand.navbar-dark.navbar-light
         a.dropdown-item(href="#")
           i.fas.fa-file.mr-2
           |  3 new reports
-
           span.float-right.text-muted.text-sm 2 days
         .dropdown-divider
         a.dropdown-item.dropdown-footer(href="#") See All Notifications
-    li.nav-item
-      a.nav-link(data-widget="control-sidebar", data-slide="true", href="#", role="button")
-        i.fas.fa-th-large
+    if thisUser       
+    li.nav-item.dropdown.user-menu
+        a.nav-link.dropdown-toggle(href="#", data-toggle="dropdown")
+          img.user-image.img-circle.elevation-2(src=`/static/images/${thisUser.avatar}`, alt="User Image")
+          span.d-none.d-md-inline #{thisUser.username}
+        ul.dropdown-menu.dropdown-menu-lg.dropdown-menu-right
+          li.user-header
+              img.img-circle(width="100" ,src=`/static/images/${thisUser.avatar}`, alt="User Image")
+              p #{thisUser.username}
+                small Member since Nov. 2012
+          li(style="display:flex; height:auto; justify-content:space-between;align-items:center").user-footer
+            a.btn.btn-default.btn-flat(href="#") Profile
+            form(action="/dashboard/logout" method="post" style="display:inline-block; margin-bottom:0px; width:100%;").form-group
+                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                input(type="submit" value="Sign out").btn.btn-default.btn-flat.float-right 

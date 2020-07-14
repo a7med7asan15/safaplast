@@ -1,0 +1,46 @@
+extends ../../layout.pug
+
+block content
+        .content-header
+            .container-fluid
+                .row.mb-3.mt-3
+                    .col-sm-6
+                        h1.m-0.text-dark All Accounts
+                    .col-sm-6
+                        a.btn.btn-success.float-right(href="/dashboard/users/add")
+                            i.fas.fa-plus
+                            |  Add New User 
+        .content
+            .container-fluid
+                .row
+                    .col-12
+                        .card
+                            .card-header
+                                h3.card-title All Users
+                            .card-body.table-responsive.p-0
+                                table.table.table-hover.text-nowrap
+                                    thead
+                                        tr
+                                        th ID
+                                        th Username
+                                        th Email
+                                        th Status
+                                        th Edit
+                                        th delete
+                                    tbody
+                                     if users
+                                         for user in users
+                                                tr
+                                                td #{ user.index }
+                                                td #{ user.username }
+                                                td #{ user.email }
+                                                td
+                                                    span.tag.tag-success Active
+                                                td
+                                                    a.btn-sm.btn-primary(href=`/dashboard/users/edit/${user.id}`)
+                                                        i.far.fa-edit
+                                                        |  Edit
+                                                td
+                                                    a.btn-sm.btn-danger(href="#")
+                                                        i.fas.fa-trash-alt
+                                                        |  Delete

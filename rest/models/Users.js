@@ -4,13 +4,14 @@ var bcrypt = require('bcrypt-nodejs');
 
 var Schema = mongoose.Schema;
 const UsersSchema = mongoose.Schema({
-    firstname: { type: String, required: true},
-    lastname: { type: String, required: true},
+    index:{type:String,required:true},
+    username: { type: String, required: true},
     email:{type:String,required:true},
     pin: { type: String, required: true},
     mobileNo:{ type: String},
     gender: { type: String, lowercase: true},
     role:{type:Number,default:1},
+    avatar:{type:String},
     stores:[
       {
         storeName: {type:String},
@@ -35,7 +36,9 @@ UsersSchema.pre('save', function(next) {
 
   UsersSchema.methods.comparePassword = async function(pin) {
   try{
-   return await bcrypt.compareSync(pin, this.pin);
+    var result = await bcrypt.compareSync(pin, this.pin);
+    console.log(result)
+   return result;
   }catch(err){
     throw new Error(error)
   }
