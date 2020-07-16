@@ -34,10 +34,13 @@ const productSchema  = new Schema({
 
 
 const ProductSchema =  mongoose.model('productSchema', productSchema);
+const VariantGroupSchema =  mongoose.model('variantGroupSchema', variantGroupSchema);
+const VariantSchema =  mongoose.model('variantSchema', variantSchema);
 
 
   
 module.exports ={
     ProductSchema,
-    
+    VariantGroupSchema,
+    VariantSchema
 }

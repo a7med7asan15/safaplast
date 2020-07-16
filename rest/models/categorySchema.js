@@ -19,11 +19,6 @@ const CategoryParentSchema =  mongoose.model('categoryParentSchema', categoryPar
 const CategorySchema =  mongoose.model('categorySchema', categorySchema);
 
 
-
-// const firstCategory = new CategoryParentSchema({name:'Shoes'})
-// firstCategory.childCategory.push({name:"Leather Shoes"})
-// firstCategory.save();
-
 module.exports ={
     CategoryParentSchema,
     CategorySchema

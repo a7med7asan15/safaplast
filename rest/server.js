@@ -1,68 +1,198 @@
-var express     = require('express');
-var path = require('path');
-var bodyParser  = require('body-parser');
-var cors = require('cors');
-var cookieParser = require('cookie-parser');
-var passport = require('passport');
-var homeController = require('./controllers/dashboard/homeController');
-var session = require('express-session')
-var MongoSeesionStore = require('connect-mongodb-session')(session);
+const  express  =  require('express');
+const  path  =  require('path');
+const  bodyParser  =  require('body-parser');
+const  cors  =  require('cors');
+const  cookieParser  =  require('cookie-parser');
+const  passport  =  require('passport');
+const  session  =  require('express-session')
+const  MongoSeesionStore  =  require('connect-mongodb-session')(session);
+const  flash  =  require('connect-flash');
+const  dotenv  =  require("dotenv");
 
-var flash =require('connect-flash');
-var {seedUser} = require('./seeds/areas')
-require('./config/passport'),(passport);
 var csrf = require('csurf');
-var csrfProtection = csrf({ cookie: true });
-var bodyParser = require('body-parser')
 
-var app = express(); 
+csrf({ cookie: true });
 
-const dotenv = require("dotenv");
+
+/// Require Passport  
+
+
+require('./config/passport'),(passport);
+
+
+/// Require Controllers 
+
+
+const  usersController  =  require(  './controllers/dashboard/usersController'  );
+const  authController  =  require(  './controllers/dashboard/authController'  );
+const  storeController  =  require(  './controllers/dashboard/storeController'  );
+const  logisticController  =  require(  './controllers/dashboard/logisticController'  );
+
+
+/// Require Seeds 
+
+const  {  seedUser  }  =  require('./seeds/areas')
+
+
+const app = express(); 
+
+
 dotenv.config();  
 
 
 require("mongodb");
+
+
 require("mongodb").MongoClient;
+
 
 require("./config/mongoose");
 
+
+
+///  Public Folders 
+
+
+
 app.use('/static', express.static(path.join(__dirname, 'public')))
+
+
+// Setting Pug As A View Engine 
+
+
+
+
 app.set('views',path.join(__dirname,'views'));
+
 app.set('view engine','pug');
-// app.use(cors());
-app.use(cookieParser(process.env.JWTsecret));
-const cookieExpirationDate = new Date();
-const cookieExpirationDays = 365;
+
+
+app.use(  cookieParser(  process.env.JWTsecret  ));
+
+//////////////////////////////
+// Coookies Funcionality /////
+//////////////////////////////
+
+
+
+const  cookieExpirationDate  =  new Date();
+const  cookieExpirationDays  =  365;
 cookieExpirationDate.setDate(cookieExpirationDate.getDate() + cookieExpirationDays);
-app.use(bodyParser.urlencoded({ extended: false })) 
-app.use(bodyParser.json())
-app.use(session({
-  secret:process.env.JWTsecret,
-  resave:false,
-  saveUninitialized:false,
-  cookie: {
-    httpOnly: true,
-    expires: cookieExpirationDate // use expires instead of maxAge
-},
-  store: new MongoSeesionStore({
-    uri:process.env.mongoUrl,
-    collection:'sessions'
-  }),
-  rolling: true,
+
+
+
+app.use(   bodyParser.urlencoded(  { extended: false }  )   ) 
+app.use(   bodyParser.json()   )
+
+
+
+//////////////////////////////
+//// session Configration ////
+/////////////////////////////
+
+
+
+app.use( 
+  
+  session({
+
+      secret  :  process.env.JWTsecret,
+
+
+      resave  :  false,
+
+
+      saveUninitialized  :  false,
+
+
+      cookie  :   {
+
+
+          httpOnly  : true,
+
+
+          expires: cookieExpirationDate // use expires instead of maxAge
+
+        
+            },
+
+      store  :  new MongoSeesionStore({
+
+          uri:process.env.mongoUrl,
+
+          collection:'sessions'
+          
+      }), 
+
+
+      rolling  : true,
+
+
 }))
 
-app.use(flash())
-app.use((req, res, next) => {
-  res.locals.errors = req.flash("error");
-  res.locals.successes = req.flash("success");
-  next();
-});
-app.use(passport.initialize());
-app.use(passport.session());
 
 
-app.use('/dashboard', homeController);
+
+////////////////////////////////////
+////////////////////////////////////
+///  Connect Flash configration ////
+////////////////////////////////////
+////////////////////////////////////
+
+
+
+
+app.use(   flash()   );
+
+app.use(
   
+  (  req , res , next  ) => {
+
+  res.locals.errors   =   req.flash("error");
+
+  res.locals.successes   =   req.flash("success");
+
+  next();
+
+});
+
+
+
+///////////////////////////////////////
+/////// INITIALIZING PASSSPORT ///////
+//////////////////////////////////////
+
+
+
+
+
+app.use(   passport.initialize()   );
+
+app.use(   passport.session()   );
+
+
+
+
+
+
+/////////////////////////////////
+////////// ROUTES  //////////////
+////////////////////////////////
+
+
+
+app.use(   '/dashboard'   ,   authController   );
+app.use(   '/dashboard/users'   ,   usersController   );
+app.use(   '/dashboard/stores'   ,   storeController   );
+app.use(   '/dashboard/logistic'   ,   logisticController  );
+  
+
+
+
+
+///////////////////////////////'
+///// Seeding Db //////////////
+///////////////////////////////
 
 
 seedUser()

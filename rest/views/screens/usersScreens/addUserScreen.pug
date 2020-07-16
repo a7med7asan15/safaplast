@@ -22,29 +22,35 @@ block content
                                         form#adduserForm(action="/dashboard/users/add" method="post" enctype="multipart/form-data")
                                             .card-body.row
                                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                                .form-group.col-md-6
-                                                    label.control-label(for="username") Username
-                                                    input.form-control#username(type="text", name="username", placeholder="Enter Username")
-                                                .form-group.col-md-6
-                                                    label(for="email") Email address
-                                                    input.form-control#email(type="email", name="email", placeholder="Enter email Address")
-                                                .form-group.col-md-6
-                                                    label(for="password") Password
-                                                    input.form-control#password(type="password", name="password", placeholder="Password")
-                                                .form-group.col-md-6
-                                                    label(for="mobilenumber") Mobile Number
-                                                    input.form-control(type="text", name="mobilenumber")
-                                                .form-group.col-md-6
-                                                    label(for="exampleInputFile") File input
-                                                    .input-group
-                                                    .custom-file
-                                                        input.custom-file-input#exampleInputFile(type="file" name="avatar")
-                                                        label.custom-file-label(for="exampleInputFile") Choose file
-                                                .form-group.col-md-6
-                                                    label(for="userrole") User Role
-                                                    select.form-control#userrole(name="userrole")
-                                                        option(value="0") Admin
-                                                        option(value="1") Store Owner
+                                                .col-md-12
+                                                    .form-group.col-md-6
+                                                        label.control-label(for="username") Username
+                                                        input.form-control#username(type="text", name="username", value=`${sessionData ? sessionData.username : ''}`, placeholder="Enter Username")
+                                                .col-md-12
+                                                    .form-group.col-md-6
+                                                        label(for="email") Email address
+                                                        input.form-control#email(type="email", name="email",value=`${sessionData ? sessionData.email : ''}` , placeholder="Enter email Address")
+                                                .col-md-12
+                                                    .form-group.col-md-6
+                                                        label(for="password") Password
+                                                        input.form-control#password(type="password", name="password",value=`${sessionData ? sessionData.password : ''}` , placeholder="Password")
+                                                .col-md-12
+                                                    .form-group.col-md-6
+                                                        label(for="mobilenumber") Mobile Number
+                                                        input.form-control(type="text", value=`${sessionData ? sessionData.mobilenumber : ''}` , name="mobilenumber")
+                                                .col-md-12
+                                                    .form-group.col-md-6
+                                                        label(for="exampleInputFile") File input
+                                                        .input-group
+                                                        .custom-file
+                                                            input.custom-file-input#exampleInputFile(type="file" name="avatar")
+                                                            label.custom-file-label(for="exampleInputFile") Choose file
+                                                .col-md-12
+                                                    .form-group.col-md-3
+                                                        label(for="userrole") User Role
+                                                        select.form-control#userrole(name="userrole", value=`${sessionData ? sessionData.userrole : ''}` )
+                                                            option(value="0") Admin
+                                                            option(value="1") Store Owner
                                             .card-footer
                                                  button.btn.btn-primary.float-right(type="submit") Add User
 block scripts 

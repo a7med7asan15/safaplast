@@ -24,6 +24,18 @@ module.exports  = {
             _csrf:Joi.string(),
             userrole:Joi.string()
         }),
+        updateUserSchema:Joi.object().keys({
+            username:Joi.string().min(3).max(30).required(),
+            email:Joi.string().email().required(),
+            mobilenumber: Joi.string().min(11).max(11).pattern(new RegExp(/['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)).required(),
+            _csrf:Joi.string(),
+            userrole:Joi.string()
+        }),
+        changePasswordSchema:Joi.object().keys({
+            oldpassword:Joi.string().min(3).max(30).required(),
+            newpassword:Joi.string().min(3).max(30).required(),
+            _csrf:Joi.string(),
+        }),
         loginSchema :Joi.object().keys({
             email: Joi.string().email().required(),
             pin :Joi.string().required(),

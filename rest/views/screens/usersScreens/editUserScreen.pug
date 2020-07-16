@@ -1,13 +1,19 @@
 extends ../../layout.pug
 
-block content
-       
-            .content-header
-                .container-fluid
-                    .row.mb-3.mt-3
-                        .col-sm-6
-                            h1.m-0.text-dark Edit Account
-                    .content
+block content     
+                if userToEdit       
+                    .container-fluid
+                        .row.mb-5.mt-5.pr-2.pl-2
+                            .col-sm-6
+                                h1.m-0.text-dark Edit User
+                            .col-sm-6
+                                a.btn.btn-warning.float-right(href=`/dashboard/users/edit/${userToEdit.id}/changepassword`)
+                                    i.fas.fa-lock
+                                    |  Change Password 
+                                a.btn.btn-dark.float-right.mr-4(href=`/dashboard/users/edit/${userToEdit.id}/changepassword`)
+                                    i.fas.fa-image
+                                    |  Change Profile Picture
+                    .content.mt-5
                         .container-fluid
                             if successes
                                 for success in successes
@@ -17,36 +23,30 @@ block content
                                     div.alert.alert-danger #{ error.message }
                             .row
                                 .col-12
-                                    .card
-                                        if userToEdit    
+                                    .card   
                                             .card-header
                                                 h3.card-title User Data
-                                            form#adduserForm(action="/dashboard/users/add" method="post" enctype="multipart/form-data")
+                                            form#adduserForm(action=`/dashboard/users/edit/${userToEdit.id}`, method="post" )
                                                 .card-body.row
                                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                                    .form-group.col-md-6
-                                                        label.control-label(for="username") Username
-                                                        input.form-control#username(type="text", name="username",value=`${userToEdit.username}`, placeholder="Enter Username")
-                                                    .form-group.col-md-6
-                                                        label(for="email") Email address
-                                                        input.form-control#email(type="email", name="email",value=`${userToEdit.email}`, placeholder="Enter email Address")
-                                                    .form-group.col-md-6
-                                                        label(for="password") Password
-                                                        input.form-control#password(type="password", name="password", placeholder="Password")
-                                                    .form-group.col-md-6
-                                                        label(for="mobilenumber") Mobile Number
-                                                        input.form-control(type="text", name="mobilenumber", value=`${userToEdit.mobileNo}`)
-                                                    .form-group.col-md-6
-                                                        label(for="exampleInputFile") File input
-                                                        .input-group
-                                                        .custom-file
-                                                            input.custom-file-input#exampleInputFile(type="file" name="avatar")
-                                                            label.custom-file-label(for="exampleInputFile") Choose file
-                                                    .form-group.col-md-6
-                                                        label(for="userrole") User Role
-                                                        select.form-control#userrole(name="userrole",value=`${userToEdit.role}`)
-                                                            option(value="0") Admin
-                                                            option(value="1") Store Owner
+                                                    .col-md-12
+                                                        .form-group.col-md-6
+                                                            label.control-label(for="username") Username
+                                                            input.form-control#username(type="text", name="username",value=`${userToEdit.username}`, placeholder="Enter Username")
+                                                    .col-md-12
+                                                        .form-group.col-md-6
+                                                            label(for="email") Email address
+                                                            input.form-control#email(type="email", name="email",value=`${userToEdit.email}`, placeholder="Enter email Address")
+                                                    .col-md-12
+                                                        .form-group.col-md-6
+                                                            label(for="mobilenumber") Mobile Number
+                                                            input.form-control(type="text", name="mobilenumber", value=`${userToEdit.mobileNo}`)
+                                                    .col-md-12
+                                                        .form-group.col-md-6
+                                                            label(for="userrole") User Role
+                                                            select.form-control#userrole(name="userrole",value=`${userToEdit.role}`)
+                                                                option(value="0") Admin
+                                                                option(value="1") Store Owner
                                                 .card-footer
                                                     button.btn.btn-primary.float-right(type="submit") Update User
 block scripts 

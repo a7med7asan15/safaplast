@@ -17,12 +17,10 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
               | Accounts 
               i.right.fas.fa-angle-left
           ul.nav.nav-treeview
-            //  Sub Menu Item  
             li.nav-item
               a.nav-link(href="/dashboard/users")
                 i.left.pr-2.fas.fa-users
                 p All Accounts
-            //  Sub Menu Item  
             li.nav-item
               a.nav-link(href="/dashboard/users/add")
                 i.left.pr-2.fas.fa-user-plus
@@ -39,21 +37,23 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
                 i.left.pr-2.fas.fa-store
                 p All Stores
             li.nav-item
-              a.nav-link(href="/stores/add")
+              a.nav-link(href="/dashboard/stores/add")
                 i.left.pr-2.fas.fa-cart-plus
                 p Add New Store
-        li.nav-item
-          a.nav-link(href="/service")
+        li.nav-item.has-treeview.menu-open
+          a.nav-link(href="#")
             i.left.pr-2.fas.fa-th
-            p Services
-              
-        li.nav-item
-          a.nav-link(href="/city")
-            i.left.pr-2.fas.fa-th
-            p City
-              
-        li.nav-item
-          a.nav-link(href="/area")
-            i.left.pr-2.fas.fa-th
-            p Areas
+            p
+              | Logitics
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link(href="/dashboard/logistic/citys")
+                i.left.pr-2.fas.fa-th
+                p Citys
+            li.nav-item
+              a.nav-link(href="/dashboard/users/add")
+                i.left.pr-2.fas.fa-th
+                p Area
+
               

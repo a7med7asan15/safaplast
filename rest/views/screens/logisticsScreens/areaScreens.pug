@@ -1,0 +1,67 @@
+extends ../../layout.pug
+
+
+block content
+        .content-header
+            .container-fluid
+                .row.mb-3.mt-3
+                .col-sm-6
+                    h1.m-0.text-dark All Citys
+        .content
+            .container-fluid
+                .row
+                    .col-5
+                        .card
+                            .card-header
+                                h3.card-title Area Info
+                            form(role="form")
+                                .card-body.row
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .form-group.col-md-10
+                                        label(for="serviceenglish") Area Name [ English ]
+                                        input.form-control#serviceenglish(type="text", name="serviceenglish", placeholder="Enter Service Name in english")
+                                    .form-group.col-md-10
+                                        label(for="servicearabic") Area Name [ Arabic ]
+                                        input.form-control#servicearabic(type="text", name="servicearabic", placeholder="Enter Service name in arabic")
+                                    .col-md-10
+                                        .form-group
+                                        label Parent City
+                                        select.form-control.cityparent(name="cityparent")
+                                            option(selected) Heliopolis
+                                            option Masr El gdeda
+                                            option Nozha
+                                            option Maady
+                                .card-footer
+                                button.btn.btn-primary.float-right(type="submit") Add Service
+                    .col-7
+                        .card
+                            .card-header
+                                h3.card-title All Services
+                                .card-tools
+                                .input-group.input-group-sm(style="width: 150px;")
+                                    input.form-control.float-right(type="text", name="table_search", placeholder="Search")
+                                    .input-group-append
+                                    button.btn.btn-default(type="submit")
+                                        i.fas.fa-search
+                            .card-body.table-responsive.p-0
+                                table.table.table-hover.text-nowrap
+                                    thead
+                                        tr
+                                            th ID
+                                            th City Name
+                                            th Parent
+                                            th Edit
+                                            th delete
+                                    tbody
+                                        tr
+                                            td 1
+                                            td Masr El gdeda
+                                            td Cairo
+                                            td
+                                                a.btn-sm.btn-primary(href="#")
+                                                    i.far.fa-edit
+                                                    |  Edit
+                                            td
+                                                a.btn-sm.btn-danger(href="#")
+                                                    i.fas.fa-trash-alt
+                                                    |  Delete

@@ -1,0 +1,73 @@
+extends ../../layout.pug
+
+block content  
+    .content-header
+        .container-fluid
+            .row.mb-3.mt-3
+            .col-sm-6
+                h1.m-0.text-dark Add New Store
+    .content
+        .container-fluid
+            .row
+            .col-12
+                .card
+                    .card-header
+                        h3.card-title Store Information
+                    form#addnewstore(role="form")
+                    .card-body.row
+                        .form-group.col-md-12
+                            h3 General Information
+                        .form-group.col-md-6
+                            label(for="storeNameEnglish") Store Name [English]
+                            input.form-control#storeNameEnglish(type="text", name="storeNameEnglish", placeholder="Enter Store Name In English")
+                        .form-group.col-md-6
+                            label(for="storeNameArabic") Store Name [Arabic]
+                            input.form-control#storeNameArabic(type="text", name="storeNameArabic", placeholder="Enter Store Name in Arabic")
+
+                        .form-group.col-md-6
+                            label(for="mobilenumber") Mobile Number
+                            input.form-control(type="text", name="mobilenumber")            
+                        .col-md-12.mt-5.mb-5
+                            h3 Advanced Information
+                        .col-md-12
+                            .col-md-4
+                                .form-group
+                                    label Store Owner
+                                    select.form-control.storeowner
+                                        option(selected) Mohamed Hussam
+                                        option Hesham Watany
+                                        option Sara Jaber                       
+                        .col-md-12.mt-5.mb-5
+                            h3 Store Address Info
+                        .col-md-12
+                            .col-md-4
+                                .form-group
+                                    label Area
+                                    select.form-control.storeowner(name="area")
+                                        option(selected) Heliopolis
+                                        option Masr El gdeda
+                                        option Nozha
+                                        option Maady
+                        .col-md-12
+                            .col-md-6
+                            .form-group
+                                label Specific Address [ English ]
+                                textarea.form-control(name="addressenglish", rows="3", placeholder="Enter ...")
+                        .col-md-12
+                            .col-md-6
+                            .form-group
+                                label Specific Address [ Arabic ]
+                                textarea.form-control(name="addressarabic", rows="3", placeholder="Enter ...")
+                        .col-md-8
+                            .row.pl-2
+                            .form-group.col-md-5
+                                label(for="storeNameEnglish") Google Longtude
+                                input.form-control#storeNameEnglish(type="text", name="longtude", placeholder="Enter Store Name In English")
+                            .form-group.col-md-5
+                                label(for="storeNameEnglish") Google Latitude
+                                input.form-control#storeNameEnglish(type="text", name="latitude", placeholder="Enter Store Name In English")
+                        
+                    .card-footer
+                         button.btn.btn-primary.float-right(type="submit") Add New Store
+block scripts 
+        script(src="/static/vendor/js/store.js", type="text/javascript")

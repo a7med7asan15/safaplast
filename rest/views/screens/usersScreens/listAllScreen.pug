@@ -41,6 +41,7 @@ block content
                                                         i.far.fa-edit
                                                         |  Edit
                                                 td
-                                                    a.btn-sm.btn-danger(href="#")
-                                                        i.fas.fa-trash-alt
-                                                        |  Delete
+                                                    form(action=`/dashboard/users/delete/${user.id}`, method="post")
+                                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                        button.btn-sm.btn-danger(type="submit")
+                                                            i.fas.fa-trash-alt

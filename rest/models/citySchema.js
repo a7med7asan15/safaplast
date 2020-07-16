@@ -1,19 +1,24 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 
 
 const Schema = mongoose.Schema;
 
 const areaSchema  = new Schema({
-    name:{ type: String, required: true},
+    name  :  { type: String, required: true},
 })
 
 
 const citySchema  = new Schema({
-    name:{ type: String, required: true},
-    childAreas :[categorySchema]
+    nameEnglish :  { type: String , required: true},
+    nameArabic  :  { type: String , required: true},
+    childAreas  :  [areaSchema]
 
 })
+
+citySchema.plugin(mongoosePaginate);
+areaSchema.plugin(mongoosePaginate);
 
 const CitySchema =  mongoose.model('citySchema', citySchema);
 const AreaSchema =  mongoose.model('areaSchema', areaSchema);
