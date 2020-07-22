@@ -4,7 +4,7 @@ var router = express.Router();
 var csrf = require('csurf'); 
 const csrfProtection = csrf();
 const logisticService = require('../../services/logisticService');
-
+const colorService = require('../../services/colorService');
 
 // uploading Middleware 
 // Multer Js 
@@ -78,6 +78,17 @@ logisticService.show
 
 );
 
+router.get( '/colors',
+
+
+csrfProtection, 
+
+
+colorService.show
+
+
+);
+
 
 
 ////////////////////////////////////////////////
@@ -95,6 +106,17 @@ csrfProtection,
 
 
 logisticService.add
+
+
+);
+
+router.post( '/colors',
+
+
+csrfProtection, 
+
+
+colorService.add
 
 
 );
