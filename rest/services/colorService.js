@@ -1,7 +1,5 @@
-const {CitySchema} = require('../models/citySchema');
-const {colorSchema} = require('../models/colorSchema');
-const _ = require('lodash');
 const ColorSchema = require('../models/colorSchema');
+const _ = require('lodash');
 
 
 const colorService ={
@@ -53,7 +51,7 @@ const colorService ={
         try{
         
         
-            const newColor = new colorSchema({
+            const newColor = new ColorSchema({
         
         
                 name: colorName,
