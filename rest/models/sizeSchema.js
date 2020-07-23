@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 
 
@@ -8,5 +9,8 @@ const sizeSchema  = new Schema({
     name:{ type: String, required: true},
 })
 
+sizeSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model('sizeSchema', sizeSchema);
+const SizeSchema = mongoose.model('sizeSchema', sizeSchema);
+
+module.exports = SizeSchema;

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 
 const Schema = mongoose.Schema;
@@ -10,5 +10,8 @@ const colorSchema  = new Schema({
 
 })
 
+colorSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model('colorSchema', colorSchema);
+const ColorSchema = mongoose.model('colorSchema', colorSchema);
+
+module.exports = ColorSchema;

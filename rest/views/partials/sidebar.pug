@@ -5,6 +5,7 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
     if thisUser 
       .user-panel.mt-3.pb-3.mb-3.d-flex
         .image
+          //if image -->    
           img.img-circle.elevation-2(src=`/static/images/${thisUser.avatar}`, alt="User Image")
         .info
             a.d-block(href="#") #{thisUser.username}
@@ -55,5 +56,13 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
               a.nav-link(href="/dashboard/users/add")
                 i.left.pr-2.fas.fa-th
                 p Area
+            li.nav-item
+              a.nav-link(href="/dashboard/logistic/colors")
+                i.left.pr-2.fas.fa-th
+                p Color
+            li.nav-item
+              a.nav-link(href="/dashboard/logistic/sizes")
+                i.left.pr-2.fas.fa-th
+                p Size
 
               
