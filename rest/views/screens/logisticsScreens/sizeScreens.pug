@@ -6,29 +6,26 @@ block content
             .container-fluid
                 .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark All Colors
+                    h1.m-0.text-dark All Sizes
         .content
             .container-fluid
                 .row
                     .col-5
                         .card
                             .card-header
-                                h3.card-title Color Info
-                            form(action="/dashboard/logistic/colors" method="post" role="form")
+                                h3.card-title Size Info
+                            form(action="/dashboard/logistic/sizes" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
-                                        label(for="serviceName") Color Name 
-                                        input.form-control#serviceName(type="text", name="colorName", placeholder="Enter Color name")
-                                    .form-group.col-md-10
-                                        label(for="serviceHex") Color Hex 
-                                        input.form-control#serviceHex(type="text", name="colorHex", placeholder="Enter Color Hex")
-                                .card-footer
-                                    button.btn.btn-primary.float-right(type="submit") Add Color
+                                        label(for="serviceName") Size 
+                                        input.form-control#serviceName(type="text", name="name", placeholder="Enter Size")
+                                    .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Add Size
                     .col-7
                         .card
                             .card-header
-                                h3.card-title All Colors 
+                                h3.card-title All Sizes 
                                 .card-tools
                                 .input-group.input-group-sm(style="width: 150px;")
                                     input.form-control.float-right(type="text", name="table_search", placeholder="Search")
@@ -41,23 +38,21 @@ block content
                                         tr
                                             th ID
                                             th Name 
-                                            th Hex 
                                             th Edit
                                             th delete
                                     tbody
                                         
-                                        if colors
-                                            - var colorArray = colors.docs
-                                            - var hasPrev = colors.hasPrevPage 
-                                            - var hasNext = colors.hasNextPage 
-                                            - var totalPages = colors.totalPages 
+                                        if sizes
+                                            - var sizeArray = sizes.docs
+                                            - var hasPrev = sizes.hasPrevPage 
+                                            - var hasNext = sizes.hasNextPage 
+                                            - var totalPages = sizes.totalPages 
                                             - var pages = 1
-                                            - var page = colors.page 
-                                            for color in colorArray
+                                            - var page = sizes.page 
+                                            for size in sizeArray
                                                 tr
-                                                    td #{color.id}
-                                                    td #{color.name}
-                                                    td #{color.colorHex}
+                                                    td 1
+                                                    td #{size.name}
                                                     td
                                                         a.btn-sm.btn-primary(href="#")
                                                             i.far.fa-edit
@@ -70,7 +65,7 @@ block content
                                 ul.pagination.pagination-sm.m-0.float-right
                                     if hasPrev
                                         li.page-item
-                                            a.page-link(href=href=`/dashboard/logistic/colors?p=${page - 1}`) «
+                                            a.page-link(href=href=`/dashboard/logistic/sizes?p=${page - 1}`) «
                         
                                     if totalPages > 1
                                         while pages  < 3            
@@ -78,10 +73,10 @@ block content
                                                 if pages === page
                                                     a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
                                                 else
-                                                    a.page-link.active( href=`/dashboard/logistic/colors?p=${pages}`)= pages
+                                                    a.page-link.active( href=`/dashboard/logistic/sizes?p=${pages}`)= pages
                                                     
                                             - pages++    
                                
                                     if hasNext
                                         li.page-item
-                                            a.page-link(href=`/dashboard/logistic/colors?p=${page + 1}`) »
+                                            a.page-link(href=`/dashboard/logistic/sizes?p=${page + 1}`) »

@@ -5,6 +5,7 @@ var csrf = require('csurf');
 const csrfProtection = csrf();
 const logisticService = require('../../services/logisticService');
 const colorService = require('../../services/colorService');
+const sizeService = require('../../services/sizeService');
 
 // uploading Middleware 
 // Multer Js 
@@ -89,7 +90,18 @@ colorService.show
 
 );
 
+router.get( '/sizes',
 
+
+csrfProtection, 
+
+
+sizeService.show
+
+
+);
+
+// separate and add category 
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
@@ -121,6 +133,16 @@ colorService.add
 
 );
 
+router.post( '/sizes',
+
+
+csrfProtection, 
+
+
+sizeService.add
+
+
+);
 
 
 ////////////////////////////////////////////////
