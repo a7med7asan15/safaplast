@@ -14,7 +14,7 @@ block content
                         .card
                             .card-header
                                 h3.card-title Color Info
-                            form(action="/dashboard/logistic/colors" method="post" role="form")
+                            form(action="/dashboard/colors" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
@@ -59,7 +59,7 @@ block content
                                                     td #{color.name}
                                                     td #{color.colorHex}
                                                     td
-                                                        a.btn-sm.btn-primary(href="#")
+                                                        a.btn-sm.btn-primary(href=`/dashboard/colors/edit/${color.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
@@ -70,7 +70,7 @@ block content
                                 ul.pagination.pagination-sm.m-0.float-right
                                     if hasPrev
                                         li.page-item
-                                            a.page-link(href=href=`/dashboard/logistic/colors?p=${page - 1}`) «
+                                            a.page-link(href=href=`/dashboard/colors?p=${page - 1}`) «
                         
                                     if totalPages > 1
                                         while pages  < 3            
@@ -78,10 +78,10 @@ block content
                                                 if pages === page
                                                     a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
                                                 else
-                                                    a.page-link.active( href=`/dashboard/logistic/colors?p=${pages}`)= pages
+                                                    a.page-link.active( href=`/dashboard/colors?p=${pages}`)= pages
                                                     
                                             - pages++    
                                
                                     if hasNext
                                         li.page-item
-                                            a.page-link(href=`/dashboard/logistic/colors?p=${page + 1}`) »
+                                            a.page-link(href=`/dashboard/colors?p=${page + 1}`) »

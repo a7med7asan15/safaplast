@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf'); 
 const csrfProtection = csrf();
-const logisticService = require('../../services/logisticService');
+const colorService = require('../../services/colorService');
 
 // uploading Middleware 
 // Multer Js 
@@ -54,29 +54,16 @@ router.use(   authMiddleware ,   idAdmin   );
 //--------------------
 
 
-
-router.get( '/citys',
-
-
-csrfProtection, 
-
-
-logisticService.show
-
-
-);
-
-router.get( '/areas',
+router.get( '/',
 
 
 csrfProtection, 
 
 
-logisticService.show
+colorService.show
 
 
 );
-
 
 
 
@@ -89,18 +76,17 @@ logisticService.show
 ////////////////////////////////////////////////
 
 
+router.post( '/',
 
-router.post( '/citys',
-
+validationBody(schemas.updateColorSchema),
 
 csrfProtection, 
 
 
-logisticService.add
+colorService.add
 
 
 );
-
 
 
 ////////////////////////////////////////////////
@@ -109,6 +95,14 @@ logisticService.add
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
+router.get('/edit/:userId', 
+
+
+csrfProtection,
+
+colorService.showOne
+
+);
 
 
 

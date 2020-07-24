@@ -50,9 +50,8 @@ module.exports  = {
         }),
         updateColorSchema:Joi.object().keys({
             colorName:Joi.string().min(3).max(30).required(),
-            colorHex:Joi.string().min(3).max(30).required(),
-            _csrf:Joi.string(),
-            
+            colorHex:Joi.string().min(4).max(7).required(),
+            _csrf:Joi.string(), 
         }),
 
     }

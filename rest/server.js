@@ -27,7 +27,9 @@ const  usersController  =  require(  './controllers/dashboard/usersController'  
 const  authController  =  require(  './controllers/dashboard/authController'  );
 const  storeController  =  require(  './controllers/dashboard/storeController'  );
 const  logisticController  =  require(  './controllers/dashboard/logisticController'  );
-
+const  colorController  =  require(  './controllers/dashboard/colorController'  );
+const  sizeController  =  require(  './controllers/dashboard/sizeController'  );
+ 
 
 /// Require Seeds 
 
@@ -185,7 +187,8 @@ app.use(   '/dashboard'   ,   authController   );
 app.use(   '/dashboard/users'   ,   usersController   );
 app.use(   '/dashboard/stores'   ,   storeController   );
 app.use(   '/dashboard/logistic'   ,   logisticController  );
-  
+app.use(   '/dashboard/colors'   ,   colorController  );
+app.use(   '/dashboard/sizes'   ,   sizeController  ); 
 
 
 

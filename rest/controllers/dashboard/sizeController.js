@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf'); 
 const csrfProtection = csrf();
-const logisticService = require('../../services/logisticService');
+const sizeService = require('../../services/sizeService');
 
 // uploading Middleware 
 // Multer Js 
@@ -53,30 +53,16 @@ router.use(   authMiddleware ,   idAdmin   );
 // Read Store Requests 
 //--------------------
 
-
-
-router.get( '/citys',
-
-
-csrfProtection, 
-
-
-logisticService.show
-
-
-);
-
-router.get( '/areas',
+router.get( '/',
 
 
 csrfProtection, 
 
 
-logisticService.show
+sizeService.show
 
 
 );
-
 
 
 
@@ -90,17 +76,17 @@ logisticService.show
 
 
 
-router.post( '/citys',
+
+router.post( '/',
 
 
 csrfProtection, 
 
 
-logisticService.add
+sizeService.add
 
 
 );
-
 
 
 ////////////////////////////////////////////////

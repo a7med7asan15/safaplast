@@ -62,7 +62,7 @@ const sizeService ={
         
             await newSize.save();
 
-            return res.redirect('/dashboard/logistic/sizes') ;
+            return res.redirect('/dashboard/sizes') ;
             
         }catch(err){
 

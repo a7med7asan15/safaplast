@@ -1,0 +1,34 @@
+extends ../../layout.pug
+
+block content     
+    
+    div
+    - console.log(colorToEdit)
+    div
+    if colorToEdit       
+        .content.mt-5
+            .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
+                .row
+                    .col-12
+                        .card   
+                            .card-header
+                                h3.card-title Color Data
+                            form#addColorForm(action=`/dashboard/colors/edit/${colorToEdit.id}`, method="post" )
+                                .card-body.row
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label.control-label(for="colorName") color Name
+                                            input.form-control#colorName(type="text" name="colorName",value=`${colorToEdit.name}`, placeholder="Enter Color Name")
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label(for="colorHex") Color Hex
+                                            input.form-control(type="text" name="colorHex", value=`${colorToEdit.colorHex}`, placeholder="Enter Color Hex")
+                                .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Update color

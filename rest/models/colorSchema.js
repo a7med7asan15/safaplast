@@ -12,6 +12,4 @@ const colorSchema  = new Schema({
 
 colorSchema.plugin(mongoosePaginate);
 
-const ColorSchema = mongoose.model('colorSchema', colorSchema);
-
-module.exports = ColorSchema;
+module.exports = mongoose.model('colorSchema', colorSchema);;
