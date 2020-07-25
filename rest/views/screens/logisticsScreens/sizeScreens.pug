@@ -17,11 +17,12 @@ block content
                             form(action="/dashboard/sizes" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                    .form-group.col-md-10
+                                    .form-group.col-md-12
                                         label(for="serviceName") Size 
                                         input.form-control#serviceName(type="text", name="name", placeholder="Enter Size")
-                                    .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Add Size
+                            .card-footer
+                                    
                     .col-7
                         .card
                             .card-header
@@ -54,7 +55,7 @@ block content
                                                     td 1
                                                     td #{size.name}
                                                     td
-                                                        a.btn-sm.btn-primary(href="#")
+                                                        a.btn-sm.btn-primary(href=`/dashboard/sizes/edit/${size.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td

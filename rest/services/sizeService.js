@@ -73,7 +73,50 @@ const sizeService ={
 
 
         },
+    
+    showOne: async (req, res) => {
+        req.session.lastlink = req.url
+        let csrfToken = req.csrfToken();
 
+        try {
+            var {sizeId} = req.params
+            console.log(sizeId);
+            const sizeToEdit = await SizeSchema.findById(sizeId);
+
+            return res.render('screens/logisticsScreens/editSizeScreen', {
+                thisUser: req.user,
+                sizeToEdit: sizeToEdit,
+                csrfToken
+            })
+        } catch (err) {
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/logisticsScreens/editSizeScreen', {
+                thisUser: req.user,
+                sizeToEdit: {},
+                csrfToken
+            })
+        }
+
+    },
+
+
+    update: async (req , res )=>{
+        const {sizeName} = req.body
+        const {sizeId} = req.params 
+        try{
+            const updateSize = await SizeSchema.findById(sizeId)
+            updateSize.name = sizeName,
+            
+            await updateSize.save();
+            req.session.passedData = false 
+            req.flash('success', 'Size Updated Succesfully')
+            return res.redirect(`/dashboard/sizes/edit/${sizeId}`)
+        }catch(err){
+            req.flash('error', {message:'Something Went wrong'})
+            return res.redirect(`/dashboard/sizes/edit/${sizeId}`)
+        }
+
+    },
 
 }
 

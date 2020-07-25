@@ -91,11 +91,11 @@ colorService.add
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// Store UPDATE ROUTES  // ++++// //////
+// +++ /// EDIT Color  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
-router.get('/edit/:userId', 
+router.get('/edit/:colorId', 
 
 
 csrfProtection,
@@ -104,6 +104,19 @@ colorService.showOne
 
 );
 
+//---------------------------
+// Update User Route 
+//---------------------------
+
+router.post('/edit/:colorId', 
+
+validationBody(schemas.updateColorSchema) , 
+
+csrfProtection,
+
+colorService.update
+
+);
 
 
 module.exports = router;

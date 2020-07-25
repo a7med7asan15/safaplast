@@ -17,14 +17,15 @@ block content
                             form(action="/dashboard/colors" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                    .form-group.col-md-10
+                                    .form-group.col-md-12
                                         label(for="serviceName") Color Name 
                                         input.form-control#serviceName(type="text", name="colorName", placeholder="Enter Color name")
-                                    .form-group.col-md-10
+                                    .form-group.col-md-12
                                         label(for="serviceHex") Color Hex 
                                         input.form-control#serviceHex(type="text", name="colorHex", placeholder="Enter Color Hex")
-                                .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Add Color
+                            .card-footer
+                                    
                     .col-7
                         .card
                             .card-header

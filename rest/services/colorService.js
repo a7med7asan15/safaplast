@@ -86,14 +86,12 @@ const colorService = {
     showOne: async (req, res) => {
         req.session.lastlink = req.url
         let csrfToken = req.csrfToken();
-        
-        try {
-            var {
-                colorId
-            } = req.params
 
+        try {
+            var {colorId} = req.params
+            console.log(colorId);
             const colorToEdit = await ColorSchema.findById(colorId);
-            
+
             return res.render('screens/logisticsScreens/editColorScreen', {
                 thisUser: req.user,
                 colorToEdit: colorToEdit,
@@ -106,6 +104,25 @@ const colorService = {
                 colorToEdit: {},
                 csrfToken
             })
+        }
+
+    },
+
+
+    update: async (req , res )=>{
+        const {colorName, colorHex} = req.body
+        const {colorId} = req.params 
+        try{
+            const updateColor = await ColorSchema.findById(colorId)
+            updateColor.name = colorName,
+            updateColor.colorHex = colorHex,
+            await updateColor.save();
+            req.session.passedData = false 
+            req.flash('success', 'Color Updated Succesfully')
+            return res.redirect(`/dashboard/colors/edit/${colorId}`)
+        }catch(err){
+            req.flash('error', {message:'Something Went wrong'})
+           return res.redirect(`/dashboard/colors/edit/${colorId}`)
         }
 
     },

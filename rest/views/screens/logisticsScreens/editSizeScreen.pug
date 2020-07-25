@@ -1,0 +1,26 @@
+extends ../../layout.pug
+
+block content     
+    if sizeToEdit       
+        .content.mt-5
+            .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
+                .row
+                    .col-12
+                        .card   
+                            .card-header
+                                h3.card-title size Data
+                            form#addsizeForm(action=`/dashboard/sizes/edit/${sizeToEdit.id}`, method="post" )
+                                .card-body.row
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label.control-label(for="sizeName") size Name
+                                            input.form-control#sizeName(type="text" name="sizeName",value=`${sizeToEdit.name}`, placeholder="Enter size Name")
+                                    .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Update size

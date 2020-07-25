@@ -11,6 +11,6 @@ const sizeSchema  = new Schema({
 
 sizeSchema.plugin(mongoosePaginate);
 
-const SizeSchema = mongoose.model('sizeSchema', sizeSchema);
+ 
 
-module.exports = SizeSchema;
+module.exports = mongoose.model('sizeSchema', sizeSchema);

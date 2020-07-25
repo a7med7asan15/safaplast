@@ -91,9 +91,30 @@ sizeService.add
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// Store UPDATE ROUTES  // ++++// //////
+// +++ /// EDIT Color  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
+
+router.get('/edit/:sizeId', 
+
+
+csrfProtection,
+
+sizeService.showOne
+
+);
+
+//---------------------------
+// Update User Route 
+//---------------------------
+
+router.post('/edit/:sizeId', 
+
+csrfProtection,
+
+sizeService.update
+
+);
 
 
 
