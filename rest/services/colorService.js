@@ -127,6 +127,20 @@ const colorService = {
 
     },
 
+    destroy: async (req , res )=>{
+        const {colorId} = req.params;
+       try{
+            const deleteColor =  await ColorSchema.findByIdAndDelete(colorId);
+            
+            req.flash('success', `${deleteColor.name} Deleted Successfully`)
+            return res.redirect(`/dashboard/colors`)
+       }catch(err){
+        req.flash('error', {message:'Something Went wrong'})
+        return res.redirect(`/dashboard/colors`)
+
+       }
+    },
+
 }
 
 module.exports = colorService

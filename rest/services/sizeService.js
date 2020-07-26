@@ -118,6 +118,20 @@ const sizeService ={
 
     },
 
+    destroy: async (req , res )=>{
+        const {sizeId} = req.params;
+       try{
+            const deleteSize =  await SizeSchema.findByIdAndDelete(sizeId);
+            
+            req.flash('success', `${deleteSize.name} Deleted Successfully`)
+            return res.redirect(`/dashboard/sizes`)
+       }catch(err){
+        req.flash('error', {message:'Something Went wrong'})
+        return res.redirect(`/dashboard/sizes`)
+
+       }
+    },
+
 }
 
 module.exports = sizeService

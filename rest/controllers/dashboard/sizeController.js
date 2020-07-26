@@ -105,7 +105,7 @@ sizeService.showOne
 );
 
 //---------------------------
-// Update User Route 
+// Update Size Route 
 //---------------------------
 
 router.post('/edit/:sizeId', 
@@ -116,7 +116,18 @@ sizeService.update
 
 );
 
+//---------------------------
+// Delete Size Route 
+//---------------------------
 
+router.post('/delete/:sizeId',
+
+csrfProtection,
+
+
+sizeService.destroy
+
+); 
 
 
 module.exports = router;

@@ -105,7 +105,7 @@ colorService.showOne
 );
 
 //---------------------------
-// Update User Route 
+// Update Color Route 
 //---------------------------
 
 router.post('/edit/:colorId', 
@@ -118,5 +118,18 @@ colorService.update
 
 );
 
+
+//---------------------------
+// Delete Color Route 
+//---------------------------
+
+router.post('/delete/:colorId',
+
+csrfProtection,
+
+
+colorService.destroy
+
+); 
 
 module.exports = router;
