@@ -71,9 +71,8 @@ module.exports  = {
             _csrf:Joi.string(), 
         }),
         addCitySchema:Joi.object().keys({
-            nameEnglish:Joi.string().required(),
-            nameArabic:Joi.string().required(),
-            parent:Joi.string().required(),
+            cityEnglish:Joi.string().required(),
+            cityArabic:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
         updateAreaSchema:Joi.object().keys({

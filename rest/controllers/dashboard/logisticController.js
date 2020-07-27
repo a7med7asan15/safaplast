@@ -93,6 +93,7 @@ logisticService.showArea
 router.post( '/citys',
 
 
+validationBody(schemas.addCitySchema),
 
 csrfProtection, 
 
