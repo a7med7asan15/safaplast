@@ -50,9 +50,10 @@ block content
                                             - var totalPages = sizes.totalPages 
                                             - var pages = 1
                                             - var page = sizes.page 
+                                            - var num = (page-1)*sizes.limit+1
                                             for size in sizeArray
                                                 tr
-                                                    td 1
+                                                    td #{num++}
                                                     td #{size.name}
                                                     td
                                                         a.btn-sm.btn-primary(href=`/dashboard/sizes/edit/${size.id}`)
@@ -68,18 +69,18 @@ block content
                                 ul.pagination.pagination-sm.m-0.float-right
                                     if hasPrev
                                         li.page-item
-                                            a.page-link(href=href=`/dashboard/logistic/sizes?p=${page - 1}`) «
+                                            a.page-link(href=href=`/dashboard/sizes?p=${page - 1}`) «
                         
                                     if totalPages > 1
-                                        while pages  < 3            
+                                        while pages  < 3           
                                             li.page-item
                                                 if pages === page
                                                     a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
                                                 else
-                                                    a.page-link.active( href=`/dashboard/logistic/sizes?p=${pages}`)= pages
+                                                    a.page-link.active( href=`/dashboard/sizes?p=${pages}`)= pages
                                                     
                                             - pages++    
                                
                                     if hasNext
                                         li.page-item
-                                            a.page-link(href=`/dashboard/logistic/sizes?p=${page + 1}`) »
+                                            a.page-link(href=`/dashboard/sizes?p=${page + 1}`) »

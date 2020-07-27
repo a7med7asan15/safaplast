@@ -72,7 +72,7 @@ router.get( '/areas',
 csrfProtection, 
 
 
-logisticService.show
+logisticService.showArea
 
 
 );
@@ -93,6 +93,7 @@ logisticService.show
 router.post( '/citys',
 
 
+
 csrfProtection, 
 
 
@@ -101,6 +102,17 @@ logisticService.add
 
 );
 
+router.post( '/areas',
+
+validationBody(schemas.addAreaSchema),
+
+csrfProtection, 
+
+
+logisticService.addArea
+
+
+);
 
 
 ////////////////////////////////////////////////
@@ -110,6 +122,77 @@ logisticService.add
 ////////////////////////////////////////////////
 
 
+//---------------------------
+// Edit City Route 
+//---------------------------
+
+router.get('/citys/edit/:colorId', 
+
+csrfProtection,
+
+logisticService.showOneCity
+
+);
+
+router.get('/areas/edit/:areaId', 
+
+csrfProtection,
+
+logisticService.showOneArea
+
+);
+
+//---------------------------
+// Update City Route 
+//---------------------------
+
+router.post('/citys/edit/:cityId', 
+
+csrfProtection,
+
+logisticService.updateCity
+
+);
+
+
+//---------------------------
+// Delete City Route 
+//---------------------------
+
+router.post('/citys/delete/:cityId',
+
+csrfProtection,
+
+
+logisticService.destroyCity
+
+); 
+
+//---------------------------
+// Update Area Route 
+//---------------------------
+
+router.post('/areas/edit/:areaId', 
+
+csrfProtection,
+
+logisticService.updateArea
+
+);
+
+
+//---------------------------
+// Delete Area Route 
+//---------------------------
+
+router.post('/areas/delete/:areaId',
+
+csrfProtection,
+
+
+logisticService.destroyArea
+
+); 
 
 
 module.exports = router;

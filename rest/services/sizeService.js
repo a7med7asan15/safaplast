@@ -23,7 +23,6 @@ const sizeService ={
                 limit: 10,
               }
             const sizes =  await SizeSchema.paginate({},options); 
-            console.log(sizes);
             return res.render('screens/logisticsScreens/sizeScreens', { thisUser:req.user , csrfToken , sizes })
         }catch(err){
 

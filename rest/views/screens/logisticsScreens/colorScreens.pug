@@ -9,6 +9,12 @@ block content
                     h1.m-0.text-dark All Colors
         .content
             .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
                 .row
                     .col-5
                         .card
@@ -54,9 +60,10 @@ block content
                                             - var totalPages = colors.totalPages 
                                             - var pages = 1
                                             - var page = colors.page 
+                                            - var num = (page-1)*colors.limit+1
                                             for color in colorArray
                                                 tr
-                                                    td #{color.id}
+                                                    td #{num++}
                                                     td #{color.name}
                                                     td #{color.colorHex}
                                                     td

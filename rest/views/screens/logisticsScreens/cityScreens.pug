@@ -9,6 +9,12 @@ block content
                     h1.m-0.text-dark All Citys
         .content
             .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
                 .row
                     .col-5
                         .card
@@ -54,9 +60,10 @@ block content
                                             - var totalPages = citys.totalPages 
                                             - var pages = 1
                                             - var page = citys.page 
+                                            - var num = (page-1)*citys.limit+1
                                             for city in cityArray
                                                 tr
-                                                    td 1
+                                                    td #{num++}
                                                     td #{city.nameEnglish}
                                                     td #{city.nameArabic}
                                                     td

@@ -1,7 +1,7 @@
 extends ../../layout.pug
 
 block content     
-    if colorToEdit       
+    if areaToEdit       
         .content.mt-5
             .container-fluid
                 if successes
@@ -14,17 +14,18 @@ block content
                     .col-12
                         .card   
                             .card-header
-                                h3.card-title Color Data
-                            form#addColorForm(action=`/dashboard/colors/edit/${colorToEdit.id}`, method="post" )
+                                h3.card-title area Data
+                            form#addAreaForm(action=`/dashboard/logistic/areas/edit/${areaToEdit.id}`, method="post" )
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .col-md-12
                                         .form-group.col-md-6
-                                            label.control-label(for="colorName") Color Name
-                                            input.form-control#colorName(type="text" name="colorName",value=`${colorToEdit.name}`, placeholder="Enter Color Name")
+                                            label.control-label(for="nameEn") English Name
+                                            input.form-control#nameEn(type="text" name="nameEnglish",value=`${areaToEdit.nameEnglish}`, placeholder="Enter English Name")
                                     .col-md-12
                                         .form-group.col-md-6
-                                            label(for="colorHex") Color Hex
-                                            input.form-control(type="text" name="colorHex", value=`${colorToEdit.colorHex}`, placeholder="Enter Color Hex")
+                                            label(for="nameAr") Arabic Name
+                                            input.form-control#nameAr(type="text" name="nameArabic", value=`${areaToEdit.nameArabic}`, placeholder="Enter Arabic Name")
+                                                              
                                 .card-footer
-                                    button.btn.btn-primary.float-right(type="submit") Update color
+                                    button.btn.btn-primary.float-right(type="submit") Update area
