@@ -127,7 +127,7 @@ logisticService.addArea
 // Edit City Route 
 //---------------------------
 
-router.get('/citys/edit/:colorId', 
+router.get('/citys/edit/:cityId', 
 
 csrfProtection,
 
@@ -135,7 +135,7 @@ logisticService.showOneCity
 
 );
 
-router.get('/areas/edit/:areaId', 
+router.get('/areas/edit/:areaParentId/:areaId', 
 
 csrfProtection,
 
@@ -148,6 +148,8 @@ logisticService.showOneArea
 //---------------------------
 
 router.post('/citys/edit/:cityId', 
+
+validationBody(schemas.updateCitySchema),
 
 csrfProtection,
 

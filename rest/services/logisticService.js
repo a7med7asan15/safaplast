@@ -109,25 +109,25 @@ const logisticService = {
     //Update City
     updateCity: async (req, res) => {
         const {
-            colorName,
-            colorHex
+            nameEnglish,
+            nameArabic
         } = req.body
         const {
-            colorId
+            cityId
         } = req.params
         try {
-            const updateColor = await ColorSchema.findById(colorId)
-            updateColor.name = colorName,
-                updateColor.colorHex = colorHex,
-                await updateColor.save();
+            const updateCity = await CitySchema.findById(cityId)
+            updateCity.nameEnglish = nameEnglish,
+            updateCity.nameArabic = nameArabic,
+            await updateCity.save();
             req.session.passedData = false
-            req.flash('success', 'Color Updated Succesfully')
-            return res.redirect(`/dashboard/colors/edit/${colorId}`)
+            req.flash('success', 'City Updated Succesfully')
+            return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
         } catch (err) {
             req.flash('error', {
                 message: 'Something Went wrong'
             })
-            return res.redirect(`/dashboard/colors/edit/${colorId}`)
+            return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
         }
 
     },
@@ -141,12 +141,12 @@ const logisticService = {
             const deleteCity = await CitySchema.findByIdAndDelete(cityId);
 
             req.flash('success', `${deleteCity.nameEnglish} Deleted Successfully`)
-            return res.redirect(`/dashboard/citys`)
+            return res.redirect(`/dashboard/logistic/citys`)
         } catch (err) {
             req.flash('error', {
                 message: 'Something Went wrong'
             })
-            return res.redirect(`/dashboard/citys`)
+            return res.redirect(`/dashboard/logistic/citys`)
 
         }
     },
@@ -207,12 +207,13 @@ const logisticService = {
                 nameArabic: areaArabic,
 
                 parent: parentCity,
+                
 
             })
 
 
             const {_id} =  await newArea.save();
-            console.log(_id);
+            
             const city = await CitySchema.findById(parentCity);
              city.childAreas.push(_id);
             await city.save();

@@ -4,7 +4,6 @@ const  Joi = require('@hapi/joi');
 module.exports  = {
     validationBody: (schemas)=>{
         return (req,res,next)=>{
-            console.log(req.url);
             const result  = schemas.validate(req.body)
             if (result.error){
                 req.flash('error', result.error.details)
@@ -67,7 +66,6 @@ module.exports  = {
         updateCitySchema:Joi.object().keys({
             nameEnglish:Joi.string().required(),
             nameArabic:Joi.string().required(),
-            parent:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
         addCitySchema:Joi.object().keys({
