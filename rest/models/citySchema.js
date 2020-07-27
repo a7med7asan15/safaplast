@@ -15,7 +15,7 @@ const areaSchema  = new Schema({
 const citySchema  = new Schema({
     nameEnglish :  { type: String , required: true},
     nameArabic  :  { type: String , required: true},
-    childAreas  :  [areaSchema]
+    childAreas  :  [{ type : Schema.Types.ObjectId , ref : 'areaSchema' }]
 
 })
 
