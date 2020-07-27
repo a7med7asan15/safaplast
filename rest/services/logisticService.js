@@ -196,10 +196,9 @@ const logisticService = {
             parentCity
         } = req.body;
 
-
         try {
 
-
+         
             const newArea = new AreaSchema({
 
 
@@ -212,8 +211,11 @@ const logisticService = {
             })
 
 
-            await newArea.save();
-
+            const {_id} =  await newArea.save();
+            console.log(_id);
+            const city = await CitySchema.findById(parentCity);
+             city.childAreas.push(_id);
+            await city.save();
             return res.redirect('/dashboard/logistic/areas');
 
         } catch (err) {

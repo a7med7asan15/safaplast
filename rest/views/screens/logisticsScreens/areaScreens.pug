@@ -37,7 +37,7 @@ block content
                                             if citys
                                                 - var cityArray = citys.docs
                                                 for city in cityArray
-                                                    option #{city.nameEnglish}
+                                                    option(value=`${city.id}`) #{city.nameEnglish}
                                 
                                 button.btn.btn-primary.float-right(type="submit") Add Area
                             .card-footer
