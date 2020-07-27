@@ -24,7 +24,7 @@ const colorService = {
             }
             const colors = await ColorSchema.paginate({}, options);
             console.log(colors);
-            return res.render('screens/logisticsScreens/colorScreens', {
+            return res.render('screens/variantScreens/colorScreens', {
                 thisUser: req.user,
                 csrfToken,
                 colors
@@ -92,14 +92,14 @@ const colorService = {
             console.log(colorId);
             const colorToEdit = await ColorSchema.findById(colorId);
 
-            return res.render('screens/logisticsScreens/editColorScreen', {
+            return res.render('screens/variantScreens/editColorScreen', {
                 thisUser: req.user,
                 colorToEdit: colorToEdit,
                 csrfToken
             })
         } catch (err) {
             req.flash('error', 'Something Went wrong')
-            return res.render('screens/logisticsScreens/editColorScreen', {
+            return res.render('screens/variantScreens/editColorScreen', {
                 thisUser: req.user,
                 colorToEdit: {},
                 csrfToken
