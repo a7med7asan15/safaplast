@@ -135,7 +135,7 @@ logisticService.showOneCity
 
 );
 
-router.get('/areas/edit/:areaParentId/:areaId', 
+router.get('/areas/edit/:areaId', 
 
 csrfProtection,
 
@@ -149,7 +149,7 @@ logisticService.showOneArea
 
 router.post('/citys/edit/:cityId', 
 
-validationBody(schemas.updateCitySchema),
+validationBody(schemas.addCitySchema),
 
 csrfProtection,
 
@@ -176,6 +176,8 @@ logisticService.destroyCity
 //---------------------------
 
 router.post('/areas/edit/:areaId', 
+
+validationBody(schemas.addAreaSchema),
 
 csrfProtection,
 

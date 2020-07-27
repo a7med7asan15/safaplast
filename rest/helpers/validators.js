@@ -58,25 +58,14 @@ module.exports  = {
             _csrf:Joi.string(), 
         }),
         addAreaSchema:Joi.object().keys({
-            areaEnglish:Joi.string().required(),
-            areaArabic:Joi.string().required(),
+            nameEnglish:Joi.string().required(),
+            nameArabic:Joi.string().required(),
             parentCity:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
-        updateCitySchema:Joi.object().keys({
-            nameEnglish:Joi.string().required(),
-            nameArabic:Joi.string().required(),
-            _csrf:Joi.string(), 
-        }),
         addCitySchema:Joi.object().keys({
-            cityEnglish:Joi.string().required(),
-            cityArabic:Joi.string().required(),
-            _csrf:Joi.string(), 
-        }),
-        updateAreaSchema:Joi.object().keys({
             nameEnglish:Joi.string().required(),
             nameArabic:Joi.string().required(),
-            parent:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
 

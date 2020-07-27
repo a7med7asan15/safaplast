@@ -26,6 +26,15 @@ block content
                                         .form-group.col-md-6
                                             label(for="nameAr") Arabic Name
                                             input.form-control#nameAr(type="text" name="nameArabic", value=`${areaToEdit.nameArabic}`, placeholder="Enter Arabic Name")
-                                                              
+                                    
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                        label Parent City
+                                        select.form-control.cityparent(name="parentCity")
+                                            option(selected) #{areaToEdit.parent}
+                                            if citys 
+                                                - var cityArray = citys.docs
+                                                for city in cityArray
+                                                    option(value=`${city.id}`) #{city.nameEnglish}                        
                                 .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Update area

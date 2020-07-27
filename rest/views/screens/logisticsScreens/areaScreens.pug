@@ -25,10 +25,10 @@ block content
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
                                         label(for="serviceenglish") Area Name [ English ]
-                                        input.form-control#serviceenglish(type="text", name="areaEnglish", placeholder="Enter Area Name in english")
+                                        input.form-control#serviceenglish(type="text", name="nameEnglish", placeholder="Enter Area Name in english")
                                     .form-group.col-md-10
                                         label(for="servicearabic") Area Name [ Arabic ]
-                                        input.form-control#servicearabic(type="text", name="areaArabic", placeholder="Enter Area name in arabic")
+                                        input.form-control#servicearabic(type="text", name="nameArabic", placeholder="Enter Area name in arabic")
                                     .col-md-10
                                         .form-group
                                         label Parent City
@@ -77,7 +77,7 @@ block content
                                                     td #{area.nameArabic}
                                                     td #{area.parent}
                                                     td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/logistic/areas/edit/${area.parent}/${area.id}`)
+                                                        a.btn-sm.btn-primary(href=`/dashboard/logistic/areas/edit/${area.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td

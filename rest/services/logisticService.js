@@ -168,7 +168,7 @@ const logisticService = {
                 limit: 10,
             }
             const areas = await AreaSchema.paginate({}, options);
-            const citys = await CitySchema.paginate({}, options);
+            const citys = await CitySchema.paginate();
             return res.render('screens/logisticsScreens/areaScreens', {
                 thisUser: req.user,
                 csrfToken,
@@ -191,8 +191,8 @@ const logisticService = {
 
 
         const {
-            areaEnglish,
-            areaArabic,
+            nameEnglish,
+            nameArabic,
             parentCity
         } = req.body;
 
@@ -202,9 +202,9 @@ const logisticService = {
             const newArea = new AreaSchema({
 
 
-                nameEnglish: areaEnglish,
+                nameEnglish: nameEnglish,
 
-                nameArabic: areaArabic,
+                nameArabic: nameArabic,
 
                 parent: parentCity,
                 
@@ -236,10 +236,8 @@ const logisticService = {
 
         try {
             var {areaId} = req.params
+            const citys = await CitySchema.paginate();
             const areaToEdit = await AreaSchema.findById(areaId);
-            const citys = await CitySchema.paginate({}, options);
-            console.log(areaToEdit);
-            console.log(3);
             return res.render('screens/logisticsScreens/editAreaScreen', {
                 thisUser: req.user,
                 areaToEdit: areaToEdit,
@@ -248,7 +246,6 @@ const logisticService = {
             })
         } catch (err) {
             req.flash('error', 'Something Went wrong')
-            console.log(3);
             return res.render('screens/logisticsScreens/editAreaScreen', {
                 thisUser: req.user,
                 areaToEdit: {},
@@ -263,25 +260,43 @@ const logisticService = {
     //Edit Area
     updateArea: async (req, res) => {
         const {
-            colorName,
-            colorHex
+            nameEnglish,
+            nameArabic, 
+            parentCity
         } = req.body
         const {
-            colorId
+            areaId
         } = req.params
         try {
-            const updateColor = await ColorSchema.findById(colorId)
-            updateColor.name = colorName,
-                updateColor.colorHex = colorHex,
-                await updateColor.save();
+            const updateArea = await AreaSchema.findById(areaId);
+            
+            const oldCity = await CitySchema.findById(updateArea.parent);
+            const newCity = await CitySchema.findById(parentCity);
+            console.log(oldCity);
+            console.log(newCity);
+            if(!newCity.childAreas.includes(areaId)){
+                newCity.childAreas.push(areaId);
+                oldCity.childAreas.splice( oldCity.childAreas.indexOf(areaId), 1 );
+                await newCity.save();
+                await oldCity.save();
+            }
+
+            
+        
+            
+            updateArea.nameEnglish = nameEnglish,
+            updateArea.nameArabic = nameArabic,
+            updateArea.parent = parentCity,
+            await updateArea.save();
+
             req.session.passedData = false
-            req.flash('success', 'Color Updated Succesfully')
-            return res.redirect(`/dashboard/colors/edit/${colorId}`)
+            req.flash('success', 'Area Updated Succesfully')
+            return res.redirect(`/dashboard/logistic/areas/edit/${areaId}`)
         } catch (err) {
             req.flash('error', {
                 message: 'Something Went wrong'
             })
-            return res.redirect(`/dashboard/colors/edit/${colorId}`)
+            return res.redirect(`/dashboard/logistic/areas/edit/${areaId}`)
         }
 
     },
