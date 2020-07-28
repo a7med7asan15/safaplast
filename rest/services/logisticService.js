@@ -47,8 +47,8 @@ const logisticService = {
 
 
         const {
-            cityEnglish,
-            cityArabic
+            nameEnglish,
+            nameArabic
         } = req.body;
 
 
@@ -58,9 +58,9 @@ const logisticService = {
             const newCity = new CitySchema({
 
 
-                nameEnglish: cityEnglish,
+                nameEnglish,
 
-                nameArabic: cityArabic
+                nameArabic
 
 
             })
@@ -172,6 +172,7 @@ const logisticService = {
             }
             const areas = await AreaSchema.paginate({}, options);
             const citys = await CitySchema.paginate();
+            console.log(areas);
             return res.render('screens/logisticsScreens/areaScreens', {
                 thisUser: req.user,
                 csrfToken,
@@ -236,8 +237,12 @@ const logisticService = {
             var {
                 areaId
             } = req.params
+            const options = {
+                populate: 'parent',
+            }
             const citys = await CitySchema.paginate();
-            const areaToEdit = await AreaSchema.findById(areaId);
+            const areaToEdit = await AreaSchema.findById(areaId).populate('parent');
+            console.log(areaToEdit);
             return res.render('screens/logisticsScreens/editAreaScreen', {
                 thisUser: req.user,
                 areaToEdit: areaToEdit,
@@ -269,21 +274,6 @@ const logisticService = {
         } = req.params
         try {
             const updateArea = await AreaSchema.findById(areaId);
-
-            const oldCity = await CitySchema.findById(updateArea.parent);
-            const newCity = await CitySchema.findById(parentCity);
-            console.log(oldCity);
-            console.log(newCity);
-            if (!newCity.childAreas.includes(areaId)) {
-                newCity.childAreas.push(areaId);
-                oldCity.childAreas.splice(oldCity.childAreas.indexOf(areaId), 1);
-                await newCity.save();
-                await oldCity.save();
-            }
-
-
-
-
             updateArea.nameEnglish = nameEnglish,
                 updateArea.nameArabic = nameArabic,
                 updateArea.parent = parentCity,
