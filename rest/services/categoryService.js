@@ -210,10 +210,12 @@ const categoryService = {
             const options = {
                 page,
                 limit: 10,
+                populate:"parentType parentClass"
             }
             const types = await TypesSchema.find();
             const classes = await ClassSchema.find();
             const variants = await VariantsSchema.paginate({}, options);
+            console.log(variants)
             return res.render('screens/categoryScreens/variationScreen', {
                 thisUser: req.user,
                 csrfToken,
@@ -229,23 +231,33 @@ const categoryService = {
     },
     addVariant: async ( req , res )=>{
         const {variantEnglish,variantArabic ,parentType,parentClass} = req.body;
-        console.log(variantEnglish,variantArabic ,parentType,parentClass);
       try{
         const variant = new VariantsSchema({
             nameArabic:variantArabic,
             nameEnglish:variantEnglish,
             parentType:parentType,
-            parenClass:parentClass
+            parentClass:parentClass
         })
         await variant.save();
         req.flash('success', 'Variant Added Succesfully')
         res.redirect('/dashboard/category/variants');
-
       }catch(err){
 
 
 
       }
+    },
+    showOneVariant:async(req,res)=>{
+       let id = req.query.id;
+       try{
+        const variant = VariantsSchema.findById(id);
+        console.log(variant)
+       }catch(err){
+
+
+       } 
+
+
     }
 }
 
