@@ -131,4 +131,16 @@ colorService.destroy
 
 ); 
 
+//---------------------------
+// Color Search 
+//---------------------------
+
+router.post('/searchResult',
+
+csrfProtection,
+
+colorService.searchShowColor
+
+); 
+
 module.exports = router;

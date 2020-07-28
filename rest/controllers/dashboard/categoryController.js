@@ -193,5 +193,51 @@ categoryService.deleteOneClass
 // Delete Color Route 
 //---------------------------
 
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// +++ /// Search  // ++++// //////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+//---------------------------
+// Types Search 
+//---------------------------
+
+router.post('/types/searchResult',
+
+csrfProtection,
+
+
+categoryService.searchShowType
+
+); 
+
+
+//---------------------------
+// Class Search 
+//---------------------------
+
+router.post('/class/searchResult',
+
+csrfProtection,
+
+
+categoryService.searchShowClass
+
+); 
+
+
+//---------------------------
+// Variant Search 
+//---------------------------
+
+router.post('/variants/searchResult',
+
+csrfProtection,
+
+
+categoryService.searchShowVariant
+
+); 
+
 
 module.exports = router;

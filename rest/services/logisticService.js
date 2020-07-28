@@ -152,6 +152,41 @@ const logisticService = {
 
         }
     },
+
+    searchShowCity: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await CitySchema.find({
+                "$or": [
+                    { nameEnglish: { '$regex': table_search, '$options': 'i' } },
+                    { nameArabic: { '$regex': table_search, '$options': 'i' } },
+                ]
+            });
+            
+            return res.render('screens/logisticsScreens/cityScreens', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/logisticsScreens/cityScreens', {
+                thisUser: req.user,
+                tbSearch: {},
+                table_search,
+                csrfToken
+            })
+        }
+
+
+    },
+
     // Show areas
     showArea: async (req, res) => {
         let page = 1;
@@ -317,8 +352,10 @@ const logisticService = {
 
                 {
                     nameEnglish: {
-                        $regex: req.body.nameEnglish
+                        $regex: req.body.nameEnglish, 
+                        $options: 'i'
                     }
+                    
 
                 }, 'nameEnglish');
 
@@ -329,6 +366,42 @@ const logisticService = {
         } catch (err) {
 
             return res.send(err);
+        }
+
+
+    },
+
+    //search Area
+    searchShowArea: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await AreaSchema.find({
+                "$or": [
+                    { nameEnglish: { '$regex': table_search, '$options': 'i' } },
+                    { nameArabic: { '$regex': table_search, '$options': 'i' } },
+                    //{ parent: { '$regex': table_search, '$options': 'i' } }
+                ]
+            }).populate('parent');
+            console.log(tbSearch);
+            return res.render('screens/logisticsScreens/areaScreens', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/logisticsScreens/areaScreens', {
+                thisUser: req.user,
+                tbSearch: {},
+                table_search,
+                csrfToken
+            })
         }
 
 
