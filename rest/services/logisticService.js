@@ -166,6 +166,7 @@ const logisticService = {
             const options = {
                 page,
                 limit: 10,
+                populate: 'parent',
             }
             const areas = await AreaSchema.paginate({}, options);
             const citys = await CitySchema.paginate();
@@ -197,10 +198,8 @@ const logisticService = {
         } = req.body;
 
         try {
-
          
             const newArea = new AreaSchema({
-
 
                 nameEnglish: nameEnglish,
 
@@ -212,11 +211,8 @@ const logisticService = {
             })
 
 
-            const {_id} =  await newArea.save();
-            
-            const city = await CitySchema.findById(parentCity);
-             city.childAreas.push(_id);
-            await city.save();
+            await newArea.save();
+
             return res.redirect('/dashboard/logistic/areas');
 
         } catch (err) {

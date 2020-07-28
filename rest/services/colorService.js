@@ -92,7 +92,7 @@ const colorService = {
 
         try {
             var {colorId} = req.params
-            console.log(colorId);
+       
             const colorToEdit = await ColorSchema.findById(colorId);
 
             return res.render('screens/variantScreens/editColorScreen', {

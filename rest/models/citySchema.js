@@ -8,14 +8,13 @@ const Schema = mongoose.Schema;
 const areaSchema  = new Schema({
     nameEnglish  :  { type: String, required: true},
     nameArabic  :  { type: String , required: true},
-    parent  :  { type: String , required: true},
+    parent  :  { type : Schema.Types.ObjectId , ref : 'citySchema' },
 })
 
 
 const citySchema  = new Schema({
     nameEnglish :  { type: String , required: true},
     nameArabic  :  { type: String , required: true},
-    childAreas  :  [{ type : Schema.Types.ObjectId , ref : 'areaSchema' }]
 
 })
 
