@@ -24,6 +24,10 @@ block content
                                             input.form-control#colorName(type="text" name="colorName",value=`${colorToEdit.name}`, placeholder="Enter Color Name")
                                     .col-md-12
                                         .form-group.col-md-6
+                                            label.control-label(for="colorArabic") Color Arabic Name
+                                            input.form-control#colorArabic(type="text" name="colorArabic",value=`${colorToEdit.colorArabic}`, placeholder="Enter Color Arabic Name")
+                                    .col-md-12
+                                        .form-group.col-md-6
                                             label(for="colorHex") Color Hex
                                             input.form-control(type="text" name="colorHex", value=`${colorToEdit.colorHex}`, placeholder="Enter Color Hex")
                                 .card-footer

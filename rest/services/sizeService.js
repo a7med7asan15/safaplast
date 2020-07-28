@@ -23,7 +23,7 @@ const sizeService ={
                 limit: 10,
               }
             const sizes =  await SizeSchema.paginate({},options); 
-            return res.render('screens/logisticsScreens/sizeScreens', { thisUser:req.user , csrfToken , sizes })
+            return res.render('screens/variantScreens/sizeScreens', { thisUser:req.user , csrfToken , sizes })
         }catch(err){
 
             res.send(err);
@@ -44,7 +44,7 @@ const sizeService ={
 
 
          
-        const {name}  =  req.body;
+        const {nameEnglish, nameArabic}  =  req.body;
         
         
         try{
@@ -53,7 +53,9 @@ const sizeService ={
             const newSize = new SizeSchema({
         
         
-                name
+                nameEnglish, 
+                
+                nameArabic
         
         
             })
@@ -79,17 +81,16 @@ const sizeService ={
 
         try {
             var {sizeId} = req.params
-            console.log(sizeId);
             const sizeToEdit = await SizeSchema.findById(sizeId);
 
-            return res.render('screens/logisticsScreens/editSizeScreen', {
+            return res.render('screens/variantScreens/editSizeScreen', {
                 thisUser: req.user,
                 sizeToEdit: sizeToEdit,
                 csrfToken
             })
         } catch (err) {
             req.flash('error', 'Something Went wrong')
-            return res.render('screens/logisticsScreens/editSizeScreen', {
+            return res.render('screens/variantScreens/editSizeScreen', {
                 thisUser: req.user,
                 sizeToEdit: {},
                 csrfToken
@@ -100,12 +101,12 @@ const sizeService ={
 
 
     update: async (req , res )=>{
-        const {sizeName} = req.body
+        const {nameEnglish, nameArabic} = req.body
         const {sizeId} = req.params 
         try{
             const updateSize = await SizeSchema.findById(sizeId)
-            updateSize.name = sizeName,
-            
+            updateSize.nameEnglish = nameEnglish,
+            updateSize.nameArabic = nameArabic,
             await updateSize.save();
             req.session.passedData = false 
             req.flash('success', 'Size Updated Succesfully')
@@ -122,7 +123,7 @@ const sizeService ={
        try{
             const deleteSize =  await SizeSchema.findByIdAndDelete(sizeId);
             
-            req.flash('success', `${deleteSize.name} Deleted Successfully`)
+            req.flash('success', `${deleteSize.nameEnglish} Deleted Successfully`)
             return res.redirect(`/dashboard/sizes`)
        }catch(err){
         req.flash('error', {message:'Something Went wrong'})

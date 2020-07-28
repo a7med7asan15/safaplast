@@ -4,7 +4,6 @@ const  Joi = require('@hapi/joi');
 module.exports  = {
     validationBody: (schemas)=>{
         return (req,res,next)=>{
-            console.log(req.url);
             const result  = schemas.validate(req.body)
             if (result.error){
                 req.flash('error', result.error.details)
@@ -51,35 +50,18 @@ module.exports  = {
         addColorSchema:Joi.object().keys({
             colorName:Joi.string().min(3).max(30).required(),
             colorHex:Joi.string().min(4).max(7).required(),
-            _csrf:Joi.string(), 
-        }),
-        updateColorSchema:Joi.object().keys({
-            colorName:Joi.string().min(3).max(30).required(),
-            colorHex:Joi.string().min(4).max(7).required(),
+            colorArabic:Joi.string().min(3).max(30).required(),
             _csrf:Joi.string(), 
         }),
         addAreaSchema:Joi.object().keys({
-            areaEnglish:Joi.string().required(),
-            areaArabic:Joi.string().required(),
-            parentCity:Joi.string().required(),
-            _csrf:Joi.string(), 
-        }),
-        updateCitySchema:Joi.object().keys({
             nameEnglish:Joi.string().required(),
             nameArabic:Joi.string().required(),
-            parent:Joi.string().required(),
+            parentCity:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
         addCitySchema:Joi.object().keys({
             nameEnglish:Joi.string().required(),
             nameArabic:Joi.string().required(),
-            parent:Joi.string().required(),
-            _csrf:Joi.string(), 
-        }),
-        updateAreaSchema:Joi.object().keys({
-            nameEnglish:Joi.string().required(),
-            nameArabic:Joi.string().required(),
-            parent:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
         addTypeSchema:Joi.object().keys({

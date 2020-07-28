@@ -1,7 +1,7 @@
 extends ../../layout.pug
 
 block content     
-    if colorToEdit       
+    if cityToEdit       
         .content.mt-5
             .container-fluid
                 if successes
@@ -14,27 +14,19 @@ block content
                     .col-12
                         .card   
                             .card-header
-                                h3.card-title Color Data
-                            form#addColorForm(action=`/dashboard/colors/edit/${colorToEdit.id}`, method="post" )
+                                h3.card-title City Data
+                            form#addColorForm(action=`/dashboard/logistic/citys/edit/${cityToEdit.id}`, method="post" )
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .col-md-12
                                         .form-group.col-md-6
-                                            label.control-label(for="colorName") Color Name
-                                            input.form-control#colorName(type="text" name="colorName",value=`${colorToEdit.name}`, placeholder="Enter Color Name")
+                                            label.control-label(for="nameEnglish") English Name
+                                            input.form-control#nameEnglish(type="text" name="nameEnglish",value=`${cityToEdit.nameEnglish}`, placeholder="Enter English Name")
                                     .col-md-12
                                         .form-group.col-md-6
-                                            label(for="colorHex") Color Hex
-                                            input.form-control(type="text" name="colorHex", value=`${colorToEdit.colorHex}`, placeholder="Enter Color Hex")
+                                            label(for="nameArabic") Arabic Name
+                                            input.form-control#nameArabic(type="text" name="nameArabic", value=`${cityToEdit.nameArabic}`, placeholder="Enter Arabic Name")
                                 .card-footer
-                                    button.btn.btn-primary.float-right(type="submit") Update color
+                                    button.btn.btn-primary.float-right(type="submit") Update City
 
-                                    .col-md-12
-                                        .form-group.col-md-6
-                                            label(for="nameAr") City
-                                            select.form-control.cityparent(name="parentCity")
-                                                option(selected) Select City
-                                                if citys
-                                                    - var cityArray = citys.docs
-                                                    for city in cityArray
-                                                        option #{city.nameEnglish}      
+                                         

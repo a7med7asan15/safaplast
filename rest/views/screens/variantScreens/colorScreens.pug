@@ -6,27 +6,39 @@ block content
             .container-fluid
                 .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark All Sizes
+                    h1.m-0.text-dark All Colors
         .content
             .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
                 .row
                     .col-5
                         .card
                             .card-header
-                                h3.card-title Size Info
-                            form(action="/dashboard/sizes" method="post" role="form")
+                                h3.card-title Color Info
+                            form(action="/dashboard/colors" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-12
-                                        label(for="serviceName") Size 
-                                        input.form-control#serviceName(type="text", name="name", placeholder="Enter Size")
-                                    button.btn.btn-primary.float-right(type="submit") Add Size
+                                        label(for="serviceName") Color Name 
+                                        input.form-control#serviceName(type="text", name="colorName", placeholder="Enter Color name")
+                                    .form-group.col-md-12
+                                        label(for="serviceArabic") Color Arabic Name 
+                                        input.form-control#serviceArabic(type="text", name="colorArabic", placeholder="Enter Color name")
+                                    .form-group.col-md-12
+                                        label(for="serviceHex") Color Hex 
+                                        input.form-control#serviceHex(type="text", name="colorHex", placeholder="Enter Color Hex")
+                                    button.btn.btn-primary.float-right(type="submit") Add Color
                             .card-footer
                                     
                     .col-7
                         .card
                             .card-header
-                                h3.card-title All Sizes 
+                                h3.card-title All Colors 
                                 .card-tools
                                 .input-group.input-group-sm(style="width: 150px;")
                                     input.form-control.float-right(type="text", name="table_search", placeholder="Search")
@@ -39,28 +51,32 @@ block content
                                         tr
                                             th ID
                                             th Name 
+                                            th Arabic
+                                            th Hex 
                                             th Edit
                                             th delete
                                     tbody
                                         
-                                        if sizes
-                                            - var sizeArray = sizes.docs
-                                            - var hasPrev = sizes.hasPrevPage 
-                                            - var hasNext = sizes.hasNextPage 
-                                            - var totalPages = sizes.totalPages 
+                                        if colors
+                                            - var colorArray = colors.docs
+                                            - var hasPrev = colors.hasPrevPage 
+                                            - var hasNext = colors.hasNextPage 
+                                            - var totalPages = colors.totalPages 
                                             - var pages = 1
-                                            - var page = sizes.page 
-                                            - var num = (page-1)*sizes.limit+1
-                                            for size in sizeArray
+                                            - var page = colors.page 
+                                            - var num = (page-1)*colors.limit+1
+                                            for color in colorArray
                                                 tr
                                                     td #{num++}
-                                                    td #{size.name}
+                                                    td #{color.name}
+                                                    td #{color.colorArabic}
+                                                    td #{color.colorHex}
                                                     td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/sizes/edit/${size.id}`)
+                                                        a.btn-sm.btn-primary(href=`/dashboard/colors/edit/${color.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
-                                                        form(action=`/dashboard/sizes/delete/${size.id}`, method="post")
+                                                        form(action=`/dashboard/colors/delete/${color.id}`, method="post")
                                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                             button.btn-sm.btn-danger(type="submit")
                                                                 i.fas.fa-trash-alt
@@ -69,18 +85,18 @@ block content
                                 ul.pagination.pagination-sm.m-0.float-right
                                     if hasPrev
                                         li.page-item
-                                            a.page-link(href=href=`/dashboard/sizes?p=${page - 1}`) «
+                                            a.page-link(href=href=`/dashboard/colors?p=${page - 1}`) «
                         
                                     if totalPages > 1
-                                        while pages  < 3           
+                                        while pages  < 3            
                                             li.page-item
                                                 if pages === page
                                                     a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
                                                 else
-                                                    a.page-link.active( href=`/dashboard/sizes?p=${pages}`)= pages
+                                                    a.page-link.active( href=`/dashboard/colors?p=${pages}`)= pages
                                                     
                                             - pages++    
                                
                                     if hasNext
                                         li.page-item
-                                            a.page-link(href=`/dashboard/sizes?p=${page + 1}`) »
+                                            a.page-link(href=`/dashboard/colors?p=${page + 1}`) »

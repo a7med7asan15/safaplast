@@ -24,7 +24,7 @@ const colorService = {
             }
             const colors = await ColorSchema.paginate({}, options);
             console.log(colors);
-            return res.render('screens/logisticsScreens/colorScreens', {
+            return res.render('screens/variantScreens/colorScreens', {
                 thisUser: req.user,
                 csrfToken,
                 colors
@@ -51,7 +51,8 @@ const colorService = {
 
         const {
             colorName,
-            colorHex
+            colorHex, 
+            colorArabic,
         } = req.body;
 
 
@@ -63,7 +64,9 @@ const colorService = {
 
                 name: colorName,
 
-                colorHex
+                colorHex, 
+                
+                colorArabic
 
 
             })
@@ -91,14 +94,15 @@ const colorService = {
             var {colorId} = req.params
        
             const colorToEdit = await ColorSchema.findById(colorId);
-            return res.render('screens/logisticsScreens/editColorScreen', {
+
+            return res.render('screens/variantScreens/editColorScreen', {
                 thisUser: req.user,
                 colorToEdit: colorToEdit,
                 csrfToken
             })
         } catch (err) {
             req.flash('error', 'Something Went wrong')
-            return res.render('screens/logisticsScreens/editColorScreen', {
+            return res.render('screens/variantScreens/editColorScreen', {
                 thisUser: req.user,
                 colorToEdit: {},
                 csrfToken
@@ -115,6 +119,7 @@ const colorService = {
             const updateColor = await ColorSchema.findById(colorId)
             updateColor.name = colorName,
             updateColor.colorHex = colorHex,
+            updateColor.colorArabic = colorArabic,
             await updateColor.save();
             req.session.passedData = false 
             req.flash('success', 'Color Updated Succesfully')

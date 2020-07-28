@@ -93,6 +93,7 @@ logisticService.showArea
 router.post( '/citys',
 
 
+validationBody(schemas.addCitySchema),
 
 csrfProtection, 
 
@@ -126,7 +127,7 @@ logisticService.addArea
 // Edit City Route 
 //---------------------------
 
-router.get('/citys/edit/:colorId', 
+router.get('/citys/edit/:cityId', 
 
 csrfProtection,
 
@@ -147,6 +148,8 @@ logisticService.showOneArea
 //---------------------------
 
 router.post('/citys/edit/:cityId', 
+
+validationBody(schemas.addCitySchema),
 
 csrfProtection,
 
@@ -173,6 +176,8 @@ logisticService.destroyCity
 //---------------------------
 
 router.post('/areas/edit/:areaId', 
+
+validationBody(schemas.addAreaSchema),
 
 csrfProtection,
 

@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 
 const colorSchema  = new Schema({
     name:{ type: String, required: true},
-    colorHex:{type:String , required :true}
-
+    colorHex:{type:String , required :true},
+    colorArabic:{ type: String, required: true},
 })
 
 colorSchema.plugin(mongoosePaginate);
