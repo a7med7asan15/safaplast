@@ -5,7 +5,7 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
     if thisUser 
       .user-panel.mt-3.pb-3.mb-3.d-flex
         .image
-          //if image -->    
+          //if image  
           img.img-circle.elevation-2(src=`/static/images/${thisUser.avatar}`, alt="User Image")
         .info
             a.d-block(href="#") #{thisUser.username}
@@ -53,16 +53,40 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
                 i.left.pr-2.fas.fa-th
                 p Citys
             li.nav-item
-              a.nav-link(href="/dashboard/users/add")
+              a.nav-link(href="/dashboard/logistic/areas")
                 i.left.pr-2.fas.fa-th
                 p Area
+        li.nav-item.has-treeview.menu-open
+          a.nav-link(href="#")
+            i.left.pr-2.fas.fa-th
+            p
+              | Variations
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
             li.nav-item
-              a.nav-link(href="/dashboard/logistic/colors")
+              a.nav-link(href="/dashboard/colors")
                 i.left.pr-2.fas.fa-th
                 p Color
             li.nav-item
-              a.nav-link(href="/dashboard/logistic/sizes")
+              a.nav-link(href="/dashboard/sizes")
                 i.left.pr-2.fas.fa-th
                 p Size
-
-              
+        li.nav-item.has-treeview.menu-open
+          a.nav-link(href="#")
+            i.left.pr-2.fas.fa-th
+            p
+              | Categories
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link(href="/dashboard/category/class")
+                i.left.pr-2.fas.fa-th
+                p Product Class 
+            li.nav-item
+              a.nav-link(href="/dashboard/category/types")
+                i.left.pr-2.fas.fa-th
+                p Product Type 
+            li.nav-item
+              a.nav-link(href="/dashboard/category/variants")
+                i.left.pr-2.fas.fa-th
+                p Product Variation 

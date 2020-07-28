@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf'); 
 const csrfProtection = csrf();
-const logisticService = require('../../services/logisticService');
+const colorService = require('../../services/colorService');
 
 // uploading Middleware 
 // Multer Js 
@@ -54,29 +54,16 @@ router.use(   authMiddleware ,   idAdmin   );
 //--------------------
 
 
-
-router.get( '/citys',
-
-
-csrfProtection, 
-
-
-logisticService.show
-
-
-);
-
-router.get( '/areas',
+router.get( '/',
 
 
 csrfProtection, 
 
 
-logisticService.showArea
+colorService.show
 
 
 );
-
 
 
 
@@ -89,28 +76,13 @@ logisticService.showArea
 ////////////////////////////////////////////////
 
 
+router.post( '/',
 
-router.post( '/citys',
-
-
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addColorSchema),
 
 csrfProtection, 
 
-
-logisticService.add
-
-
-);
-
-router.post( '/areas',
-
-validationBody(schemas.addAreaSchema),
-
-csrfProtection, 
-
-
-logisticService.addArea
+colorService.add
 
 
 );
@@ -118,86 +90,45 @@ logisticService.addArea
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// Store UPDATE ROUTES  // ++++// //////
+// +++ /// EDIT Color  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
+router.get('/edit/:colorId', 
 
-//---------------------------
-// Edit City Route 
-//---------------------------
-
-router.get('/citys/edit/:cityId', 
 
 csrfProtection,
 
-logisticService.showOneCity
-
-);
-
-router.get('/areas/edit/:areaId', 
-
-csrfProtection,
-
-logisticService.showOneArea
+colorService.showOne
 
 );
 
 //---------------------------
-// Update City Route 
+// Update Color Route 
 //---------------------------
 
-router.post('/citys/edit/:cityId', 
+router.post('/edit/:colorId', 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addColorSchema) , 
 
 csrfProtection,
 
-logisticService.updateCity
+colorService.update
 
 );
 
 
 //---------------------------
-// Delete City Route 
+// Delete Color Route 
 //---------------------------
 
-router.post('/citys/delete/:cityId',
+router.post('/delete/:colorId',
 
 csrfProtection,
 
 
-logisticService.destroyCity
+colorService.destroy
 
 ); 
-
-//---------------------------
-// Update Area Route 
-//---------------------------
-
-router.post('/areas/edit/:areaId', 
-
-validationBody(schemas.addAreaSchema),
-
-csrfProtection,
-
-logisticService.updateArea
-
-);
-
-
-//---------------------------
-// Delete Area Route 
-//---------------------------
-
-router.post('/areas/delete/:areaId',
-
-csrfProtection,
-
-
-logisticService.destroyArea
-
-); 
-
 
 module.exports = router;

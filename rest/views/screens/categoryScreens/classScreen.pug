@@ -6,7 +6,7 @@ block content
             .container-fluid
                 .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark All Citys
+                    h1.m-0.text-dark All Classes
         .content
             .container-fluid
                 if successes
@@ -19,23 +19,22 @@ block content
                     .col-5
                         .card
                             .card-header
-                                h3.card-title Area Info
-                            form(action="/dashboard/logistic/citys" method="post" role="form")
+                                h3.card-title Class Info
+                            form(action="/dashboard/category/class/add" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
-                                        label(for="serviceenglish") City Name [ English ]
-                                        input.form-control#serviceenglish(type="text", name="nameEnglish", placeholder="Enter City Name in english")
+                                        label(for="serviceenglish") Class Name [ English ]
+                                        input.form-control#serviceenglish(type="text", name="classEnglish", placeholder="Enter Type Name in english")
                                     .form-group.col-md-10
-                                        label(for="servicearabic") City Name [ Arabic ]
-                                        input.form-control#servicearabic(type="text", name="nameArabic", placeholder="Enter City name in arabic")
-                                
-                                    button.btn.btn-primary.float-right(type="submit") Add Service
-                            .card-footer
+                                        label(for="servicearabic") Class Name [ Arabic ]
+                                        input.form-control#servicearabic(type="text", name="classArabic", placeholder="Enter Type name in arabic")
+                                .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Add Class
                     .col-7
                         .card
                             .card-header
-                                h3.card-title All Citys 
+                                h3.card-title All Class 
                                 .card-tools
                                 .input-group.input-group-sm(style="width: 150px;")
                                     input.form-control.float-right(type="text", name="table_search", placeholder="Search")
@@ -53,29 +52,28 @@ block content
                                             th delete
                                     tbody
                                         
-                                        if citys
-                                            - var cityArray = citys.docs
-                                            - var hasPrev = citys.hasPrevPage 
-                                            - var hasNext = citys.hasNextPage 
-                                            - var totalPages = citys.totalPages 
+                                        if dataProvided
+                                            - var dataArray = dataProvided.docs
+                                            - var hasPrev = dataProvided.hasPrevPage 
+                                            - var hasNext = dataProvided.hasNextPage 
+                                            - var totalPages = dataProvided.totalPages 
                                             - var pages = 1
-                                            - var page = citys.page 
-                                            - var num = (page-1)*citys.limit+1
-                                            for city in cityArray
+                                            - var page = dataProvided.page 
+                                            - var num = (page-1)*dataProvided.limit+1
+                                            for dat in dataArray
                                                 tr
                                                     td #{num++}
-                                                    td #{city.nameEnglish}
-                                                    td #{city.nameArabic}
+                                                    td #{dat.nameEnglish}
+                                                    td #{dat.nameArabic}
                                                     td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/logistic/citys/edit/${city.id}`)
+                                                        a.btn-sm.btn-primary(href=`/dashboard/category/class/edit?id=${dat.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
-                                                        form(action=`/dashboard/logistic/citys/delete/${city.id}`, method="post")
+                                                        form(action=`/dashboard/category/class/delete?id=${dat.id}`, method="post")
                                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                             button.btn-sm.btn-danger(type="submit")
                                                                 i.fas.fa-trash-alt
-                                                                |  Delete
                             .card-footer.clearfix
                                 ul.pagination.pagination-sm.m-0.float-right
                                     if hasPrev

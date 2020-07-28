@@ -14,14 +14,18 @@ block content
                         .card
                             .card-header
                                 h3.card-title Size Info
-                            form(action="/dashboard/logistic/sizes" method="post" role="form")
+                            form(action="/dashboard/sizes" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                    .form-group.col-md-10
+                                    .form-group.col-md-12
                                         label(for="serviceName") Size 
-                                        input.form-control#serviceName(type="text", name="name", placeholder="Enter Size")
-                                    .card-footer
+                                        input.form-control#serviceName(type="text", name="nameEnglish", placeholder="Enter Size")
+                                    .form-group.col-md-12
+                                        label(for="serviceArabic") Size in Arabic
+                                        input.form-control#serviceArabic(type="text", name="nameArabic", placeholder="Enter Size")
                                     button.btn.btn-primary.float-right(type="submit") Add Size
+                            .card-footer
+                                    
                     .col-7
                         .card
                             .card-header
@@ -38,6 +42,7 @@ block content
                                         tr
                                             th ID
                                             th Name 
+                                            th Arabic
                                             th Edit
                                             th delete
                                     tbody
@@ -49,34 +54,38 @@ block content
                                             - var totalPages = sizes.totalPages 
                                             - var pages = 1
                                             - var page = sizes.page 
+                                            - var num = (page-1)*sizes.limit+1
                                             for size in sizeArray
                                                 tr
-                                                    td 1
-                                                    td #{size.name}
+                                                    td #{num++}
+                                                    td #{size.nameEnglish}
+                                                    td #{size.nameArabic}
                                                     td
-                                                        a.btn-sm.btn-primary(href="#")
+                                                        a.btn-sm.btn-primary(href=`/dashboard/sizes/edit/${size.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
-                                                        a.btn-sm.btn-danger(href="#")
-                                                            i.fas.fa-trash-alt
-                                                            |  Delete
+                                                        form(action=`/dashboard/sizes/delete/${size.id}`, method="post")
+                                                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                            button.btn-sm.btn-danger(type="submit")
+                                                                i.fas.fa-trash-alt
+                                                                |  Delete
                             .card-footer.clearfix
                                 ul.pagination.pagination-sm.m-0.float-right
                                     if hasPrev
                                         li.page-item
-                                            a.page-link(href=href=`/dashboard/logistic/sizes?p=${page - 1}`) «
+                                            a.page-link(href=href=`/dashboard/sizes?p=${page - 1}`) «
                         
                                     if totalPages > 1
-                                        while pages  < 3            
+                                        while pages  < 3           
                                             li.page-item
                                                 if pages === page
                                                     a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
                                                 else
-                                                    a.page-link.active( href=`/dashboard/logistic/sizes?p=${pages}`)= pages
+                                                    a.page-link.active( href=`/dashboard/sizes?p=${pages}`)= pages
                                                     
                                             - pages++    
                                
                                     if hasNext
                                         li.page-item
-                                            a.page-link(href=`/dashboard/logistic/sizes?p=${page + 1}`) »
+                                            a.page-link(href=`/dashboard/sizes?p=${page + 1}`) »

@@ -1,0 +1,40 @@
+extends ../../layout.pug
+
+block content     
+    if areaToEdit       
+        .content.mt-5
+            .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
+                .row
+                    .col-12
+                        .card   
+                            .card-header
+                                h3.card-title area Data
+                            form#addAreaForm(action=`/dashboard/logistic/areas/edit/${areaToEdit.id}`, method="post" )
+                                .card-body.row
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label.control-label(for="nameEn") English Name
+                                            input.form-control#nameEn(type="text" name="nameEnglish",value=`${areaToEdit.nameEnglish}`, placeholder="Enter English Name")
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label(for="nameAr") Arabic Name
+                                            input.form-control#nameAr(type="text" name="nameArabic", value=`${areaToEdit.nameArabic}`, placeholder="Enter Arabic Name")
+                                    
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                        label Parent City
+                                        select.form-control.cityparent(name="parentCity")
+                                            option(selected) #{areaToEdit.parent}
+                                            if citys 
+                                                - var cityArray = citys.docs
+                                                for city in cityArray
+                                                    option(value=`${city.id}`) #{city.nameEnglish}                        
+                                .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Update area

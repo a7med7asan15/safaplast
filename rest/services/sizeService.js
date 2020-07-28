@@ -23,8 +23,7 @@ const sizeService ={
                 limit: 10,
               }
             const sizes =  await SizeSchema.paginate({},options); 
-            console.log(sizes);
-            return res.render('screens/logisticsScreens/sizeScreens', { thisUser:req.user , csrfToken , sizes })
+            return res.render('screens/variantScreens/sizeScreens', { thisUser:req.user , csrfToken , sizes })
         }catch(err){
 
             res.send(err);
@@ -45,7 +44,7 @@ const sizeService ={
 
 
          
-        const {name}  =  req.body;
+        const {nameEnglish, nameArabic}  =  req.body;
         
         
         try{
@@ -54,7 +53,9 @@ const sizeService ={
             const newSize = new SizeSchema({
         
         
-                name
+                nameEnglish, 
+                
+                nameArabic
         
         
             })
@@ -62,7 +63,7 @@ const sizeService ={
         
             await newSize.save();
 
-            return res.redirect('/dashboard/logistic/sizes') ;
+            return res.redirect('/dashboard/sizes') ;
             
         }catch(err){
 
@@ -73,7 +74,63 @@ const sizeService ={
 
 
         },
+    
+    showOne: async (req, res) => {
+        req.session.lastlink = req.url
+        let csrfToken = req.csrfToken();
 
+        try {
+            var {sizeId} = req.params
+            const sizeToEdit = await SizeSchema.findById(sizeId);
+
+            return res.render('screens/variantScreens/editSizeScreen', {
+                thisUser: req.user,
+                sizeToEdit: sizeToEdit,
+                csrfToken
+            })
+        } catch (err) {
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/variantScreens/editSizeScreen', {
+                thisUser: req.user,
+                sizeToEdit: {},
+                csrfToken
+            })
+        }
+
+    },
+
+
+    update: async (req , res )=>{
+        const {nameEnglish, nameArabic} = req.body
+        const {sizeId} = req.params 
+        try{
+            const updateSize = await SizeSchema.findById(sizeId)
+            updateSize.nameEnglish = nameEnglish,
+            updateSize.nameArabic = nameArabic,
+            await updateSize.save();
+            req.session.passedData = false 
+            req.flash('success', 'Size Updated Succesfully')
+            return res.redirect(`/dashboard/sizes/edit/${sizeId}`)
+        }catch(err){
+            req.flash('error', {message:'Something Went wrong'})
+            return res.redirect(`/dashboard/sizes/edit/${sizeId}`)
+        }
+
+    },
+
+    destroy: async (req , res )=>{
+        const {sizeId} = req.params;
+       try{
+            const deleteSize =  await SizeSchema.findByIdAndDelete(sizeId);
+            
+            req.flash('success', `${deleteSize.nameEnglish} Deleted Successfully`)
+            return res.redirect(`/dashboard/sizes`)
+       }catch(err){
+        req.flash('error', {message:'Something Went wrong'})
+        return res.redirect(`/dashboard/sizes`)
+
+       }
+    },
 
 }
 

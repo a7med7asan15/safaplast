@@ -4,11 +4,10 @@ const  Joi = require('@hapi/joi');
 module.exports  = {
     validationBody: (schemas)=>{
         return (req,res,next)=>{
-            console.log(req.url);
             const result  = schemas.validate(req.body)
             if (result.error){
                 req.flash('error', result.error.details)
-                return res.redirect('/dashboard' + req.url)
+                return res.redirect(req.baseUrl + req.url)
             }
             if(!req.value){ req.value= {}}
             req.value['body'] = result.value;
@@ -48,11 +47,39 @@ module.exports  = {
         emailSchema:Joi.object().keys({
             email :Joi.string().email().required(),
         }),
-        updateColorSchema:Joi.object().keys({
+        addColorSchema:Joi.object().keys({
             colorName:Joi.string().min(3).max(30).required(),
-            colorHex:Joi.string().min(3).max(30).required(),
-            _csrf:Joi.string(),
-            
+            colorHex:Joi.string().min(4).max(7).required(),
+            colorArabic:Joi.string().min(3).max(30).required(),
+            _csrf:Joi.string(), 
+        }),
+        addAreaSchema:Joi.object().keys({
+            nameEnglish:Joi.string().required(),
+            nameArabic:Joi.string().required(),
+            parentCity:Joi.string().required(),
+            _csrf:Joi.string(), 
+        }),
+        addCitySchema:Joi.object().keys({
+            nameEnglish:Joi.string().required(),
+            nameArabic:Joi.string().required(),
+            _csrf:Joi.string(), 
+        }),
+        addTypeSchema:Joi.object().keys({
+            typeEnglish:Joi.string().required(),
+            typeArabic:Joi.string().required(),
+            _csrf:Joi.string(), 
+        }),
+        addClassSchema:Joi.object().keys({
+            classEnglish:Joi.string().required(),
+            classArabic:Joi.string().required(),
+            _csrf:Joi.string(), 
+        }),
+        addVariantSchema:Joi.object().keys({
+            variantEnglish:Joi.string().required(),
+            variantArabic:Joi.string().required(),
+            parentType:Joi.string().required(),
+            parentClass:Joi.string().required(),
+            _csrf:Joi.string(), 
         }),
 
     }
