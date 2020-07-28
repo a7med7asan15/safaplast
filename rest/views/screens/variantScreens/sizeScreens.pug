@@ -19,7 +19,10 @@ block content
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-12
                                         label(for="serviceName") Size 
-                                        input.form-control#serviceName(type="text", name="name", placeholder="Enter Size")
+                                        input.form-control#serviceName(type="text", name="nameEnglish", placeholder="Enter Size")
+                                    .form-group.col-md-12
+                                        label(for="serviceArabic") Size in Arabic
+                                        input.form-control#serviceArabic(type="text", name="nameArabic", placeholder="Enter Size")
                                     button.btn.btn-primary.float-right(type="submit") Add Size
                             .card-footer
                                     
@@ -39,6 +42,7 @@ block content
                                         tr
                                             th ID
                                             th Name 
+                                            th Arabic
                                             th Edit
                                             th delete
                                     tbody
@@ -54,7 +58,8 @@ block content
                                             for size in sizeArray
                                                 tr
                                                     td #{num++}
-                                                    td #{size.name}
+                                                    td #{size.nameEnglish}
+                                                    td #{size.nameArabic}
                                                     td
                                                         a.btn-sm.btn-primary(href=`/dashboard/sizes/edit/${size.id}`)
                                                             i.far.fa-edit

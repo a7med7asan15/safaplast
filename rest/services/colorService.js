@@ -51,7 +51,8 @@ const colorService = {
 
         const {
             colorName,
-            colorHex
+            colorHex, 
+            colorArabic,
         } = req.body;
 
 
@@ -63,7 +64,9 @@ const colorService = {
 
                 name: colorName,
 
-                colorHex
+                colorHex, 
+                
+                colorArabic
 
 
             })
@@ -116,6 +119,7 @@ const colorService = {
             const updateColor = await ColorSchema.findById(colorId)
             updateColor.name = colorName,
             updateColor.colorHex = colorHex,
+            updateColor.colorArabic = colorArabic,
             await updateColor.save();
             req.session.passedData = false 
             req.flash('success', 'Color Updated Succesfully')

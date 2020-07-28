@@ -78,7 +78,7 @@ colorService.show
 
 router.post( '/',
 
-validationBody(schemas.updateColorSchema),
+validationBody(schemas.addColorSchema),
 
 csrfProtection, 
 
@@ -110,7 +110,7 @@ colorService.showOne
 
 router.post('/edit/:colorId', 
 
-validationBody(schemas.updateColorSchema) , 
+validationBody(schemas.addColorSchema) , 
 
 csrfProtection,
 
