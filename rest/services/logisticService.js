@@ -86,8 +86,10 @@ const logisticService = {
         let csrfToken = req.csrfToken();
 
         try {
-            var {cityId} = req.params
-            
+            var {
+                cityId
+            } = req.params
+
             const cityToEdit = await CitySchema.findById(cityId);
 
             return res.render('screens/logisticsScreens/editCityScreen', {
@@ -118,8 +120,8 @@ const logisticService = {
         try {
             const updateCity = await CitySchema.findById(cityId)
             updateCity.nameEnglish = nameEnglish,
-            updateCity.nameArabic = nameArabic,
-            await updateCity.save();
+                updateCity.nameArabic = nameArabic,
+                await updateCity.save();
             req.session.passedData = false
             req.flash('success', 'City Updated Succesfully')
             return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
@@ -198,7 +200,7 @@ const logisticService = {
         } = req.body;
 
         try {
-         
+
             const newArea = new AreaSchema({
 
                 nameEnglish: nameEnglish,
@@ -206,7 +208,7 @@ const logisticService = {
                 nameArabic: nameArabic,
 
                 parent: parentCity,
-                
+
 
             })
 
@@ -231,7 +233,9 @@ const logisticService = {
         let csrfToken = req.csrfToken();
 
         try {
-            var {areaId} = req.params
+            var {
+                areaId
+            } = req.params
             const citys = await CitySchema.paginate();
             const areaToEdit = await AreaSchema.findById(areaId);
             return res.render('screens/logisticsScreens/editAreaScreen', {
@@ -257,7 +261,7 @@ const logisticService = {
     updateArea: async (req, res) => {
         const {
             nameEnglish,
-            nameArabic, 
+            nameArabic,
             parentCity
         } = req.body
         const {
@@ -265,25 +269,25 @@ const logisticService = {
         } = req.params
         try {
             const updateArea = await AreaSchema.findById(areaId);
-            
+
             const oldCity = await CitySchema.findById(updateArea.parent);
             const newCity = await CitySchema.findById(parentCity);
             console.log(oldCity);
             console.log(newCity);
-            if(!newCity.childAreas.includes(areaId)){
+            if (!newCity.childAreas.includes(areaId)) {
                 newCity.childAreas.push(areaId);
-                oldCity.childAreas.splice( oldCity.childAreas.indexOf(areaId), 1 );
+                oldCity.childAreas.splice(oldCity.childAreas.indexOf(areaId), 1);
                 await newCity.save();
                 await oldCity.save();
             }
 
-            
-        
-            
+
+
+
             updateArea.nameEnglish = nameEnglish,
-            updateArea.nameArabic = nameArabic,
-            updateArea.parent = parentCity,
-            await updateArea.save();
+                updateArea.nameArabic = nameArabic,
+                updateArea.parent = parentCity,
+                await updateArea.save();
 
             req.session.passedData = false
             req.flash('success', 'Area Updated Succesfully')
@@ -316,6 +320,29 @@ const logisticService = {
         }
     },
 
+    searchArea: async (req, res) => {
+        try {
+
+            const area = await AreaSchema.find(
+
+                {
+                    nameEnglish: {
+                        $regex: req.body.nameEnglish
+                    }
+
+                }, 'nameEnglish');
+
+            return res.send({
+                results: area
+            })
+
+        } catch (err) {
+
+            return res.send(err);
+        }
+
+
+    }
 
 
 }

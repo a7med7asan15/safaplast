@@ -199,5 +199,16 @@ logisticService.destroyArea
 
 ); 
 
+//---------------------------
+// Delete Area Route 
+//---------------------------
+router.post('/areas/search',
+
+
+csrfProtection,
+
+logisticService.searchArea
+
+)
 
 module.exports = router;
