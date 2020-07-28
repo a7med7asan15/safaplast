@@ -29,6 +29,7 @@ const  storeController  =  require(  './controllers/dashboard/storeController'  
 const  logisticController  =  require(  './controllers/dashboard/logisticController'  );
 const  colorController  =  require(  './controllers/dashboard/colorController'  );
 const  sizeController  =  require(  './controllers/dashboard/sizeController'  );
+const  categoryController  =  require(  './controllers/dashboard/categoryController'  );
  
 
 /// Require Seeds 
@@ -189,6 +190,7 @@ app.use(   '/dashboard/stores'   ,   storeController   );
 app.use(   '/dashboard/logistic'   ,   logisticController  );
 app.use(   '/dashboard/colors'   ,   colorController  );
 app.use(   '/dashboard/sizes'   ,   sizeController  ); 
+app.use(   '/dashboard/category'   ,   categoryController  ); 
 
 
 

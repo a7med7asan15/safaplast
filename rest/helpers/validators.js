@@ -82,6 +82,23 @@ module.exports  = {
             parent:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
+        addTypeSchema:Joi.object().keys({
+            typeEnglish:Joi.string().required(),
+            typeArabic:Joi.string().required(),
+            _csrf:Joi.string(), 
+        }),
+        addClassSchema:Joi.object().keys({
+            classEnglish:Joi.string().required(),
+            classArabic:Joi.string().required(),
+            _csrf:Joi.string(), 
+        }),
+        addVariantSchema:Joi.object().keys({
+            variantEnglish:Joi.string().required(),
+            variantArabic:Joi.string().required(),
+            parentType:Joi.string().required(),
+            parentClass:Joi.string().required(),
+            _csrf:Joi.string(), 
+        }),
 
     }
 }

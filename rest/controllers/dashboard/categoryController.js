@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf'); 
 const csrfProtection = csrf();
-const colorService = require('../../services/colorService');
+const categoryService = require('../../services/categoryService');
 
 // uploading Middleware 
 // Multer Js 
@@ -54,19 +54,52 @@ router.use(   authMiddleware ,   idAdmin   );
 //--------------------
 
 
-router.get( '/',
+router.get( '/types',
 
 
 csrfProtection, 
 
+categoryService.showTypes
 
-colorService.show
+
+);
+
+router.get( '/types/edit',
+
+csrfProtection, 
+
+categoryService.showOneType
+
+
+);
+
+router.get( '/class',
+
+
+csrfProtection, 
+
+categoryService.showClasses
+
+
+);
+router.get( '/class/edit',
+
+
+csrfProtection, 
+
+categoryService.showOneClass
 
 
 );
 
 
+router.get( '/variants',
 
+csrfProtection, 
+
+categoryService.showVariants
+
+);
 // separate and add category 
 
 ////////////////////////////////////////////////
@@ -75,17 +108,58 @@ colorService.show
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
+router.post( '/types/add',
 
-router.post( '/',
-
-validationBody(schemas.updateColorSchema),
+validationBody(schemas.addTypeSchema),
 
 csrfProtection, 
 
-colorService.add
+categoryService.addTypes
+
+)
+
+router.post( '/types/edit',
+
+validationBody(schemas.addTypeSchema),
+
+csrfProtection, 
+
+categoryService.addTypes
+
+)
 
 
-);
+router.post( '/class/add',
+
+validationBody(schemas.addClassSchema),
+
+csrfProtection, 
+
+categoryService.addClass
+
+)
+router.post( '/class/edit',
+
+validationBody(schemas.addClassSchema),
+
+csrfProtection, 
+
+categoryService.updateOneClass
+
+)
+
+
+router.post( '/variants',
+
+validationBody(schemas.addVariantSchema),
+
+csrfProtection, 
+
+categoryService.addVariant
+
+)
+
+
 
 
 ////////////////////////////////////////////////
@@ -94,41 +168,30 @@ colorService.add
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
-router.get('/edit/:colorId', 
+router.post( '/types/delete',
 
+csrfProtection, 
 
-csrfProtection,
+categoryService.deleteOneType
 
-colorService.showOne
+)
+router.post( '/class/delete',
 
-);
+csrfProtection, 
+
+categoryService.deleteOneClass
+
+)
 
 //---------------------------
 // Update Color Route 
 //---------------------------
 
-router.post('/edit/:colorId', 
-
-validationBody(schemas.updateColorSchema) , 
-
-csrfProtection,
-
-colorService.update
-
-);
 
 
 //---------------------------
 // Delete Color Route 
 //---------------------------
 
-router.post('/delete/:colorId',
-
-csrfProtection,
-
-
-colorService.destroy
-
-); 
 
 module.exports = router;

@@ -1,0 +1,30 @@
+extends ../../layout.pug
+
+block content     
+    if dataProvided       
+        .content.mt-5
+            .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
+                .row
+                    .col-12
+                        .card   
+                            .card-header
+                                h3.card-title Type Information
+                            form#updateTypeForm(action=`/dashboard/category/types/edit?id=${dataProvided.id}`, method="post" )
+                                .card-body.row
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label.control-label(for="typeEnglish") Name [English]
+                                            input#typeEnglish.form-control(type="text" name="typeEnglish",value=`${dataProvided.nameEnglish}`, placeholder="Enter Color Name")
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label(for="typeArabic") Name [Arabic]
+                                            input#typeArabic.form-control( type="text" name="typeArabic", value=`${dataProvided.nameArabic}`, placeholder="Enter Color Hex")
+                                .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Update Type

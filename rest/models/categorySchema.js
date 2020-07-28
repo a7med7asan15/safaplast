@@ -1,25 +1,39 @@
 const mongoose = require('mongoose');
-
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 
 const Schema = mongoose.Schema;
 
-const categorySchema  = new Schema({
-    name:{ type: String, required: true},
+const variantsSchema  = new Schema({
+    nameArabic:{ type: String, required: true},
+    nameEnglish:{ type: String, required: true},
+    parentType:{ type : Schema.Types.ObjectId , ref : 'typesSchema' },
+    parenClass:{ type : Schema.Types.ObjectId , ref : 'classSchema' }
 })
 
-
-const categoryParentSchema  = new Schema({
-    name:{ type: String, required: true},
-    childCategory :[categorySchema]
-
+const classSchema = new Schema({
+    nameArabic:{ type: String, required: true},
+    nameEnglish:{ type: String, required: true},
 })
 
-const CategoryParentSchema =  mongoose.model('categoryParentSchema', categoryParentSchema);
-const CategorySchema =  mongoose.model('categorySchema', categorySchema);
+const typesSchema  = new Schema({
 
+    nameArabic:{ type: String, required: true},
+    nameEnglish:{ type: String, required: true},
+    variants : [{ type : Schema.Types.ObjectId , ref : 'variantsSchema' }]
+    
+})
+
+typesSchema.plugin(mongoosePaginate);
+variantsSchema.plugin(mongoosePaginate);
+classSchema.plugin(mongoosePaginate);
+
+const TypesSchema =  mongoose.model('typesSchema', typesSchema);
+const VariantsSchema =  mongoose.model('variantsSchema', variantsSchema);
+const ClassSchema =  mongoose.model('classSchema', classSchema);
 
 module.exports ={
-    CategoryParentSchema,
-    CategorySchema
+    TypesSchema,
+    VariantsSchema,
+    ClassSchema
 }
