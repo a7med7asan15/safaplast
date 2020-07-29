@@ -100,6 +100,13 @@ csrfProtection,
 categoryService.showVariants
 
 );
+router.get( '/variants/edit',
+
+csrfProtection, 
+
+categoryService.showOneVariant
+
+);
 // separate and add category 
 
 ////////////////////////////////////////////////
@@ -158,6 +165,15 @@ csrfProtection,
 categoryService.addVariant
 
 )
+router.post( '/variants/edit',
+
+validationBody(schemas.addVariantSchema),
+
+csrfProtection, 
+
+categoryService.updateOneVariant
+
+)
 
 
 
@@ -176,6 +192,13 @@ categoryService.deleteOneType
 
 )
 router.post( '/class/delete',
+
+csrfProtection, 
+
+categoryService.deleteOneClass
+
+)
+router.post( '/variant/delete',
 
 csrfProtection, 
 
