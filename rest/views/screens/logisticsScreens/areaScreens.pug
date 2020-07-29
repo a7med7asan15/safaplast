@@ -38,9 +38,9 @@ block content
                                                 - var cityArray = citys.docs
                                                 for city in cityArray
                                                     option(value=`${city.id}`) #{city.nameEnglish}
+                                .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Add Area
                                 
-                                button.btn.btn-primary.float-right(type="submit") Add Area
-                            .card-footer
                     .col-7
                         .card
                             .card-header
