@@ -108,7 +108,39 @@ const categoryService = {
             res.redirect('/dashboard/category/types');
         }
     },
+    searchShowType: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await TypesSchema.find({
+                "$or": [
+                    { nameEnglish: { '$regex': table_search, '$options': 'i' } },
+                    { nameArabic: { '$regex': table_search, '$options': 'i' } },
+                ]
+            });
+            
+            return res.render('screens/categoryScreens/typesScreen', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
 
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/categoryScreens/typesScreen', {
+                thisUser: req.user,
+                tbSearch: {},
+                table_search,
+                csrfToken
+            })
+        }
+
+
+    },
     showClasses : async (req,res)=>{
         let page = 1;
         let limit = 1;
@@ -194,6 +226,39 @@ const categoryService = {
         req.flash('error', 'Cant delete it;' );
         res.redirect('/dashboard/category/class');
     }
+    },
+    searchShowClass: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await ClassSchema.find({
+                "$or": [
+                    { nameEnglish: { '$regex': table_search, '$options': 'i' } },
+                    { nameArabic: { '$regex': table_search, '$options': 'i' } },
+                ]
+            });
+            
+            return res.render('screens/categoryScreens/classScreen', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/categoryScreens/classScreen', {
+                thisUser: req.user,
+                tbSearch: {},
+                table_search,
+                csrfToken
+            })
+        }
+
+
     },
     showVariants : async (req,res)=>{
         let page = 1;
@@ -301,6 +366,40 @@ const categoryService = {
     }catch(err){
         req.flash('error', 'Cant delete it;' );
         res.redirect('/dashboard/category/variants');
+    },
+
+    searchShowVariant: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await VariantsSchema.find({
+                "$or": [
+                    { nameEnglish: { '$regex': table_search, '$options': 'i' } },
+                    { nameArabic: { '$regex': table_search, '$options': 'i' } },
+                ]
+            });
+            
+            return res.render('screens/categoryScreens/variationScreen', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/categoryScreens/variationScreen', {
+                thisUser: req.user,
+                tbSearch: {},
+                table_search,
+                csrfToken
+            })
+        }
+
+
     }
     },
 

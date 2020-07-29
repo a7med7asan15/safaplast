@@ -43,11 +43,12 @@ block content
                             .col-md-4
                                 .form-group
                                     label Area
-                                    select.form-control.storeowner(name="area")
-                                        option(selected) Heliopolis
-                                        option Masr El gdeda
-                                        option Nozha
-                                        option Maady
+                                    select.form-control.storeArea(name="area")
+                                        option(selected) Select Area
+                                        if areas
+                                            - var areaArray = areas.docs
+                                            for area in areaArray
+                                                option(value=`${area.id}`) #{area.nameEnglish}
                         .col-md-12
                             .col-md-6
                             .form-group

@@ -31,7 +31,7 @@ block content
                                         .form-group.col-md-6
                                         label Parent City
                                         select.form-control.cityparent(name="parentCity")
-                                            option(selected) #{areaToEdit.parent}
+                                            option(selected) #{areaToEdit.parent.nameEnglish}
                                             if citys 
                                                 - var cityArray = citys.docs
                                                 for city in cityArray

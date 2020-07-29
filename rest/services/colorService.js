@@ -51,7 +51,7 @@ const colorService = {
 
         const {
             colorName,
-            colorHex, 
+            colorHex,
             colorArabic,
         } = req.body;
 
@@ -64,8 +64,8 @@ const colorService = {
 
                 name: colorName,
 
-                colorHex, 
-                
+                colorHex,
+
                 colorArabic
 
 
@@ -91,8 +91,10 @@ const colorService = {
         let csrfToken = req.csrfToken();
 
         try {
-            var {colorId} = req.params
-       
+            var {
+                colorId
+            } = req.params
+
             const colorToEdit = await ColorSchema.findById(colorId);
 
             return res.render('screens/variantScreens/editColorScreen', {
@@ -112,38 +114,84 @@ const colorService = {
     },
 
 
-    update: async (req , res )=>{
-        const {colorName, colorHex} = req.body
-        const {colorId} = req.params 
-        try{
+    update: async (req, res) => {
+        const {
+            colorName,
+            colorHex
+        } = req.body
+        const {
+            colorId
+        } = req.params
+        try {
             const updateColor = await ColorSchema.findById(colorId)
             updateColor.name = colorName,
-            updateColor.colorHex = colorHex,
-            updateColor.colorArabic = colorArabic,
-            await updateColor.save();
-            req.session.passedData = false 
+                updateColor.colorHex = colorHex,
+                updateColor.colorArabic = colorArabic,
+                await updateColor.save();
+            req.session.passedData = false
             req.flash('success', 'Color Updated Succesfully')
             return res.redirect(`/dashboard/colors/edit/${colorId}`)
-        }catch(err){
-            req.flash('error', {message:'Something Went wrong'})
-           return res.redirect(`/dashboard/colors/edit/${colorId}`)
+        } catch (err) {
+            req.flash('error', {
+                message: 'Something Went wrong'
+            })
+            return res.redirect(`/dashboard/colors/edit/${colorId}`)
         }
 
     },
 
-    destroy: async (req , res )=>{
-        const {colorId} = req.params;
-       try{
-            const deleteColor =  await ColorSchema.findByIdAndDelete(colorId);
-            
+    destroy: async (req, res) => {
+        const {
+            colorId
+        } = req.params;
+        try {
+            const deleteColor = await ColorSchema.findByIdAndDelete(colorId);
+
             req.flash('success', `${deleteColor.name} Deleted Successfully`)
             return res.redirect(`/dashboard/colors`)
-       }catch(err){
-        req.flash('error', {message:'Something Went wrong'})
-        return res.redirect(`/dashboard/colors`)
+        } catch (err) {
+            req.flash('error', {
+                message: 'Something Went wrong'
+            })
+            return res.redirect(`/dashboard/colors`)
 
-       }
+        }
     },
+
+    searchShowColor: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await ColorSchema.find({
+                "$or": [
+                    { name: { '$regex': table_search, '$options': 'i' } },
+                    { colorHex: { '$regex': table_search, '$options': 'i' } },
+                    { colorArabic: { '$regex': table_search, '$options': 'i' } }
+                ]
+            });
+            return res.render('screens/variantScreens/colorScreens', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/variantScreens/colorScreens', {
+                thisUser: req.user,
+                table_search,
+                tbSearch:{},
+                csrfToken
+            })
+        }
+
+
+    }
+
 
 }
 

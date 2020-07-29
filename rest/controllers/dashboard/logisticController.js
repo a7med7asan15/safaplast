@@ -199,5 +199,49 @@ logisticService.destroyArea
 
 ); 
 
+//---------------------------
+// Delete Area Route 
+//---------------------------
+router.post('/areas/search',
+
+
+csrfProtection,
+
+logisticService.searchArea
+
+);
+
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// +++ /// Search  // ++++// //////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+//---------------------------
+// City Search 
+//---------------------------
+
+router.post('/citys/searchResult',
+
+csrfProtection,
+
+
+logisticService.searchShowCity
+
+); 
+
+
+//---------------------------
+// Area Search 
+//---------------------------
+
+router.post('/areas/searchResult',
+
+csrfProtection,
+
+
+logisticService.searchShowArea
+
+); 
 
 module.exports = router;
