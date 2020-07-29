@@ -275,10 +275,12 @@ const categoryService = {
             const options = {
                 page,
                 limit: 10,
+                populate:"parentType parentClass"
             }
             const types = await TypesSchema.find();
             const classes = await ClassSchema.find();
             const variants = await VariantsSchema.paginate({}, options);
+            console.log(variants)
             return res.render('screens/categoryScreens/variationScreen', {
                 thisUser: req.user,
                 csrfToken,
@@ -294,24 +296,78 @@ const categoryService = {
     },
     addVariant: async ( req , res )=>{
         const {variantEnglish,variantArabic ,parentType,parentClass} = req.body;
-        console.log(variantEnglish,variantArabic ,parentType,parentClass);
       try{
         const variant = new VariantsSchema({
             nameArabic:variantArabic,
             nameEnglish:variantEnglish,
             parentType:parentType,
-            parenClass:parentClass
+            parentClass:parentClass
         })
         await variant.save();
         req.flash('success', 'Variant Added Succesfully')
         res.redirect('/dashboard/category/variants');
-
       }catch(err){
 
 
 
       }
     },
+    showOneVariant:async(req,res)=>{
+       let id = req.query.id;
+       let csrfToken = req.csrfToken();
+       try{
+        const variant = await VariantsSchema.findById(id)
+                        .populate({ path: 'parentType', select: 'nameEnglish  _id' })
+                        .populate({ path: 'parentClass', select: 'nameEnglish  _id' })
+        console.log(variant)
+        const types = await TypesSchema.find( {_id: { $ne:variant.parentType._id}});
+        const classes = await ClassSchema.find({_id: { $ne:variant.parentClass._id}});
+
+         return res.render('screens/categoryScreens/editVariantScreen', {
+                thisUser: req.user,
+                dataProvided: variant,
+                types,
+                classes,
+                csrfToken
+            })
+       }catch(err){
+
+
+       } 
+
+
+    },
+    updateOneVariant:async(req,res)=>{
+        const id = req.query.id;
+       const{ variantEnglish,
+              variantArabic,
+              parentType,
+              parentClass} = req.body;
+
+        try{
+                const variant = await VariantsSchema.findById(id);
+                variant.nameEnglish= variantEnglish
+                variant.nameArabic= variantArabic
+                variant.parentType = parentType
+                variant.parentClass =parentClass
+                variant.save();
+                req.flash('success', 'Variant  Updated Succesfully')
+                res.redirect('/dashboard/category/variants');
+        }catch(err){
+
+        }
+
+    },
+    deleteOneClass: async (req,res)=>{
+        try{
+            await VariantsSchema.findByIdAndDelete(req.query.id);
+            req.flash('success', 'Variant Deleted Succesfully')
+            res.redirect('/dashboard/category/variants');
+    }catch(err){
+        req.flash('error', 'Cant delete it;' );
+        res.redirect('/dashboard/category/variants');
+    },
+
     searchShowVariant: async (req, res) => {
         try {
             let csrfToken = req.csrfToken();
@@ -345,6 +401,8 @@ const categoryService = {
 
 
     }
+    },
+
 }
 
 module.exports = categoryService

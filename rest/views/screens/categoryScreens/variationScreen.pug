@@ -66,9 +66,9 @@ block content
                                 table.table.table-hover.text-nowrap
                                     thead
                                         tr
-                                            th ID
-                                            th English 
-                                            th Arabic 
+                                            th Name 
+                                            th Type 
+                                            th class 
                                             th Edit
                                             th delete
                                     tbody
@@ -98,16 +98,16 @@ block content
                                             - var page = dataProvided.page 
                                             - var num = (page-1)*dataProvided.limit+1
                                             for dat in dataArray
-                                                tr
-                                                    td #{num++}
+                                                tr           
                                                     td #{dat.nameEnglish}
-                                                    td #{dat.nameArabic}
+                                                    td #{dat.parentType.nameEnglish}
+                                                    td #{dat.parentClass.nameEnglish}
                                                     td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/category/class/edit?id=${dat.id}`)
+                                                        a.btn-sm.btn-primary(href=`/dashboard/category/variants/edit?id=${dat.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
-                                                        form(action=`/dashboard/category/class/delete?id=${dat.id}`, method="post")
+                                                        form(action=`/dashboard/category/variant/delete?id=${dat.id}`, method="post")
                                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                             button.btn-sm.btn-danger(type="submit")
                                                                 i.fas.fa-trash-alt
