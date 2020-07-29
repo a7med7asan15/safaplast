@@ -147,7 +147,40 @@ const userService ={
             }
 
 
+    },
+    searchShowUser: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await User.find({
+                "$or": [
+                    { username: { '$regex': table_search, '$options': 'i' } },
+                    { email: { '$regex': table_search, '$options': 'i' } }
+                ]
+            });
+            return res.render('screens/usersScreens/listAllScreen', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/usersScreens/listAllScreen', {
+                thisUser: req.user,
+                table_search,
+                tbSearch:{},
+                csrfToken
+            })
+        }
+
+
     }
+
 
 }
 

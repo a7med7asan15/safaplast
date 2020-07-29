@@ -17,6 +17,16 @@ block content
                         .card
                             .card-header
                                 h3.card-title All Users
+                                form(action=`/dashboard/users/searchResult`, method="post")
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .input-group.input-group-sm.float-right(style="width: 150px;")
+                                        if users
+                                            input.form-control.float-right(type="text", name="table_search", placeholder="Search")
+                                        if tbSearch
+                                            input.form-control.float-right(type="text", value = `${table_search}`, name="table_search", placeholder="Search")
+                                        .input-group-append
+                                        button.btn.btn-default(type="submit")
+                                            i.fas.fa-search
                             .card-body.table-responsive.p-0
                                 table.table.table-hover.text-nowrap
                                     thead
@@ -28,8 +38,25 @@ block content
                                         th Edit
                                         th delete
                                     tbody
-                                     if users
-                                         for user in users
+                                        if tbSearch
+                                            for tb in tbSearch
+                                                tr
+                                                td #{ tb.index }
+                                                td #{ tb.username }
+                                                td #{ tb.email }
+                                                td
+                                                    span.tag.tag-success Active
+                                                td
+                                                    a.btn-sm.btn-primary(href=`/dashboard/users/edit/${tb.id}`)
+                                                        i.far.fa-edit
+                                                        |  Edit
+                                                td
+                                                    form(action=`/dashboard/users/delete/${tb.id}`, method="post")
+                                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                        button.btn-sm.btn-danger(type="submit")
+                                                            i.fas.fa-trash-alt
+                                        if users
+                                            for user in users
                                                 tr
                                                 td #{ user.index }
                                                 td #{ user.username }
