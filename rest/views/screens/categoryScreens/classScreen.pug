@@ -56,19 +56,19 @@ block content
                                             th Edit
                                             th delete
                                     tbody
-                                        if clsSearch
+                                        if tbSearch
                                             - var num = 1
-                                            for cls in classSearch
+                                            for tb in tbSearch
                                                 tr
                                                     td #{num++}
-                                                    td #{cls.nameEnglish}
-                                                    td #{cls.nameArabic}
+                                                    td #{tb.nameEnglish}
+                                                    td #{tb.nameArabic}
                                                     td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/category/class/edit/${cls.id}`)
+                                                        a.btn-sm.btn-primary(href=`/dashboard/category/class/edit/${tb.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
-                                                        form(action=`/dashboard/category/class/delete/${cls.id}`, method="post")
+                                                        form(action=`/dashboard/category/class/delete/${tb.id}`, method="post")
                                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                             button.btn-sm.btn-danger(type="submit")
                                                                 i.fas.fa-trash-alt
