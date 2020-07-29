@@ -20,7 +20,7 @@ block content
                         .card
                             .card-header
                                 h3.card-title Class Info
-                            form(action="/dashboard/category/variants" method="post" role="form")
+                            form#addVariantForm(action="/dashboard/category/variants" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
@@ -32,7 +32,7 @@ block content
                                     .form-group.col-md-10
                                         label  Type
                                         select.form-control.cityparent(name="parentType")
-                                            option(selected ,value='') Select Type
+                                            option(selected disabled,value='') Select Type
                                             if types
                                                 - var typeArray = types
                                                 for t in typeArray
@@ -40,13 +40,13 @@ block content
                                     .form-group.col-md-10
                                         label  Class
                                         select.form-control.cityparent(name="parentClass")
-                                            option(selected ,value='') Select Type
+                                            option(selected disabled,value='') Select Class
                                             if classes
                                                 - var classesArray = classes
                                                 for c in classesArray
                                                     option(value=`${c.id}`) #{c.nameEnglish}
                                 .card-footer
-                                    button.btn.btn-primary.float-right(type="submit") Add Class
+                                    button.btn.btn-primary.float-right(type="submit") Add Variation
                     .col-7
                         .card
                             .card-header
@@ -130,3 +130,5 @@ block content
                                     if hasNext
                                         li.page-item
                                             a.page-link(href=`/dashboard/logistic/citys?p=${page + 1}`) »
+block scripts 
+        script(src="/static/vendor/js/addVariant.js", type="text/javascript")

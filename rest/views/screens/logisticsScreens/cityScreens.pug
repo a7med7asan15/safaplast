@@ -20,7 +20,7 @@ block content
                         .card
                             .card-header
                                 h3.card-title city Info
-                            form(action="/dashboard/logistic/citys" method="post" role="form")
+                            form#addCityForm(action="/dashboard/logistic/citys" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
@@ -30,7 +30,7 @@ block content
                                         label(for="servicearabic") City Name [ Arabic ]
                                         input.form-control#servicearabic(type="text", name="nameArabic", placeholder="Enter City name in arabic")
                                 
-                                    button.btn.btn-primary.float-right(type="submit") Add Service
+                                    button.btn.btn-primary.float-right(type="submit") Add City
                             .card-footer
                     .col-7
                         .card
@@ -116,3 +116,5 @@ block content
                                     if hasNext
                                         li.page-item
                                             a.page-link(href=`/dashboard/logistic/citys?p=${page + 1}`) »
+block scripts 
+        script(src="/static/vendor/js/addCity.js", type="text/javascript")

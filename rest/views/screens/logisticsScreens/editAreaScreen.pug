@@ -31,10 +31,12 @@ block content
                                         .form-group.col-md-6
                                         label Parent City
                                         select.form-control.cityparent(name="parentCity")
-                                            option(selected) #{areaToEdit.parent.nameEnglish}
+                                            option(selected disabled) #{areaToEdit.parent.nameEnglish}
                                             if citys 
                                                 - var cityArray = citys.docs
                                                 for city in cityArray
                                                     option(value=`${city.id}`) #{city.nameEnglish}                        
                                 .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Update area
+block scripts 
+        script(src="/static/vendor/js/addArea.js", type="text/javascript")

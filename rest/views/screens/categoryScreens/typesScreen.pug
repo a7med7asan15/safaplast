@@ -20,7 +20,7 @@ block content
                         .card
                             .card-header
                                 h3.card-title Type Info
-                            form(action="/dashboard/category/types/add" method="post" role="form")
+                            form#addTypeForm(action="/dashboard/category/types/add" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
@@ -114,3 +114,5 @@ block content
                                     if hasNext
                                         li.page-item
                                             a.page-link(href=`/dashboard/logistic/citys?p=${page + 1}`) »
+block scripts 
+        script(src="/static/vendor/js/addType.js", type="text/javascript")

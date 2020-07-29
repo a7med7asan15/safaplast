@@ -14,7 +14,7 @@ block content
                         .card
                             .card-header
                                 h3.card-title Size Info
-                            form(action="/dashboard/sizes" method="post" role="form")
+                            form#addSizeForm(action="/dashboard/sizes" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-12
@@ -110,3 +110,5 @@ block content
                                     if hasNext
                                         li.page-item
                                             a.page-link(href=`/dashboard/sizes?p=${page + 1}`) »
+block scripts 
+        script(src="/static/vendor/js/addSize.js", type="text/javascript")

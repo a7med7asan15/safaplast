@@ -20,7 +20,7 @@ block content
                         .card
                             .card-header
                                 h3.card-title Class Info
-                            form(action="/dashboard/category/class/add" method="post" role="form")
+                            form#addClassForm(action="/dashboard/category/class/add" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
@@ -115,3 +115,5 @@ block content
                                     if hasNext
                                         li.page-item
                                             a.page-link(href=`/dashboard/logistic/citys?p=${page + 1}`) »
+block scripts 
+        script(src="/static/vendor/js/addClass.js", type="text/javascript")

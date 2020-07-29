@@ -15,7 +15,7 @@ block content
                         .card   
                             .card-header
                                 h3.card-title Variant Information
-                            form#updateTypeForm(action=`/dashboard/category/variants/edit?id=${dataProvided.id}`, method="post" )
+                            form#addVariantForm(action=`/dashboard/category/variants/edit?id=${dataProvided.id}`, method="post" )
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .col-md-12
@@ -46,3 +46,5 @@ block content
                                                         option(value=`${c.id}`) #{c.nameEnglish}
                                 .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Update Type
+block scripts 
+        script(src="/static/vendor/js/addVariant.js", type="text/javascript")
