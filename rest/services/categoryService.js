@@ -366,8 +366,8 @@ const categoryService = {
     }catch(err){
         req.flash('error', 'Cant delete it;' );
         res.redirect('/dashboard/category/variants');
+    }
     },
-
     searchShowVariant: async (req, res) => {
         try {
             let csrfToken = req.csrfToken();
@@ -401,8 +401,7 @@ const categoryService = {
 
 
     }
-    },
+ }
 
-}
 
 module.exports = categoryService
