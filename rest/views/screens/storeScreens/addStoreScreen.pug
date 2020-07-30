@@ -44,7 +44,7 @@ block content
                                     .form-group
                                         label Store Owner
                                         select(name="storeOwner").form-control.storeowner
-                                            option(selected value='') Choose Account
+                                            option(selected disabled value='') Choose Account
                                                             
                             .col-md-12.mt-5.mb-5
                                 h3 Store Address Info
@@ -53,7 +53,7 @@ block content
                                     .form-group
                                         label Store Area
                                         select.form-control.storeArea(name="storeArea")
-                                            option(selected) Select Area
+                                            option(selected disabled) Select Area
                                             if areas
                                                 - var areaArray = areas.docs
                                                 for area in areaArray

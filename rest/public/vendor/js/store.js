@@ -27,7 +27,79 @@ $(function () {
 
   $('.storeArea').select2();
  
+  Inputmask().mask(document.querySelectorAll("input"));
+  
+    $("#addnewstore").validate({
+      rules: {
+        storeEnglish: {
+          required: true,
+        },
+        storeArabic: {
+          required: true,
+        },
+        mobileNumber: {
+          required: true,
+          minLength: 11,
+        },
+        storeOwner: {
+          required: true,
+        },
+        storeArea: {
+          required: true,
+        },
+        addressEnglish: {
+          required: true,
+        },
+        addressArabic: {
+          required: true,
+        },
+        longtude: {
+          required: true,
+        },
+        latitude: {
+          required: true,
+        },
 
+      },
+      messages: {
+        storeEnglish: {
+          required: "Please Enter English Name",
+        },
+        storeArabic: {
+          required: "Please Enter Arabic Name",
+        },
+        mobileNumber: {
+          required: "Please Enter Valid Mobile Number",
+          minLength: "Must be 11 digits",
+        },
+        storeOwner: {
+          required: "Please Enter Store Owner",
+        },
+        storeArea: {
+          required: "Please Enter Area",
+        },
+        addressEnglish: {
+          required: "Please Enter Address in English",
+        },
+        addressArabic: {
+          required: "Please Enter Address in Arabic",
+        },
+        longtude: {
+          required: "Please Enter Longitude",
+        },
+        latitude: {
+          required: "Please Enter Latitude",
+        },
+      },
+      highlight: function (element) {
+        $(element).addClass("is-invalid");
+      },
+      unhighlight: function (element) {
+        $(element).removeClass("is-invalid");
+      },
+      errorElement: "span",
+      errorClass: "error invalid-feedback",
+    });
 
 
 
