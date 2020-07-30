@@ -20,7 +20,11 @@ block content
                         .card
                             .card-header
                                 h3.card-title Color Info
-                            form#colorForm(action="/dashboard/colors" method="post" role="form")
+
+                         
+
+                            form#addColorForm(action="/dashboard/colors" method="post" role="form")
+
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-12
@@ -32,8 +36,9 @@ block content
                                     .form-group.col-md-12
                                         label(for="serviceHex") Color Hex 
                                         input.form-control#serviceHex(type="text", name="colorHex", placeholder="Enter Color Hex")
+                                .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Add Color
-                            .card-footer
+                            
                                     
                     .col-7
                         .card
@@ -124,3 +129,5 @@ block content
                                     if hasNext
                                         li.page-item
                                             a.page-link(href=`/dashboard/colors?p=${page + 1}`) »
+block scripts 
+        script(src="/static/vendor/js/addColor.js", type="text/javascript")

@@ -20,7 +20,7 @@ block content
                         .card
                             .card-header
                                 h3.card-title Area Info
-                            form(action="/dashboard/logistic/areas" method="post" role="form")
+                            form#addAreaForm(action="/dashboard/logistic/areas" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
@@ -33,14 +33,14 @@ block content
                                         .form-group
                                         label Parent City
                                         select.form-control.cityparent(name="parentCity")
-                                            option(selected) Select City
+                                            option(selected disabled) Select City
                                             if citys
                                                 - var cityArray = citys.docs
                                                 for city in cityArray
                                                     option(value=`${city.id}`) #{city.nameEnglish}
+                                .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Add Area
                                 
-                                button.btn.btn-primary.float-right(type="submit") Add Area
-                            .card-footer
                     .col-7
                         .card
                             .card-header
@@ -128,5 +128,7 @@ block content
                                     if hasNext
                                         li.page-item
                                             a.page-link(href=`/dashboard/logistic/areas?p=${page + 1}`) »
+block scripts 
+        script(src="/static/vendor/js/addArea.js", type="text/javascript")
 
                                         
