@@ -23,7 +23,6 @@ const colorService = {
                 limit: 10,
             }
             const colors = await ColorSchema.paginate({}, options);
-            console.log(colors);
             return res.render('screens/variantScreens/colorScreens', {
                 thisUser: req.user,
                 csrfToken,

@@ -81,6 +81,18 @@ module.exports  = {
             parentClass:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
+        addStoreSchema:Joi.object().keys({
+            storeEnglish:Joi.string().required(),
+            storeArabic:Joi.string().required(),
+            mobileNumber: Joi.string().min(11).max(11).pattern(new RegExp(/['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)).required(),
+            storeOwner:Joi.string().required(),
+            storeArea:Joi.string().required(),
+            addressArabic:Joi.string().required(),
+            addressEnglish:Joi.string().required(),
+            longtude:Joi.string().required(),
+            latitude:Joi.string().required(),
+            _csrf:Joi.string(), 
+        }),
 
     }
 }

@@ -30,6 +30,7 @@ sameEmail,
 preUsedEmail,
 
 authMiddleware } = require('../../middlewares/authenticator');
+const { schema } = require('../../models/Users');
 
 
 /// Auth Use MiddleWares 
@@ -56,6 +57,16 @@ router.use(   authMiddleware ,   idAdmin   );
 
 
 
+router.get( '/',
+
+
+csrfProtection, 
+
+
+storeService.listAllStores
+
+
+);
 router.get( '/add',
 
 
@@ -75,6 +86,18 @@ storeService.addStorePage
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
+router.post( '/add',
+
+
+validationBody(schemas.addStoreSchema),
+
+csrfProtection, 
+
+
+storeService.createStore
+
+
+);
 
 
 

@@ -4,7 +4,6 @@ const {
     ClassSchema
 
 } = require('../models/categorySchema');
-const _ = require('lodash');
 
 
 const categoryService = {
@@ -280,7 +279,6 @@ const categoryService = {
             const types = await TypesSchema.find();
             const classes = await ClassSchema.find();
             const variants = await VariantsSchema.paginate({}, options);
-            console.log(variants)
             return res.render('screens/categoryScreens/variationScreen', {
                 thisUser: req.user,
                 csrfToken,
@@ -319,7 +317,6 @@ const categoryService = {
         const variant = await VariantsSchema.findById(id)
                         .populate({ path: 'parentType', select: 'nameEnglish  _id' })
                         .populate({ path: 'parentClass', select: 'nameEnglish  _id' })
-        console.log(variant)
         const types = await TypesSchema.find( {_id: { $ne:variant.parentType._id}});
         const classes = await ClassSchema.find({_id: { $ne:variant.parentClass._id}});
 
