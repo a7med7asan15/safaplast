@@ -1,53 +1,53 @@
 extends ../../layout.pug
 
 block content     
-                if userToEdit       
-                    .container-fluid
-                        .row.mb-5.mt-5.pr-2.pl-2
-                            .col-sm-6
-                                h1.m-0.text-dark Edit User
-                            .col-sm-6
-                                a.btn.btn-warning.float-right(href=`/dashboard/users/edit/${userToEdit.id}/changepassword`)
-                                    i.fas.fa-lock
-                                    |  Change Password 
-                                a.btn.btn-dark.float-right.mr-4(href=`/dashboard/users/edit/${userToEdit.id}/changepassword`)
-                                    i.fas.fa-image
-                                    |  Change Profile Picture
-                    .content.mt-5
-                        .container-fluid
-                            if successes
-                                for success in successes
-                                    div.alert.alert-success #{ success }
-                            if errors
-                                for error, i in errors
-                                    div.alert.alert-danger #{ error.message }
-                            .row
-                                .col-12
-                                    .card   
-                                            .card-header
-                                                h3.card-title User Data
-                                            form#adduserForm(action=`/dashboard/users/edit/${userToEdit.id}`, method="post" )
-                                                .card-body.row
-                                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                                    .col-md-12
-                                                        .form-group.col-md-6
-                                                            label.control-label(for="username") Username
-                                                            input.form-control#username(type="text", name="username",value=`${userToEdit.username}`, placeholder="Enter Username")
-                                                    .col-md-12
-                                                        .form-group.col-md-6
-                                                            label(for="email") Email address
-                                                            input.form-control#email(type="email", name="email",value=`${userToEdit.email}`, placeholder="Enter email Address")
-                                                    .col-md-12
-                                                        .form-group.col-md-6
-                                                            label(for="mobilenumber") Mobile Number
-                                                            input.form-control(type="text", name="mobilenumber", value=`${userToEdit.mobileNo}`)
-                                                    .col-md-12
-                                                        .form-group.col-md-6
-                                                            label(for="userrole") User Role
-                                                            select.form-control#userrole(name="userrole",value=`${userToEdit.role}`)
-                                                                option(value="0") Admin
-                                                                option(value="1") Store Owner
-                                                .card-footer
-                                                    button.btn.btn-primary.float-right(type="submit") Update User
+    if userToEdit       
+        .container-fluid
+            .row.mb-5.mt-5.pr-2.pl-2
+                .col-sm-6
+                    h1.m-0.text-dark Edit User
+                .col-sm-6
+                    a.btn.btn-warning.float-right(href=`/dashboard/users/edit/${userToEdit.id}/changepassword`)
+                        i.fas.fa-lock
+                        |  Change Password 
+                    a.btn.btn-dark.float-right.mr-4(href=`/dashboard/users/edit/${userToEdit.id}/changepassword`)
+                        i.fas.fa-image
+                        |  Change Profile Picture
+        .content.mt-5
+            .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
+                .row
+                    .col-12
+                        .card   
+                            .card-header
+                                h3.card-title User Data
+                            form#adduserForm(action=`/dashboard/users/edit/${userToEdit.id}`, method="post" )
+                                .card-body.row
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label.control-label(for="username") Username
+                                            input.form-control#username(type="text" name="username",value=`${userToEdit.username}`, placeholder="Enter Username")
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label(for="email") Email address
+                                            input.form-control#email(type="email" name="email",value=`${userToEdit.email}`, placeholder="Enter email Address")
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label(for="mobilenumber") Mobile Number
+                                            input.form-control(type="text" name="mobilenumber", value=`${userToEdit.mobileNo}`)
+                                    .col-md-12
+                                        .form-group.col-md-6
+                                            label(for="userrole") User Role
+                                            select.form-control#userrole(name="userrole",value=`${userToEdit.role}`)
+                                                option(value="0") Admin
+                                                option(value="1") Store Owner
+                                .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Update User
 block scripts 
-        script(src="/static/vendor/js/addUser.js", type="text/javascript")
+    script(src="/static/vendor/js/addUser.js" type="text/javascript")

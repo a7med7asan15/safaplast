@@ -378,9 +378,9 @@ const logisticService = {
             } = req.body;
             const tbSearch = await AreaSchema.find({
                 "$or": [
-                    { nameEnglish: { '$regex': table_search, '$options': 'i' } },
-                    { nameArabic: { '$regex': table_search, '$options': 'i' } },
-                    //{ parent: { '$regex': table_search, '$options': 'i' } }
+                    { "nameEnglish": { '$regex': table_search, '$options': 'i' } },
+                    { "nameArabic": { '$regex': table_search, '$options': 'i' } },
+                    //{ "parent.nameEnglish": { '$regex':  table_search, '$options': 'i' } }
                 ]
             }).populate('parent');
             return res.render('screens/logisticsScreens/areaScreens', {

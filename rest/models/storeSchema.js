@@ -15,16 +15,14 @@ const storeSchema  = new Schema({
         areaId: { type : Schema.Types.ObjectId , ref : 'areaSchema' },
         addressArabic : {type:String},
         addressEnglish : {type:String},
-        longtiude:{type:String},
+        longtude:{type:String},
         latitude:{type:String},
     },
     views:{type:Number}, 
     clicks:{type:Number},
-    storeOwner : { type : Schema.Types.ObjectId , ref : 'UsersModel' }
+    //storeOwner : { type : Schema.Types.ObjectId , ref : 'UsersModel' }
 })
 storeSchema.plugin(mongoosePaginate);
 
-const StoreSchema =  mongoose.model('storeSchema', storeSchema);
 
-
-module.exports = StoreSchema
+module.exports = mongoose.model('storeSchema', storeSchema)

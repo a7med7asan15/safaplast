@@ -1,0 +1,85 @@
+extends ../../layout.pug
+
+block content  
+    if storeToEdit 
+        .content-header
+            .container-fluid
+                .row.mb-3.mt-3
+                .col-sm-6
+                    h1.m-0.text-dark Edit Store
+
+        .content
+            .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
+            .container-fluid
+                .row
+                .col-12
+                    .card
+                        .card-header
+                            h3.card-title Store Information
+                        form#addnewstore(role="form" action=`/dashboard/stores/edit/${storeToEdit.id}` method="POST")
+                            .card-body.row
+                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                .form-group.col-md-12
+                                    h3 General Information
+
+                                .form-group.col-md-6
+                                    label(for="storeEnglish") Store Name [English]
+                                    input.form-control#storeEnglish(type="text" name="storeEnglish" value=`${storeToEdit.storeEnglish}` placeholder="Enter Store Name In English")
+                                .form-group.col-md-6
+                                    label(for="storeArabic") Store Name [Arabic]
+                                    input.form-control#storeArabic(type="text" name="storeArabic" value=`${storeToEdit.storeArabic}` placeholder="Enter Store Name in Arabic")
+
+                                .form-group.col-md-6
+                                    label(for="mobilenumber") Mobile Number
+                                    input.form-control(type="text" name="mobileNumber" value=`${storeToEdit.mobileNumber}` )            
+                                .col-md-12.mt-5.mb-5
+                                    h3 Advanced Information
+                                .col-md-12
+                                    .col-md-4
+                                        .form-group
+                                            label Store Owner
+                                            select(name="storeOwner").form-control.storeowner
+                                                option(selected value=`${storeToEdit.storeOwner}`) #{storeToEdit.storeOwner.username}
+
+                                .col-md-12.mt-5.mb-5
+                                    h3 Store Address Info
+                                .col-md-12
+                                    .col-md-4
+                                        .form-group
+                                            if areaSel
+                                                label Store Area
+                                                select.form-control.storeArea(name="storeArea")
+                                                    option(selected value=`${storeToEdit.Address.areaId}`) #{areaSel.nameEnglish}
+                                                    if areas
+                                                        - var areaArray = areas.docs
+                                                        for area in areaArray
+                                                            option(value=`${area.id}`)=`${area.nameEnglish} - ${area.nameArabic}` 
+                                .col-md-12
+                                    .col-md-6
+                                        .form-group
+                                            label Specific Address [ English ]
+                                            input.form-control(name="addressEnglish" value=`${storeToEdit.Address.addressEnglish}` rows="3" placeholder="Enter ...")
+                                .col-md-12
+                                    .col-md-6
+                                        .form-group
+                                            label Specific Address [ Arabic ]
+                                            input.form-control(name="addressArabic" value=`${storeToEdit.Address.addressArabic}` rows="3" placeholder="Enter ...")
+                                .col-md-8
+                                    .row.pl-2
+                                        .form-group.col-md-5
+                                            label(for="longtude") Google Longtude
+                                            input.form-control#longtude(type="text" name="longtude" value=`${storeToEdit.Address.longtude}` placeholder="Enter Store Name In English")
+                                        .form-group.col-md-5
+                                            label(for="latitude") Google Latitude
+                                            input.form-control#latitude(type="text" name="latitude" value=`${storeToEdit.Address.latitude}` placeholder="Enter Store Name In English")
+
+                            .card-footer
+                                button.btn.btn-primary.float-right(type="submit") Update Store
+block scripts 
+    script(src="/static/vendor/js/store.js" type="text/javascript")

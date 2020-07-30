@@ -101,11 +101,59 @@ storeService.createStore
 
 
 
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// +++ /// EDIT Store  // ++++// //////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
 
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-// +++ /// Store UPDATE ROUTES  // ++++// //////
-////////////////////////////////////////////////
-////////////////////////////////////////////////
+router.get('/edit/:storeId', 
+
+
+csrfProtection,
+
+storeService.showOne
+
+);
+
+//---------------------------
+// Update Store Route 
+//---------------------------
+
+router.post('/edit/:storeId', 
+
+validationBody(schemas.addStoreSchema),
+
+csrfProtection,
+
+storeService.update
+
+);
+
+
+//---------------------------
+// Delete Store Route 
+//---------------------------
+
+router.post('/delete/:storeId',
+
+csrfProtection,
+
+
+storeService.destroy
+
+); 
+
+//---------------------------
+// Store Search 
+//---------------------------
+
+router.post('/searchResult',
+
+csrfProtection,
+
+storeService.searchShowStore
+
+); 
 
 module.exports = router;
