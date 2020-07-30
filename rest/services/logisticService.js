@@ -207,7 +207,6 @@ const logisticService = {
             }
             const areas = await AreaSchema.paginate({}, options);
             const citys = await CitySchema.paginate();
-            console.log(areas);
             return res.render('screens/logisticsScreens/areaScreens', {
                 thisUser: req.user,
                 csrfToken,
@@ -277,7 +276,6 @@ const logisticService = {
             }
             const citys = await CitySchema.paginate();
             const areaToEdit = await AreaSchema.findById(areaId).populate('parent');
-            console.log(areaToEdit);
             return res.render('screens/logisticsScreens/editAreaScreen', {
                 thisUser: req.user,
                 areaToEdit: areaToEdit,
@@ -385,7 +383,6 @@ const logisticService = {
                     //{ parent: { '$regex': table_search, '$options': 'i' } }
                 ]
             }).populate('parent');
-            console.log(tbSearch);
             return res.render('screens/logisticsScreens/areaScreens', {
                 thisUser: req.user,
                 csrfToken,

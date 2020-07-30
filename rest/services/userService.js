@@ -46,7 +46,6 @@ const userService ={
         if(req.file){
          filename = req.file.filename;
         }
-        console.log(req.file,filename);
         try{
             const count = await User.count()
             const newuser = await User({
@@ -91,7 +90,6 @@ const userService ={
         const {userId} = req.params;
        try{
             const deleteUser =  await User.findByIdAndDelete(userId);
-            console.log(deleteUser);
             req.flash('success', `${deleteUser.name} Deleted Successfully`)
             return res.redirect(`/dashboard/users`)
        }catch(err){

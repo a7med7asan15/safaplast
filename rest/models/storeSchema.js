@@ -1,26 +1,28 @@
 const mongoose = require('mongoose');
-
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 
 const Schema = mongoose.Schema;
 
 const storeSchema  = new Schema({
+    storeOwner: { type : Schema.Types.ObjectId , ref : 'UsersModel' },
     storeEnglish:{ type: String, required: true},
     storeArabic:{ type: String, required: true},
     image:{type:String},
-    storeMobile:{type:String},
+    mobileNumber:{type:String},
     Address:{
-        city :{String},
         cityId: { type : Schema.Types.ObjectId , ref : 'citySchema' },
-        area:{String},
         areaId: { type : Schema.Types.ObjectId , ref : 'areaSchema' },
-        specificAddress : {type:String}
+        addressArabic : {type:String},
+        addressEnglish : {type:String},
+        longtiude:{type:String},
+        latitude:{type:String},
     },
     views:{type:Number}, 
     clicks:{type:Number},
-    Products: [{ type : Schema.Types.ObjectId , ref : 'productSchema' }],
     storeOwner : { type : Schema.Types.ObjectId , ref : 'UsersModel' }
 })
+storeSchema.plugin(mongoosePaginate);
 
 const StoreSchema =  mongoose.model('storeSchema', storeSchema);
 

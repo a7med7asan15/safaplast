@@ -20,7 +20,7 @@ block content
                         .card
                             .card-header
                                 h3.card-title Color Info
-                            form(action="/dashboard/colors" method="post" role="form")
+                            form#colorForm(action="/dashboard/colors" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-12
