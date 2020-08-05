@@ -21,9 +21,11 @@ const variantGroupSchema  = new Schema({
 
 const productSchema  = new Schema({
     name:{ type: String, required: true},
+    sku:{type:String,required: true},
     categoryParent:{type:String , required: true},
     category:{type:String,required:true},
     categoryId: { type : Schema.Types.ObjectId , ref:'categorySchema'},
+    storeId:{ type : Schema.Types.ObjectId , ref:'storeSchema'},
     buyPrice : {type:Number ,required:true},
     sellPrice : {type:Number ,required:true},
     totalBuyPrice : {type:Number ,required:true },

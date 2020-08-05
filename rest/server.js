@@ -16,6 +16,7 @@ csrf({ cookie: true });
 
 /// Require Passport  
 
+dotenv.config();  
 
 require('./config/passport'),(passport);
 
@@ -30,6 +31,7 @@ const  logisticController  =  require(  './controllers/dashboard/logisticControl
 const  colorController  =  require(  './controllers/dashboard/colorController'  );
 const  sizeController  =  require(  './controllers/dashboard/sizeController'  );
 const  categoryController  =  require(  './controllers/dashboard/categoryController'  );
+const  appAuthController  =  require(  './controllers/application/authController'  );
  
 
 /// Require Seeds 
@@ -40,7 +42,6 @@ const  {  seedUser  }  =  require('./seeds/areas')
 const app = express(); 
 
 
-dotenv.config();  
 
 
 require("mongodb");
@@ -93,7 +94,7 @@ app.use(   bodyParser.json()   )
 //// session Configration ////
 /////////////////////////////
 
-
+app.use(   '/api/auth'   ,   appAuthController  ); 
 
 app.use( 
   
@@ -164,6 +165,7 @@ app.use(
 ///////////////////////////////////////
 /////// INITIALIZING PASSSPORT ///////
 //////////////////////////////////////
+
 
 
 
