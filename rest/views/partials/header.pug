@@ -85,11 +85,11 @@ nav.main-header.navbar.navbar-expand.navbar-dark.navbar-light
     if thisUser       
     li.nav-item.dropdown.user-menu
         a.nav-link.dropdown-toggle(href="#", data-toggle="dropdown")
-          img.user-image.img-circle.elevation-2(src=`/static/images/${thisUser.avatar}`, alt="User Image")
+          img.user-image.img-circle.elevation-2(src=`${thisUser.avatar}`, alt="User Image")
           span.d-none.d-md-inline #{thisUser.username}
         ul.dropdown-menu.dropdown-menu-lg.dropdown-menu-right
           li.user-header
-              img.img-circle(width="100" ,src=`/static/images/${thisUser.avatar}`, alt="User Image")
+              img.img-circle(width="100" ,src=`${thisUser.avatar}`, alt="User Image")
               p #{thisUser.username}
                 small Member since Nov. 2012
           li(style="display:flex; height:auto; justify-content:space-between;align-items:center").user-footer

@@ -80,6 +80,15 @@ idAdmin : (req,res,next)=>{
     }
     return res.redirect('/dashboard/login')
     
+},
+isStoreAdmin : (req,res,next)=>{
+    if(req.user.role === 0 ){
+        
+        return next();
+        
+    }
+    return res.redirect('/dashboard/login')
+    
 }
 
 }
