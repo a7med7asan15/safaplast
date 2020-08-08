@@ -1,0 +1,98 @@
+extends ../../layout.pug
+
+
+block content
+        .content-header
+            .container-fluid
+                .row.mb-3.mt-3
+                .col-sm-6
+                    h1.m-0.text-dark Product lists 
+        .content
+            .container-fluid
+                if successes
+                    for success in successes
+                        div.alert.alert-success #{ success }
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger #{ error.message }
+                .row
+                    .col-5
+                        .card
+                            .card-header
+                                h3.card-title Product List Info
+                            form#addClassForm(action="/dashboard/ai/productlists" method="post" role="form")
+                                .card-body.row
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .form-group.col-md-10
+                                        label(for="listName") Product List Name 
+                                        input.form-control#serviceenglish(type="text", name="listName", placeholder="Product Set Name ")
+                                    .form-group.col-md-10
+                                        label(for="listId") Product List Id  
+                                        input.form-control#serviceenglish(type="text", name="listId", placeholder="Product Set Id ")
+                                .card-footer
+                                    button.btn.btn-primary.float-right(type="submit") Add Product Set 
+                    .col-7
+                        .card
+                            .card-header
+                                h3.card-title All Class 
+                                .card-tools
+                                form(action=`/dashboard/category/class/searchResult`, method="post")
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .input-group.input-group-sm.float-right(style="width: 150px;")
+                                        if dataProvided
+                                            input.form-control.float-right(type="text", name="table_search", placeholder="Search")
+                                        if tbSearch
+                                            input.form-control.float-right(type="text", value = `${table_search}`, name="table_search", placeholder="Search")
+                                        .input-group-append
+                                        button.btn.btn-default(type="submit")
+                                            i.fas.fa-search
+                            .card-body.table-responsive.p-0
+                                table.table.table-hover.text-nowrap
+                                    thead
+                                        tr                   
+                                            th List id  
+                                            th List Name  
+                                            th Get Products   
+                                            th Edit
+                                            th delete
+                                    tbody
+                                        if dataProvided
+                                            - var dataArray = dataProvided                                            
+                                            for dat in dataArray
+                                                tr
+                                                    td=`${dat.name.split('/').pop()}`
+                                                    td=`${dat.displayName}`
+                                                    td
+                                                        a.btn-sm.btn-primary(href=`/dashboard/ai/products/${dat.name.split('/').pop()}`)
+                                                            i.far.fa-edit
+                                                            |  All Products
+                                                    td
+                                                        a.btn-sm.btn-primary(href=`/dashboard/ai/edit?id=${dat.name.split('/').pop()}`)
+                                                            i.far.fa-edit
+                                                            |  Edit
+                                                    td
+                                                        form(action=`/dashboard/ai/productlists/delete?productListId=${dat.name.split('/').pop()}`, method="post")
+                                                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                            button.btn-sm.btn-danger(type="submit")
+                                                                i.fas.fa-trash-alt
+                            .card-footer.clearfix
+                                //- ul.pagination.pagination-sm.m-0.float-right
+                                //-     if hasPrev
+                                //-         li.page-item
+                                //-             a.page-link(href=href=`/dashboard/logistic/citys?p=${page - 1}`) «
+                        
+                                //-     if totalPages > 1
+                                //-         while pages  < 3            
+                                //-             li.page-item
+                                //-                 if pages === page
+                                //-                     a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
+                                //-                 else
+                                //-                     a.page-link.active( href=`/dashboard/logistic/citys?p=${pages}`)= pages
+                                                    
+                                //-             - pages++    
+                               
+                                //-     if hasNext
+                                //-         li.page-item
+                                //-             a.page-link(href=`/dashboard/logistic/citys?p=${page + 1}`) »
+//- block scripts 
+//-         script(src="/static/vendor/js/addClass.js", type="text/javascript")

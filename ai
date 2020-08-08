@@ -1,0 +1,18 @@
+                  let colorProductId = product.productColors[i]._id
+                  const imageLink = await aiHelpers.imageLink(productColors[i].filename);
+             
+                  const id = product._id;
+                  const request = {
+                    parent:locationPath,
+                    product : {
+                    displayName: name,
+                    productCategory:process.env.defaultproductcategory
+                    },
+                    productId: id
+                  }
+                  const [createProduct] = await clientProd.createProduct(request);
+                  var productPath = await clientProd.productPath(projectId,location,id)
+                  var addProductToSet = await clientProd.addProductToProductSet({
+                    name: productSetPath,
+                    product: productPath,
+                  })

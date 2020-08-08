@@ -11,7 +11,7 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
             a.d-block(href="#") #{thisUser.username}
     nav.mt-2
       ul.nav.nav-pills.nav-sidebar.flex-column(data-widget="treeview", role="menu", data-accordion="false")
-        li.nav-item.has-treeview.menu-open
+        li.nav-item.has-treeview
           a.nav-link(href="#")
             i.left.pr-2.fas.fa-user-circle
             p
@@ -26,7 +26,7 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
               a.nav-link(href="/dashboard/users/add")
                 i.left.pr-2.fas.fa-user-plus
                 p Add New Account
-        li.nav-item.has-treeview.menu-open
+        li.nav-item.has-treeview
           a.nav-link(href="#")
             i.left.pr-2.fas.fa-store-alt
             p
@@ -41,7 +41,7 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
               a.nav-link(href="/dashboard/stores/add")
                 i.left.pr-2.fas.fa-cart-plus
                 p Add New Store
-        li.nav-item.has-treeview.menu-open
+        li.nav-item.has-treeview
           a.nav-link(href="#")
             i.left.pr-2.fas.fa-th
             p
@@ -56,7 +56,7 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
               a.nav-link(href="/dashboard/logistic/areas")
                 i.left.pr-2.fas.fa-th
                 p Area
-        li.nav-item.has-treeview.menu-open
+        li.nav-item.has-treeview
           a.nav-link(href="#")
             i.left.pr-2.fas.fa-th
             p
@@ -71,7 +71,7 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
               a.nav-link(href="/dashboard/sizes")
                 i.left.pr-2.fas.fa-th
                 p Size
-        li.nav-item.has-treeview.menu-open
+        li.nav-item.has-treeview
           a.nav-link(href="#")
             i.left.pr-2.fas.fa-th
             p
@@ -90,3 +90,30 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
               a.nav-link(href="/dashboard/category/variants")
                 i.left.pr-2.fas.fa-th
                 p Product Variation 
+        li.nav-item.has-treeview
+          a.nav-link(href="#")
+            i.left.pr-2.fas.fa-th
+            p
+              | AI
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link(href="/dashboard/ai/productlists")
+                i.left.pr-2.fas.fa-th
+                p Product Lists 
+            li.nav-item
+              a.nav-link(href="/dashboard/ai/products")
+                i.left.pr-2.fas.fa-th
+                p Products 
+        li.nav-item.has-treeview
+          a.nav-link(href="#")
+            i.left.pr-2.fas.fa-th
+            p
+              | Review
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link(href="/dashboard/review")
+                i.left.pr-2.fas.fa-th
+                p Review Panel
+
