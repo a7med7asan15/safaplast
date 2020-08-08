@@ -6,7 +6,7 @@ const csrfProtection = csrf();
 const categoryService = require('../../services/categoryService');
 
 // uploading Middleware 
-// Multer Js 
+// Multer Js a
 
 const { upload } = require('../../middlewares/uploadImage');
 

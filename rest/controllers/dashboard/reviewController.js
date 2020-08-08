@@ -1,13 +1,13 @@
 // checker controller routes
 var express = require('express');
 var router = express.Router();
-const passport = require('passport');
-const productService = require('../../appServices/productService');
+var csrf = require('csurf'); 
+const csrfProtection = csrf();
+const reviewService = require('../../services/reviewService');
 
 // uploading Middleware 
 // Multer Js 
 
-const { upload } = require('../../middlewares/uploadImage');
 
 
 // Validation Middleware 
@@ -23,6 +23,10 @@ const {
 
 idAdmin,
 
+sameEmail,
+
+preUsedEmail,
+
 authMiddleware } = require('../../middlewares/authenticator');
 
 
@@ -30,7 +34,7 @@ authMiddleware } = require('../../middlewares/authenticator');
 
 
 
-router.use(   passport.authenticate('jwt', { session: false }) );
+router.use(   authMiddleware ,   idAdmin   );
 
 
 
@@ -51,7 +55,20 @@ router.use(   passport.authenticate('jwt', { session: false }) );
 
 router.get( '/',
 
-productService.addProduct
+
+csrfProtection, 
+
+reviewService.showAllReviews
+
+
+);
+router.get( '/product',
+
+
+csrfProtection, 
+
+reviewService.reviewOneProduct
+
 
 );
 
@@ -65,10 +82,12 @@ productService.addProduct
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
+router.post( '/product/accept',
 
-router.post( '/',
 
-productService.addProduct
+csrfProtection, 
+
+reviewService.acceptProduct
 
 
 );
@@ -80,52 +99,23 @@ productService.addProduct
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
-// router.get('/edit/:colorId', 
+
+//---------------------------
+// Update Color Route 
+//---------------------------
+
+
+//---------------------------
+// Delete Color Route 
+//---------------------------
 
 
 
-// colorService.showOne
-
-// );
-
-// //---------------------------
-// // Update Color Route 
-// //---------------------------
-
-// router.post('/edit/:colorId', 
-
-// validationBody(schemas.addColorSchema) , 
-
-// csrfProtection,
-
-// colorService.update
-
-// );
+//---------------------------
+// Color Search 
+//---------------------------
 
 
-// //---------------------------
-// // Delete Color Route 
-// //---------------------------
 
-// router.post('/delete/:colorId',
-
-// csrfProtection,
-
-
-// colorService.destroy
-
-// ); 
-
-// //---------------------------
-// // Color Search 
-// //---------------------------
-
-// router.post('/searchResult',
-
-// csrfProtection,
-
-// colorService.searchShowColor
-
-// ); 
 
 module.exports = router;

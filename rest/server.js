@@ -31,7 +31,10 @@ const  logisticController  =  require(  './controllers/dashboard/logisticControl
 const  colorController  =  require(  './controllers/dashboard/colorController'  );
 const  sizeController  =  require(  './controllers/dashboard/sizeController'  );
 const  categoryController  =  require(  './controllers/dashboard/categoryController'  );
+const  aiController  =  require(  './controllers/dashboard/aiController'  );
 const  appAuthController  =  require(  './controllers/application/authController'  );
+const  productController  =  require(  './controllers/application/productController'  );
+const  reviewController  =  require(  './controllers/dashboard/reviewController'  );
  
 
 /// Require Seeds 
@@ -95,6 +98,7 @@ app.use(   bodyParser.json()   )
 /////////////////////////////
 
 app.use(   '/api/auth'   ,   appAuthController  ); 
+app.use(   '/api/products'   ,   productController  ); 
 
 app.use( 
   
@@ -193,6 +197,8 @@ app.use(   '/dashboard/logistic'   ,   logisticController  );
 app.use(   '/dashboard/colors'   ,   colorController  );
 app.use(   '/dashboard/sizes'   ,   sizeController  ); 
 app.use(   '/dashboard/category'   ,   categoryController  ); 
+app.use(   '/dashboard/ai'   ,   aiController  ); 
+app.use(   '/dashboard/review'   ,   reviewController  ); 
 
 
 

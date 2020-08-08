@@ -1,48 +1,51 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 
 const Schema = mongoose.Schema;
 
 
 
-const variantSchema  = new Schema({
-    size:{ type: String, required: true },
+const quantitySizeSchema  = new Schema({
     sizeId: { type : Schema.Types.ObjectId , ref : 'sizeSchema' },
     allQuantity:{ type : Number , required: true },
     quantityNow:{ type : Number , required: true },    
 })
 
-const variantGroupSchema  = new Schema({
-    color:{ type: String, required: true},
+const productColorSchema  = new Schema({
+    aiProductId:{type:String},
     colorId: { type : Schema.Types.ObjectId , ref:'colorSchema'},
     image:{type:String,required:true},
-    variant:[variantSchema]
+    filename:{type:String,required:true},
+    colorSizes:[quantitySizeSchema]
 })
 
 const productSchema  = new Schema({
     name:{ type: String, required: true},
     sku:{type:String,required: true},
-    categoryParent:{type:String , required: true},
-    category:{type:String,required:true},
-    categoryId: { type : Schema.Types.ObjectId , ref:'categorySchema'},
+    classId: { type : Schema.Types.ObjectId , ref:'classSchema'},
+    typeId: { type : Schema.Types.ObjectId , ref:'typesSchema'},
+    varId: { type : Schema.Types.ObjectId , ref:'variantsSchema'},
     storeId:{ type : Schema.Types.ObjectId , ref:'storeSchema'},
     buyPrice : {type:Number ,required:true},
     sellPrice : {type:Number ,required:true},
-    totalBuyPrice : {type:Number ,required:true },
+    totalBuyPrice : {type:Number },
     status : {type:String ,required:true},
-    variantGroup:[variantGroupSchema]
+    productColors:[productColorSchema]
 })
 
 
 
+productSchema.plugin(mongoosePaginate);
+
 const ProductSchema =  mongoose.model('productSchema', productSchema);
-const VariantGroupSchema =  mongoose.model('variantGroupSchema', variantGroupSchema);
-const VariantSchema =  mongoose.model('variantSchema', variantSchema);
+const ProductColorSchema =  mongoose.model('productColorSchema', productColorSchema);
+const QuantitySizeSchema =  mongoose.model('quantitySizeSchema', quantitySizeSchema);
 
 
   
 module.exports ={
     ProductSchema,
-    VariantGroupSchema,
-    VariantSchema
+    ProductColorSchema,
+    QuantitySizeSchema
 }
