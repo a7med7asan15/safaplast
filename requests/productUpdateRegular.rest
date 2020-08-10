@@ -1,0 +1,12 @@
+POST http://localhost:3001/api/products/update?dataTab=regular&productId=5f3153eeed47b163f413f024
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYyYTFjYTAxNDk0NGI1OWYwY2I0NmJmIiwidXNlcm5hbWUiOiJtb2hhbWVkIGh1c3NhbSJ9LCJpYXQiOjE1OTY2NzU2MTh9.ZaAZ65EWpX1nsO2XcD0YEXxAyMKHQAuI0xuC01c6h-A
+
+{
+  "name":"habzlm",
+  "sku":"a15205",
+  "buyPrice":"50",
+  "sellPrice":"500",
+  "classId":"5f1ff69a19758b5c3c2c521d",
+  "varId":"5f21ec38b46e045778f38072"
+}

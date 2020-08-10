@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/products/update?dataTab=varient&productId=5f3153eeed47b163f413f024
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYyYTFjYTAxNDk0NGI1OWYwY2I0NmJmIiwidXNlcm5hbWUiOiJtb2hhbWVkIGh1c3NhbSJ9LCJpYXQiOjE1OTY2NzU2MTh9.ZaAZ65EWpX1nsO2XcD0YEXxAyMKHQAuI0xuC01c6h-A
+
+{
+  "varientId":"5f3153eeed47b163f413f025",
+  "colorId":"5f21ebbeb46e045778f3806f",
+  "image":"https://aiimagestrain.storage.googleapis.com/0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
+  "filename":"0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg"
+}

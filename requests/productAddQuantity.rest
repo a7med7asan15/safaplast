@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/products/update?dataTab=new-quantity&productId=5f3153eeed47b163f413f024
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYyYTFjYTAxNDk0NGI1OWYwY2I0NmJmIiwidXNlcm5hbWUiOiJtb2hhbWVkIGh1c3NhbSJ9LCJpYXQiOjE1OTY2NzU2MTh9.ZaAZ65EWpX1nsO2XcD0YEXxAyMKHQAuI0xuC01c6h-A
+
+{
+  "varientId":"5f3153eeed47b163f413f025",
+  "sizeQuantityId":"5f3153eeed47b163f413f026",
+  "newQuantity":"400"
+}

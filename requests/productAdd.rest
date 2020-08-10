@@ -3,7 +3,7 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYyYTFjYTAxNDk0NGI1OWYwY2I0NmJmIiwidXNlcm5hbWUiOiJtb2hhbWVkIGh1c3NhbSJ9LCJpYXQiOjE1OTY2NzU2MTh9.ZaAZ65EWpX1nsO2XcD0YEXxAyMKHQAuI0xuC01c6h-A
 
 {
-  "name":"Pantalon ",
+  "name":"salamon",
   "sku":"a15205",
   "storeId":"5f21e0fe71a8624ed81f140e",
   "classId":"5f1ff68b19758b5c3c2c521c",
@@ -47,5 +47,3 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiN
       }
   ]
 }
-
-
