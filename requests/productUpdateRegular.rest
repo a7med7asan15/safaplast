@@ -4,7 +4,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiN
 
 {
   "name":"habzlm",
-  "sku":"a15205",
+  "sku":"",
   "buyPrice":"50",
   "sellPrice":"500",
   "classId":"5f1ff69a19758b5c3c2c521d",

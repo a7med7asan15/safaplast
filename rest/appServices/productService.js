@@ -1,6 +1,10 @@
 const {ProductSchema,ProductColorSchema,QuantitySizeSchema} = require('../models/productSchema');
 const {VariantsSchema} = require('../models/categorySchema')
+const {
 
+  validationFunction, 
+  
+  schemas } = require('../helpers/apiValidator');
 
 
 const {aiHelpers,clientProd,locationPath,productSetPath} = require('../helpers/aiHelpers');
@@ -67,10 +71,21 @@ const productService = {
       
 
         },
-        updateRegularData: async(req,res)=>{
+        updateRegularData: async(req,res) => {
 
           const{productId} = req.query;
 
+          // validation   
+          const body = req.body;
+          const validation = validationFunction(body,schemas.productRegular);
+        
+          if(validation.error){
+            console.log(validation.error.details[0].message)
+            return  res.status(200).json({err:true,msg:validation.error.details[0].message});
+
+          }
+
+          
           try{
             const {
               name,
@@ -83,7 +98,7 @@ const productService = {
 
             const product = await ProductSchema.findById(productId);
               if(!product){
-                
+  
                 return  res.status(200).json({err:true,msg:"Error In Updatin Product"});
               }
             product.name = name;
@@ -105,6 +120,7 @@ const productService = {
           }
         },
         updateVarientData : async(req,res)=>{
+
           const {productId} = req.query;
           const varientId = req.body.varientId;
 
@@ -113,9 +129,22 @@ const productService = {
             image,
             filename
           } = req.body;
+
+
+          // validation   
+          const body = req.body;
+          const validation = validationFunction(body,schemas.productRegular);
+        
+          if(validation.error){
+            return  res.status(200).json({err:true,msg:validation.error.details[0].message});
+
+          }
+     
+
           try{
 
             const product = await ProductSchema.findById(productId);
+
                   product.status = 'pending'; 
                   
             const varient = product.productColors.id(varientId);
@@ -142,7 +171,9 @@ const productService = {
           }= req.body;
           try{
             const product = await ProductSchema.findById(productId)
+
             const varient = product.productColors.id(varientId);
+            
             const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
            
             sizeQuantity.sizeId = sizeId;
@@ -184,7 +215,6 @@ const productService = {
 
 
         }
-
 
 }
 
