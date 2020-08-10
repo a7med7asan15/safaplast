@@ -76,56 +76,18 @@ productService.addProduct
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// EDIT Color  // ++++// //////
+// +++ /// Update  Product  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
-// router.get('/edit/:colorId', 
+router.post( '/update',
+
+productService.updateProduct
+
+);
 
 
 
-// colorService.showOne
 
-// );
-
-// //---------------------------
-// // Update Color Route 
-// //---------------------------
-
-// router.post('/edit/:colorId', 
-
-// validationBody(schemas.addColorSchema) , 
-
-// csrfProtection,
-
-// colorService.update
-
-// );
-
-
-// //---------------------------
-// // Delete Color Route 
-// //---------------------------
-
-// router.post('/delete/:colorId',
-
-// csrfProtection,
-
-
-// colorService.destroy
-
-// ); 
-
-// //---------------------------
-// // Color Search 
-// //---------------------------
-
-// router.post('/searchResult',
-
-// csrfProtection,
-
-// colorService.searchShowColor
-
-// ); 
 
 module.exports = router;

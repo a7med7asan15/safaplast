@@ -14,6 +14,7 @@ const quantitySizeSchema  = new Schema({
 
 const productColorSchema  = new Schema({
     aiProductId:{type:String},
+    aiProductStatus:{type:String , default :'pending'},
     colorId: { type : Schema.Types.ObjectId , ref:'colorSchema'},
     image:{type:String,required:true},
     filename:{type:String,required:true},

@@ -64,6 +64,7 @@ const reviewService = {
 
             const {id} = req.query
             try{
+
                 const product = await ProductSchema.findById(id)
                 .populate(['classId ','varId','typeId','storeId','productColors.colorId','productColors.colorSizes.sizeId']);
                 const productData = {
@@ -78,34 +79,23 @@ const reviewService = {
                   }
 
             for(i=0 ; i < product.productColors.length ; i++ ){
-
+                if(product.productColors[i].aiProductStatus === 'active'){
+                    const productPath = clientProd.productPath(projectId, location, product.productColors[i].aiProductId);
+                    const deleteProduct = await clientProd.deleteProduct({name: productPath});
+                     console.log(deleteProduct);  
+                }
                 let colorId = product.productColors[i].id;
             
-                request.product.productLabels =[
+                request.product.productLabels = [
                     {
                         key: "parent",
                         value: product.id
                       },
-                    {
-                        key: "class",
-                        value: product.classId.nameEnglish
-                    },
-                    {
-                         key: "type",
-                         value: product.typeId.nameEnglish
-                    },
-
-                    {
-                         key: "color",
-                         value: product.productColors[i].colorId.name
-                    },
-
-
                     ]
                   
                 request.productId = colorId;
 
-            
+                    
                 var imageBucketLink = await imageLink(product.productColors[i].filename);
                 var [createProduct] = await clientProd.createProduct(request);
                 var productPath = await clientProd.productPath(projectId,location,colorId);
@@ -120,12 +110,11 @@ const reviewService = {
                     referenceImage:{
                       uri:imageBucketLink
                     }})
-                    console.log(linkRef);
-                    
-                    // console.log(createProduct.name)
-                    req.flash('message', 'Success');
-         
-
+                    const varient = product.productColors.id(colorId);
+                    varient.aiProductId = colorId
+                    varient.aiProductStatus = 'active';
+                    await varient.save()
+                    console.log(varient);
                     }
             product.status = 'active';    
             await product.save();
