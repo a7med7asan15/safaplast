@@ -8,7 +8,7 @@ const variantsSchema  = new Schema({
     nameArabic:{ type: String, required: true},
     nameEnglish:{ type: String, required: true},
     parentType:{ type : Schema.Types.ObjectId , ref : 'typesSchema' },
-    parenClass:{ type : Schema.Types.ObjectId , ref : 'classSchema' }
+    parentClass:{ type : Schema.Types.ObjectId , ref : 'classSchema' }
 })
 
 const classSchema = new Schema({

@@ -1,0 +1,47 @@
+POST http://localhost:3001/api/products
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYzMWFmM2M0ZWNlOWEzNDg0YjAwMjZhIiwidXNlcm5hbWUiOiJtYWhtb3VkIn0sImlhdCI6MTU5NzA5MzkwOH0.4BqPCadLjydwYl4vfMP_JKJJglKl0ALhsCXdXBWou0s
+
+{
+  "name":"3azma",
+  "sku":"a15205",
+  "storeId":"5f31b1fc601dcd16cc5d49c5",
+  "classId":"5f1ff68b19758b5c3c2c521c",
+  "varId":"5f21ec38b46e045778f38072",
+  "buyPrice":"5000",
+  "sellPrice":"500",
+  "productColors":[
+      {
+          "colorId":"5f1f1e33de5d645350b011f8",
+          "image":"https://aiimagestrain.storage.googleapis.com/0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
+          "filename":"0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
+          "colorSizes":[
+              {
+                "sizeId":"5f21ac9552f5b95718f975df",
+                "allQuantity":"50"
+              },
+              {
+                "sizeId":"5f21ec88b46e045778f38073",
+                "allQuantity":"30"
+              }
+          ]
+      },
+      {
+          "colorId":"5f21ac5c52f5b95718f975dd",
+          "image":"https://aiimagestrain.storage.googleapis.com/0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
+          "filename":"0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
+          "colorSizes":[
+              {
+                "sizeId":"5f21ac9552f5b95718f975df",
+                "allQuantity":"20"
+          
+              },
+              {
+                "sizeId":"5f21ec88b46e045778f38073",
+                "allQuantity":"80"
+          
+              }
+          ]
+      }
+  ]
+}

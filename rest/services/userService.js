@@ -44,9 +44,9 @@ const userService ={
         let filename = ''; 
         
         if(req.file){
-         filename = req.file.filename;
+       
+         filename = req.file.path;
         }
-        console.log(req.file,filename);
         try{
             const count = await User.count()
             const newuser = await User({
@@ -91,7 +91,6 @@ const userService ={
         const {userId} = req.params;
        try{
             const deleteUser =  await User.findByIdAndDelete(userId);
-            console.log(deleteUser);
             req.flash('success', `${deleteUser.name} Deleted Successfully`)
             return res.redirect(`/dashboard/users`)
        }catch(err){
@@ -147,7 +146,40 @@ const userService ={
             }
 
 
+    },
+    searchShowUser: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await User.find({
+                "$or": [
+                    { username: { '$regex': table_search, '$options': 'i' } },
+                    { email: { '$regex': table_search, '$options': 'i' } }
+                ]
+            });
+            return res.render('screens/usersScreens/listAllScreen', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/usersScreens/listAllScreen', {
+                thisUser: req.user,
+                table_search,
+                tbSearch:{},
+                csrfToken
+            })
+        }
+
+
     }
+
 
 }
 

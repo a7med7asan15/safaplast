@@ -6,7 +6,7 @@ const csrfProtection = csrf();
 const categoryService = require('../../services/categoryService');
 
 // uploading Middleware 
-// Multer Js 
+// Multer Js a
 
 const { upload } = require('../../middlewares/uploadImage');
 
@@ -100,6 +100,13 @@ csrfProtection,
 categoryService.showVariants
 
 );
+router.get( '/variants/edit',
+
+csrfProtection, 
+
+categoryService.showOneVariant
+
+);
 // separate and add category 
 
 ////////////////////////////////////////////////
@@ -158,6 +165,15 @@ csrfProtection,
 categoryService.addVariant
 
 )
+router.post( '/variants/edit',
+
+validationBody(schemas.addVariantSchema),
+
+csrfProtection, 
+
+categoryService.updateOneVariant
+
+)
 
 
 
@@ -182,6 +198,13 @@ csrfProtection,
 categoryService.deleteOneClass
 
 )
+router.post( '/variant/delete',
+
+csrfProtection, 
+
+categoryService.deleteOneClass
+
+)
 
 //---------------------------
 // Update Color Route 
@@ -192,6 +215,52 @@ categoryService.deleteOneClass
 //---------------------------
 // Delete Color Route 
 //---------------------------
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// +++ /// Search  // ++++// //////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+//---------------------------
+// Types Search 
+//---------------------------
+
+router.post('/types/searchResult',
+
+csrfProtection,
+
+
+categoryService.searchShowType
+
+); 
+
+
+//---------------------------
+// Class Search 
+//---------------------------
+
+router.post('/class/searchResult',
+
+csrfProtection,
+
+
+categoryService.searchShowClass
+
+); 
+
+
+//---------------------------
+// Variant Search 
+//---------------------------
+
+router.post('/variants/searchResult',
+
+csrfProtection,
+
+
+categoryService.searchShowVariant
+
+); 
 
 
 module.exports = router;

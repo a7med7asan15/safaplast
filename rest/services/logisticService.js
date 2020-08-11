@@ -47,8 +47,8 @@ const logisticService = {
 
 
         const {
-            cityEnglish,
-            cityArabic
+            nameEnglish,
+            nameArabic
         } = req.body;
 
 
@@ -58,9 +58,9 @@ const logisticService = {
             const newCity = new CitySchema({
 
 
-                nameEnglish: cityEnglish,
+                nameEnglish,
 
-                nameArabic: cityArabic
+                nameArabic
 
 
             })
@@ -86,8 +86,10 @@ const logisticService = {
         let csrfToken = req.csrfToken();
 
         try {
-            var {cityId} = req.params
-            
+            var {
+                cityId
+            } = req.params
+
             const cityToEdit = await CitySchema.findById(cityId);
 
             return res.render('screens/logisticsScreens/editCityScreen', {
@@ -118,8 +120,8 @@ const logisticService = {
         try {
             const updateCity = await CitySchema.findById(cityId)
             updateCity.nameEnglish = nameEnglish,
-            updateCity.nameArabic = nameArabic,
-            await updateCity.save();
+                updateCity.nameArabic = nameArabic,
+                await updateCity.save();
             req.session.passedData = false
             req.flash('success', 'City Updated Succesfully')
             return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
@@ -150,6 +152,41 @@ const logisticService = {
 
         }
     },
+
+    searchShowCity: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await CitySchema.find({
+                "$or": [
+                    { nameEnglish: { '$regex': table_search, '$options': 'i' } },
+                    { nameArabic: { '$regex': table_search, '$options': 'i' } },
+                ]
+            });
+            
+            return res.render('screens/logisticsScreens/cityScreens', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/logisticsScreens/cityScreens', {
+                thisUser: req.user,
+                tbSearch: {},
+                table_search,
+                csrfToken
+            })
+        }
+
+
+    },
+
     // Show areas
     showArea: async (req, res) => {
         let page = 1;
@@ -198,7 +235,7 @@ const logisticService = {
         } = req.body;
 
         try {
-         
+
             const newArea = new AreaSchema({
 
                 nameEnglish: nameEnglish,
@@ -206,7 +243,7 @@ const logisticService = {
                 nameArabic: nameArabic,
 
                 parent: parentCity,
-                
+
 
             })
 
@@ -231,9 +268,14 @@ const logisticService = {
         let csrfToken = req.csrfToken();
 
         try {
-            var {areaId} = req.params
+            var {
+                areaId
+            } = req.params
+            const options = {
+                populate: 'parent',
+            }
             const citys = await CitySchema.paginate();
-            const areaToEdit = await AreaSchema.findById(areaId);
+            const areaToEdit = await AreaSchema.findById(areaId).populate('parent');
             return res.render('screens/logisticsScreens/editAreaScreen', {
                 thisUser: req.user,
                 areaToEdit: areaToEdit,
@@ -257,7 +299,7 @@ const logisticService = {
     updateArea: async (req, res) => {
         const {
             nameEnglish,
-            nameArabic, 
+            nameArabic,
             parentCity
         } = req.body
         const {
@@ -265,25 +307,10 @@ const logisticService = {
         } = req.params
         try {
             const updateArea = await AreaSchema.findById(areaId);
-            
-            const oldCity = await CitySchema.findById(updateArea.parent);
-            const newCity = await CitySchema.findById(parentCity);
-            console.log(oldCity);
-            console.log(newCity);
-            if(!newCity.childAreas.includes(areaId)){
-                newCity.childAreas.push(areaId);
-                oldCity.childAreas.splice( oldCity.childAreas.indexOf(areaId), 1 );
-                await newCity.save();
-                await oldCity.save();
-            }
-
-            
-        
-            
             updateArea.nameEnglish = nameEnglish,
-            updateArea.nameArabic = nameArabic,
-            updateArea.parent = parentCity,
-            await updateArea.save();
+                updateArea.nameArabic = nameArabic,
+                updateArea.parent = parentCity,
+                await updateArea.save();
 
             req.session.passedData = false
             req.flash('success', 'Area Updated Succesfully')
@@ -316,6 +343,66 @@ const logisticService = {
         }
     },
 
+    searchArea: async (req, res) => {
+        try {
+
+            const area = await AreaSchema.find(
+
+                {
+                    nameEnglish: {
+                        $regex: req.body.nameEnglish, 
+                        $options: 'i'
+                    }
+                    
+
+                }, 'nameEnglish');
+
+            return res.send({
+                results: area
+            })
+
+        } catch (err) {
+
+            return res.send(err);
+        }
+
+
+    },
+
+    //search Area
+    searchShowArea: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await AreaSchema.find({
+                "$or": [
+                    { "nameEnglish": { '$regex': table_search, '$options': 'i' } },
+                    { "nameArabic": { '$regex': table_search, '$options': 'i' } },
+                    //{ "parent.nameEnglish": { '$regex':  table_search, '$options': 'i' } }
+                ]
+            }).populate('parent');
+            return res.render('screens/logisticsScreens/areaScreens', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/logisticsScreens/areaScreens', {
+                thisUser: req.user,
+                tbSearch: {},
+                table_search,
+                csrfToken
+            })
+        }
+
+
+    }
 
 
 }

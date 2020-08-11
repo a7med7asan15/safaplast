@@ -15,7 +15,7 @@ block content
                         .card   
                             .card-header
                                 h3.card-title Type Information
-                            form#updateTypeForm(action=`/dashboard/category/types/edit?id=${dataProvided.id}`, method="post" )
+                            form#addTypeForm(action=`/dashboard/category/types/edit?id=${dataProvided.id}`, method="post" )
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .col-md-12
@@ -28,3 +28,5 @@ block content
                                             input#typeArabic.form-control( type="text" name="typeArabic", value=`${dataProvided.nameArabic}`, placeholder="Enter Color Hex")
                                 .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Update Type
+block scripts 
+        script(src="/static/vendor/js/addType.js", type="text/javascript")

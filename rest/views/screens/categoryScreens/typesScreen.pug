@@ -20,7 +20,7 @@ block content
                         .card
                             .card-header
                                 h3.card-title Type Info
-                            form(action="/dashboard/category/types/add" method="post" role="form")
+                            form#addTypeForm(action="/dashboard/category/types/add" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
@@ -36,11 +36,16 @@ block content
                             .card-header
                                 h3.card-title All Types 
                                 .card-tools
-                                .input-group.input-group-sm(style="width: 150px;")
-                                    input.form-control.float-right(type="text", name="table_search", placeholder="Search")
-                                    .input-group-append
-                                    button.btn.btn-default(type="submit")
-                                        i.fas.fa-search
+                                form(action=`/dashboard/category/types/searchResult`, method="post")
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .input-group.input-group-sm.float-right(style="width: 150px;")
+                                        if dataProvided
+                                            input.form-control.float-right(type="text", name="table_search", placeholder="Search")
+                                        if tbSearch
+                                            input.form-control.float-right(type="text", value = `${table_search}`, name="table_search", placeholder="Search")
+                                        .input-group-append
+                                        button.btn.btn-default(type="submit")
+                                            i.fas.fa-search
                             .card-body.table-responsive.p-0
                                 table.table.table-hover.text-nowrap
                                     thead
@@ -51,7 +56,23 @@ block content
                                             th Edit
                                             th delete
                                     tbody
-                                        
+                                        if tbSearch
+                                            - var num = 1
+                                            for tb in tbSearch
+                                                tr
+                                                    td #{num++}
+                                                    td #{tb.nameEnglish}
+                                                    td #{tb.nameArabic}
+                                                    td
+                                                        a.btn-sm.btn-primary(href=`/dashboard/category/types/edit/${tb.id}`)
+                                                            i.far.fa-edit
+                                                            |  Edit
+                                                    td
+                                                        form(action=`/dashboard/category/types/delete/${tb.id}`, method="post")
+                                                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                            button.btn-sm.btn-danger(type="submit")
+                                                                i.fas.fa-trash-alt
+                                                                |  Delete
                                         if dataProvided
                                             - var dataArray = dataProvided.docs
                                             - var hasPrev = dataProvided.hasPrevPage 
@@ -93,3 +114,5 @@ block content
                                     if hasNext
                                         li.page-item
                                             a.page-link(href=`/dashboard/logistic/citys?p=${page + 1}`) »
+block scripts 
+        script(src="/static/vendor/js/addType.js", type="text/javascript")

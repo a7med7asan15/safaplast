@@ -80,7 +80,26 @@ idAdmin : (req,res,next)=>{
     }
     return res.redirect('/dashboard/login')
     
-}
+},
+isStoreAdmin : (req,res,next)=>{
+    if(req.user.role === 0 ){
+        
+        return next();
+        
+    }
+    return res.redirect('/dashboard/login')
+    
+},
+isStoreOwner:(req,res,next)=>{
+    const storeId = req.body.storeId 
+     if(req.user.stores.includes(storeId)){
+         return next();
+     }
+
+    return  res.status(200).json({err:true,msg:"Your's Not Eliigible to CRUD This Store "});
+    }
+
+    
 
 }
 

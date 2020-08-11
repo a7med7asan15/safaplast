@@ -25,127 +25,82 @@ $(function () {
       }
   }});
 
+  $('.storeArea').select2();
  
-
-  $('#addnewstore').validate({
-        rules:{
-          storeNameEnglish:{
-                required: true,
-            },
-            storeNameArabic:{
-                required: true,
-            },
-            mobilenumber:{
-              required:true,
-              minlength: 11,
-            },
-
-              storelogo:{ 
-                required: true, 
-                extension: "png|jpe?g|gif", 
-               },
-               storecover:{
-                required: true, 
-                extension: "png|jpe?g|gif", 
-               },
-               openhour:{
-                required: true,
-            },
-            closehour:{
-                required: true,
-            },
-            waitingtime:{
-                required: true,
-            },
-            storeservices:{
-                required: true,
-
-            },
-            addressarabic:{
-                required: true,
-
-            },
-            addressenglish:{
-                required: true,
-
-            },
-            longtude:{
-                required: true,
-
-            },
-            latitude:{
-                required: true,
-
-            }
-
+  Inputmask().mask(document.querySelectorAll("input"));
+  
+    $("#addnewstore").validate({
+      rules: {
+        storeEnglish: {
+          required: true,
         },
-        messages:{
-          storeNameEnglish:{
-            required: 'Please Enter Store Name In English',
-          },
-          storeNameEnglish:{
-            required: 'Please Enter Store Name In Arabic',
-          },
-          mobilenumber:{
-            required: ' please Enter landline Number',
-            minlength:'Please Verify That it is not less than 8 Charachters'
-          },
-          storelogo:{ 
-                required: 'Please Provide Us With the Store Logo', 
-                extension: "The Only Valid extensions is [ png,jpeg , jpg ,gif]", 
-               },
-          storecover:{ 
-                required: 'Please Provide Us With the Store Cover', 
-                extension: "The Only Valid extensions is [ png,jpeg , jpg ,gif]", 
-               },
-               openhour:{
-                required: "Required Feild",
-            },
-            closehour:{
-                required: "Required Feild",
-            },
-            waitingtime:{
-                required: "Required Feild",
-            },
-            storeservices:{
-                required: "Please Select At Least one Service",
-
-            },
-            addressarabic:{
-                required: "Please Provide Us With Address In Arabic",
-
-            },
-            addressenglish:{
-              required: "Please Provide Us With Address In English",
-            },
-            longtude:{
-              required: "Please Provide Us With Google longtude",
-
-            },
-            latitude:{
-              required: "Please Provide Us With Google latitude",
-
-            }
-
+        storeArabic: {
+          required: true,
         },
-        highlight: function(element) {
-            $(element).addClass('is-invalid');
+        mobileNumber: {
+          required: true,
+          minLength: 11,
         },
-        unhighlight: function(element) {
-            $(element).removeClass('is-invalid');
+        storeOwner: {
+          required: true,
         },
-        errorElement: 'span',    
-        errorClass: 'error invalid-feedback',
-        errorPlacement:function(error,element){
-          if (element.attr("name") == "storelogo" || "storecover" ) {
-            $(element).closest(".form-group").append(error);
-            }
-            else{
+        storeArea: {
+          required: true,
+        },
+        addressEnglish: {
+          required: true,
+        },
+        addressArabic: {
+          required: true,
+        },
+        longtude: {
+          required: true,
+        },
+        latitude: {
+          required: true,
+        },
 
-            $(element).parent().append(error);
-            }
-        }
-        })
+      },
+      messages: {
+        storeEnglish: {
+          required: "Please Enter English Name",
+        },
+        storeArabic: {
+          required: "Please Enter Arabic Name",
+        },
+        mobileNumber: {
+          required: "Please Enter Valid Mobile Number",
+          minLength: "Must be 11 digits",
+        },
+        storeOwner: {
+          required: "Please Enter Store Owner",
+        },
+        storeArea: {
+          required: "Please Enter Area",
+        },
+        addressEnglish: {
+          required: "Please Enter Address in English",
+        },
+        addressArabic: {
+          required: "Please Enter Address in Arabic",
+        },
+        longtude: {
+          required: "Please Enter Longitude",
+        },
+        latitude: {
+          required: "Please Enter Latitude",
+        },
+      },
+      highlight: function (element) {
+        $(element).addClass("is-invalid");
+      },
+      unhighlight: function (element) {
+        $(element).removeClass("is-invalid");
+      },
+      errorElement: "span",
+      errorClass: "error invalid-feedback",
+    });
+
 
 
 

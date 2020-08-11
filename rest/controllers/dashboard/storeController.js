@@ -30,6 +30,7 @@ sameEmail,
 preUsedEmail,
 
 authMiddleware } = require('../../middlewares/authenticator');
+const { schema } = require('../../models/Users');
 
 
 /// Auth Use MiddleWares 
@@ -56,6 +57,16 @@ router.use(   authMiddleware ,   idAdmin   );
 
 
 
+router.get( '/',
+
+
+csrfProtection, 
+
+
+storeService.listAllStores
+
+
+);
 router.get( '/add',
 
 
@@ -75,14 +86,74 @@ storeService.addStorePage
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
+router.post( '/add',
 
+
+validationBody(schemas.addStoreSchema),
+
+csrfProtection, 
+
+
+storeService.createStore
+
+
+);
 
 
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// Store UPDATE ROUTES  // ++++// //////
+// +++ /// EDIT Store  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
+
+router.get('/edit/:storeId', 
+
+
+csrfProtection,
+
+storeService.showOne
+
+);
+
+//---------------------------
+// Update Store Route 
+//---------------------------
+
+router.post('/edit/:storeId', 
+
+validationBody(schemas.addStoreSchema),
+
+csrfProtection,
+
+storeService.update
+
+);
+
+
+//---------------------------
+// Delete Store Route 
+//---------------------------
+
+router.post('/delete/:storeId',
+
+csrfProtection,
+
+
+storeService.destroy
+
+); 
+
+//---------------------------
+// Store Search 
+//---------------------------
+
+router.post('/searchResult',
+
+csrfProtection,
+
+storeService.searchShowStore
+
+); 
 
 module.exports = router;
