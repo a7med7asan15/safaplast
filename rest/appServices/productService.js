@@ -126,7 +126,7 @@ const productService = {
 
         return res.status(200).json({
           err: true,
-          msg: "Error In Updatin Product"
+          msg: "Error In Product Id"
         });
       }
       product.name = name;
@@ -148,7 +148,7 @@ const productService = {
 
       return res.status(200).json({
         err: true,
-        msg: "Error In Updatin Product"
+        msg: "Error In Updating Product"
       });
 
     }
@@ -169,7 +169,7 @@ const productService = {
 
     // validation   
     const body = req.body;
-    const validation = validationFunction(body, schemas.productRegular);
+    const validation = validationFunction(body, schemas.productVarient);
 
     if (validation.error) {
       return res.status(200).json({
@@ -183,10 +183,23 @@ const productService = {
     try {
 
       const product = await ProductSchema.findById(productId);
+      if (!product) {
 
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Product Id"
+        });
+      }
       product.status = 'pending';
 
       const varient = product.productColors.id(varientId);
+      if (!varient) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Variant Id"
+        });
+      }
       varient.colorId = colorId;
       varient.image = image;
       varient.filename = filename;
@@ -216,12 +229,45 @@ const productService = {
       allQuantity
 
     } = req.body;
+
+    // validation   
+    const body = req.body;
+    const validation = validationFunction(body, schemas.productSizeQuantity);
+
+    if (validation.error) {
+      return res.status(200).json({
+        err: true,
+        msg: validation.error.details[0].message
+      });
+
+    }
+
     try {
       const product = await ProductSchema.findById(productId)
+      if (!product) {
 
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Product Id"
+        });
+      }
       const varient = product.productColors.id(varientId);
+      if (!varient) {
 
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Variant Id"
+        });
+      }
       const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
+
+      if (!product) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Size Id"
+        });
+      }
 
       sizeQuantity.sizeId = sizeId;
       sizeQuantity.allQuantity = allQuantity;
@@ -251,11 +297,44 @@ const productService = {
     const {
       newQuantity
     } = req.body;
+
+    // validation   
+    const body = req.body;
+    const validation = validationFunction(body, schemas.addQuantity);
+
+    if (validation.error) {
+      return res.status(200).json({
+        err: true,
+        msg: validation.error.details[0].message
+      });
+
+    }
+
     try {
       const product = await ProductSchema.findById(productId);
+      if (!product) {
 
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Product Id"
+        });
+      }
       const varient = product.productColors.id(varientId);
+      if (!varient) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Variant Id"
+        });
+      }
       const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
+      if (!sizeQuantity) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Size Id"
+        });
+      }
       const newquantity = parseInt(sizeQuantity.allQuantity) + parseInt(newQuantity);
       const newQuantityNow = parseInt(sizeQuantity.quantityNow) + parseInt(newQuantity);
       sizeQuantity.allQuantity = newquantity;
