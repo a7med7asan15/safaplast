@@ -3,7 +3,7 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYxZDg1OGY5ZmMzMDQzZTA0NjMxMzg2IiwidXNlcm5hbWUiOiJBZG1pbiJ9LCJpYXQiOjE1OTcxNjkzNDJ9.jCmI3SWqsvqkqenZ3mn7B1XIgMoHRVtpffpk7UilNkM
 
 {
-  "storeId":"5f31b1fc601dcd16cc5d49c5",
+  "storeId":"5f32e6c340413f47f4a85c30",
   "name":"habzlm",
   "sku":"12356",
   "buyPrice":"50",
