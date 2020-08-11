@@ -62,6 +62,18 @@ reviewService.showAllReviews
 
 
 );
+
+router.get( '/deleted',
+
+
+csrfProtection, 
+
+reviewService.showDeletedProducts
+
+
+);
+
+
 router.get( '/product',
 
 
@@ -88,6 +100,16 @@ router.post( '/product/accept',
 csrfProtection, 
 
 reviewService.acceptProduct
+
+
+);
+
+router.post( '/delete',
+
+
+csrfProtection, 
+
+reviewService.deleteProduct
 
 
 );

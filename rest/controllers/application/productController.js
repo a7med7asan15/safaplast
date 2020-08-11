@@ -21,16 +21,14 @@ schemas } = require('../../helpers/validators');
 // Authenticte Middlewares 
 const {
 
-idAdmin,
-
-authMiddleware } = require('../../middlewares/authenticator');
+isStoreOwner } = require('../../middlewares/authenticator');
 
 
 /// Auth Use MiddleWares 
 
 
 
-router.use(   passport.authenticate('jwt', { session: false }) );
+router.use(   passport.authenticate('jwt', { session: false }) , isStoreOwner);
 
 
 
@@ -83,6 +81,17 @@ productService.addProduct
 router.post( '/update',
 
 productService.updateProduct
+
+);
+
+router.post( '/add',
+
+productService.addToProduct
+
+);
+router.post( '/delete',
+
+productService.deleteProduct
 
 );
 

@@ -28,6 +28,7 @@ module.exports  = {
         }),
         productRegular:Joi.object().keys({
             name:Joi.string().required(),
+            storeId:Joi.string().required(),
             sku:Joi.string().required(),
             buyPrice:Joi.string().required(),
             sellPrice:Joi.string().required(),

@@ -1,362 +1,338 @@
-const {
-  ProductSchema,
-  ProductColorSchema,
-  QuantitySizeSchema
-} = require('../models/productSchema');
-const {
-  VariantsSchema
-} = require('../models/categorySchema')
+const {ProductSchema,ProductColorSchema,QuantitySizeSchema} = require('../models/productSchema');
+const {VariantsSchema} = require('../models/categorySchema')
 const {
 
-  validationFunction,
+  validationFunction, 
+  
+  schemas } = require('../helpers/apiValidator');
 
-  schemas
-} = require('../helpers/apiValidator');
 
-
-const {
-  aiHelpers,
-  clientProd,
-  locationPath,
-  productSetPath
-} = require('../helpers/aiHelpers');
+const {aiHelpers,clientProd,locationPath,productSetPath} = require('../helpers/aiHelpers');
+const productSchema = require('../models/productSchema');
 
 
 
 
 const productService = {
-  addProduct: async (req, res) => {
-    const {
-      name,
-      sku,
-      classId,
-      varId,
-      storeId,
-      buyPrice,
-      sellPrice,
-      productColors
-    } = req.body;
+        addProduct: async (req,res)=>{
+        const  {
+            name,
+            sku,
+            classId,
+            varId,
+            storeId,
+            buyPrice,
+            sellPrice,
+            productColors
+          } = req.body;
+            
+            try{
 
-    try {
+              const variant = await VariantsSchema.findById(varId);
+              const product = new ProductSchema ({
+                name,
+                sku,
+                classId,
+                varId,
+                typeId:variant.parentType,
+                storeId,
+                buyPrice,
+                sellPrice,
+                productColors
+              })
 
-      const variant = await VariantsSchema.findById(varId);
-      const product = new ProductSchema({
-        name,
-        sku,
-        classId,
-        varId,
-        typeId: variant.parentType,
-        storeId,
-        buyPrice,
-        sellPrice,
-        status: 'pending',
-        productColors
-      })
+                await product.save();
+                res.status(200).json({err:false,msg:"Product Added Succefully"});
 
-      await product.save();
-      res.status(200).json({
-        err: false,
-        msg: "Product Added Succefully"
-      });
+            }catch(err){
 
-    } catch (err) {
+              res.status(200).json({err:true,msg:"Error in Adding The Product"});
+            }
+        },
+        updateProduct: async (req,res)=>{
+          const{dataTab} = req.query;
+          
+          switch(dataTab) {
+            case 'regular':
+              productService.updateRegularData(req,res);
+              break;
+            case 'varient':
+              productService.updateVarientData(req,res);
+              break;
+            case 'quantity':
+              productService.updateSizeQuantity(req,res);
+              break;
+            case 'new-quantity':
+              productService.addQuantity(req,res);
+              break;
+            default:
+              return res.send('No Data Type');
+          }
+      
 
-      res.status(200).json({
-        err: true,
-        msg: "Error in Adding The Product"
-      });
-    }
-  },
-  updateProduct: async (req, res) => {
-    const {
-      dataTab
-    } = req.query;
+        },
+        updateRegularData: async(req,res) => {
 
-    switch (dataTab) {
-      case 'regular':
-        productService.updateRegularData(req, res);
-        break;
-      case 'varient':
-        productService.updateVarientData(req, res);
-        break;
-      case 'quantity':
-        productService.updateSizeQuantity(req, res);
-        break;
-      case 'new-quantity':
-        productService.addQuantity(req, res);
-        break;
-      default:
-        return res.send('No Data Type');
-    }
+          const{productId} = req.query;
 
+          // validation   
+          const body = req.body;
+          const validation = validationFunction(body,schemas.productRegular);
+        
+          if(validation.error){
+            console.log(validation.error.details[0].message)
+            return  res.status(200).json({err:true,msg:validation.error.details[0].message});
 
-  },
-  updateRegularData: async (req, res) => {
+          }
 
-    const {
-      productId
-    } = req.query;
+          
+          try{
+            const {
+              name,
+              sku,
+              buyPrice,
+              sellPrice,
+              classId,
+              varId
+            } = req.body;
 
-    // validation   
-    const body = req.body;
-    const validation = validationFunction(body, schemas.productRegular);
+            const product = await ProductSchema.findById(productId);
+              if(!product){
+  
+                return  res.status(200).json({err:true,msg:"Error In Id Product"});
+              }
+            product.name = name;
+            product.sku = sku;
+            product.name = name;
+            product.buyPrice = buyPrice;
+            product.sellPrice = sellPrice;
+            product.classId = classId;
+            product.varId = varId;
 
-    if (validation.error) {
-      console.log(validation.error.details[0].message)
-      return res.status(200).json({
-        err: true,
-        msg: validation.error.details[0].message
-      });
+            await product.save();
+  
+           return  res.status(200).json({err:false,msg:"Product Updated Successfully"});
+           
+          }catch(err){
+            
+            return  res.status(200).json({err:true,msg:"Error In Updatin Product"});
 
-    }
+          }
+        },
+        updateVarientData : async(req,res)=>{
 
+          const {productId} = req.query;
+          const varientId = req.body.varientId;
 
-    try {
-      const {
-        name,
-        sku,
-        buyPrice,
-        sellPrice,
-        classId,
-        varId
-      } = req.body;
-
-      const product = await ProductSchema.findById(productId);
-      if (!product) {
-
-        return res.status(200).json({
-          err: true,
-          msg: "Error In Product Id"
-        });
-      }
-      product.name = name;
-      product.sku = sku;
-      product.name = name;
-      product.buyPrice = buyPrice;
-      product.sellPrice = sellPrice;
-      product.classId = classId;
-      product.varId = varId;
-
-      await product.save();
-
-      return res.status(200).json({
-        err: false,
-        msg: "Product Updated Successfully"
-      });
-
-    } catch (err) {
-
-      return res.status(200).json({
-        err: true,
-        msg: "Error In Updating Product"
-      });
-
-    }
-  },
-  updateVarientData: async (req, res) => {
-
-    const {
-      productId
-    } = req.query;
-    const varientId = req.body.varientId;
-
-    const {
-      colorId,
-      image,
-      filename
-    } = req.body;
+          const {
+            colorId,
+            image,
+            filename
+          } = req.body;
 
 
-    // validation   
-    const body = req.body;
-    const validation = validationFunction(body, schemas.productVarient);
+          try{
 
-    if (validation.error) {
-      return res.status(200).json({
-        err: true,
-        msg: validation.error.details[0].message
-      });
+            const product = await ProductSchema.findById(productId);
 
-    }
-
-
-    try {
-
-      const product = await ProductSchema.findById(productId);
-      if (!product) {
-
-        return res.status(200).json({
-          err: true,
-          msg: "Error In Product Id"
-        });
-      }
-      product.status = 'pending';
-
-      const varient = product.productColors.id(varientId);
-      if (!varient) {
-
-        return res.status(200).json({
-          err: true,
-          msg: "Error In Variant Id"
-        });
-      }
-      varient.colorId = colorId;
-      varient.image = image;
-      varient.filename = filename;
-      product.save();
-      return res.status(200).json({
-        err: false,
-        msg: "Product Varient Updated Successfully"
-      });
+                  product.status = 'pending'; 
+                  
+            const varient = product.productColors.id(varientId);
+                  varient.colorId =  colorId;
+                  varient.image = image;
+                  varient.filename = filename;
+                  product.save(); 
+                  return  res.status(200).json({err:false,msg:"Product Varient Updated Successfully"});
 
 
-    } catch (err) {
-      return res.status(200).json({
-        err: false,
-        msg: "Error Updating Product Varient"
-      });
-    }
+          }catch(err){
+            return  res.status(200).json({err:false,msg:"Error Updating Product Varient"});
+          }
 
-  },
-  updateSizeQuantity: async (req, res) => {
-    const {
-      productId
-    } = req.query;
-    const varientId = req.body.varientId;
-    const sizeQuantityId = req.body.sizeQuantityId
-    const {
-      sizeId,
-      allQuantity
+        },
+        updateSizeQuantity: async(req,res)=>{
+          const {productId} = req.query;
+          const varientId = req.body.varientId;
+          const sizeQuantityId =   req.body.sizeQuantityId
+          const {
+            sizeId,
+            allQuantity
+          }= req.body;
+          try{
+            const product = await ProductSchema.findById(productId)
 
-    } = req.body;
+            const varient = product.productColors.id(varientId);
 
-    // validation   
-    const body = req.body;
-    const validation = validationFunction(body, schemas.productSizeQuantity);
+            const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
+           
+            sizeQuantity.sizeId = sizeId;
+            sizeQuantity.allQuantity = allQuantity;
+            sizeQuantity.quantityNow = allQuantity;
 
-    if (validation.error) {
-      return res.status(200).json({
-        err: true,
-        msg: validation.error.details[0].message
-      });
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Product Size Updated Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:true,msg:"Error in updating Product Size"});
 
-    }
+            }
 
-    try {
-      const product = await ProductSchema.findById(productId)
-      if (!product) {
+        },
+        addQuantity: async(req,res)=>{
+          const {productId} = req.query;
+          const varientId = req.body.varientId;
+          const sizeQuantityId =   req.body.sizeQuantityId
+          const { newQuantity }= req.body;
+          try{
+            const product = await ProductSchema.findById(productId);
 
-        return res.status(200).json({
-          err: true,
-          msg: "Error In Product Id"
-        });
-      }
-      const varient = product.productColors.id(varientId);
-      if (!varient) {
+            const varient = product.productColors.id(varientId);
+            const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
+            const newquantity = parseInt(sizeQuantity.allQuantity) + parseInt(newQuantity);
+            sizeQuantity.allQuantity = newquantity;
+            
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Product Size Updated Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:true,msg:"Error in updating Product Size"});
 
-        return res.status(200).json({
-          err: true,
-          msg: "Error In Variant Id"
-        });
-      }
-      const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
-
-      if (!product) {
-
-        return res.status(200).json({
-          err: true,
-          msg: "Error In Size Id"
-        });
-      }
-
-      sizeQuantity.sizeId = sizeId;
-      sizeQuantity.allQuantity = allQuantity;
-      sizeQuantity.quantityNow = allQuantity;
-
-      await product.save();
-      return res.status(200).json({
-        err: false,
-        msg: "Product Size Updated Successfully"
-      });
-
-    } catch (err) {
-      return res.status(200).json({
-        err: true,
-        msg: "Error in updating Product Size"
-      });
-
-    }
-
-  },
-  addQuantity: async (req, res) => {
-    const {
-      productId
-    } = req.query;
-    const varientId = req.body.varientId;
-    const sizeQuantityId = req.body.sizeQuantityId
-    const {
-      newQuantity
-    } = req.body;
-
-    // validation   
-    const body = req.body;
-    const validation = validationFunction(body, schemas.addQuantity);
-
-    if (validation.error) {
-      return res.status(200).json({
-        err: true,
-        msg: validation.error.details[0].message
-      });
-
-    }
-
-    try {
-      const product = await ProductSchema.findById(productId);
-      if (!product) {
-
-        return res.status(200).json({
-          err: true,
-          msg: "Error In Product Id"
-        });
-      }
-      const varient = product.productColors.id(varientId);
-      if (!varient) {
-
-        return res.status(200).json({
-          err: true,
-          msg: "Error In Variant Id"
-        });
-      }
-      const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
-      if (!sizeQuantity) {
-
-        return res.status(200).json({
-          err: true,
-          msg: "Error In Size Id"
-        });
-      }
-      const newquantity = parseInt(sizeQuantity.allQuantity) + parseInt(newQuantity);
-      const newQuantityNow = parseInt(sizeQuantity.quantityNow) + parseInt(newQuantity);
-      sizeQuantity.allQuantity = newquantity;
-      sizeQuantity.quantityNow = newQuantityNow;
-
-      await product.save();
-      return res.status(200).json({
-        err: false,
-        msg: "Product Size Updated Successfully"
-      });
-
-    } catch (err) {
-      return res.status(200).json({
-        err: true,
-        msg: "Error in updating Product Size"
-      });
-
-    }
+            }
 
 
 
-  }
+        },
+        addToProduct :async(req,res)=>{
+
+          const{dataTab} = req.query;
+
+          switch(dataTab) {
+            case 'varient':
+              productService.addVarient(req,res);
+              break;
+            case 'size':
+              productService.addSize(req,res);
+              break;
+            default:
+              return res.send('No Data Type');
+          }
+        },
+        addVarient:async(req,res)=>{
+          const{productId} = req.query;
+          const {
+            colorId,
+            image,
+            filename
+          } = req.body;
+          const varient = {
+            colorId,
+            image,
+            filename
+          }
+
+          try{
+            const product = await ProductSchema.findById(productId);
+            product.status = 'pending';
+            product.productColors.push(varient);
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Vaient Color Added  Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:true,msg:"Error In Adding Varient Color "});
+
+          }
+
+        },
+        addSize:async(req,res)=>{
+          const{productId} = req.query;
+          const {
+            sizeId,
+            allQuantity,
+            varientId
+          } = req.body;
+          const size = {
+            sizeId,
+            allQuantity,
+            quantityNow : allQuantity
+          }
+
+          try{
+            const product = await ProductSchema.findById(productId);
+            let varient = product.productColors.id(varientId);
+
+            varient.colorSizes.push(size)
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Size and quantity  Added  Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:true,msg:"Error In Adding Size And Quantity "});
+
+          }
+        },
+        deleteProduct:async(req,res)=>{
+          const{dataTab} = req.query;
+          switch(dataTab) {
+            case 'regular':
+              productService.deleteRegular(req,res);
+              break;
+            case 'varient':
+              productService.deleteVarient(req,res);
+              break;
+            case 'size':
+              productService.deleteSize(req,res);
+              break;
+            default:
+              return res.send('No Data Type');
+          }
+        },
+        deleteRegular:async(req,res)=>{
+          const{productId} = req.query;
+          try{
+            const product = await ProductSchema.findById(productId);
+            product.status = 'deleted';
+            product.productColors.forEach((varient)=>{
+              varient.status = 'deleted';
+            })
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Product Deleted Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:false,msg:"Error In Deleting Product"});
+
+          }
+        },
+        deleteVarient:async(req,res)=>{
+          const{productId} = req.query;
+          const{varientId}= req.body;
+          try{
+            const product = await ProductSchema.findById(productId);
+            const varient = product.productColors.id(varientId);
+            varient.status = 'deleted';
+            product.save();
+            return  res.status(200).json({err:false,msg:"varient Deleted Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:false,msg:"Error In Deleting varient"});
+
+          }
+        },
+        deleteSize:async(req,res)=>{
+          const{productId} = req.query;
+          const{varientId,sizeId}= req.body;
+          try{
+            const product = await ProductSchema.findById(productId);
+            const varient = product.productColors.id(varientId);
+            const size = varient.colorSizes.id(sizeId);
+            size.status = 'deleted';
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Size Deleted Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:false,msg:"Error In Deleting Size"});
+
+          }
+        }
+
 
 }
 

@@ -1,10 +1,11 @@
-POST http://localhost:3001/api/products/update?dataTab=regular&productId=5f3153eeed47b163f413f024
+POST http://localhost:3001/api/products/update?dataTab=regular&productId=5f321b263cfcb026ec6e5d10
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYyYTFjYTAxNDk0NGI1OWYwY2I0NmJmIiwidXNlcm5hbWUiOiJtb2hhbWVkIGh1c3NhbSJ9LCJpYXQiOjE1OTY2NzU2MTh9.ZaAZ65EWpX1nsO2XcD0YEXxAyMKHQAuI0xuC01c6h-A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYzMWFmM2M0ZWNlOWEzNDg0YjAwMjZhIiwidXNlcm5hbWUiOiJtYWhtb3VkIn0sImlhdCI6MTU5NzA5MzkwOH0.4BqPCadLjydwYl4vfMP_JKJJglKl0ALhsCXdXBWou0s
 
 {
+  "storeId":"5f31b1fc601dcd16cc5d49c5",
   "name":"habzlm",
-  "sku":"",
+  "sku":"12356",
   "buyPrice":"50",
   "sellPrice":"500",
   "classId":"5f1ff69a19758b5c3c2c521d",
