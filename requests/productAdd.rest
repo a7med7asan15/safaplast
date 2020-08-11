@@ -9,10 +9,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiN
   "classId":"5f1ff68b19758b5c3c2c521c",
   "varId":"5f21ec38b46e045778f38072",
   "buyPrice":"5000",
+
   "sellPrice":"500",
   "productColors":[
       {
-          "colorId":"5f1f1e33de5d645350b011f8",
+          "colorId":"5f1ae664ab6bfc2de8a06a69",
           "image":"https://aiimagestrain.storage.googleapis.com/0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "filename":"0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "colorSizes":[
@@ -23,11 +24,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiN
               {
                 "sizeId":"5f21ec88b46e045778f38073",
                 "allQuantity":"30"
+
               }
           ]
       },
       {
-          "colorId":"5f21ac5c52f5b95718f975dd",
+          "colorId":"5f1f6d5166aa572e1875361d",
           "image":"https://aiimagestrain.storage.googleapis.com/0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "filename":"0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "colorSizes":[
@@ -40,6 +42,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiN
                 "sizeId":"5f21ec88b46e045778f38073",
                 "allQuantity":"80"
           
+
               }
           ]
       }

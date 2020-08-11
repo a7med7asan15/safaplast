@@ -84,6 +84,7 @@ const reviewService = {
                     const deleteProduct = await clientProd.deleteProduct({name: productPath});
                      
                 }
+                if(product.productColors[i].status === 'active' ){
                 let colorId = product.productColors[i].id;
             
                 request.product.productLabels = [
@@ -119,7 +120,8 @@ const reviewService = {
                     varient.aiProductStatus = 'active';
                     await varient.save()
                     console.log(varient);
-                    }
+                }
+                }
             product.review = 'active';  
             product.aiStatus = 'linked';  
             await product.save();
@@ -173,11 +175,11 @@ const reviewService = {
                             {
                                 key: "parent",
                                 value: product.id
-                              },
-                              {
-                                key: "status",
-                                value: 'deleted'
-                              },
+                            },
+                            {
+                            key: "status",
+                            value: 'deleted'
+                            },
                         ],
                     }
                     const updateMask = {
