@@ -6,7 +6,7 @@ module.exports  = {
         return (req,res,next)=>{
             const result  = schemas.validate(req.body)
             if (result.error){
-                return res.json({error:true,msg:result.error.details[0].message})
+                return res.json({error:true,msg:"Validation Error: " + result.error.details[0].message})
             }
             if(!req.value){ req.value= {}}
             req.value['body'] = result.value;
@@ -36,12 +36,13 @@ module.exports  = {
             varId:Joi.string().required(),
         }),
         productVarient:Joi.object().keys({
-            varientId:Joi.string().required(),
+            storeId:Joi.string().required(),
             colorId:Joi.string().required(),
             image:Joi.string().required(),
             filename:Joi.string().required(),
         }),
         productSizeQuantity:Joi.object().keys({
+            storeId:Joi.string().required(),
             varientId:Joi.string().required(),
             sizeQuantityId:Joi.string().required(),
             sizeId:Joi.string().required(),

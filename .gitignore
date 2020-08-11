@@ -1,1 +1,12 @@
 /node_modules
+requests/addNewSize.rest
+requests/addVarient.rest
+requests/auth.rest
+requests/deleteProduct.rest
+requests/deleteSize.rest
+requests/deleteVarient.rest
+requests/productAdd.rest
+requests/productAddQuantity.rest
+requests/productUpdateRegular.rest
+requests/productUpdateSizeQuantity.rest
+requests/productUpdateVarient.rest

@@ -1,13 +1,14 @@
 POST http://localhost:3001/api/products
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYzMWFmM2M0ZWNlOWEzNDg0YjAwMjZhIiwidXNlcm5hbWUiOiJtYWhtb3VkIn0sImlhdCI6MTU5NzA5MzkwOH0.4BqPCadLjydwYl4vfMP_JKJJglKl0ALhsCXdXBWou0s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYxZDg1OGY5ZmMzMDQzZTA0NjMxMzg2IiwidXNlcm5hbWUiOiJBZG1pbiJ9LCJpYXQiOjE1OTcxNjkzNDJ9.jCmI3SWqsvqkqenZ3mn7B1XIgMoHRVtpffpk7UilNkM
+
 
 {
   "name":"3azma",
   "sku":"a15205",
-  "storeId":"5f31b1fc601dcd16cc5d49c5",
-  "classId":"5f1ff68b19758b5c3c2c521c",
-  "varId":"5f21ec38b46e045778f38072",
+  "storeId":"5f32e6c340413f47f4a85c30",
+  "classId":"5f21b094de580e4c7037b4e7",
+  "varId":"5f31d1bc43311221a466e36a",
   "buyPrice":"5000",
 
   "sellPrice":"500",
@@ -18,28 +19,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiN
           "filename":"0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "colorSizes":[
               {
-                "sizeId":"5f21ac9552f5b95718f975df",
+                "sizeId":"5f1f6e54dc1d022084365cfe",
                 "allQuantity":"50"
               },
               {
-                "sizeId":"5f21ec88b46e045778f38073",
+                "sizeId":"5f1f6e54dc1d022084365cfe",
                 "allQuantity":"30"
 
               }
           ]
       },
       {
-          "colorId":"5f1f6d5166aa572e1875361d",
+          "colorId":"5f1ae664ab6bfc2de8a06a69",
           "image":"https://aiimagestrain.storage.googleapis.com/0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "filename":"0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "colorSizes":[
               {
-                "sizeId":"5f21ac9552f5b95718f975df",
+                "sizeId":"5f1f6e54dc1d022084365cfe",
                 "allQuantity":"20"
           
               },
               {
-                "sizeId":"5f21ec88b46e045778f38073",
+                "sizeId":"5f1f6e54dc1d022084365cfe",
                 "allQuantity":"80"
           
 
