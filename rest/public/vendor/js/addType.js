@@ -8,7 +8,6 @@ $(function () {
         },
         typeArabic: {
           required: true,
-          email: true,
         },
       },
       messages: {

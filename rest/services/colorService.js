@@ -54,6 +54,7 @@ const colorService = {
             colorArabic,
         } = req.body;
 
+        var keepValue;
 
         try {
 
@@ -76,7 +77,19 @@ const colorService = {
             return res.redirect('/dashboard/colors');
 
         } catch (err) {
+            keepValue = 2;
+            req.flash('error', 'Something Went wrong');
+            console.log(keepValue);
+            return res.render('screens/variantScreens/colorScreens', {
+                thisUser: req.user,
+                csrfToken,
+                keepValue,
+                colorName,
 
+                colorHex,
+
+                colorArabic
+            })
         }
 
 

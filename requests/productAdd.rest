@@ -1,45 +1,45 @@
 POST http://localhost:3001/api/products
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYyYTFjYTAxNDk0NGI1OWYwY2I0NmJmIiwidXNlcm5hbWUiOiJtb2hhbWVkIGh1c3NhbSJ9LCJpYXQiOjE1OTY2NzU2MTh9.ZaAZ65EWpX1nsO2XcD0YEXxAyMKHQAuI0xuC01c6h-A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYxZDg1OGY5ZmMzMDQzZTA0NjMxMzg2IiwidXNlcm5hbWUiOiJBZG1pbiJ9LCJpYXQiOjE1OTcxMDAwOTV9.YjK4gM4WPJPk81Q2T8pdEkffKjLJD8IcEpxy7XuJg-c
 
 {
-  "name":"salamon",
+  "name":"gdkjgfidjg",
   "sku":"a15205",
-  "storeId":"5f21e0fe71a8624ed81f140e",
-  "classId":"5f1ff68b19758b5c3c2c521c",
-  "varId":"5f21ec38b46e045778f38072",
+  "storeId":"5f31d0f7cfd5642e8828c961",
+  "classId":"5f31d11ecfd5642e8828c962",
+  "varId":"5f31d1bc43311221a466e36a",
   "buyPrice":"50",
   "sellPrice":"500",
   "productColors":[
       {
-          "colorId":"5f1f1e33de5d645350b011f8",
+          "colorId":"5f1ae664ab6bfc2de8a06a69",
           "image":"https://aiimagestrain.storage.googleapis.com/0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "filename":"0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "colorSizes":[
               {
-                "sizeId":"5f21ac9552f5b95718f975df",
+                "sizeId":"5f1f6e54dc1d022084365cfe",
                 "allQuantity":"50",
                 "quantityNow":"50"
               },
               {
-                "sizeId":"5f21ec88b46e045778f38073",
+                "sizeId":"5f206007e5ef934bc0826e78",
                 "allQuantity":"30",
                 "quantityNow":"30"
               }
           ]
       },
       {
-          "colorId":"5f21ac5c52f5b95718f975dd",
+          "colorId":"5f1f6d5166aa572e1875361d",
           "image":"https://aiimagestrain.storage.googleapis.com/0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "filename":"0c9e3400-d8bb-11ea-9cb7-939416916fd6_4.jpg",
           "colorSizes":[
               {
-                "sizeId":"5f21ac9552f5b95718f975df",
+                "sizeId":"5f1f6e54dc1d022084365cfe",
                 "allQuantity":"20",
                 "quantityNow":"20"
               },
               {
-                "sizeId":"5f21ec88b46e045778f38073",
+                "sizeId":"5f206007e5ef934bc0826e78",
                 "allQuantity":"80",
                 "quantityNow":"80"
               }
