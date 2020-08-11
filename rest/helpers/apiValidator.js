@@ -41,5 +41,16 @@ module.exports  = {
             image:Joi.string().required(),
             filename:Joi.string().required(),
         }),
+        productSizeQuantity:Joi.object().keys({
+            varientId:Joi.string().required(),
+            sizeQuantityId:Joi.string().required(),
+            sizeId:Joi.string().required(),
+            allQuantity:Joi.string().required(),
+        }),
+        addQuantity:Joi.object().keys({
+            varientId:Joi.string().required(),
+            sizeQuantityId:Joi.string().required(),
+            newQuantity:Joi.string().required(),
+        }),
     }
 }
