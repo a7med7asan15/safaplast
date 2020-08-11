@@ -59,6 +59,7 @@ const storeService = {
 
     try {
       const areaObj = await AreaSchema.findById(storeArea);
+      const user = await User.findById(storeOwner);
       const store = new StoreSchema({
         storeOwner,
         storeEnglish,
@@ -74,6 +75,9 @@ const storeService = {
         }
       });
       await store.save();
+      user.stores.push(store.id);
+      user.save();
+
       req.flash('success', 'Store Added Succesfully')
       return res.redirect('/dashboard/stores');
 
@@ -126,12 +130,20 @@ const storeService = {
       longtude,
       latitude
     } = req.body;
+    
     const {
       storeId
     } = req.params
     try {
       const updateStore = await StoreSchema.findById(storeId);
-      console.log(updateStore);
+      const oldUser = await User.findById(updateStore.storeOwner);
+      
+      if(oldUser.stores.includes(updateStore.id)){
+        let index = oldUser.stores.indexOf(updateStore.id)
+        oldUser.stores.splice(index, 1);
+        await oldUser.save();
+      }
+      
       updateStore.storeEnglish = storeEnglish,
       updateStore.storeArabic = storeArabic,
       updateStore.mobileNumber = mobileNumber,
@@ -142,7 +154,12 @@ const storeService = {
       updateStore.Address.addressEnglish = addressEnglish,
       updateStore.Address.longtude = longtude,
       updateStore.Address.latitude = latitude,
+
         await updateStore.save();
+        const newUser = await User.findById(storeOwner);
+        newUser.stores.push(updateStore.id);
+        newUser.save();
+
       req.session.passedData = false
       req.flash('success', 'Store Updated Succesfully')
       return res.redirect(`/dashboard/stores/edit/${storeId}`)

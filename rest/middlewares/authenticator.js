@@ -89,7 +89,17 @@ isStoreAdmin : (req,res,next)=>{
     }
     return res.redirect('/dashboard/login')
     
-}
+},
+isStoreOwner:(req,res,next)=>{
+    const storeId = req.body.storeId 
+     if(req.user.stores.includes(storeId)){
+         return next();
+     }
+
+    return  res.status(200).json({err:true,msg:"Your's Not Eliigible to CRUD This Store "});
+    }
+
+    
 
 }
 

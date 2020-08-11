@@ -6,6 +6,7 @@ const authService ={
     checkEmail: async (email,password)=>{
         try{
             const user = await User.findOne({email:email})
+          
                 if(user){
                    const passCheck =  await user.comparePassword(password)
                    if(!passCheck){
@@ -38,7 +39,7 @@ const authService ={
     },
     signToken : async (user)=>{
         try{
-           
+       
            const sign = await jwt.sign({user:{id:user._id,username:user.username}},process.env.JWTsecret)
            if(!sign){
 

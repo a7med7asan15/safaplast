@@ -8,6 +8,7 @@ const {
 
 
 const {aiHelpers,clientProd,locationPath,productSetPath} = require('../helpers/aiHelpers');
+const productSchema = require('../models/productSchema');
 
 
 
@@ -37,7 +38,6 @@ const productService = {
                 storeId,
                 buyPrice,
                 sellPrice,
-                status:'pending',
                 productColors
               })
 
@@ -99,7 +99,7 @@ const productService = {
             const product = await ProductSchema.findById(productId);
               if(!product){
   
-                return  res.status(200).json({err:true,msg:"Error In Updatin Product"});
+                return  res.status(200).json({err:true,msg:"Error In Id Product"});
               }
             product.name = name;
             product.sku = sku;
@@ -131,16 +131,6 @@ const productService = {
           } = req.body;
 
 
-          // validation   
-          const body = req.body;
-          const validation = validationFunction(body,schemas.productRegular);
-        
-          if(validation.error){
-            return  res.status(200).json({err:true,msg:validation.error.details[0].message});
-
-          }
-     
-
           try{
 
             const product = await ProductSchema.findById(productId);
@@ -167,13 +157,12 @@ const productService = {
           const {
             sizeId,
             allQuantity
-
           }= req.body;
           try{
             const product = await ProductSchema.findById(productId)
 
             const varient = product.productColors.id(varientId);
-            
+
             const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
            
             sizeQuantity.sizeId = sizeId;
@@ -199,10 +188,8 @@ const productService = {
 
             const varient = product.productColors.id(varientId);
             const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
-            const newquantity = parseInt(sizeQuantity.allQuantity) +  parseInt(newQuantity);
-            const  newQuantityNow = parseInt(sizeQuantity.quantityNow) + parseInt(newQuantity);
+            const newquantity = parseInt(sizeQuantity.allQuantity) + parseInt(newQuantity);
             sizeQuantity.allQuantity = newquantity;
-            sizeQuantity.quantityNow = newQuantityNow;
             
             await product.save();
             return  res.status(200).json({err:false,msg:"Product Size Updated Successfully"});
@@ -214,7 +201,138 @@ const productService = {
 
 
 
+        },
+        addToProduct :async(req,res)=>{
+
+          const{dataTab} = req.query;
+
+          switch(dataTab) {
+            case 'varient':
+              productService.addVarient(req,res);
+              break;
+            case 'size':
+              productService.addSize(req,res);
+              break;
+            default:
+              return res.send('No Data Type');
+          }
+        },
+        addVarient:async(req,res)=>{
+          const{productId} = req.query;
+          const {
+            colorId,
+            image,
+            filename
+          } = req.body;
+          const varient = {
+            colorId,
+            image,
+            filename
+          }
+
+          try{
+            const product = await ProductSchema.findById(productId);
+            product.status = 'pending';
+            product.productColors.push(varient);
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Vaient Color Added  Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:true,msg:"Error In Adding Varient Color "});
+
+          }
+
+        },
+        addSize:async(req,res)=>{
+          const{productId} = req.query;
+          const {
+            sizeId,
+            allQuantity,
+            varientId
+          } = req.body;
+          const size = {
+            sizeId,
+            allQuantity,
+            quantityNow : allQuantity
+          }
+
+          try{
+            const product = await ProductSchema.findById(productId);
+            let varient = product.productColors.id(varientId);
+
+            varient.colorSizes.push(size)
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Size and quantity  Added  Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:true,msg:"Error In Adding Size And Quantity "});
+
+          }
+        },
+        deleteProduct:async(req,res)=>{
+          const{dataTab} = req.query;
+          switch(dataTab) {
+            case 'regular':
+              productService.deleteRegular(req,res);
+              break;
+            case 'varient':
+              productService.deleteVarient(req,res);
+              break;
+            case 'size':
+              productService.deleteSize(req,res);
+              break;
+            default:
+              return res.send('No Data Type');
+          }
+        },
+        deleteRegular:async(req,res)=>{
+          const{productId} = req.query;
+          try{
+            const product = await ProductSchema.findById(productId);
+            product.status = 'deleted';
+            product.productColors.forEach((varient)=>{
+              varient.status = 'deleted';
+            })
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Product Deleted Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:false,msg:"Error In Deleting Product"});
+
+          }
+        },
+        deleteVarient:async(req,res)=>{
+          const{productId} = req.query;
+          const{varientId}= req.body;
+          try{
+            const product = await ProductSchema.findById(productId);
+            const varient = product.productColors.id(varientId);
+            varient.status = 'deleted';
+            product.save();
+            return  res.status(200).json({err:false,msg:"varient Deleted Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:false,msg:"Error In Deleting varient"});
+
+          }
+        },
+        deleteSize:async(req,res)=>{
+          const{productId} = req.query;
+          const{varientId,sizeId}= req.body;
+          try{
+            const product = await ProductSchema.findById(productId);
+            const varient = product.productColors.id(varientId);
+            const size = varient.colorSizes.id(sizeId);
+            size.status = 'deleted';
+            await product.save();
+            return  res.status(200).json({err:false,msg:"Size Deleted Successfully"});
+            
+          }catch(err){
+            return  res.status(200).json({err:false,msg:"Error In Deleting Size"});
+
+          }
         }
+
 
 }
 

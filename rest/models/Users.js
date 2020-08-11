@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
+const Schema = mongoose.Schema;
 
 const UsersSchema = mongoose.Schema({
     index:{type:String,required:true},
@@ -12,12 +13,7 @@ const UsersSchema = mongoose.Schema({
     gender: { type: String, lowercase: true},
     role:{type:Number,default:1},
     avatar:{type:String},
-    stores:[
-      {
-        storeName: {type:String},
-        
-      }
-    ]
+    stores:[{ type : Schema.Types.ObjectId , ref:'storeSchema'}]
 });
 
 UsersSchema.pre('save', function(next) {

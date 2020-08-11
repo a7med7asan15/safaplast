@@ -44,8 +44,8 @@ const userService ={
         let filename = ''; 
         
         if(req.file){
-            console.log(req.file);
-         filename = req.file.location;
+       
+         filename = req.file.path;
         }
         try{
             const count = await User.count()
