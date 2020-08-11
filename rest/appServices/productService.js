@@ -182,10 +182,23 @@ const productService = {
     try {
 
       const product = await ProductSchema.findById(productId);
+      if (!product) {
 
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Id Product"
+        });
+      }
       product.status = 'pending';
 
       const varient = product.productColors.id(varientId);
+      if (!varient) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Id Variant"
+        });
+      }
       varient.colorId = colorId;
       varient.image = image;
       varient.filename = filename;
@@ -230,10 +243,29 @@ const productService = {
 
     try {
       const product = await ProductSchema.findById(productId)
+      if (!product) {
 
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Id Product"
+        });
+      }
       const varient = product.productColors.id(varientId);
+      if (!varient) {
 
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Id Variant"
+        });
+      }
       const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
+      if (!sizeQuantity) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Id Size Quantity"
+        });
+      }
 
       sizeQuantity.sizeId = sizeId;
       sizeQuantity.allQuantity = allQuantity;
@@ -278,9 +310,29 @@ const productService = {
 
     try {
       const product = await ProductSchema.findById(productId);
+      if (!product) {
 
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Id Product"
+        });
+      }
       const varient = product.productColors.id(varientId);
+      if (!varient) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Variant Id"
+        });
+      }
       const sizeQuantity = varient.colorSizes.id(sizeQuantityId);
+      if (!sizeQuantity) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Size Quantity Id"
+        });
+      }
       const newquantity = parseInt(sizeQuantity.allQuantity) + parseInt(newQuantity);
       sizeQuantity.allQuantity = newquantity;
 
@@ -348,6 +400,13 @@ const productService = {
 
     try {
       const product = await ProductSchema.findById(productId);
+      if (!product) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Product Id"
+        });
+      }
       product.status = 'pending';
       product.productColors.push(varient);
       await product.save();
@@ -395,8 +454,21 @@ const productService = {
 
     try {
       const product = await ProductSchema.findById(productId);
-      let varient = product.productColors.id(varientId);
+      if (!product) {
 
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Product Id"
+        });
+      }
+      const varient = product.productColors.id(varientId);
+      if (!varient) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Variant Id"
+        });
+      }
       varient.colorSizes.push(size)
       await product.save();
       return res.status(200).json({
@@ -437,6 +509,13 @@ const productService = {
     
     try {
       const product = await ProductSchema.findById(productId);
+      if (!product) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Product Id"
+        });
+      }
       product.status = 'deleted';
       product.productColors.forEach((varient) => {
         varient.status = 'deleted';
@@ -464,7 +543,21 @@ const productService = {
     } = req.body;
     try {
       const product = await ProductSchema.findById(productId);
+      if (!product) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Product Id"
+        });
+      }
       const varient = product.productColors.id(varientId);
+      if (!varient) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Variant Id"
+        });
+      }
       varient.status = 'deleted';
       product.save();
       return res.status(200).json({
@@ -490,8 +583,29 @@ const productService = {
     } = req.body;
     try {
       const product = await ProductSchema.findById(productId);
+      if (!product) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Product Id"
+        });
+      }
       const varient = product.productColors.id(varientId);
+      if (!varient) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Variant Id"
+        });
+      }
       const size = varient.colorSizes.id(sizeId);
+      if (!size) {
+
+        return res.status(200).json({
+          err: true,
+          msg: "Error In Size Id"
+        });
+      }
       size.status = 'deleted';
       await product.save();
       return res.status(200).json({
