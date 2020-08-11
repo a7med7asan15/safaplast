@@ -61,14 +61,6 @@ const reviewService = {
             const csrfToken = req.csrfToken();
             const product = await ProductSchema.findById(id)
                 .populate(['classId ', 'varId', 'typeId', 'storeId', 'productColors.colorId', 'productColors.colorSizes.sizeId']);
-
-            if (!product) {
-                req.flash('error', {
-                    message: 'Something Went wrong. Please Try again'
-                })
-                return res.redirect('/dashboard/review');
-            }
-
             return res.render('screens/reviewScreens/revProductScreen', {
                 thisUser: req.user,
                 csrfToken,
@@ -76,8 +68,6 @@ const reviewService = {
             })
         } catch (err) {
             res.send(err);
-            req.flash('error', 'Error In Retrieving Product');
-            return res.redirect('/dashboard/review')
         }
 
 
