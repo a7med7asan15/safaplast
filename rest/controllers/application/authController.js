@@ -6,7 +6,7 @@ const csrfProtection = csrf()
 const passport = require('passport');
 const authService = require('../../appServices/authService')
 const storeService = require('../../services/storeService')
-
+const cors = require('cors')
 // Validation Middleware 
 // Joi Js
 
@@ -20,7 +20,9 @@ const {
 
     authMiddleware ,
    
-    NotAuth   } = require('../../middlewares/authenticator');
+    tokenDate 
+
+} = require('../../middlewares/authenticator');
     
     
 
@@ -45,6 +47,8 @@ router.get('/login',
 
 passport.authenticate('jwt', { session: false }),
 
+tokenDate,
+
 authService.checkToken 
 
 );
@@ -59,6 +63,8 @@ authService.checkToken
 router.post('/login',
  
 validationBody(schemas.loginSchema),
+
+
 
 authService.login
 );

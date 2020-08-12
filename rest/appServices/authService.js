@@ -1,144 +1,127 @@
 const User = require('../models/Users');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
+const moment = require('moment');
 
-const authService = {
-    checkEmail: async (email, password) => {
-        try {
-            const user = await User.findOne({
-                email: email
-            })
-
-            if (user) {
-                const passCheck = await user.comparePassword(password)
-                if (!passCheck) {
+const authService ={
+    checkEmail: async (email,password)=>{
+        try{
+            const user = await User.findOne({email:email})
+          
+                if(user){
+                   const passCheck =  await user.comparePassword(password)
+                   if(!passCheck){
                     return {
-                        error: true,
-                        message: 'wrong Password',
-                        user: {}
+                        error:true,
+                        message:'wrong Password',
+                        user:{}
                     }
+                   }
+                    return {
+                        error:false,
+                        message:'User Found and Password Matches ',
+                        user:user
+                    }
+                    
                 }
                 return {
-                    error: false,
-                    message: 'User Found and Password Matches ',
-                    user: user
+                    error:true,
+                    message:'User Not Found',
+                    user:{}
                 }
-
-            }
-            return {
-                error: true,
-                message: 'User Not Found',
-                user: {}
-            }
-
-        } catch (err) {
-            return {
-                error: true,
-                message: 'Error in the response',
-                user: {}
-            }
+                
+            }catch(err){
+                return {
+                    error:true,
+                    message:'Error in the response',
+                    user:{}
+                }
         }
     },
-    signToken: async (user) => {
-        try {
+    signToken : async (user)=>{
+        try{
+            const newDate = moment(new Date(), "DD-MM-YYYY").add(5, 'days');
+        
+            const parsedDate = Date.parse(newDate);
 
-            const sign = await jwt.sign({
-                user: {
-                    id: user._id,
-                    username: user.username
-                }
-            }, process.env.JWTsecret)
-            if (!sign) {
+            const sign = await jwt.sign({user:{id:user._id,username:user.username,endDate:parsedDate }},process.env.JWTsecret)
+           if(!sign){
 
                 return {
-                    error: true,
-                    msg: 'Error In signing'
-
+                    error:true,
+                    msg:'Error In signing'
+        
                 }
             }
             return {
-                error: false,
-                msg: 'Perfectly Signed',
-                token: sign
+                error:false,
+                msg:'Perfectly Signed',
+                token:sign
             }
-        } catch (err) {
+        }catch(err){
             return {
-                error: true,
-                msg: 'response Error'
+                error:true,
+                msg:'response Error'
             }
         }
 
     },
-    login: async (req, res) => {
-
-        const {
-            email,
-            password
-        } = req.body;
-
-        try {
+    login: async (req,res)=>{
+        
+        const {email,password }= req.body;
+        
+        try{
             // Check For user and compare Passwords 
-            let userObj = await authService.checkEmail(email, password);
+         let  userObj = await authService.checkEmail(email,password);
+               
+         if(userObj.error)
+         {
 
-            if (userObj.error) {
+                   //if No User Found Return No User Message 
+                   return res.json({error:true,msg:userObj.message});
+         
+        }
 
-                //if No User Found Return No User Message 
-                return res.json({
-                    error: true,
-                    msg: userObj.message
-                });
+        /// Deconstruct User To Ger The User Object 
 
-            }
+        let {user} = userObj; 
 
-            /// Deconstruct User To Ger The User Object 
+        // Sign User Token With  sending The User Data Required 
 
-            let {
-                user
-            } = userObj;
+        let sign = await authService.signToken(user);
+        
+        // if Sign error Return Error 
 
-            // Sign User Token With  sending The User Data Required 
+        if(sign.error)
 
-            let sign = await authService.signToken(user);
-
-            // if Sign error Return Error 
-
-            if (sign.error)
-
-            {
-
+        {
+        
                 /// Return The errror 
-                return res.json({
-                    error: true,
-                    msg: sign.message
-                });
+              return res.status(200).json({error:true,msg:sign.message});
+        
+        
+        }
+
+        /// Return The Signed token If Everything is Ok ;
+
+         return res.json({error:false,msg:userObj.message , token:sign.token});
 
 
-            }
-
-            /// Return The Signed token If Everything is Ok ;
-
-            return res.json({
-                error: false,
-                msg: userObj.message,
-                token: sign.token
-            });
-
-
-        } catch (err) {
+        }catch(err){
 
             // Catch Unhandled Errors // 
 
-            return res.json(err);
+            return   res.json(err);
 
         }
     },
-    checkToken: async (req, res) => {
-        console.log(req.user);
+    checkToken: async ( req, res ) => {
+        return res.status(200).json({error:false,msg:'validated Token'});
     },
-    destroy: async (req, res) => {
-        req.session.destroy(() => {
+    destroy: async (req , res )=>{
+        req.session.destroy(()=>{
             res.redirect('/dashboard/login')
-        })
+        })  
     }
 }
 
