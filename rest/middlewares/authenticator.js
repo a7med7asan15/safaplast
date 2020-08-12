@@ -1,6 +1,6 @@
 
 const User = require('../models/Users');
-
+const moment = require('moment');
  
 
 const auth = {
@@ -97,6 +97,15 @@ isStoreOwner:(req,res,next)=>{
      }
 
     return  res.status(200).json({err:true,msg:"Your's Not Eliigible to CRUD This Store "});
+    },
+
+    tokenDate :(req,res,next)=>{
+    const endDate = req.user.endDate;
+    const checker = moment(endDate).isBefore(Date.now());
+    if(checker){
+        return res.status(200).json({err:true,msg:"Out Dated Token Please Login "});
+    }
+    return next();
     }
 
     
