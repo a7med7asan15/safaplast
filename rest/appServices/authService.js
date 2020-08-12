@@ -1,6 +1,7 @@
 const User = require('../models/Users');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
+const moment = require('moment');
 
 const authService ={
     checkEmail: async (email,password)=>{
@@ -39,8 +40,11 @@ const authService ={
     },
     signToken : async (user)=>{
         try{
-       
-           const sign = await jwt.sign({user:{id:user._id,username:user.username}},process.env.JWTsecret)
+            const newDate = moment(new Date(), "DD-MM-YYYY").add(5, 'days');
+        
+            const parsedDate = Date.parse(newDate);
+
+            const sign = await jwt.sign({user:{id:user._id,username:user.username,endDate:parsedDate }},process.env.JWTsecret)
            if(!sign){
 
                 return {
@@ -93,7 +97,7 @@ const authService ={
         {
         
                 /// Return The errror 
-              return res.json({error:true,msg:sign.message});
+              return res.status(200).json({error:true,msg:sign.message});
         
         
         }
@@ -112,7 +116,7 @@ const authService ={
         }
     },
     checkToken: async ( req, res ) => {
-        console.log(req.user);
+        return res.status(200).json({error:false,msg:'validated Token'});
     },
     destroy: async (req , res )=>{
         req.session.destroy(()=>{

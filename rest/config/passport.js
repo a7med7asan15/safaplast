@@ -44,8 +44,8 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.JWTsecret;
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-  console.log(jwt_payload);
-  
+
+
   User.findById(jwt_payload.user.id, function(err, user) {
 
 
@@ -54,6 +54,7 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
           return done(err, false);
       }
       if (user) {
+        user.endDate = jwt_payload.user.endDate;
         return done(null, user);
       } else {
           return done(null, false);
