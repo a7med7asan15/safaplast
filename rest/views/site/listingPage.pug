@@ -1,0 +1,18 @@
+extends ../websiteLayout.pug
+
+block content   
+
+   
+        main
+            include ../partials/resultsBar
+            include ../partials/filterListing
+            .container.margin_60_35
+                .row
+                    include ../partials/searchFilter.pug
+                    .col-lg-9
+                        .row
+                            include ../partials/homePageCard.pug
+                        p.text-center
+                            a.btn_1.rounded.add_top_30(href="#0") Load more
+                footer.plus_border     
+                #toTop

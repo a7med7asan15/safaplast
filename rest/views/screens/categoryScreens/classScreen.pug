@@ -6,7 +6,7 @@ block content
             .container-fluid
                 .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark All Classes
+                    h1.m-0.text-dark All Rooms
         .content
             .container-fluid
                 if successes
@@ -19,15 +19,15 @@ block content
                     .col-5
                         .card
                             .card-header
-                                h3.card-title Class Info
-                            form#addClassForm(action="/dashboard/category/class/add" method="post" role="form")
+                                h3.card-title Rooms Info
+                            form#addClassForm(action="/dashboard/category/rooms/add" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
-                                        label(for="serviceenglish") Class Name [ English ]
+                                        label(for="serviceenglish") Room Name [ English ]
                                         input.form-control#serviceenglish(type="text", name="classEnglish", placeholder="Enter Type Name in english")
                                     .form-group.col-md-10
-                                        label(for="servicearabic") Class Name [ Arabic ]
+                                        label(for="servicearabic") Room Name [ Arabic ]
                                         input.form-control#servicearabic(type="text", name="classArabic", placeholder="Enter Type name in arabic")
                                 .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Add Class
@@ -36,7 +36,7 @@ block content
                             .card-header
                                 h3.card-title All Class 
                                 .card-tools
-                                form(action=`/dashboard/category/class/searchResult`, method="post")
+                                form(action=`/dashboard/category/rooms/searchResult`, method="post")
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .input-group.input-group-sm.float-right(style="width: 150px;")
                                         if dataProvided
@@ -88,11 +88,11 @@ block content
                                                     td #{dat.nameEnglish}
                                                     td #{dat.nameArabic}
                                                     td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/category/class/edit?id=${dat.id}`)
+                                                        a.btn-sm.btn-primary(href=`/dashboard/category/rooms/edit?id=${dat.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
-                                                        form(action=`/dashboard/category/class/delete?id=${dat.id}`, method="post")
+                                                        form(action=`/dashboard/category/rooms/delete?id=${dat.id}`, method="post")
                                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                             button.btn-sm.btn-danger(type="submit")
                                                                 i.fas.fa-trash-alt

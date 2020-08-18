@@ -26,15 +26,13 @@ require('./config/passport'),(passport);
 
 const  usersController  =  require(  './controllers/dashboard/usersController'  );
 const  authController  =  require(  './controllers/dashboard/authController'  );
-const  storeController  =  require(  './controllers/dashboard/storeController'  );
+const  propertyController  =  require(  './controllers/dashboard/propertyController'  );
 const  logisticController  =  require(  './controllers/dashboard/logisticController'  );
-const  colorController  =  require(  './controllers/dashboard/colorController'  );
-const  sizeController  =  require(  './controllers/dashboard/sizeController'  );
 const  categoryController  =  require(  './controllers/dashboard/categoryController'  );
-const  aiController  =  require(  './controllers/dashboard/aiController'  );
+const  mediaController  =  require(  './controllers/dashboard/mediaController'  );
 const  appAuthController  =  require(  './controllers/application/authController'  );
 const  productController  =  require(  './controllers/application/productController'  );
-const  reviewController  =  require(  './controllers/dashboard/reviewController'  );
+const  homePageController  =  require(  './controllers/website/homePageController'  );
  
 
 /// Require Seeds 
@@ -189,16 +187,15 @@ app.use(   passport.session()   );
 ////////////////////////////////
 
 
-
+app.use(   '/'   ,   homePageController   );
 app.use(   '/dashboard'   ,   authController   );
 app.use(   '/dashboard/users'   ,   usersController   );
-app.use(   '/dashboard/stores'   ,   storeController   );
+app.use(   '/dashboard/propertys'   ,  propertyController   );
 app.use(   '/dashboard/logistic'   ,   logisticController  );
-app.use(   '/dashboard/colors'   ,   colorController  );
-app.use(   '/dashboard/sizes'   ,   sizeController  ); 
 app.use(   '/dashboard/category'   ,   categoryController  ); 
-app.use(   '/dashboard/ai'   ,   aiController  ); 
-app.use(   '/dashboard/review'   ,   reviewController  ); 
+app.use(   '/dashboard/media'   ,   mediaController  ); 
+
+
 
 
 

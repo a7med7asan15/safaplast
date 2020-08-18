@@ -5,7 +5,7 @@ var csrf = require('csurf');
 const csrfProtection = csrf()
 const passport = require('passport');
 const authService = require('../../appServices/authService')
-const storeService = require('../../services/storeService')
+const propertyService = require('../../services/propertyService')
 const cors = require('cors')
 // Validation Middleware 
 // Joi Js

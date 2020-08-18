@@ -20,7 +20,7 @@ block content
                             form(action=`/dashboard/stores/searchResult`, method="post")
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .input-group.input-group-sm.float-right(style="width: 150px;")
-                                    if stores
+                                    if property
                                         input.form-control.float-right(type="text" name="table_search" placeholder="Search")
                                     if tbSearch
                                         input.form-control.float-right(type="text", value = `${table_search}`, name="table_search" placeholder="Search")
@@ -53,18 +53,18 @@ block content
                                                         button.btn-sm.btn-danger(type="submit")
                                                             i.fas.fa-trash-alt
                                                             |  Delete
-                                    if stores
-                                        for store in stores.docs
+                                    if propertys
+                                        for property in propertys.docs
                                             tr
-                                            td #{ store.storeEnglish }
+                                            td #{ property.nameEnglish }
                                             td
                                                 span.tag.tag-success Active
                                             td
-                                                a.btn-sm.btn-primary(href=`/dashboard/stores/edit/${store.id}`)
+                                                a.btn-sm.btn-primary(href=`/dashboard/propertys/edit/${property.id}`)
                                                     i.far.fa-edit
                                                     |  Edit
                                             td
-                                                form(action=`/dashboard/stores/delete/${store.id}`, method="post")
+                                                form(action=`/dashboard/propertys/delete/${property.id}`, method="post")
                                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                     button.btn-sm.btn-danger(type="submit")
                                                         i.fas.fa-trash-alt

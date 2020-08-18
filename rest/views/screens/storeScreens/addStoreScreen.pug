@@ -20,44 +20,60 @@ block content
             .col-12
                 .card
                     .card-header
-                        h3.card-title Store Information
+                        h3.card-title Property Information
                     form#addnewstore(role="form" action="/dashboard/stores/add" method="POST")
                         .card-body.row
                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                             .form-group.col-md-12
-                                h3 General Information
+                                h3 Property General Information
 
                             .form-group.col-md-6
-                                label(for="storeEnglish") Store Name [English]
+                                label(for="storeEnglish") Property Name [English]
                                 input.form-control#storeEnglish(type="text", name="storeEnglish", placeholder="Enter Store Name In English")
                             .form-group.col-md-6
-                                label(for="storeArabic") Store Name [Arabic]
+                                label(for="storeArabic") Property Name [Arabic]
                                 input.form-control#storeArabic(type="text", name="storeArabic", placeholder="Enter Store Name in Arabic")
 
                             .form-group.col-md-6
                                 label(for="mobilenumber") Mobile Number
                                 input.form-control(type="text", name="mobileNumber")            
+                            .col-md-12.pl-0
+                                .form-group.col-md-4
+                                    label(for="mobilenumber") Price 
+                                    input.form-control(type="number", name="price")            
                             .col-md-12.mt-5.mb-5
                                 h3 Advanced Information
                             .col-md-12
                                 .col-md-4
                                     .form-group
-                                        label Store Owner
-                                        select(name="storeOwner").form-control.storeowner
+                                        label Property Type
+                                        select(name="type").form-control.types
                                             option(selected disabled value='') Choose Account
-                                                            
+                                            if rooms
+                                                - var type = type
+                                                for t in type
+                                                    option(value=`${t.id}`)=`${t.nameEnglish} - ${t.nameArabic}` 
+                                .col-md-4
+                                    .form-group
+                                        label Property No. of rooms
+                                        select(name="rooms").form-control.norooms
+                                            option(selected disabled value='') Choose Account
+                                            if rooms
+                                                - var type = rooms
+                                                for t in type
+                                                    option(value=`${t.id}`)=`${t.nameEnglish} - ${t.nameArabic}`     
                             .col-md-12.mt-5.mb-5
-                                h3 Store Address Info
+                                h3 Property Info
                             .col-md-12
                                 .col-md-4
                                     .form-group
-                                        label Store Area
-                                        select.form-control.storeArea(name="storeArea")
+                                        label Property Area
+                                        select.form-control.storeArea(name="area")
                                             option(selected disabled) Select Area
                                             if areas
-                                                - var areaArray = areas.docs
-                                                for area in areaArray
-                                                    option(value=`${area.id}`)=`${area.nameEnglish} - ${area.nameArabic}` 
+                                                - var type = areas
+                                                for t in type
+                                                    option(value=`${t.id}`)=`${t.nameEnglish} - ${t.nameArabic}` 
                             .col-md-12
                                 .col-md-6
                                     .form-group
@@ -68,15 +84,8 @@ block content
                                     .form-group
                                         label Specific Address [ Arabic ]
                                         textarea.form-control(name="addressArabic", rows="3", placeholder="Enter ...")
-                            .col-md-8
-                                .row.pl-2
-                                    .form-group.col-md-5
-                                        label(for="longtude") Google Longtude
-                                        input.form-control#longtude(type="text", name="longtude", placeholder="Enter Store Name In English")
-                                    .form-group.col-md-5
-                                        label(for="latitude") Google Latitude
-                                        input.form-control#latitude(type="text", name="latitude", placeholder="Enter Store Name In English")
-                            
+                            .col-md-12
+                                div#dropi.dropzone.dz_clickable
                         .card-footer
                             button.btn.btn-primary.float-right(type="submit") Add New Store
 block scripts 

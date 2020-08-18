@@ -1,7 +1,6 @@
 const {
     TypesSchema,
-    VariantsSchema,
-    ClassSchema
+    RoomsSchema
 
 } = require('../models/categorySchema');
 
@@ -140,7 +139,7 @@ const categoryService = {
 
 
     },
-    showClasses : async (req,res)=>{
+    showRooms : async (req,res)=>{
         let page = 1;
         let limit = 1;
 
@@ -156,7 +155,7 @@ const categoryService = {
                 page,
                 limit: 10,
             }
-            const classes = await ClassSchema.paginate({}, options);
+            const classes = await RoomsSchema.paginate({}, options);
             return res.render('screens/categoryScreens/classScreen', {
                 thisUser: req.user,
                 csrfToken,
@@ -168,28 +167,28 @@ const categoryService = {
 
         }
     },
-    addClass : async(req,res)=>{
+    addRoom : async(req,res)=>{
         const {classEnglish ,classArabic} = req.body;
         try{
-          const classadd = new ClassSchema({
+          const classadd = new RoomsSchema({
               nameEnglish : classEnglish,
               nameArabic: classArabic
           })
         await classadd.save()
          req.flash('success', 'Class Added Succesfully')
-          res.redirect('/dashboard/category/class');
+          res.redirect('/dashboard/category/rooms');
 
 
         }catch(err){
             res.send(err);
         }
     },
-    showOneClass : async (req,res)=>{
+    showOneRoom : async (req,res)=>{
         const id =  req.query.id;
         let csrfToken = req.csrfToken();
 
         try{
-            const Classes = await ClassSchema.findById(id);
+            const Classes = await RoomsSchema.findById(id);
                  return res.render('screens/categoryScreens/editClassScreen', {
                 thisUser: req.user,
                 dataProvided: Classes,
@@ -201,38 +200,38 @@ const categoryService = {
 
         }
     },
-    updateOneClass : async (req,res)=>{
+    updateOneRoom : async (req,res)=>{
 
         const {classEnglish,classArabic} = req.body;
 
         try{
-            let type = await ClassSchema.findById(req.query.id);
+            let type = await RoomsSchema.findById(req.query.id);
                 type.nameArabic = classArabic;
                 type.nameEnglish = classEnglish;
                 await type.save();
                 req.flash('success', 'Class Updated Succesfully')
-                res.redirect('/dashboard/category/class');
+                res.redirect('/dashboard/category/rooms');
         }catch(err){
 
         }
     },
-    deleteOneClass: async (req,res)=>{
+    deleteOneRoom: async (req,res)=>{
         try{
-            await ClassSchema.findByIdAndDelete(req.query.id);
+            await RoomsSchema.findByIdAndDelete(req.query.id);
             req.flash('success', 'Class Deleted Succesfully')
-            res.redirect('/dashboard/category/class');
+            res.redirect('/dashboard/category/rooms');
     }catch(err){
         req.flash('error', 'Cant delete it;' );
         res.redirect('/dashboard/category/class');
     }
     },
-    searchShowClass: async (req, res) => {
+    searchShowRoom: async (req, res) => {
         try {
             let csrfToken = req.csrfToken();
             const {
                 table_search,
             } = req.body;
-            const tbSearch = await ClassSchema.find({
+            const tbSearch = await RoomsSchema.find({
                 "$or": [
                     { nameEnglish: { '$regex': table_search, '$options': 'i' } },
                     { nameArabic: { '$regex': table_search, '$options': 'i' } },
@@ -259,145 +258,7 @@ const categoryService = {
 
 
     },
-    showVariants : async (req,res)=>{
-        let page = 1;
-        let limit = 1;
 
-        if (req.query.p) {
-            page = parseInt(req.query.p, 10)
-        }
-
-
-        let csrfToken = req.csrfToken();
-
-        try {
-            const options = {
-                page,
-                limit: 10,
-                populate:"parentType parentClass"
-            }
-            const types = await TypesSchema.find();
-            const classes = await ClassSchema.find();
-            const variants = await VariantsSchema.paginate({}, options);
-            return res.render('screens/categoryScreens/variationScreen', {
-                thisUser: req.user,
-                csrfToken,
-                dataProvided:variants,
-                types:types,
-                classes:classes
-            })
-        } catch (err) {
-
-            res.send(err);
-
-        }  
-    },
-    addVariant: async ( req , res )=>{
-        const {variantEnglish,variantArabic ,parentType,parentClass} = req.body;
-      try{
-        const variant = new VariantsSchema({
-            nameArabic:variantArabic,
-            nameEnglish:variantEnglish,
-            parentType:parentType,
-            parentClass:parentClass
-        })
-        await variant.save();
-        req.flash('success', 'Variant Added Succesfully')
-        res.redirect('/dashboard/category/variants');
-      }catch(err){
-
-
-
-      }
-    },
-    showOneVariant:async(req,res)=>{
-       let id = req.query.id;
-       let csrfToken = req.csrfToken();
-       try{
-        const variant = await VariantsSchema.findById(id)
-                        .populate({ path: 'parentType', select: 'nameEnglish  _id' })
-                        .populate({ path: 'parentClass', select: 'nameEnglish  _id' })
-        const types = await TypesSchema.find( {_id: { $ne:variant.parentType._id}});
-        const classes = await ClassSchema.find({_id: { $ne:variant.parentClass._id}});
-
-         return res.render('screens/categoryScreens/editVariantScreen', {
-                thisUser: req.user,
-                dataProvided: variant,
-                types,
-                classes,
-                csrfToken
-            })
-       }catch(err){
-
-
-       } 
-
-
-    },
-    updateOneVariant:async(req,res)=>{
-        const id = req.query.id;
-       const{ variantEnglish,
-              variantArabic,
-              parentType,
-              parentClass} = req.body;
-
-        try{
-                const variant = await VariantsSchema.findById(id);
-                variant.nameEnglish= variantEnglish
-                variant.nameArabic= variantArabic
-                variant.parentType = parentType
-                variant.parentClass =parentClass
-                variant.save();
-                req.flash('success', 'Variant  Updated Succesfully')
-                res.redirect('/dashboard/category/variants');
-        }catch(err){
-
-        }
-
-    },
-    deleteOneClass: async (req,res)=>{
-        try{
-            await VariantsSchema.findByIdAndDelete(req.query.id);
-            req.flash('success', 'Variant Deleted Succesfully')
-            res.redirect('/dashboard/category/variants');
-    }catch(err){
-        req.flash('error', 'Cant delete it;' );
-        res.redirect('/dashboard/category/variants');
-    }
-    },
-    searchShowVariant: async (req, res) => {
-        try {
-            let csrfToken = req.csrfToken();
-            const {
-                table_search,
-            } = req.body;
-            const tbSearch = await VariantsSchema.find({
-                "$or": [
-                    { nameEnglish: { '$regex': table_search, '$options': 'i' } },
-                    { nameArabic: { '$regex': table_search, '$options': 'i' } },
-                ]
-            });
-            
-            return res.render('screens/categoryScreens/variationScreen', {
-                thisUser: req.user,
-                csrfToken,
-                table_search,
-                tbSearch
-            })
-
-        } catch (err) {
-
-            req.flash('error', 'Something Went wrong')
-            return res.render('screens/categoryScreens/variationScreen', {
-                thisUser: req.user,
-                tbSearch: {},
-                table_search,
-                csrfToken
-            })
-        }
-
-
-    }
  }
 
 

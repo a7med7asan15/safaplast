@@ -4,36 +4,26 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 
 const Schema = mongoose.Schema;
 
-const variantsSchema  = new Schema({
+const roomsSchema  = new Schema({
     nameArabic:{ type: String, required: true},
     nameEnglish:{ type: String, required: true},
-    parentType:{ type : Schema.Types.ObjectId , ref : 'typesSchema' },
-    parentClass:{ type : Schema.Types.ObjectId , ref : 'classSchema' }
+
 })
 
-const classSchema = new Schema({
+const typesSchema = new Schema({
     nameArabic:{ type: String, required: true},
     nameEnglish:{ type: String, required: true},
 })
 
-const typesSchema  = new Schema({
 
-    nameArabic:{ type: String, required: true},
-    nameEnglish:{ type: String, required: true},
-    variants : [{ type : Schema.Types.ObjectId , ref : 'variantsSchema' }]
-    
-})
 
 typesSchema.plugin(mongoosePaginate);
-variantsSchema.plugin(mongoosePaginate);
-classSchema.plugin(mongoosePaginate);
+roomsSchema.plugin(mongoosePaginate);
 
 const TypesSchema =  mongoose.model('typesSchema', typesSchema);
-const VariantsSchema =  mongoose.model('variantsSchema', variantsSchema);
-const ClassSchema =  mongoose.model('classSchema', classSchema);
+const RoomsSchema =  mongoose.model('roomsSchema', roomsSchema);
 
 module.exports ={
     TypesSchema,
-    VariantsSchema,
-    ClassSchema
+    RoomsSchema,
 }

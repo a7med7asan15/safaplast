@@ -73,40 +73,25 @@ categoryService.showOneType
 
 );
 
-router.get( '/class',
+router.get( '/rooms',
 
 
 csrfProtection, 
 
-categoryService.showClasses
+categoryService.showRooms
 
 
 );
-router.get( '/class/edit',
+router.get( '/rooms/edit',
 
 
 csrfProtection, 
 
-categoryService.showOneClass
+categoryService.showOneRoom
 
 
 );
 
-
-router.get( '/variants',
-
-csrfProtection, 
-
-categoryService.showVariants
-
-);
-router.get( '/variants/edit',
-
-csrfProtection, 
-
-categoryService.showOneVariant
-
-);
 // separate and add category 
 
 ////////////////////////////////////////////////
@@ -136,45 +121,24 @@ categoryService.addTypes
 )
 
 
-router.post( '/class/add',
+router.post( '/rooms/add',
 
 validationBody(schemas.addClassSchema),
 
 csrfProtection, 
 
-categoryService.addClass
+categoryService.addRoom
 
 )
-router.post( '/class/edit',
+router.post( '/rooms/edit',
 
 validationBody(schemas.addClassSchema),
 
 csrfProtection, 
 
-categoryService.updateOneClass
+categoryService.updateOneRoom
 
 )
-
-
-router.post( '/variants',
-
-validationBody(schemas.addVariantSchema),
-
-csrfProtection, 
-
-categoryService.addVariant
-
-)
-router.post( '/variants/edit',
-
-validationBody(schemas.addVariantSchema),
-
-csrfProtection, 
-
-categoryService.updateOneVariant
-
-)
-
 
 
 
@@ -191,20 +155,14 @@ csrfProtection,
 categoryService.deleteOneType
 
 )
-router.post( '/class/delete',
+router.post( '/rooms/delete',
 
 csrfProtection, 
 
-categoryService.deleteOneClass
+categoryService.deleteOneRoom
 
 )
-router.post( '/variant/delete',
 
-csrfProtection, 
-
-categoryService.deleteOneClass
-
-)
 
 //---------------------------
 // Update Color Route 
@@ -239,12 +197,12 @@ categoryService.searchShowType
 // Class Search 
 //---------------------------
 
-router.post('/class/searchResult',
+router.post('/rooms/searchResult',
 
 csrfProtection,
 
 
-categoryService.searchShowClass
+categoryService.searchShowRoom
 
 ); 
 
@@ -252,15 +210,6 @@ categoryService.searchShowClass
 //---------------------------
 // Variant Search 
 //---------------------------
-
-router.post('/variants/searchResult',
-
-csrfProtection,
-
-
-categoryService.searchShowVariant
-
-); 
 
 
 module.exports = router;
