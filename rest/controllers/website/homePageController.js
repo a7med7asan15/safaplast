@@ -41,8 +41,19 @@ const {
 
 
 router.get('/', 
-
+csrfProtection,
 homePageService.show 
+
+
+);
+router.get('/search', 
+csrfProtection,
+homePageService.showSearch
+
+
+);
+router.get('/list/:slug', 
+homePageService.showOneProduct
 
 
 );

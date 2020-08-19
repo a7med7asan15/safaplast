@@ -4,12 +4,9 @@ block content
     .content-header
         .container-fluid
             .row.mb-3.mt-3
-                .col-sm-6
-                    h1.m-0.text-dark Edit Store 
-                .col-sm-6
-                    a.btn.btn-success.float-right(href="/dashboard/stores/add")
-                        i.fas.fa-plus
-                        |  Edit Property Images  
+            .col-sm-6
+                h1.m-0.text-dark Add New Store
+                - var property = property
     .content
         .container-fluid
             if successes
@@ -20,74 +17,93 @@ block content
                     div.alert.alert-danger #{ error.message }
         .container-fluid
             .row
-                .col-12
-                    .card
-                        .card-header
-                            h3.card-title Property Information
-                        form#addnewstore(role="form" action="/dashboard/stores/add" method="POST")
-                            .card-body.row
-                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                .form-group.col-md-12
-                                    h3 Property General Information
+            .col-12
+                .card
+                    .card-header
+                        h3.card-title Property Information
+                    form#addnewstore(role="form" action="/dashboard/stores/add" method="POST")
+                        .card-body.row
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            .form-group.col-md-12
+                                h3 Property General Information
 
-                                .form-group.col-md-6
-                                    label(for="storeEnglish") Property Name [English]
-                                    input.form-control#storeEnglish(type="text", name="storeEnglish", placeholder="Enter Store Name In English")
-                                .form-group.col-md-6
-                                    label(for="storeArabic") Property Name [Arabic]
-                                    input.form-control#storeArabic(type="text", name="storeArabic", placeholder="Enter Store Name in Arabic")
+                            .form-group.col-md-6
+                                label(for="storeEnglish") Property Name [English]
+                                input.form-control#storeEnglish(type="text", name="storeEnglish", placeholder="Enter Store Name In English" value=`${property.nameEnglish}`)
+                            .form-group.col-md-6
+                                label(for="storeArabic") Property Name [Arabic]
+                                input.form-control#storeArabic(type="text", name="storeArabic", placeholder="Enter Store Name in Arabic" value=`${property.nameArabic}`)
 
-                                .form-group.col-md-6
-                                    label(for="mobilenumber") Mobile Number
-                                    input.form-control(type="text", name="mobileNumber")            
-                                .col-md-12.pl-0
-                                    .form-group.col-md-4
-                                        label(for="mobilenumber") Price 
-                                        input.form-control(type="number", name="price")            
-                                .col-md-12.mt-5.mb-5
-                                    h3 Advanced Information
-                                .col-md-12
-                                    .col-md-4
-                                        .form-group
-                                            label Property Type
-                                            select(name="type").form-control.types
-                                                option(selected disabled value='') Choose Account
-                                                if rooms
-                                                    - var type = type
-                                                    for t in type
-                                                        option(value=`${t.id}`)=`${t.nameEnglish} - ${t.nameArabic}` 
-                                    .col-md-4
-                                        .form-group
-                                            label Property No. of rooms
-                                            select(name="rooms").form-control.norooms
-                                                option(selected disabled value='') Choose Account
-                                                if rooms
-                                                    - var type = rooms
-                                                    for t in type
-                                                        option(value=`${t.id}`)=`${t.nameEnglish} - ${t.nameArabic}`     
-                                .col-md-12.mt-5.mb-5
-                                    h3 Property Info
-                                .col-md-12
-                                    .col-md-4
-                                        .form-group
-                                            label Property Area
-                                            select.form-control.storeArea(name="area")
-                                                option(selected disabled) Select Area
-                                                if areas
-                                                    - var type = areas
-                                                    for t in type
-                                                        option(value=`${t.id}`)=`${t.nameEnglish} - ${t.nameArabic}` 
-                                .col-md-12
-                                    .col-md-6
-                                        .form-group
-                                            label Specific Address [ English ]
-                                            textarea.form-control(name="addressEnglish", rows="3", placeholder="Enter ...")
-                                .col-md-12
-                                    .col-md-6
-                                        .form-group
-                                            label Specific Address [ Arabic ]
-                                            textarea.form-control(name="addressArabic", rows="3", placeholder="Enter ...")
-                            .card-footer
-                                button.btn.btn-primary.float-right(type="submit") Add New Store
+                            .form-group.col-md-6
+                                label(for="mobilenumber") Mobile Number
+                                input.form-control(type="text", name="mobileNumber" value=`${property.mobileNumber}`)            
+                            .col-md-12.pl-0
+                                .form-group.col-md-4
+                                    label(for="mobilenumber") Price 
+                                    input.form-control(type="number", name="price" , value=`${property.price}`)            
+                            .col-md-12.mt-5.mb-5
+                                h3 Advanced Information
+                            .col-md-12
+                                .col-md-4
+                                    .form-group
+                                        label Property Type
+                                        select(name="type").form-control.types
+                                            option( disabled value='') Choose Type
+                                            if type
+                                                - var type = type
+                                                for t in type
+                                                    - var selecType = false   
+                                                    if(t.id == property.type)
+                                                        - selecType = true
+                                                    option(value=`${t.id}` selected=selecType )=`${t.nameEnglish} - ${t.nameArabic}` 
+                                .col-md-4
+                                    .form-group
+                                        label Property No. of rooms
+                                        select(name="rooms").form-control.norooms
+                                            option(disabled value='') Choose No. of Rooms
+                                            if rooms
+                                                - var rooms = rooms
+                                                for r in rooms
+                                                    - var selecRooms = false   
+                                                    if(r.id == property.rooms)
+                                                        selecRooms = true
+                                                    option(value=`${r.id}` selected=selecRooms)=`${r.nameEnglish} - ${r.nameArabic}`      
+                            .col-md-12.mt-5.mb-5
+                                h3 Property Info
+                            .col-md-12
+                                .col-md-4
+                                    .form-group
+                                        label Property Area
+                                        select.form-control.storeArea(name="area")
+                                            option( disabled) Select Area
+                                            if areas
+                                                - var areas = areas
+                                                for a in areas
+                                                    - var selecArea = false   
+                                                    if(a.id == property.areaId)
+                                                        - selecArea = true
+                                                    option(value=`${a.id}` selected=selecArea )=`${a.nameEnglish} - ${a.nameArabic}` 
+                            .col-md-12
+                                .col-md-6
+                                    .form-group
+                                        label Specific Address [ English ]
+                                        textarea.form-control(name="addressEnglish", rows="3", placeholder="Enter ..." )=property.Address.desriptionArabic
+                            .col-md-12
+                                .col-md-6
+                                    .form-group
+                                        label Specific Address [ Arabic ]
+                                        textarea.form-control(name="addressArabic", rows="3", placeholder="Enter ...")=property.Address.descriptionEnglish
+                            .col-md-12
+                                div#dropi.dropzone.dz_clickable
+                        .card-footer
+                            button.btn.btn-primary.float-right(type="submit") Add New Store
+   
+    script var data = !{JSON.stringify(property.images).replace(/<\//g, '<\\/')}
+    script var postId = !{JSON.stringify(property._id)}
+    script var add = !{false}
+
+
 block scripts 
         script(src="/static/vendor/js/store.js", type="text/javascript")
+
+

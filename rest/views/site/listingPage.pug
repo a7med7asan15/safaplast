@@ -12,7 +12,19 @@ block content
                     .col-lg-9
                         .row
                             include ../partials/homePageCard.pug
-                        p.text-center
-                            a.btn_1.rounded.add_top_30(href="#0") Load more
+                .pagination__wrapper.add_bottom_30
+                    ul.pagination
+                        li
+                            a.prev(href="#0", title="previous page") ❮
+                        li
+                            a.active(href="#0") 1
+                        li
+                            a(href="#0") 2
+                        li
+                            a(href="#0") 3
+                        li
+                            a(href="#0") 4
+                        li
+                            a.next(href="#0", title="next page") ❯
                 footer.plus_border     
                 #toTop

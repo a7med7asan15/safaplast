@@ -90,6 +90,6 @@ authService.destroy
 
 );
 
-
+router.get('/',)
 
 module.exports = router;

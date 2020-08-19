@@ -107,7 +107,7 @@ propertyService.createStore
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
-router.get('/edit/:storeId', 
+router.get('/edit', 
 
 
 csrfProtection,
@@ -120,9 +120,9 @@ propertyService.showOne
 // Update Store Route 
 //---------------------------
 
-router.post('/edit/:storeId', 
+router.post('/edit', 
 
-validationBody(schemas.addStoreSchema),
+// validationBody(schemas.addStoreSchema),
 
 csrfProtection,
 

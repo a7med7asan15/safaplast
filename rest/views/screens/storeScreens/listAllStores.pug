@@ -5,11 +5,11 @@ block content
         .container-fluid
             .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark All Stores
+                    h1.m-0.text-dark All Propertys 
                 .col-sm-6
-                    a.btn.btn-success.float-right(href="/dashboard/stores/add")
+                    a.btn.btn-success.float-right(href="/dashboard/propertys/add")
                         i.fas.fa-plus
-                        |  Add New Store
+                        |  Add New Property
     .content
         .container-fluid
             .row
@@ -17,7 +17,7 @@ block content
                     .card
                         .card-header
                             h3.card-title All Stores
-                            form(action=`/dashboard/stores/searchResult`, method="post")
+                            form(action=`/dashboard/propertys/searchResult`, method="post")
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .input-group.input-group-sm.float-right(style="width: 150px;")
                                     if property
@@ -60,7 +60,7 @@ block content
                                             td
                                                 span.tag.tag-success Active
                                             td
-                                                a.btn-sm.btn-primary(href=`/dashboard/propertys/edit/${property.id}`)
+                                                a.btn-sm.btn-primary(href=`/dashboard/propertys/edit?id=${property.id}`)
                                                     i.far.fa-edit
                                                     |  Edit
                                             td

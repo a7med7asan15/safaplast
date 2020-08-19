@@ -1,0 +1,149 @@
+extends ../websiteLayout.pug
+
+block content   
+       
+       
+        main 
+            .container.margin_60_35
+                .row
+                    .col-lg-8
+                        #carousel_in.owl-carousel.owl-theme.add_bottom_30        
+                            for p in property.images           
+                                .item
+                                    img(src=`${p.imageLink}`, alt)
+                        section#description
+                            .detail_title_1
+                                .cat_star
+                                i.icon_star
+                                i.icon_star
+                                i.icon_star
+                                i.icon_star
+                                h1=`${property.nameArabic}` 
+                                a.address(href="https://www.google.com/maps/dir//Assistance+%E2%80%93+H%C3%B4pitaux+De+Paris,+3+Avenue+Victoria,+75004+Paris,+Francia/@48.8606548,2.3348734,14z/data=!4m15!1m6!3m5!1s0x47e66e1de36f4147:0xb6615b4092e0351f!2sAssistance+Publique+-+H%C3%B4pitaux+de+Paris+(AP-HP)+-+Si%C3%A8ge!8m2!3d48.8568376!4d2.3504305!4m7!1m0!1m5!1m1!1s0x47e67031f8c20147:0xa6a9af76b1e2d899!2m2!1d2.3504327!2d48.8568361") 438 Rush Green Road, Romford
+                            p
+                                | Per consequat adolescens ex, cu nibh commune 
+                                strong temporibus vim
+                                | , ad sumo viris eloquentiam sed. Mea appareat omittantur eloquentiam ad, nam ei quas oportere democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.
+                            p
+                                | Cum et probo menandri. Officiis consulatu pro et, ne sea sale invidunt, sed ut sint 
+                                strong blandit
+                                |  efficiendi. Atomorum explicari eu qui, est enim quaerendum te. Quo harum viris id. Per ne quando dolore evertitur, pro ad cibo commune.
+                            h5.add_bottom_15 Amenities
+                            .row.add_bottom_30
+                                .col-lg-6
+                                ul.bullets
+                                    li Dolorem mediocritatem
+                                    li Mea appareat
+                                    li Prima causae
+                                    li Singulis indoctum
+                                .col-lg-6
+                                ul.bullets
+                                    li Timeam inimicus
+                                    li Oportere democritum
+                                    li Cetero inermis
+                                    li Pertinacia eum
+                            //  /row 
+                            hr
+                            .room_type.first
+                                .row
+                                .col-md-4
+                                    img.img-fluid(src="img/gallery/hotel_list_1.jpg", alt)
+                                .col-md-8
+                                    h4 Single Room
+                                    p Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.
+                                    ul.hotel_facilities
+                                    li
+                                        img(src="img/hotel_facilites_icon_2.svg", alt)
+                                        | Single Bed
+                                    li
+                                        img(src="img/hotel_facilites_icon_4.svg", alt)
+                                        | Free Wifi
+                                    li
+                                        img(src="img/hotel_facilites_icon_5.svg", alt)
+                                        | Shower
+                                    li
+                                        img(src="img/hotel_facilites_icon_7.svg", alt)
+                                        | Air Condition
+                                    li
+                                        img(src="img/hotel_facilites_icon_8.svg", alt)
+                                        | Hairdryer
+                                //  /row 
+                            //  /rom_type 
+                            .room_type.alternate
+                                .row
+                                .col-md-4
+                                    img.img-fluid(src="img/gallery/hotel_list_2.jpg", alt)
+                                .col-md-8
+                                    h4 Double Room
+                                    p Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.
+                                    ul.hotel_facilities
+                                    li
+                                        img(src="img/hotel_facilites_icon_3.svg", alt)
+                                        | Double Bed
+                                    li
+                                        img(src="img/hotel_facilites_icon_4.svg", alt)
+                                        | Free Wifi
+                                    li
+                                        img(src="img/hotel_facilites_icon_6.svg", alt)
+                                        | Bathtub
+                                    li
+                                        img(src="img/hotel_facilites_icon_7.svg", alt)
+                                        | Air Condition
+                                    li
+                                        img(src="img/hotel_facilites_icon_8.svg", alt)
+                                        | Hairdryer
+                                //  /row 
+                            //  /rom_type 
+                            .room_type.last
+                                .row
+                                .col-md-4
+                                    img.img-fluid(src="img/gallery/hotel_list_3.jpg", alt)
+                                .col-md-8
+                                    h4 Suite Room
+                                    p Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.
+                                    ul.hotel_facilities
+                                    li
+                                        img(src="img/hotel_facilites_icon_3.svg", alt)
+                                        | King size Bed
+                                    li
+                                        img(src="img/hotel_facilites_icon_4.svg", alt)
+                                        | Free Wifi
+                                    li
+                                        img(src="img/hotel_facilites_icon_6.svg", alt)
+                                        | Bathtub
+                                    li
+                                        img(src="img/hotel_facilites_icon_7.svg", alt)
+                                        | Air Condition
+                                    li
+                                        img(src="img/hotel_facilites_icon_9.svg", alt)
+                                        | Swimming pool
+                                    li
+                                        img(src="img/hotel_facilites_icon_3.svg", alt)
+                                        | Hairdryer
+                                //  /row 
+                            //  /rom_type 
+                            hr
+                            h3 Prices
+                            table.table.table-striped.add_bottom_45
+                                tbody
+                                tr
+                                    td Low (from 23/03 to 31/05)
+                                    td 140$
+                                tr
+                                    td Middle (from 23/03 to 31/05)
+                                    td 180$
+                                tr
+                                    td High (from 23/03 to 31/05)
+                                    td 200$
+                            hr
+                            h3 Location
+                            #map.map.map_single.add_bottom_45
+                            //  End Map       
+        script. 
+            $('#carousel_in').owlCarousel({
+                center: false,
+                items:1,
+                loop:false,
+                rtl: true,
+                margin:0
+                });                    

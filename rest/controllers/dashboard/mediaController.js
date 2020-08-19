@@ -75,6 +75,10 @@ mediaService.uploadImageFiles
 
 );
 
+router.post('/deleteimage',
+csrfProtection,
+mediaService.deleteImage
+)
 
 
 module.exports = router;

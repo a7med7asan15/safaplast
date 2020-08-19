@@ -21,9 +21,13 @@ const citySchema  = new Schema({
 citySchema.plugin(mongoosePaginate);
 areaSchema.plugin(mongoosePaginate);
 
-exports.CitySchema =  mongoose.model('citySchema', citySchema);
-exports.AreaSchema =  mongoose.model('areaSchema', areaSchema);
+const CitySchema =  mongoose.model('citySchema', citySchema);
+const AreaSchema =  mongoose.model('areaSchema', areaSchema);
 
+module.exports ={
+    CitySchema,
+    AreaSchema,
+}
 // const firstCategory = new CategoryParentSchema({name:'Shoes'})
 // firstCategory.childCategory.push({name:"Leather Shoes"})
 // firstCategory.save();

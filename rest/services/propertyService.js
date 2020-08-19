@@ -76,9 +76,9 @@ const propertyService = {
         price,
         rooms,
         mobileNumber,
+        cityId: areaObj.parent,
+        areaId: areaObj.id,
         Address: {
-          cityId: areaObj.parent,
-          areaId: areaObj.id,
           desriptionArabic:addressArabic,
           descriptionEnglish:addressEnglish,
         },
@@ -94,7 +94,6 @@ const propertyService = {
       return res.json({err:false,message:"Store Added Successfuly"});
 
     } catch (err) {
-      console.log(err);
       return res.json({err:true,message:err});
 
     }
@@ -103,27 +102,29 @@ const propertyService = {
   showOne: async (req, res) => {
     req.session.lastlink = req.url
     let csrfToken = req.csrfToken();
-
     try {
       var {
-        storeId
-      } = req.params
-
-      // const areas = await AreaSchema.paginate();
-      const property = await PropertySchema.findById(storeId)
-      const areaSel = await AreaSchema.findById(property.Address.areaId);
+        id
+      } = req.query
+      const areas = await AreaSchema.find();
+      const type = await TypesSchema.find();
+      const rooms = await RoomsSchema.find();
+      const property = await PropertySchema.findById(id)
       return res.render('screens/storeScreens/editStoreScreen', {
         thisUser: req.user,
         property,
-        areaSel,
-        csrfToken
+        csrfToken,
+        areas,
+        type,
+        rooms,
+
       })
     } catch (err) {
       req.flash('error', 'Something Went wrong')
-      return res.render('screens/variantScreens/editStoreScreen', {
+      
+      return res.render('screens/storeScreens/editStoreScreen', {
         thisUser: req.user,
         storeToEdit: {},
-        areaSel,
         csrfToken
       })
     }
@@ -131,55 +132,50 @@ const propertyService = {
   },
 
   update: async (req, res) => {
+    const {id}= req.query;
     const {
       storeEnglish,
       storeArabic,
       mobileNumber,
-      storeOwner,
-      storeArea,
+      area,
+      type,
+      rooms,
+      price,
       addressArabic,
       addressEnglish,
-      longtude,
-      latitude
+      images 
     } = req.body;
-    
-    const {
-      storeId
-    } = req.params
+      let im = images.split(',');
     try {
-      const updateStore = await PropertySchema.findById(storeId);
-      const oldUser = await User.findById(updateStore.storeOwner);
-      
-      if(oldUser.stores.includes(updateStore.id)){
-        let index = oldUser.stores.indexOf(updateStore.id)
-        oldUser.stores.splice(index, 1);
-        await oldUser.save();
+      const updateStore = await PropertySchema.findById(id);
+      let images = [] ;
+      for(i=0 ; i<im.length ; i++){
+        images.push({imageLink : im[i]});
       }
-      
-      updateStore.storeEnglish = storeEnglish,
-      updateStore.storeArabic = storeArabic,
-      updateStore.mobileNumber = mobileNumber,
-      updateStore.storeOwner = storeOwner,
-      updateStore.Address.areaId = storeArea,
-      updateStore.Address.cityId = AreaSchema.findById(storeArea).parent,
-      updateStore.Address.addressArabic = addressArabic,
-      updateStore.Address.addressEnglish = addressEnglish,
-      updateStore.Address.longtude = longtude,
-      updateStore.Address.latitude = latitude,
+      console.log(type);
+      updateStore.nameEnglish = storeEnglish;
+      updateStore.nameArabic = storeArabic;
+      updateStore.mobileNumber = mobileNumber;
+      updateStore.type = type;
+      updateStore.price = price;
+      updateStore.rooms = rooms;
+      updateStore.areaId = area;
+      updateStore.Address.desriptionArabic = addressArabic;
+      updateStore.Address.descriptionEnglish = addressEnglish;
+      updateStore.images = images;
+      console.log(updateStore.type);
+       await updateStore.save();
 
-        await updateStore.save();
-        const newUser = await User.findById(storeOwner);
-        newUser.stores.push(updateStore.id);
-        newUser.save();
+      // req.session.passedData = false
+  
+      req.flash('success', 'Store Added Succesfully')
+      return res.json({err:false,message:"Store Added Successfuly"});
 
-      req.session.passedData = false
-      req.flash('success', 'Store Updated Succesfully')
-      return res.redirect(`/dashboard/stores/edit/${storeId}`)
     } catch (err) {
       req.flash('error', {
         message: 'Something Went wrong'
       })
-      return res.redirect(`/dashboard/stores/edit/${storeId}`)
+      return  res.json({err:true,message:"Store NOT Added Successfuly"});
     }
 
   },
@@ -192,12 +188,12 @@ const propertyService = {
       const deleteStore = await PropertySchema.findByIdAndDelete(storeId);
 
       req.flash('success', `${deleteStore.storeEnglish} Deleted Successfully`)
-      return res.redirect(`/dashboard/stores`)
+      return res.redirect(`/dashboard/propertys`)
     } catch (err) {
       req.flash('error', {
         message: 'Something Went wrong'
       })
-      return res.redirect(`/dashboard/stores`)
+      return res.redirect(`/dashboard/propertys`)
 
     }
   },

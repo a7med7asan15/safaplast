@@ -11,14 +11,16 @@ const propertySchema  = new Schema({
     createdby:{  type : Schema.Types.ObjectId , ref : 'UsersModel' },
     nameEnglish:{ type: String, required: true},
     nameArabic:{ type: String, required: true},
+    slugEnglish:{ type: String },
+    slugArabic:{ type: String},
     mobileNumber:{type:String},
     type:{  type : Schema.Types.ObjectId , ref : 'typesSchema' },
     rooms:{  type : Schema.Types.ObjectId , ref : 'roomsSchema' },
     price:{type:String},
     images:[images],
+    cityId: { type : Schema.Types.ObjectId , ref : 'citySchema' },
+    areaId: { type : Schema.Types.ObjectId , ref : 'areaSchema' },
     Address:{
-        cityId: { type : Schema.Types.ObjectId , ref : 'citySchema' },
-        areaId: { type : Schema.Types.ObjectId , ref : 'areaSchema' },
         desriptionArabic : {type:String},
         descriptionEnglish : {type:String},
     },
@@ -28,8 +30,17 @@ const propertySchema  = new Schema({
 })
 
 
-propertySchema.plugin(mongoosePaginate);
+propertySchema.pre('save', function(next) {
+let slugBaseEnglish = this.nameEnglish.split(' ');
+    slugBaseEnglish = slugBaseEnglish.join('-');
+let slugBaseArabic =  this.nameArabic.split(' ');   
+    slugBaseArabic = slugBaseArabic.join('-');    
+    this.slugArabic = slugBaseArabic
+    next()
 
+})
+
+propertySchema.plugin(mongoosePaginate);
 const PropertySchema = mongoose.model('propertySchema', propertySchema);
 
 

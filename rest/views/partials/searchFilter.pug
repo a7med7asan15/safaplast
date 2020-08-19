@@ -1,74 +1,57 @@
 aside#sidebar.col-lg-3
-        form#filters_col
+        form(method="get",action="/search")#filters_col
             a#filters_col_bt(data-toggle="collapse", href="#collapseFilters", aria-expanded="false", aria-controls="collapseFilters") 
             | عايز تأجر ؟
             .collapse.show#collapseFilters
+                input(type="hidden" name="_csrf" value=`${csrfToken}`)
                 .filter_type
                     h6 نوع الوحدة
                     ul
-                        li
-                            label.container_check شالية
-                                small 245
-                                input(type="checkbox" name="restraunt")
-                                span.checkmark                     
-                        li
-                            label.container_check شقة
-                                small 245
-                                input(type="checkbox" name="restraunt")
-                                span.checkmark                     
-                        li
-                            label.container_check فيلا
-                                small 245
-                                input(type="checkbox" name="restraunt")
-                                span.checkmark                     
-                        li
-                            label.container_check استديو
-                                small 245
-                                input(type="checkbox" name="restraunt")
-                                span.checkmark                     
+                        if types
+                            for t in types
+                                - found = false   
+                                if( typesQuery.includes(t.id) ) 
+                                  - found =true   
+                                li
+                                    label.container_check=t.nameArabic
+                                        
+                                        input(type="checkbox" name="type" value=t.id checked=found)
+                                        span.checkmark                     
+                 
                 .filter_type
                     h6 السعر
                     .distance
                         |  تكون فى حدود
                         span
                         |   جنية اليوم
-                    input(type="range", name="price",min="100", max="1200", step="50", value="30", data-orientation="horizontal")
+                    - avg = 300
+                    if(priceQuery)
+                        - avg = priceQuery    
+                    input(type="range", name="price",min="100", max="1200", step="50", value=avg, data-orientation="horizontal")
                 .filter_type
                     h6 المكان
                     ul
-                        li
-                            label.container_check العسلة 
-                                small 43
-                                input(type="checkbox")
-                                span.checkmark
-                        li
-                            label.container_check المشربة
-                                small 43
-                                input(type="checkbox")
-                                span.checkmark
-                        li
-                            label.container_check التنمية
-                                small 43
-                                input(type="checkbox")
-                                span.checkmark
+                       if types
+                            for a in areas
+                                - areaFound = false   
+                                if( areaQuery.includes(a.id)) 
+                                    - areaFound =true  
+                                li
+                                    label.container_check=a.nameArabic 
+                                        input(type="checkbox" name="area" value=a.id checked=areaFound)
+                                        span.checkmark
                 .filter_type
                     h6 عدد الغرف
                     ul
-                        li
-                            label.container_check غرفة  
-                                small 43
-                                input(type="checkbox")
-                                span.checkmark
-                        li
-                            label.container_check غرفتين
-                                small 43
-                                input(type="checkbox")
-                                span.checkmark
-                        li
-                            label.container_check ثلاث غرف
-                                small 43
-                                input(type="checkbox")
-                                span.checkmark
+                        if types
+                            for r in rooms
+                                - foundRoom = false   
+                                if( roomsQuery.includes(r.id) ) 
+                                    - foundRoom =true   
+                                li
+                                    label.container_check=r.nameArabic  
+                                        input(type="checkbox" name="room" value=r.id checked=foundRoom)
+                                        span.checkmark
                 .filter_type
                     h6 
                     input.btn_1.add_top_10(style="width:100%;",type="submit" value="دورلى")        
