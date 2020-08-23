@@ -1,5 +1,6 @@
 const {location,projectId,aiHelpers,clientProd,locationPath ,productSetPath , defaultProductCategory,imageLink} = require('../helpers/aiHelpers');
 const {ProductSchema } = require('../models/productSchema');
+const OrdersSchema = require('../models/ordersSchema');
 const reviewService = {
 
 
@@ -16,19 +17,18 @@ const reviewService = {
                 }
                 const options = {
                     page,
-                    limit: 10,
-                    populate:'classId varId typeId'
+                    limit: 20,
+                    populate:'propertyId'
                 }
 
                 let csrfToken = req.csrfToken();
                                 
-                const products = await ProductSchema.paginate({review:"pending",status:"active"}, options)
-
-        
+                const bookings = await OrdersSchema.paginate({review:"pending", status:"active"}, options)
+                console.log(bookings.docs);
                 return res.render('screens/reviewScreens/listReviews', {
                     thisUser: req.user,
                     csrfToken,
-                    dataProvided:products
+                    dataProvided:bookings
                 })
 
             }catch(err){
@@ -38,6 +38,56 @@ const reviewService = {
             }
 
 
+        },
+        checkpoint:async(req,res)=>{
+            const {id,request} = req.query;
+            
+            try{
+                const order = await OrdersSchema.findById(id);
+                if(order.review === "pending"){
+
+                    order.review = request;
+                }
+                order.save();
+                console.log(order);
+                req.flash('success',`Succefully ${request}ed order`);
+                res.redirect('/dashboard/booking')
+            }catch(err){
+                req.flash('error','fucked Up');
+                res.redirect('/dashboard/booking')
+
+            }
+        },
+        showActualBookings:async(req,res)=>{
+            try{
+                
+                let page = 1;
+                let limit = 1;
+                
+                if (req.query.p) {
+                    page = parseInt(req.query.p, 10)
+                }
+                const options = {
+                    page,
+                    limit: 20,
+                    populate:'propertyId'
+                }
+
+                let csrfToken = req.csrfToken();
+                                
+                const bookings = await OrdersSchema.paginate({review:"accept", status:"active"}, options)
+                console.log(bookings.docs);
+                return res.render('screens/reviewScreens/listAccepted', {
+                    thisUser: req.user,
+                    csrfToken,
+                    dataProvided:bookings
+                })
+
+            }catch(err){
+                res.send(err)
+
+
+            }
         },
         reviewOneProduct: async(req,res)=>{
                const {id} = req.query

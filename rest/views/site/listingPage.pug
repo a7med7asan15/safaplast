@@ -4,27 +4,23 @@ block content
 
    
         main
-            include ../partials/resultsBar
-            include ../partials/filterListing
+            //- include ../partials/filterListing
             .container.margin_60_35
                 .row
                     include ../partials/searchFilter.pug
-                    .col-lg-9
+                    #cardsContainer.col-lg-9
                         .row
-                            include ../partials/homePageCard.pug
-                .pagination__wrapper.add_bottom_30
-                    ul.pagination
-                        li
-                            a.prev(href="#0", title="previous page") ❮
-                        li
-                            a.active(href="#0") 1
-                        li
-                            a(href="#0") 2
-                        li
-                            a(href="#0") 3
-                        li
-                            a(href="#0") 4
-                        li
-                            a.next(href="#0", title="next page") ❯
+                            if (data.docs.length > 0 )
+                                include ../partials/homePageCard.pug
+                            else
+                                div(style="background-color:white; width:100%; height:200px; border:1px solid #ededed; display:flex; align-items:center; justify-content:center; text-align:center;")
+                                    h5 مفيش وحدات بالمواصفات الى انت عايزها     
+                        if (data.totalPages > 1)
+                            p#loadmore.text-center
+                                a.btn_1.rounded.add_top_30(href="") المزيد 
                 footer.plus_border     
                 #toTop
+            script var page = !{JSON.stringify(data.page)}   
+            script var totalPages = !{JSON.stringify(data.totalPages)} 
+block scripts 
+       script(src="/static/vendor/js/search.js", type="text/javascript")       

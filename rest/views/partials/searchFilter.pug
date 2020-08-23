@@ -3,7 +3,6 @@ aside#sidebar.col-lg-3
             a#filters_col_bt(data-toggle="collapse", href="#collapseFilters", aria-expanded="false", aria-controls="collapseFilters") 
             | عايز تأجر ؟
             .collapse.show#collapseFilters
-                input(type="hidden" name="_csrf" value=`${csrfToken}`)
                 .filter_type
                     h6 نوع الوحدة
                     ul
@@ -24,14 +23,14 @@ aside#sidebar.col-lg-3
                         |  تكون فى حدود
                         span
                         |   جنية اليوم
-                    - avg = 300
+                    - avg = 800
                     if(priceQuery)
                         - avg = priceQuery    
-                    input(type="range", name="price",min="100", max="1200", step="50", value=avg, data-orientation="horizontal")
+                    input(type="range", name="price",min=`${minPrice}`, max="1200", step="50", value=avg, data-orientation="horizontal")
                 .filter_type
                     h6 المكان
                     ul
-                       if types
+                       if areas
                             for a in areas
                                 - areaFound = false   
                                 if( areaQuery.includes(a.id)) 
@@ -43,7 +42,7 @@ aside#sidebar.col-lg-3
                 .filter_type
                     h6 عدد الغرف
                     ul
-                        if types
+                        if rooms
                             for r in rooms
                                 - foundRoom = false   
                                 if( roomsQuery.includes(r.id) ) 
@@ -53,5 +52,18 @@ aside#sidebar.col-lg-3
                                         input(type="checkbox" name="room" value=r.id checked=foundRoom)
                                         span.checkmark
                 .filter_type
+                    h6 الخدمات
+                    ul
+                        if amen
+                            for am in amen
+                                - foundamen = false   
+                                if( amentiesQuery.includes(am.id) ) 
+                                    - foundamen = true   
+                                li
+                                    label.container_check=am.nameArabic  
+                                        input(type="checkbox" name="amenties" value=am.id checked=foundamen)
+                                        span.checkmark
+                .filter_type
                     h6 
-                    input.btn_1.add_top_10(style="width:100%;",type="submit" value="دورلى")        
+                    input.btn_1.add_top_10(style="width:100%;",type="submit" value="دورلى")   
+                       

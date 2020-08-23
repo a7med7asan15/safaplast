@@ -3,3 +3,47 @@ extends ../layout.pug
 
 
 block content
+        .content-header
+        .container-fluid
+            .row.mb-2
+                .col-sm-6
+                    h1.m-0.text-dark Dashboard
+            section.content
+                .container-fluid
+                    .row
+                        .col-lg-3.col-6
+                            .small-box.bg-info
+                                .inner
+                                    h3 #{countOrders}
+                                    p Pending Orders
+                                    .icon
+                                        i.ion.ion-bag
+                                a.small-box-footer(href="/dashboard/booking") More info 
+                                  i.fas.fa-arrow-circle-right
+                        .col-lg-3.col-6
+                            .small-box.bg-success
+                                .inner
+                                    h3 #{acceptedOrders}
+                                    p Actual Orders
+                                    .icon
+                                        i.ion.ion-bag
+                                a.small-box-footer(href="/dashboard/booking/booked") More info 
+                                  i.fas.fa-arrow-circle-right
+                        .col-lg-3.col-6
+                            .small-box.bg-danger
+                                .inner
+                                    h3 #{bookedOrders}
+                                    p Booked Orders
+                                    .icon
+                                        i.ion.ion-bag
+                                a.small-box-footer(href="/dashboard/booking/accepted") More info 
+                                  i.fas.fa-arrow-circle-right
+                        .col-lg-3.col-6
+                            .small-box.bg-warning
+                                .inner
+                                    h3 #{totalPropertys}
+                                    p Propertys
+                                    .icon
+                                        i.ion.ion-bag
+                                a.small-box-footer(href="/dashboard/booking/accepted") More info 
+                                  i.fas.fa-arrow-circle-right

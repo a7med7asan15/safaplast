@@ -62,6 +62,24 @@ reviewService.showAllReviews
 
 
 );
+router.get( '/accepted',
+
+
+csrfProtection, 
+
+reviewService.showActualBookings
+
+
+);
+
+/// check Point 
+router.post('/checkpoint', 
+
+csrfProtection, 
+
+reviewService.checkpoint
+
+)
 
 router.get( '/deleted',
 

@@ -34,7 +34,7 @@ block content
                                 label(for="storeArabic") Property Name [Arabic]
                                 input.form-control#storeArabic(type="text", name="storeArabic", placeholder="Enter Store Name in Arabic" value=`${property.nameArabic}`)
 
-                            .form-group.col-md-6
+                            .form-group.col-md-4
                                 label(for="mobilenumber") Mobile Number
                                 input.form-control(type="text", name="mobileNumber" value=`${property.mobileNumber}`)            
                             .col-md-12.pl-0
@@ -68,6 +68,16 @@ block content
                                                     if(r.id == property.rooms)
                                                         selecRooms = true
                                                     option(value=`${r.id}` selected=selecRooms)=`${r.nameEnglish} - ${r.nameArabic}`      
+                                .col-md-4
+                                        .form-group
+                                            label Amednties
+                                            select.amenties(multiple,name="amenties", data-placeholder="Select Amenties", style="width: 100%;")
+                                                if amen 
+                                                    for a in amen
+                                                        - var selecAmen = false 
+                                                        -if(property.amenties.includes(a.id.toString()))
+                                                            -selecAmen = true
+                                                        option(value=`${a.id}` , selected=selecAmen)=`${a.nameEnglish} - ${a.nameArabic}` 
                             .col-md-12.mt-5.mb-5
                                 h3 Property Info
                             .col-md-12

@@ -11,16 +11,16 @@
 		}
 	});
 	
-	// Sticky sidebar
-	$('#sidebar').theiaStickySidebar({
-		updateSidebarHeight: true,
-		additionalMarginTop: 150
-	});
+	// // Sticky sidebar
+	// $('#sidebar').theiaStickySidebar({
+	// 	updateSidebarHeight: true,
+	// 	additionalMarginTop: 150
+	// });
 	
 	// Faq section
-	$('#faq_cat').theiaStickySidebar({
-		additionalMarginTop: 100
-	});
+	// $('#faq_cat').theiaStickySidebar({
+	// 	additionalMarginTop: 100
+	// });
 	
 	// Mobile Mmenu
 	var $menu = $("nav#menu").mmenu({

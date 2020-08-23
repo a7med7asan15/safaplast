@@ -2970,7 +2970,7 @@ a.box_feat h3 {
 }
 .strip a.wish_bt:after {
   font-family: 'ElegantIcons';
-  content: "\e012";
+  content: "\e01a";
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
@@ -2978,14 +2978,14 @@ a.box_feat h3 {
   transition: all 0.5s ease;
 }
 .strip a.wish_bt.liked:after {
-  content: "\e078";
+  content: "\e01a";
   color: #FFC107;
 }
 .strip a.wish_bt:hover.liked:after {
   color: #FFC107;
 }
 .strip a.wish_bt:hover:after {
-  content: "\e078";
+  content: "\e01a";
   color: #fff;
 }
 .strip figure {
@@ -3251,7 +3251,7 @@ a.box_feat h3 {
   }
 }
 .strip.map_view a.address:before {
-  content: "\e081";
+  content: "\e07e";
 }
 @media (max-width: 991px) {
   .strip.map_view a.address {
@@ -3334,9 +3334,21 @@ a.address {
   color: #999;
   line-height: 1;
 }
-a.address:before {
+a.address.views:before {
   font-family: 'ElegantIcons';
-  content: "\e01c";
+  content: "\e07e";
+  margin-right: 5px;
+  display: inline-block;
+}
+a.address.area:before {
+  font-family: 'ElegantIcons';
+  content: "\e01f";
+  margin-right: 5px;
+  display: inline-block;
+}
+a.address.type:before {
+  font-family: 'ElegantIcons';
+  content: "\e06e";
   margin-right: 5px;
   display: inline-block;
 }

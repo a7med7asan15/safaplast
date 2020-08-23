@@ -4,11 +4,10 @@ var router = express.Router();
 var csrf = require('csurf'); 
 const csrfProtection = csrf();
 const mediaService = require('../../services/mediaService');
-
 // uploading Middleware 
 // Multer Js 
 
-const upload = require('../../middlewares/uploadImage');
+const {upload} = require('../../middlewares/uploadImage');
 
 
 // Validation Middleware 

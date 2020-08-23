@@ -26,18 +26,17 @@ require('./config/passport'),(passport);
 
 const  usersController  =  require(  './controllers/dashboard/usersController'  );
 const  authController  =  require(  './controllers/dashboard/authController'  );
+const  reviewController  =  require(  './controllers/dashboard/reviewController'  );
 const  propertyController  =  require(  './controllers/dashboard/propertyController'  );
 const  logisticController  =  require(  './controllers/dashboard/logisticController'  );
 const  categoryController  =  require(  './controllers/dashboard/categoryController'  );
 const  mediaController  =  require(  './controllers/dashboard/mediaController'  );
-const  appAuthController  =  require(  './controllers/application/authController'  );
-const  productController  =  require(  './controllers/application/productController'  );
 const  homePageController  =  require(  './controllers/website/homePageController'  );
  
 
 /// Require Seeds 
 
-const  {  seedUser  }  =  require('./seeds/areas')
+const  {  seedUser ,seedProperty ,seedOrders,seedAmenties}  =  require('./seeds/areas')
 
 
 const app = express(); 
@@ -94,9 +93,6 @@ app.use(   bodyParser.json()   )
 //////////////////////////////
 //// session Configration ////
 /////////////////////////////
-
-app.use(   '/api/auth'   ,   appAuthController  ); 
-app.use(   '/api/products'   ,   productController  ); 
 
 app.use( 
   
@@ -158,6 +154,10 @@ app.use(
 
   res.locals.successes   =   req.flash("success");
 
+  res.locals.name   =   req.flash("name");
+
+  res.locals.ordernumber   =   req.flash("ordernumber");
+
   next();
 
 });
@@ -194,7 +194,10 @@ app.use(   '/dashboard/propertys'   ,  propertyController   );
 app.use(   '/dashboard/logistic'   ,   logisticController  );
 app.use(   '/dashboard/category'   ,   categoryController  ); 
 app.use(   '/dashboard/media'   ,   mediaController  ); 
-
+app.use(   '/dashboard/booking'   ,   reviewController  ); 
+app.get('*', function(req, res){
+  return res.render('site/404.pug')
+});
 
 
 
@@ -206,8 +209,9 @@ app.use(   '/dashboard/media'   ,   mediaController  );
 
 
 seedUser()
-
-
+// seedProperty()
+// seedOrders()
+seedAmenties()
 app.listen(process.env.STATUS === "PROD" ? process.env.PORT : 3001, () => {
   console.log(`Server is running ${process.env.STATUS === "PROD" ? process.env.PORT : 3001}`);
 });

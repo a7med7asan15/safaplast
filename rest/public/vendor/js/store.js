@@ -7,6 +7,7 @@ $(function () {
   $('.storeArea').select2();
   $('.norooms').select2();
   $('.types').select2();
+  $('.amenties').select2();
   
 
   $("div#dropi").dropzone({ 
@@ -136,16 +137,14 @@ $(function () {
       unhighlight: function (element) {
         $(element).removeClass("is-invalid");
       },
-      submitHandler:function(form){
+      submitHandler:function(form,e){
         var link = '/dashboard/propertys/add';
         if(!add){
            link =`/dashboard/propertys/edit?id=${postId}`;
         }
-         $( "#addnewstore" ).submit(function(e){
           e.preventDefault();  
-          var serialData = $( this ).serializeArray();
+          var serialData = $( form ).serializeArray();
           serialData.push({name:"images" , value: [...imagesArray] })
-
            $.ajax({
             type: "POST",
             url: link,
@@ -156,7 +155,7 @@ $(function () {
               }
             }
           });
-        }) ;
+    
       },
       errorElement: "span",
       errorClass: "error invalid-feedback",

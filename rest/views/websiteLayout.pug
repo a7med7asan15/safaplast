@@ -2,16 +2,27 @@ html
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    if csrfToken
+       meta(name="csrf-token", content=`${csrfToken}`)
     meta(name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no")
-    meta(name="description" content="SPARKER - Premium directory and listings template by Ansonika.")
-    meta(name="author" content="Ansonika")
-    title=title
+    if metDescription
+      meta(name="description" content=`${metDescription}`)
+    if title  
+      title=title
+    if ogTitle
+      meta(name="og:title" content=`${ogTitle}`)
+      
+    if ogDomain
+      meta(name="og:title" content=`${ogDomain}`)
+    meta(name="og:type" content="website")
+    if metDescription
+      meta(name="og:type" content=`${metDescription}`)
+
     link(rel="shortcut icon" href="img/favicon.ico" type="image/x-icon")
     link(rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png")
     link(rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png")
     link(rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png")
     link(rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png")
-    link(href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet")
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     link(href="/static/websiteAssets/css/bootstrap-rtl.min.css" rel="stylesheet")
     link(href="/static/websiteAssets/css/style.css" rel="stylesheet")
@@ -27,37 +38,13 @@ body
     script(src="/static/websiteAssets/js/common_scripts.js")
     script(src="/static/websiteAssets/js/functions_rtl.js")
     script(src="/static/websiteAssets/js/validate.js")
-    script(src="/static/websiteAssets/js/input_qty.js")
+    script(src="/static/bower_components/jquery-validation/dist/jquery.validate.min.js", type="text/javascript")
+
     //  Map 
     script(src="http://maps.googleapis.com/maps/api/js")
     script(src="/static/websiteAssets/js/markerclusterer.js")
     script(src="/static/websiteAssets/js/map.js")
     script(src="/static/websiteAssets/js/infobox.js")
     script(src="/static/websiteAssets/js/app.js")
-    script.
-      $('#carousel_in').owlCarousel({
-      center: false,
-      items:1,
-      loop:false,
-      rtl: true,
-      margin:0
-      });
-    // DATEPICKER
-    script.
-      $(function() {
-      $('input[name="dates"]').daterangepicker({
-      autoUpdateInput: false,
-      parentEl:'#input-dates',
-      opens: 'right',
-      locale: {
-      direction: 'rtl',
-      cancelLabel: 'Clear'
-      }
-      });
-      $('input[name="dates"]').on('apply.daterangepicker', function(ev, picker) {
-      $(this).val(picker.startDate.format('MM-DD-YY') + ' > ' + picker.endDate.format('MM-DD-YY'));
-      });
-      $('input[name="dates"]').on('cancel.daterangepicker', function(ev, picker) {
-      $(this).val('');
-      });
-      });
+    
+block scripts      

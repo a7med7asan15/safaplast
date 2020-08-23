@@ -7,7 +7,7 @@ const {
   RoomsSchema
 } = require('../models/categorySchema');
 const PropertySchema = require('../models/propertySchema');
-
+const AmentiesSchema = require('../models/amentiesSchema');
 
 const propertyService = {
   listAllStores: async (req, res) => {
@@ -43,12 +43,15 @@ const propertyService = {
     const areas = await AreaSchema.find();
     const type = await TypesSchema.find();
     const rooms = await RoomsSchema.find();
+    const amen = await AmentiesSchema.find();
+
     return res.render('screens/storeScreens/addStoreScreen', {
       thisUser: req.user,
       csrfToken,
       areas,
       type,
-      rooms
+      rooms,
+      amen
     })
 
   },
@@ -63,8 +66,10 @@ const propertyService = {
       price,
       addressArabic,
       addressEnglish,
-      images
+      images,
+      amenties
     } = req.body;
+    console.log(amenties);
     const im = images.split(',')
     try {
       const areaObj = await AreaSchema.findById(area);
@@ -109,7 +114,9 @@ const propertyService = {
       const areas = await AreaSchema.find();
       const type = await TypesSchema.find();
       const rooms = await RoomsSchema.find();
-      const property = await PropertySchema.findById(id)
+      const amen = await AmentiesSchema.find();
+
+      const property = await PropertySchema.findById(id);
       return res.render('screens/storeScreens/editStoreScreen', {
         thisUser: req.user,
         property,
@@ -117,6 +124,7 @@ const propertyService = {
         areas,
         type,
         rooms,
+        amen
 
       })
     } catch (err) {
@@ -143,7 +151,8 @@ const propertyService = {
       price,
       addressArabic,
       addressEnglish,
-      images 
+      images,
+      amenties
     } = req.body;
       let im = images.split(',');
     try {
@@ -163,15 +172,16 @@ const propertyService = {
       updateStore.Address.desriptionArabic = addressArabic;
       updateStore.Address.descriptionEnglish = addressEnglish;
       updateStore.images = images;
+      updateStore.amenties = amenties;
       console.log(updateStore.type);
        await updateStore.save();
 
-      // req.session.passedData = false
   
       req.flash('success', 'Store Added Succesfully')
       return res.json({err:false,message:"Store Added Successfuly"});
 
     } catch (err) {
+      console.log(err);
       req.flash('error', {
         message: 'Something Went wrong'
       })

@@ -3,6 +3,7 @@ if data
         .col-md-6
                 .strip.grid
                     figure
+                        a.wish_bt=dat.views
                         a(href=`/list/${dat.slugArabic}`)
                             img.img-fluid(src=`${dat.images[0].imageLink}`, alt)
                             .read_more
@@ -12,7 +13,7 @@ if data
                         h3
                             a(href=`/list/${dat.slugArabic}`)=dat.nameArabic
                         small=dat.rooms.nameArabic
-                        p=dat.Address.desriptionArabic
+                        p(style="line-height: 18px;max-height: 54px;overflow: hidden;")=dat.Address.desriptionArabic
                     ul(style="display:flex; justify-content:space-between;align-items:center")
                         li
                             span.loc_open=dat.areaId.nameArabic

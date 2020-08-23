@@ -1,6 +1,6 @@
 aside.main-sidebar.sidebar-light-primary.elevation-4
   a.brand-link(href="index3.html")
-    span.brand-text.font-weight-light Lbsak Dashboard 
+    span.brand-text.font-weight-light Dahabit
   .sidebar
     if thisUser 
       .user-panel.mt-3.pb-3.mb-3.d-flex
@@ -71,4 +71,19 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
               a.nav-link(href="/dashboard/category/rooms")
                 i.left.pr-2.fas.fa-th
                 p Rooms
+        li.nav-item.has-treeview
+          a.nav-link(href="#")
+            i.left.pr-2.fas.fa-th
+            p
+              | Bookings
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link(href="/dashboard/booking")
+                i.left.pr-2.fas.fa-th
+                p Bookings Under Review 
+            li.nav-item
+              a.nav-link(href="/dashboard/booking/accepted")
+                i.left.pr-2.fas.fa-th
+                p Actual Bookings
 

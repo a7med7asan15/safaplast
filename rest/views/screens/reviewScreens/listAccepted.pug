@@ -5,7 +5,7 @@ block content
         .container-fluid
             .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark Review Orders
+                    h1.m-0.text-dark Accepted Orders
 
     .content
         .container-fluid
@@ -19,7 +19,7 @@ block content
                 .col-12
                     .card
                         .card-header
-                            h3.card-title All Pending Orders
+                            h3.card-title All Accepted Orders
                             form(action=`/dashboard/users/searchResult`, method="post")
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .input-group.input-group-sm.float-right(style="width: 150px;")
@@ -34,14 +34,11 @@ block content
                             table.table.table-hover.text-nowrap
                                 thead
                                     tr
-
                                     th Date 
+                                    th orderID 
                                     th Customer Name 
                                     th Customer Mobile No  
-                                    th Check in   
-                                    th Check Out   
-                                    th Adults   
-                                    th Child   
+                                    th Property Owner 
                                     th Property 
                                     th Review 
                                 tbody
@@ -57,23 +54,21 @@ block content
                                         for product in dataArray
                                             tr
                                             td #{ product.createdAt.toDateString() }
+                                            td #{ product.orderId }
                                             td #{ product.nameCustomer }
                                             td #{ product.customerMobileNo }
-                                            td #{ product.checkIn }
-                                            td #{ product.checkOut }
-                                            td #{ product.adults }
-                                            td #{ product.child }
+                                            td #{ product.propertyId.mobileNumber }                                     
                                             td
                                                 a.btn-sm.btn-primary(href=`/list/${product.propertyId.slugArabic}` target="_blank")
                                                     i.far.fa-eye
-                                                    |  View Property                                        
+                                                    |  Property                                        
                                             td
-                                                form(action=`/dashboard/booking/checkpoint?id=${product.id}&request=accept`, method="post")
+                                                form(action=`/dashboard/booking/checkpoint?id=${product.id}&request=booked`, method="post")
                                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                     button.btn-sm.btn-success(type="submit")
-                                                        | Accept                                       
+                                                        | Booked                                       
                                             td
-                                               form(action=`/dashboard/booking/checkpoint?id=${product.id}&request=reject`, method="post")
+                                               form(action=`/dashboard/booking/checkpoint?id=${product.id}&request=retension`, method="post")
                                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                     button.btn-sm.btn-danger(type="submit")
                                                         | Reject                                       

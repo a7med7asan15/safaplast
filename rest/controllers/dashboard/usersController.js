@@ -10,7 +10,7 @@ const userService = require('../../services/userService')
 // uploading Middleware 
 // Multer Js 
 
-const upload  = require('../../middlewares/uploadImage');
+const {upload}  = require('../../middlewares/uploadImage');
 
 
 // Validation Middleware 

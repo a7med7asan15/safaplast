@@ -13,128 +13,28 @@ block content
 
                         section#description
                             .detail_title_1
-                                .cat_star
-                                    i.icon_star
-                                    i.icon_star
-                                    i.icon_star
-                                    i.icon_star
                                 h1=property.nameArabic
-                                //a.address(href='https://www.google.com/maps/dir//Assistance+%E2%80%93+H%C3%B4pitaux+De+Paris,+3+Avenue+Victoria,+75004+Paris,+Francia/@48.8606548,2.3348734,14z/data=!4m15!1m6!3m5!1s0x47e66e1de36f4147:0xb6615b4092e0351f!2sAssistance+Publique+-+H%C3%B4pitaux+de+Paris+(AP-HP)+-+Si%C3%A8ge!8m2!3d48.8568376!4d2.3504305!4m7!1m0!1m5!1m1!1s0x47e67031f8c20147:0xa6a9af76b1e2d899!2m2!1d2.3504327!2d48.8568361') 438 Rush Green Road, Romford
+                                a.address.views(href="" style="padding-top:30px") 
+                                    | زيارات :
+                                    strong=property.views
+                                br    
+                                a.address.area(href="" style="padding-top:10px") 
+                                    | المنطقة : 
+                                    strong=property.areaId.nameArabic
+                                br    
+                                a.address.type(href="" style="padding-top:10px") 
+                                    | النوع: 
+                                    strong=property.type.nameArabic  
+                               
+                            
+                            ul(style="padding-top:15px; padding-bottom:15px;").hotel_facilities
+                                for am in property.amenties
+                                    li
+                                        img(src=`/static/images/${am.icon}.svg`, alt)
+                                        | #{am.nameArabic}                  
                             p=property.Address.desriptionArabic
-
-                            h5.add_bottom_15 Amenities
-                            .row.add_bottom_30
-                                .col-lg-6
-                                    ul.bullets
-                                        li Dolorem mediocritatem
-                                        li Mea appareat
-                                        li Prima causae
-                                        li Singulis indoctum
-                                .col-lg-6
-                                    ul.bullets
-                                        li Timeam inimicus
-                                        li Oportere democritum
-                                        li Cetero inermis
-                                        li Pertinacia eum
-                            // /row
-                            hr
-                            .room_type.first
-                                .row
-                                    .col-md-4
-                                        img.img-fluid(src='img/gallery/hotel_list_1.jpg' alt='')
-                                    .col-md-8
-                                        h4 Single Room
-                                        p
-                                            | Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.
-                                        ul.hotel_facilities
-                                            li
-                                                img(src='img/hotel_facilites_icon_2.svg' alt='')
-                                                | Single Bed
-                                            li
-                                                img(src='img/hotel_facilites_icon_4.svg' alt='')
-                                                | Free Wifi
-                                            li
-                                                img(src='img/hotel_facilites_icon_5.svg' alt='')
-                                                | Shower
-                                            li
-                                                img(src='img/hotel_facilites_icon_7.svg' alt='')
-                                                | Air Condition
-                                            li
-                                                img(src='img/hotel_facilites_icon_8.svg' alt='')
-                                                | Hairdryer
-                                // /row
-                                // /rom_type
-                                .room_type.alternate
-                                    .row
-                                        .col-md-4
-                                            img.img-fluid(src='img/gallery/hotel_list_2.jpg' alt='')
-                                        .col-md-8
-                                            h4 Double Room
-                                            p
-                                                | Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.
-                                            ul.hotel_facilities
-                                                li
-                                                    img(src='img/hotel_facilites_icon_3.svg' alt='')
-                                                    | Double Bed
-                                                li
-                                                    img(src='img/hotel_facilites_icon_4.svg' alt='')
-                                                    | Free Wifi
-                                                li
-                                                    img(src='img/hotel_facilites_icon_6.svg' alt='')
-                                                    | Bathtub
-                                                li
-                                                    img(src='img/hotel_facilites_icon_7.svg' alt='')
-                                                    | Air Condition
-                                                li
-                                                    img(src='img/hotel_facilites_icon_8.svg' alt='')
-                                                    | Hairdryer
-                                    // /row
-                                    // /rom_type
-                                    .room_type.last
-                                        .row
-                                            .col-md-4
-                                                img.img-fluid(src='img/gallery/hotel_list_3.jpg' alt='')
-                                            .col-md-8
-                                                h4 Suite Room
-                                                p
-                                                    | Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.
-                                                ul.hotel_facilities
-                                                    li
-                                                        img(src='img/hotel_facilites_icon_3.svg' alt='')
-                                                        | King size Bed
-                                                    li
-                                                        img(src='img/hotel_facilites_icon_4.svg' alt='')
-                                                        | Free Wifi
-                                                    li
-                                                        img(src='img/hotel_facilites_icon_6.svg' alt='')
-                                                        | Bathtub
-                                                    li
-                                                        img(src='img/hotel_facilites_icon_7.svg' alt='')
-                                                        | Air Condition
-                                                    li
-                                                        img(src='img/hotel_facilites_icon_9.svg' alt='')
-                                                        | Swimming pool
-                                                    li
-                                                        img(src='img/hotel_facilites_icon_3.svg' alt='')
-                                                        | Hairdryer
-                                        // /row
-                                        // /rom_type
-                                        hr
-                                        h3 Prices
-                                        table.table.table-striped.add_bottom_45
-                                            tbody
-                                                tr
-                                                    td Low (from 23/03 to 31/05)
-                                                    td 140$
-                                                tr
-                                                    td Middle (from 23/03 to 31/05)
-                                                    td 180$
-                                                tr
-                                                    td High (from 23/03 to 31/05)
-                                                    td 200$
-                                        hr
-
-
+                        if property.amenties
+     
                     aside#sidebar.col-lg-4
                         .box_detail.booking
                             .price
@@ -142,43 +42,52 @@ block content
                                     =property.price 
                                     | جم 
                                     small /ليلة
-                            form(action="" method="")
+                            form#reqForm(action="/orders" method="POST")
                                 #input-dates.form-group
-                                    input.form-control(type='text' name='dates' placeholder='When..')
+                                    input.form-control(type='text' name='dates' placeholder='امتى')
                                     i.icon_calendar
                                 .dropdown
                                     a(href='#' data-toggle='dropdown')
-                                        | Guests 
+                                        | عدد فرد 
                                         span#qty_total 0
                                     .dropdown-menu.dropdown-menu-right
                                         .dropdown-menu-content
-                                            label Adults
+                                            label كبار
                                             .qty-buttons
                                                 input.qtyplus(type='button' value='+' name='adults')
                                                 input#adults.qty(type='text' name='adults' value='0')
                                                 input.qtyminus(type='button' value='-' name='adults')
                                         .dropdown-menu-content
-                                            label Childrens
+                                            label اطفال
                                             .qty-buttons
                                                 input.qtyplus(type='button' value='+' name='child')
                                                 input#child.qty(type='text' name='child' value='0')
                                                 input.qtyminus(type='button' value='-' name='child')
-                                // /dropdown
-                                .form-group.clearfix
-                                    .custom-select-form
-                                        select.wide
-                                            option Room Type
-                                            option Single Room
-                                            option Double Room
-                                            option Suite Room
                                 .form-group
                                     input.form-control(type="text" name="nameCustomer" placeholder="الاسم")
                                 .form-group
-                                    input.form-control(type="number" name="nameCustomer" placeholder="رقم التليفون")
+                                    input.form-control(type="number" name="customerMobileNo" placeholder="رقم التليفون")
                                 button.add_top_30.btn_1.full-width.purchase(type='submit') أرسل
                             .text-center
                                 small سنتواصل معك بأقصي سرعة
-
+                    .container.margin_60_35
+                        .main_title_3
+                            span
+                            h2 وحدات ذات صلة
+                            p  فى نفس المنطقة 
+                        .row.add_bottom_30
+                            for rp in relatedProducts
+                                .col-lg-3.col-sm-6
+                                    a.grid_item.small(href=`/list/${rp.slugArabic}`)
+                                        figure
+                                            img(src=`${rp.images[0].imageLink}`, alt)
+                                            .info
+                                                h3=rp.nameArabic
+                    //  /row                
+            script var propertyId = !{JSON.stringify(property._id)}
+block scripts 
+        script(src="/static/websiteAssets/js/input_qty.js")
+        script(src="/static/vendor/js/sendReq.js", type="text/javascript")
 
 
         

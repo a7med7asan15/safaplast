@@ -6,7 +6,8 @@ module.exports  = {
         return (req,res,next)=>{
             const result  = schemas.validate(req.body)
             if (result.error){
-                return res.json({error:true,msg:"Validation Error: " + result.error.details[0].message})
+                console.log(result.error.details[0]);
+                return res.json({err:true,msg: result.error.details[0].context.label, key:result.error.details[0].context.key})
             }
             if(!req.value){ req.value= {}}
             req.value['body'] = result.value;
@@ -65,5 +66,13 @@ module.exports  = {
             sizeId:Joi.string().required(),
             allQuantity:Joi.string().required(),
         }),
+        postOrder:Joi.object().keys({
+            dates:Joi.string().required().label("من فضلك لا تترك هذا المدخل فارغ"),
+            adults:Joi.required(),
+            child:Joi.required(),
+            propertyId:Joi.required(),
+            nameCustomer:Joi.string().required().label("من فضلك لا تترك هذا المدخل فارغ"),
+            customerMobileNo:Joi.required().label("من فضلك لا تترك هذا المدخل فارغ")
+        })
     }
 }

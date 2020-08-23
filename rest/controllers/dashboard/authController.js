@@ -50,7 +50,13 @@ authService.show
 
 );
 
+router.get('/',
 
+authMiddleware,
+
+authService.homepage
+
+)
 
 //-----------------
 //  Login Request 
@@ -90,6 +96,7 @@ authService.destroy
 
 );
 
-router.get('/',)
+
+
 
 module.exports = router;

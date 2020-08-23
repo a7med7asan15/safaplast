@@ -93,6 +93,7 @@ module.exports  = {
             latitude:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
+        
 
     }
 }
