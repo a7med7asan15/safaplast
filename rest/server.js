@@ -212,6 +212,7 @@ seedUser()
 // seedProperty()
 // seedOrders()
 seedAmenties()
+
 app.listen(process.env.STATUS === "PROD" ? process.env.PORT : 3001, () => {
   console.log(`Server is running ${process.env.STATUS === "PROD" ? process.env.PORT : 3001}`);
 });
