@@ -62,10 +62,11 @@ const homePageService ={
             const rooms = await RoomsSchema.find();
             const areas = await AreaSchema.find();
             const amen = await AmentiesSchema.find();
-            console.log(query)
             const minmumPriceRange = await PropertySchema.find().sort({price:1}).limit(1);
-            console.log(data)
-            const minPrice = minmumPriceRange[0].price;
+            let minPrice = 100;   
+            if(minmumPriceRange.length){
+                minPrice  = minmumPriceRange[0].price;
+            }
             res.render('site/listingPage', { 
             title: ' باب دهب - اجر شقة فى دهب باليوم بأرخص الأسعار', 
             metDescription: 'شقق فى دهب بأرخص الأسعار دور على شقة باليوم فى دهب ', 
