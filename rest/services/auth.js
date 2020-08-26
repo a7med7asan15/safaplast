@@ -9,7 +9,7 @@ const authService ={
         res.render('screens/authScreens/loginScreen', { title: 'Hey', message: 'Hello there!' })
     },
     action: async(req,res)=>{
-
+        
     },
     homepage: async(req,res)=>{
         try{

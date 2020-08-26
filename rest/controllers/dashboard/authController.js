@@ -72,13 +72,10 @@ passport.authenticate('local',{
 
     failureRedirect: '/dashboard/login',
 
-    failureFlash: true
+    failureFlash:'Incorrect Username or Password'
 
 
-}) ,
-
-authService.action
-
+})
 );
 
 

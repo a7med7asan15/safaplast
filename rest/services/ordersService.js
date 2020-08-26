@@ -5,7 +5,8 @@ const orderid = require('order-id')('dahabdoor')
 const ordersService = {
     addOrder:async(req,res)=>{
         const {
-                dates,
+                dateStart,
+                dateEnd,
                 adults,
                 child,
                 nameCustomer,
@@ -18,12 +19,9 @@ const ordersService = {
             domainName = process.env.hostDomain
         }
         try{
-            const dateArray = dates.split('>')
-            const checkIn = dateArray[0];
-            const checkOut = dateArray[1];
             const order = new OrdersSchema({
-                checkIn ,
-                checkOut ,
+                checkIn: dateStart ,
+                checkOut: dateEnd ,
                 adults,
                 child,
                 nameCustomer,

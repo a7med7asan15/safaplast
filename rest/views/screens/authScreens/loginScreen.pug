@@ -4,11 +4,15 @@ block content
     .login-box
         .login-logo
             a(href="../../index2.html")
-            b Admin
-            | LTE
+            b Dahab
+            | Doors
         .card
             .card-body.login-card-body
-                p.login-box-msg Sign in to start your session
+
+                if errors
+                    for err in errors
+                        p.login-box-msg=err
+                   
                 form#loginForm(action="/dashboard/login" method="post")
                     .input-group.mb-3
                         input.form-control(type="email" name="email" ,placeholder="Email" )
@@ -27,11 +31,6 @@ block content
                                 label(for="remember").ml-2 Remember Me
                         .col-4
                             button.btn.btn-primary.btn-block(type="submit") Sign In
-
-                    p.mb-1
-                        a(href="forgot-password.html") I forgot my password
-                    p.mb-0
-                        a.text-center(href="register.html") Register a new membership
 
 block scripts 
     script(src="/static/vendor/js/login.js" type="text/javascript")

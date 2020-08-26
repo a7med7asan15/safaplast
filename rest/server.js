@@ -158,6 +158,8 @@ app.use(
 
   res.locals.ordernumber   =   req.flash("ordernumber");
 
+  res.locals.failureFlash   =   req.flash("failureFlash");
+
   next();
 
 });
