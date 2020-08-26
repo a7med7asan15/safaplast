@@ -3010,11 +3010,18 @@ section#data {
       margin-bottom: 20px;
       font-weight: 600;
       font-size: 16px; }
-    section#data .facil .hotel_facilities li {
-      font-weight: 500;
-      font-size: 14px; }
-      section#data .facil .hotel_facilities li img {
-        width: 20px; }
+    section#data .facil .hotel_facilities {
+      display: flex;
+      flex-direction: column; }
+      @media only screen and (min-width: 1170px) {
+        section#data .facil .hotel_facilities {
+          flex-direction: row; } }
+      section#data .facil .hotel_facilities li {
+        font-weight: 500;
+        font-size: 14px;
+        width: 100%; }
+        section#data .facil .hotel_facilities li img {
+          width: 20px; }
 
 section#reviews {
   border-bottom: none; }
@@ -3389,9 +3396,7 @@ input.qtyminus {
 ul.hotel_facilities {
   list-style: none;
   margin: 0;
-  padding: 0;
-  -moz-column-count: 2;
-  column-count: 2; }
+  padding: 0; }
   ul.hotel_facilities li {
     margin-bottom: 10px;
     display: inline-block;

@@ -80,6 +80,7 @@ block content
                                     input.form-control(type="text" name="nameCustomer" placeholder="الاسم")
                                 .form-group
                                     input.form-control(type="number" name="customerMobileNo" placeholder="رقم التليفون")
+                                .g-recaptcha(data-sitekey="6LcQjsMZAAAAAPs9aeCTGC8vIXfiaZRgHSpW_ji5")        
                                 button.add_top_30.btn_1.full-width.purchase(type='submit') إحجز
                             .text-center
                                 small سنتواصل معك بأقصي سرعة
@@ -107,6 +108,7 @@ block content
                     //  /row                
             script var propertyId = !{JSON.stringify(property._id)}
 block scripts 
+        script(src="https://www.google.com/recaptcha/api.js", async, defer)
         script(src="/static/websiteAssets/js/input_qty.js")
         script(src="/static/vendor/js/sendReq.js", type="text/javascript")
 

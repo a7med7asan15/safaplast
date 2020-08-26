@@ -667,11 +667,9 @@ input.qtyminus {
 
 ul.hotel_facilities {
   display: flex; }
-  ul.hotel_facilities li {
-    max-width: 25%; }
-    ul.hotel_facilities li img {
-      margin-right: inherit;
-      margin-left: 10px; }
+  ul.hotel_facilities li img {
+    margin-right: inherit;
+    margin-left: 10px; }
 
 .opening {
   padding: 25px 25px 25px 25px; }

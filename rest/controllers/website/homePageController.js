@@ -54,6 +54,10 @@ csrfProtection,
 homePageService.showSearch
 
 );
+router.get('/faq', 
+homePageService.faqPage
+
+);
 router.post('/loadmore',
 homePageService.loadMore
 )
