@@ -5,9 +5,9 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 
 const ordersSchema  = new Schema({
-    checkIn:{ type: String, required: true},
-    orderId:{type:String,required:true},
-    checkOut:{ type: String, required: true},
+    checkIn:{ type: Date ,  required: true},
+    orderId:{type:String ,required:true},
+    checkOut:{ type: Date, required: true},
     nameCustomer:{type:String,required:true},
     status:{type:String,required:true ,default:'pending'},
     adults:{type:String},

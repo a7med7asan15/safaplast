@@ -9,9 +9,11 @@ margin:0
 
 
 $(function() {
-$('input[name="dates"]').daterangepicker({
+$('input[name="dateStart"]').daterangepicker({
+singleDatePicker:true,
 autoUpdateInput: false,
 parentEl:'#input-dates',
+showDropdowns: false,
 opens: 'right',
 locale: {
 direction: 'rtl',
@@ -19,18 +21,49 @@ cancelLabel: 'مسح',
 applyLabel:'تحديد',
 }
 });
-$('input[name="dates"]').on('apply.daterangepicker', function(ev, picker) {
-$(this).val(picker.startDate.format('MM-DD-YY') + ' > ' + picker.endDate.format('MM-DD-YY'));
+$('input[name="dateEnd"]').daterangepicker({
+singleDatePicker:true,
+autoUpdateInput: false,
+parentEl:'#input-dates',
+showDropdowns: false,
+opens: 'right',
+locale: {
+direction: 'rtl',
+cancelLabel: 'مسح',
+applyLabel:'تحديد',
+}
 });
-$('input[name="dates"]').on('cancel.daterangepicker', function(ev, picker) {
+
+$('input[name="dateStart"]').on('apply.daterangepicker', function(ev, picker) {
+$(this).val(picker.startDate.format('MM-DD-YYYY'));
+});
+$('input[name="dateEnd"]').on('apply.daterangepicker', function(ev, picker) {
+$(this).val(picker.startDate.format('MM-DD-YYYY'));
+});
+
+$('input[name="dateEnd"]').on('cancel.daterangepicker', function(ev, picker) {
 $(this).val('');
 });
 });
+jQuery.validator.addMethod("startDate", function(value, element) {
+     return new Date(value) > new Date(Date.now()) 
+  }, "لا يمكن اختيار تاريخ وصول قبل تاريخ اليوم ");
+
+
+jQuery.validator.addMethod("endDate", function(value, element) {
+    return new Date(value) > new Date($('input[name="dateStart"]').val());
+  }, "لا يمكن اختيار تاريخ وصول قبل تاريخ الوصول  ");
 
 var $validate = $("#reqForm").validate({
 rules:{
-    dates:{
-        required:true
+    dateStart:{
+        required:true,
+        startDate:true
+    },
+    dateEnd:{
+        required:true,
+        startDate:true,
+        endDate:true
     },
     nameCustomer:{
         required:true
@@ -42,8 +75,11 @@ rules:{
 
 },
 messages:{
-    dates:{
-        required: "من فضلك ادخل مدة البقاء",
+    dateStart:{
+        required: "من فضلك ادخل تاريخ الوصول",
+    },
+    dateEnd:{
+        required: "من فضلك ادخل تاريخ العودة",
     },
     nameCustomer:{
         required: "من فضلك ادخل مدة البقاء",

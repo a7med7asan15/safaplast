@@ -67,9 +67,10 @@ module.exports  = {
             allQuantity:Joi.string().required(),
         }),
         postOrder:Joi.object().keys({
-            dates:Joi.string().required().label("من فضلك لا تترك هذا المدخل فارغ"),
-            adults:Joi.required(),
+            dateStart:Joi.required().label("من فضلك لا تترك هذا المدخل فارغ"),
+            dateEnd:Joi.required().label("من فضلك لا تترك هذا المدخل فارغ"),
             child:Joi.required(),
+            adults:Joi.required(),
             propertyId:Joi.required(),
             nameCustomer:Joi.string().required().label("من فضلك لا تترك هذا المدخل فارغ"),
             customerMobileNo:Joi.required().label("من فضلك لا تترك هذا المدخل فارغ")

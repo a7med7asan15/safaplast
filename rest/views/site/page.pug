@@ -54,7 +54,10 @@ block content
                                     small /ليلة
                             form#reqForm(action="/orders" method="POST")
                                 #input-dates.form-group
-                                    input.form-control(type='text' name='dates' placeholder='امتى')
+                                    input.form-control(type='text' name='dateStart' placeholder='تاريخ الوصول' autocorrect="off")
+                                    i.icon_calendar
+                                #input-dates.form-group
+                                    input.form-control(type='text' name='dateEnd' placeholder='تاريخ الإنتهاء' autocorrect="off")
                                     i.icon_calendar
                                 .dropdown
                                     a(href='#' data-toggle='dropdown')

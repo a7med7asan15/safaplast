@@ -109,7 +109,7 @@ const seedAmenties = async () => {
 }
 const seedUser = async ()=>{
 
-   const user =  await User.findOne({email:'admin@admin.com'})
+   const user = await User.count({});
    if(!user){
        const newUser = new User({
         index:'1',
