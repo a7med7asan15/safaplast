@@ -6,7 +6,9 @@ loop:false,
 rtl: true,
 margin:0
 });
-
+var onloadCallback = function() {
+    alert("grecaptcha is ready!");
+  };
 
 $(function() {
 $('input[name="dateStart"]').daterangepicker({
@@ -97,34 +99,35 @@ highlight: function (element) {
   },
 submitHandler:function(form,event){
     event.preventDefault();
-    const serialData = $(form).serializeArray();
-          serialData.push({name:"propertyId" , value:propertyId })
-    $.ajax({
-        type: "POST",
-        url:'/orders/add',
-        data: serialData,
-        headers: {
-            'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
-           }, 
-        success:function(result){
-            console.log(result);
+ 
+    // const serialData = $(form).serializeArray();
+    //       serialData.push({name:"propertyId" , value:propertyId })
+    // $.ajax({
+    //     type: "POST",
+    //     url:'/orders/add',
+    //     data: serialData,
+    //     headers: {
+    //         'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
+    //        }, 
+    //     success:function(result){
+    //         console.log(result);
             
-            if(!result.err){
-                localStorage.setItem("name", result.customerName);
-                localStorage.setItem("orderId", result.orderId);
-                return window.location.replace( "http://" + result.domainName + "/orders/confirm");
-            }else{
+    //         if(!result.err){
+    //             localStorage.setItem("name", result.customerName);
+    //             localStorage.setItem("orderId", result.orderId);
+    //             return window.location.replace( "http://" + result.domainName + "/orders/confirm");
+    //         }else{
 
                 
-                let key = result.key
-                let msg = result.msg
-                let errors = {[key]: msg };
+    //             let key = result.key
+    //             let msg = result.msg
+    //             let errors = {[key]: msg };
                 
-                return $validate.showErrors(errors);
-            }
+    //             return $validate.showErrors(errors);
+    //         }
 
-        } 
-    })
+    //     } 
+    // })
   },
 
 })

@@ -159,6 +159,15 @@ const homePageService ={
             console.log(err);
             res.json({err:true})
         }
+    },
+    faqPage:async(req,res)=>{
+        
+        return res.render('site/faq',{
+            title: 'الأسئلة الشائعة', 
+            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز', 
+            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز', 
+        });
+
     }
 
 }

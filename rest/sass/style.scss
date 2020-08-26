@@ -3299,9 +3299,16 @@ border-bottom: 1px solid rgba($border-color-3,0.5);
 		font-size:16px;
 	}
 	.hotel_facilities{
+		display:flex;
+		flex-direction:column;
+		
+		@include MQ(L){
+			flex-direction:row;
+		}
 		li{
 			font-weight: 500;
 			font-size:14px;
+			width:100%;
 			img{
 				width:20px;
 				
@@ -3725,9 +3732,6 @@ ul.hotel_facilities {
 	list-style: none;
 	margin:0;
 	padding: 0;
-	-webkit-column-count: 2;
-	-moz-column-count: 2;
-	column-count: 2;
 	li {
 		margin-bottom: 10px;
 		display: inline-block;
