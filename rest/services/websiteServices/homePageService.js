@@ -96,11 +96,18 @@ const homePageService ={
         try{
             const {slug} = req.params;
             let csrfToken = req.csrfToken();
-            const property = await PropertySchema.findOne({slugArabic:slug}).populate(['type','areaId','amenties'])
+            const property = await PropertySchema.findOne({slugArabic:slug}).populate(['type','areaId','amenties',"rooms"])
             const relatedProducts = await PropertySchema.find({price:{$lte:property.price}}).limit(4).select(['slugArabic','nameArabic','images']);
             property.views = property.views  + 1;
             await property.save();
-             return res.render('site/page', { title: 'ميرنا دهب || Merna Dahab' , property :property,csrfToken,relatedProducts})
+             return res.render('site/page', {property :property,
+             csrfToken,
+             relatedProducts,
+             title: property.nameArabic, 
+             metDescription: property.Address.desriptionArabic, 
+             ogTitle: property.nameArabic, 
+            
+            })
         }catch(err){
             console.log(err);
             return res.send(err);
