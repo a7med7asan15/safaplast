@@ -6,35 +6,46 @@ block content
             .container.margin_60_35
                 .row
                     .col-lg-8
-                        #carousel_in.owl-carousel.owl-theme.add_bottom_30(style="z-index:0")
+
+                        #carousel_in.owl-carousel.owl-theme(style="z-index:0")
                             for dat in property.images
                                 .item
                                     img(src=`${dat.imageLink}` alt=`${dat.slugArabic}` height="400px" style="object-fit: cover;")
-
-                        section#description
-                            .detail_title_1
-                                h1=property.nameArabic
-                                a.address.views(href="" style="padding-top:30px") 
-                                    | زيارات :
-                                    strong=property.views
-                                br    
-                                a.address.area(href="" style="padding-top:10px") 
-                                    | المنطقة : 
-                                    strong=property.areaId.nameArabic
-                                br    
-                                a.address.type(href="" style="padding-top:10px") 
-                                    | النوع: 
-                                    strong=property.type.nameArabic  
-                               
-                            
-                            ul(style="padding-top:15px; padding-bottom:15px;").hotel_facilities
-                                for am in property.amenties
-                                    li
-                                        img(src=`/static/images/${am.icon}.svg`, alt)
-                                        | #{am.nameArabic}                  
-                            p=property.Address.desriptionArabic
-                        if property.amenties
-     
+                        section#data
+                                .detail_title_1
+                                    h1=property.nameArabic 
+                                .databar    
+                                    a.address.views 
+                                        span=property.views
+                                    
+                                    a.address.area 
+                                        span=property.areaId.nameArabic
+                                    
+                                    a.address.type 
+                                        span=property.type.nameArabic  
+                                    a.address.rooms 
+                                        span=property.rooms.nameArabic  
+                                .description
+                                    p=property.Address.desriptionArabic
+                                .facil    
+                                    h3 الخدمات
+                                    ul.hotel_facilities
+                                        for am in property.amenties
+                                            li
+                                                img(src=`/static/images/${am.icon}.svg`, alt)
+                                                | #{am.nameArabic}                  
+                        .opening
+                            h4 الشروط و الأحكام
+                            .row
+                                .col-md-12
+                                    ul
+                                        li 1- فى حالة إلغاء الحجز يتم الإبلاغ قبل ميعاد الحجز ب 48 ساعة و إلا لن يتم إسترداد عربون الحجز                     
+                                        li 2- لا يتم إسترداد مبلغ التأمين فى حالة وجود أى تلفيات داخل الوحدة                       
+                                        li 3- برجاء الإلتزام بعدد الأفراد المتفق عليها فى الحجز                         
+                                        li 4- أثناء الإستلام يرجى المعاينة التامة و التأكد من تطابقها مع العقد                       
+                                        li 5- يتم دفع باقى مبلغ الحجز كامل عند إستلام الوحدة                     
+                                        li 6- يتم الإلتزام بالمواعيد المتفق عليها عند إستلام و تسليم الوحدة                    
+                                        li 7- المحافظة على نظافة الوحدة و تسليمها كما تم إستلامها                 
                     aside#sidebar.col-lg-4
                         .box_detail.booking
                             .price
@@ -67,9 +78,17 @@ block content
                                     input.form-control(type="text" name="nameCustomer" placeholder="الاسم")
                                 .form-group
                                     input.form-control(type="number" name="customerMobileNo" placeholder="رقم التليفون")
-                                button.add_top_30.btn_1.full-width.purchase(type='submit') أرسل
+                                button.add_top_30.btn_1.full-width.purchase(type='submit') إحجز
                             .text-center
                                 small سنتواصل معك بأقصي سرعة
+                        .box_detail.booking
+                                h3.bookingPropertyHead مطلبات الحجز 
+                                ul.bookingProperty
+                                    li صورة البطاقة الشخصية
+                                    li قيمة ليلتين لتأكيد جدية الحجز
+                                    li يفضل الحجز قبل 48 ساعة من الوصول 
+
+
                     .container.margin_60_35
                         .main_title_3
                             span
