@@ -61,7 +61,7 @@ const userService ={
 
             await newuser.save();
             req.session.passedData = false 
-            req.flash('success', 'user Added Succesfully')
+            req.flash('success', 'User Added Succesfully')
             return res.redirect('/dashboard/users/add')
         }catch(err){
             req.flash('error', 'Something Went wrong')

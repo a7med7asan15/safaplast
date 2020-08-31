@@ -6,7 +6,6 @@ block content
             .container.margin_60_35
                 .row
                     .col-lg-8
-
                         #carousel_in.owl-carousel.owl-theme(style="z-index:0")
                             for dat in property.images
                                 .item
@@ -16,8 +15,7 @@ block content
                                     h1=property.nameArabic 
                                 .databar    
                                     a.address.views 
-                                        span=property.views
-                                    
+                                        span=property.views 
                                     a.address.area 
                                         span=property.areaId.nameArabic
                                     a.address.type 

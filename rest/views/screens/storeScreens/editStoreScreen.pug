@@ -5,7 +5,7 @@ block content
         .container-fluid
             .row.mb-3.mt-3
             .col-sm-6
-                h1.m-0.text-dark Add New Store
+                h1.m-0.text-dark Update Property
                 - var property = property
     .content
         .container-fluid
@@ -21,7 +21,7 @@ block content
                 .card
                     .card-header
                         h3.card-title Property Information
-                    form#addnewstore(role="form" action="/dashboard/stores/add" method="POST")
+                    form#addnewstore(role="form" action="/dashboard/stores/edit" method="POST")
                         .card-body.row
                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                             .form-group.col-md-12
@@ -70,7 +70,7 @@ block content
                                                     option(value=`${r.id}` selected=selecRooms)=`${r.nameEnglish} - ${r.nameArabic}`      
                                 .col-md-4
                                         .form-group
-                                            label Amednties
+                                            label Amenities
                                             select.amenties(multiple,name="amenties", data-placeholder="Select Amenties", style="width: 100%;")
                                                 if amen 
                                                     for a in amen
@@ -106,7 +106,7 @@ block content
                             .col-md-12
                                 div#dropi.dropzone.dz_clickable
                         .card-footer
-                            button.btn.btn-primary.float-right(type="submit") Add New Store
+                            button.btn.btn-primary.float-right(type="submit") Update Property
    
     script var data = !{JSON.stringify(property.images).replace(/<\//g, '<\\/')}
     script var postId = !{JSON.stringify(property._id)}

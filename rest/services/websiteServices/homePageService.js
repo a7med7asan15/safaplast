@@ -168,7 +168,25 @@ const homePageService ={
             ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز', 
         });
 
-    }
+    },
+    contactPage:async(req,res)=>{
+        
+        return res.render('site/contact',{
+            title: 'تواصل معنا', 
+            metDescription: 'عنوان دهب دورز', 
+            ogTitle: 'عنوان دهب دورز', 
+        });
+
+    },
+    yourList:async(req,res)=>{
+        
+        return res.render('site/yourList',{
+            title: 'تواصل معنا', 
+            metDescription: 'عنوان دهب دورز', 
+            ogTitle: 'عنوان دهب دورز', 
+        });
+
+    },
 
 }
 

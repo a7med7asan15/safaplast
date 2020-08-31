@@ -122,7 +122,7 @@ propertyService.showOne
 
 router.post('/edit', 
 
-// validationBody(schemas.addStoreSchema),
+ validationBody(schemas.addStoreSchema),
 
 csrfProtection,
 

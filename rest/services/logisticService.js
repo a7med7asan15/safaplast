@@ -271,9 +271,6 @@ const logisticService = {
             var {
                 areaId
             } = req.params
-            const options = {
-                populate: 'parent',
-            }
             const citys = await CitySchema.paginate();
             const areaToEdit = await AreaSchema.findById(areaId).populate('parent');
             return res.render('screens/logisticsScreens/editAreaScreen', {
