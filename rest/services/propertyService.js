@@ -69,7 +69,6 @@ const propertyService = {
       images,
       amenties
     } = req.body;
-    console.log(amenties);
     const im = images.split(',')
     try {
       const areaObj = await AreaSchema.findById(area);
@@ -81,6 +80,7 @@ const propertyService = {
         price,
         rooms,
         mobileNumber,
+        amenties,
         cityId: areaObj.parent,
         areaId: areaObj.id,
         Address: {
@@ -95,11 +95,11 @@ const propertyService = {
       await store.save();
       
 
-      req.flash('success', 'Store Added Succesfully')
-      return res.json({err:false,message:"Store Added Successfuly"});
+      req.flash('success', 'Property Added Succesfully')
+      return res.json({err:false,message:"Property Added Successfuly"});
 
     } catch (err) {
-      return res.json({err:true,message:err});
+      return res.json({err:true,message:"Property Not Added Successfuly"});
 
     }
   },
@@ -161,7 +161,6 @@ const propertyService = {
       for(i=0 ; i<im.length ; i++){
         images.push({imageLink : im[i]});
       }
-      console.log(type);
       updateStore.nameEnglish = storeEnglish;
       updateStore.nameArabic = storeArabic;
       updateStore.mobileNumber = mobileNumber;
@@ -173,19 +172,18 @@ const propertyService = {
       updateStore.Address.descriptionEnglish = addressEnglish;
       updateStore.images = images;
       updateStore.amenties = amenties;
-      console.log(updateStore.type);
        await updateStore.save();
 
   
-      req.flash('success', 'Store Added Succesfully')
-      return res.json({err:false,message:"Store Added Successfuly"});
+      req.flash('success', 'Property Updated Succesfully')
+      return res.json({err:false,message:"Property Updated Successfuly"});
 
     } catch (err) {
       console.log(err);
       req.flash('error', {
         message: 'Something Went wrong'
       })
-      return  res.json({err:true,message:"Store NOT Added Successfuly"});
+      return  res.json({err:true,message:"Property NOT Updated Successfuly"});
     }
 
   },

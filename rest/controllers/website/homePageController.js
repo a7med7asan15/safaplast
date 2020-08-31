@@ -58,6 +58,10 @@ router.get('/faq',
 homePageService.faqPage
 
 );
+router.get('/contact', 
+homePageService.contactPage
+
+);
 router.post('/loadmore',
 homePageService.loadMore
 )

@@ -175,7 +175,7 @@ const categoryService = {
               nameArabic: classArabic
           })
         await classadd.save()
-         req.flash('success', 'Class Added Succesfully')
+         req.flash('success', 'Room Added Succesfully')
           res.redirect('/dashboard/category/rooms');
 
 
@@ -218,7 +218,7 @@ const categoryService = {
     deleteOneRoom: async (req,res)=>{
         try{
             await RoomsSchema.findByIdAndDelete(req.query.id);
-            req.flash('success', 'Class Deleted Succesfully')
+            req.flash('success', 'Room Deleted Succesfully')
             res.redirect('/dashboard/category/rooms');
     }catch(err){
         req.flash('error', 'Cant delete it;' );

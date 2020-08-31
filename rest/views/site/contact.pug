@@ -1,0 +1,64 @@
+extends ../websiteLayout.pug
+
+block content   
+
+    .container.margin_60_35
+        .row.justify-content-center
+            .col-xl-5.col-lg-6.pr-xl-5
+				.main_title_3
+					span
+					h2 | Send us a message
+					p | Cum doctus civibus efficiantur in imperdiet
+
+					#message-contact
+						form#contactform(method="post" action="assets/contact.php" autocomplete="off")
+							.row
+								.col-md-6
+									.form-group
+										label | Name
+										input.form-control#name_contact(type="text" name="name_contact")
+								.col-md-6
+									.form-group
+										label | Last name
+										input.form-control#lastname_contact(type="text" name="lastname_contact")
+							.row
+								.col-md-6
+									.form-group
+										label | Email
+										input.form-control#email_contact(type="email" name="email_contact")
+								.col-md-6
+									.form-group
+										label | Telephone
+										input.form-control#phone_contact(type="text" name="phone_contact")
+							.form-group
+								label | Message
+								textarea.form-control#message_contact(name="message_contact" style="height:150px;")
+							.row
+								.col-md-6
+									.form-group
+										label | Are you human? 3 + 1 =
+										input(type="text" name="verify_contact")
+							p.add_top_30
+                                input.btn_1.rounded#submit-contact(type="submit" value="Submit")
+				.col-xl-5.col-lg-6.pl-xl-5
+					.box_contacts
+						i.ti-support
+						h2 | محتاج مساعدة؟
+						a(href="#0") | 43 4324265622
+                        - 
+                        a(href="#0") | help@sparker.com
+					.box_contacts
+						i.ti-help-alt
+						h2 أي أسئلة؟ 
+						a(href="#0") 43 324242322
+                        - 
+                        a(href="#0") info@sparker.com
+					.box_contacts
+						i.ti-home
+						h2 | العنوان
+						a(href="#0") | PO Box 97845 Baker st. 567, Los Angeles
+                        br 
+                        | California - US
+					</div>
+				</div>
+            
