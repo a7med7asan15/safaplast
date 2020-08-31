@@ -98,7 +98,7 @@ highlight: function (element) {
 submitHandler:function(form,event){
     event.preventDefault();
     const serialData = $(form).serializeArray();
-              serialData.push({name:"propertyId" , value:propertyId })
+    serialData.push({name:"propertyId" , value:propertyId })
         $.ajax({
             type: "POST",
             url:'/orders/add',

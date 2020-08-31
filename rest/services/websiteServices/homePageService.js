@@ -110,7 +110,7 @@ const homePageService ={
             })
         }catch(err){
             console.log(err);
-            return res.send(err);
+            return res.render('site/404.pug')
 
         }
     },

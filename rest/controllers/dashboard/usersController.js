@@ -66,7 +66,6 @@ router.get('/add',
 
 csrfProtection,
 
-
 userService.showAdd 
 
 
@@ -161,6 +160,8 @@ userService.create
 //---------------------------
 
 router.post('/edit/:userId', 
+
+upload.single('avatar') ,
 
 validationBody(schemas.updateUserSchema) , 
 

@@ -1,11 +1,14 @@
 if data 
-    for dat in data.docs 
+    - var image = '/static/images/fpo.png';
+    for dat in data.docs
+        if dat.images[0].imageLink 
+            - image = dat.images[0].imageLink 
         .col-md-6
                 .strip.grid
                     figure
                         a.wish_bt=dat.views
                         a(href=`/list/${dat.slugArabic}`)
-                            img.img-fluid(src=`${dat.images[0].imageLink}`, alt)
+                            img.img-fluid(src=`${image}`, alt)
                             .read_more
                                 span أعرف أكتر 
                         small=dat.type.nameArabic
