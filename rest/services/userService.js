@@ -40,12 +40,12 @@ const userService ={
         return res.render('screens/usersScreens/addUserScreen', { thisUser:req.user , csrfToken ,sessionData:passedData})
     },
     create: async ( req , res ) => {
+
         const {username,email,password,mobilenumber,userrole }  = req.body
         let filename = ''; 
         
         if(req.file){
-       
-         filename = req.file.path;
+         filename = req.file.location;
         }
         try{
             const count = await User.count()
@@ -58,7 +58,7 @@ const userService ={
                 role:userrole,
                 avatar:filename
             })
-            
+
             await newuser.save();
             req.session.passedData = false 
             req.flash('success', 'user Added Succesfully')
@@ -69,14 +69,22 @@ const userService ={
         }
         },
     update: async (req , res )=>{
+
         const {username,email,mobilenumber,userrole } = req.body
         const {userId} = req.params 
+        console.log();
         try{
             const updateuser = await User.findById(userId)
             updateuser.username = username,
             updateuser.email = email,
             updateuser.mobileNo = mobilenumber,
             updateuser.role = userrole
+            
+            if(req.file){
+
+            updateuser.avatar = req.file.location   
+            
+            }
             await updateuser.save();
             req.session.passedData = false 
             req.flash('success', 'User Updated Succesfully')

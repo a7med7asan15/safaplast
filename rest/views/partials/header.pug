@@ -4,60 +4,10 @@ nav.main-header.navbar.navbar-expand.navbar-dark.navbar-light
       a.nav-link(data-widget="pushmenu", href="#", role="button")
         i.fas.fa-bars
     li.nav-item.d-none.d-sm-inline-block
-      a.nav-link(href="index3.html") Home
-    li.nav-item.d-none.d-sm-inline-block
-      a.nav-link(href="#") Contact
+      a.nav-link(href="/dashboard") Dashboard
 
   ul.navbar-nav.ml-auto
-    li.nav-item.dropdown
-      a.nav-link(data-toggle="dropdown", href="#")
-        i.far.fa-comments
-        span.badge.badge-danger.navbar-badge 3
-      .dropdown-menu.dropdown-menu-lg.dropdown-menu-right
-        a.dropdown-item(href="#")
-          .media
-            img.img-size-50.mr-3.img-circle(src="dist/img/user1-128x128.jpg", alt="User Avatar")
-            .media-body
-              h3.dropdown-item-title
-                | Brad Diesel
-
-                span.float-right.text-sm.text-danger
-                  i.fas.fa-star
-              p.text-sm Call me whenever you can...
-              p.text-sm.text-muted
-                i.far.fa-clock.mr-1
-                |  4 Hours Ago
-        .dropdown-divider
-        a.dropdown-item(href="#")
-          .media
-            img.img-size-50.img-circle.mr-3(src="dist/img/user8-128x128.jpg", alt="User Avatar")
-            .media-body
-              h3.dropdown-item-title
-                | John Pierce
-
-                span.float-right.text-sm.text-muted
-                  i.fas.fa-star
-              p.text-sm I got your message bro
-              p.text-sm.text-muted
-                i.far.fa-clock.mr-1
-                |  4 Hours Ago
-        .dropdown-divider
-        a.dropdown-item(href="#")
-          .media
-            img.img-size-50.img-circle.mr-3(src="dist/img/user3-128x128.jpg", alt="User Avatar")
-            .media-body
-              h3.dropdown-item-title
-                | Nora Silvester
-
-                span.float-right.text-sm.text-warning
-                  i.fas.fa-star
-              p.text-sm The subject goes here
-              p.text-sm.text-muted
-                i.far.fa-clock.mr-1
-                |  4 Hours Ago
-        .dropdown-divider
-        a.dropdown-item.dropdown-footer(href="#") See All Messages
-    li.nav-item.dropdown
+    //- li.nav-item.dropdown
       a.nav-link(data-toggle="dropdown", href="#")
         i.far.fa-bell
         span.badge.badge-warning.navbar-badge 15
@@ -83,17 +33,17 @@ nav.main-header.navbar.navbar-expand.navbar-dark.navbar-light
         .dropdown-divider
         a.dropdown-item.dropdown-footer(href="#") See All Notifications
     if thisUser       
-    li.nav-item.dropdown.user-menu
-        a.nav-link.dropdown-toggle(href="#", data-toggle="dropdown")
-          img.user-image.img-circle.elevation-2(src=`${thisUser.avatar}`, alt="User Image")
-          span.d-none.d-md-inline #{thisUser.username}
-        ul.dropdown-menu.dropdown-menu-lg.dropdown-menu-right
-          li.user-header
-              img.img-circle(width="100" ,src=`${thisUser.avatar}`, alt="User Image")
-              p #{thisUser.username}
-                small Member since Nov. 2012
-          li(style="display:flex; height:auto; justify-content:space-between;align-items:center").user-footer
-            a.btn.btn-default.btn-flat(href="#") Profile
-            form(action="/dashboard/logout" method="post" style="display:inline-block; margin-bottom:0px; width:100%;").form-group
-                input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                input(type="submit" value="Sign out").btn.btn-default.btn-flat.float-right 
+      li.nav-item.dropdown.user-menu
+          a.nav-link.dropdown-toggle(href="#", data-toggle="dropdown")
+            img.user-image.img-circle.elevation-2(src=`${thisUser.avatar}`, alt="User Image")
+            span.d-none.d-md-inline #{thisUser.username}
+          ul.dropdown-menu.dropdown-menu-lg.dropdown-menu-right
+            li.user-header
+                img.img-circle(width="100" ,src=`${thisUser.avatar}`, alt="User Image")
+                p #{thisUser.username}
+                  small Member since Nov. 2012
+            li(style="display:flex; height:auto; justify-content:space-between;align-items:center").user-footer
+              a.btn.btn-default.btn-flat(href=`/dashboard/users/edit/${thisUser.id}`) Profile
+              form(action="/dashboard/logout" method="post" style="display:inline-block; margin-bottom:0px; width:100%;").form-group
+                  input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                  input(type="submit" value="Sign out").btn.btn-default.btn-flat.float-right 

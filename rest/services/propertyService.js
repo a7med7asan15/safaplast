@@ -103,7 +103,6 @@ const propertyService = {
 
     }
   },
-
   showOne: async (req, res) => {
     req.session.lastlink = req.url
     let csrfToken = req.csrfToken();
@@ -138,7 +137,6 @@ const propertyService = {
     }
 
   },
-
   update: async (req, res) => {
     const {id}= req.query;
     const {
@@ -154,14 +152,18 @@ const propertyService = {
       images,
       amenties
     } = req.body;
-      let im = images.split(',');
+    let im = [];
+    if(images){
+       im = images.split(',');
+    } 
     try {
       const updateStore = await PropertySchema.findById(id);
-      let images = [] ;
-      for(i=0 ; i<im.length ; i++){
-        images.push({imageLink : im[i]});
+      let imagesLoop = [] ;
+      if(im.length){
+        for(i=0 ; i < im.length ; i++){
+          imagesLoop.push({imageLink : im[i]});
+        }
       }
-      console.log(type);
       updateStore.nameEnglish = storeEnglish;
       updateStore.nameArabic = storeArabic;
       updateStore.mobileNumber = mobileNumber;
@@ -171,9 +173,8 @@ const propertyService = {
       updateStore.areaId = area;
       updateStore.Address.desriptionArabic = addressArabic;
       updateStore.Address.descriptionEnglish = addressEnglish;
-      updateStore.images = images;
+      updateStore.images = imagesLoop;
       updateStore.amenties = amenties;
-      console.log(updateStore.type);
        await updateStore.save();
 
   
@@ -189,7 +190,6 @@ const propertyService = {
     }
 
   },
-
   destroy: async (req, res) => {
     const {
       storeId
@@ -207,7 +207,6 @@ const propertyService = {
 
     }
   },
-
   searchShowStore: async (req, res) => {
     try {
       let csrfToken = req.csrfToken();

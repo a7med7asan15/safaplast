@@ -10,9 +10,6 @@ block content
                     a.btn.btn-warning.float-right(href=`/dashboard/users/edit/${userToEdit.id}/changepassword`)
                         i.fas.fa-lock
                         |  Change Password 
-                    a.btn.btn-dark.float-right.mr-4(href=`/dashboard/users/edit/${userToEdit.id}/changepassword`)
-                        i.fas.fa-image
-                        |  Change Profile Picture
         .content.mt-5
             .container-fluid
                 if successes
@@ -26,7 +23,7 @@ block content
                         .card   
                             .card-header
                                 h3.card-title User Data
-                            form#adduserForm(action=`/dashboard/users/edit/${userToEdit.id}`, method="post" )
+                            form#adduserForm(action=`/dashboard/users/edit/${userToEdit.id}`, method="post" ,enctype="multipart/form-data")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .col-md-12
@@ -42,11 +39,19 @@ block content
                                             label(for="mobilenumber") Mobile Number
                                             input.form-control(type="text" name="mobilenumber", value=`${userToEdit.mobileNo}`)
                                     .col-md-12
+                                                .form-group.col-md-6
+                                                    label(for="exampleInputFile") File input
+                                                    .input-group
+                                                    .custom-file
+                                                        input.custom-file-input#exampleInputFile(type="file" name="avatar")
+                                                        label.custom-file-label(for="exampleInputFile") Choose file
+                                    .col-md-12
                                         .form-group.col-md-6
                                             label(for="userrole") User Role
                                             select.form-control#userrole(name="userrole",value=`${userToEdit.role}`)
                                                 option(value="0") Admin
                                                 option(value="1") Store Owner
+
                                 .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Update User
 block scripts 
