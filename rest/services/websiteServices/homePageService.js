@@ -178,6 +178,15 @@ const homePageService ={
         });
 
     },
+    yourList:async(req,res)=>{
+        
+        return res.render('site/yourList',{
+            title: 'تواصل معنا', 
+            metDescription: 'عنوان دهب دورز', 
+            ogTitle: 'عنوان دهب دورز', 
+        });
+
+    },
 
 }
 

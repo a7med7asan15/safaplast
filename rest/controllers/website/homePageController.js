@@ -62,6 +62,10 @@ router.get('/contact',
 homePageService.contactPage
 
 );
+router.get('/yourList', 
+homePageService.yourList
+
+);
 router.post('/loadmore',
 homePageService.loadMore
 )
