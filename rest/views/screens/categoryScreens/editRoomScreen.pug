@@ -14,19 +14,19 @@ block content
                     .col-12
                         .card   
                             .card-header
-                                h3.card-title Class Information
-                            form#addClassForm(action=`/dashboard/category/class/edit?id=${dataProvided.id}`, method="post" )
+                                h3.card-title Room Information
+                            form#addRoomForm(action=`/dashboard/category/rooms/edit?id=${dataProvided.id}`, method="post" )
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .col-md-12
                                         .form-group.col-md-6
                                             label.control-label(for="typeEnglish") Name [English]
-                                            input#typeEnglish.form-control(type="text" name="classEnglish",value=`${dataProvided.nameEnglish}`, placeholder="Enter Color Name")
+                                            input#typeEnglish.form-control(type="text" name="nameEnglish",value=`${dataProvided.nameEnglish}`, placeholder="Enter Color Name")
                                     .col-md-12
                                         .form-group.col-md-6
                                             label(for="typeArabic") Name [Arabic]
-                                            input#typeArabic.form-control( type="text" name="classArabic", value=`${dataProvided.nameArabic}`, placeholder="Enter Color Hex")
+                                            input#typeArabic.form-control( type="text" name="nameArabic", value=`${dataProvided.nameArabic}`, placeholder="Enter Color Hex")
                                 .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Update Type
 block scripts 
-        script(src="/static/vendor/js/addClass.js", type="text/javascript")
+        script(src="/static/vendor/js/addRoom.js", type="text/javascript")

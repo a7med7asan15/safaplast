@@ -43,11 +43,11 @@ const categoryService = {
 
     // add Type 
     addTypes: async(req,res)=>{
-        const {typeEnglish,typeArabic} = req.body;
+        const {nameEnglish,nameArabic} = req.body;
         try{
           const type = new TypesSchema({
-              nameEnglish : typeEnglish,
-              nameArabic: typeArabic
+              nameEnglish : nameEnglish,
+              nameArabic: nameArabic
           })
         await type.save()
          req.flash('success', 'Type Added Succesfully')
@@ -55,7 +55,8 @@ const categoryService = {
 
 
         }catch(err){
-            res.send(err);
+            req.flash('error', 'Type not Added')
+            res.redirect('/dashboard/category/types');
         }
     },
 
@@ -82,17 +83,18 @@ const categoryService = {
     // Update One type 
     updateOneType : async (req,res)=>{
   
-            const {typeEnglish,typeArabic} = req.body;
+            const {nameEnglish,nameArabic} = req.body;
 
             try{
                 let type = await TypesSchema.findById(req.query.id);
-                    type.nameArabic = typeArabic;
-                    type.nameEnglish = typeEnglish;
+                    type.nameArabic = nameArabic;
+                    type.nameEnglish = nameEnglish;
                     await type.save();
                     req.flash('success', 'Type Updated Succesfully')
                     res.redirect('/dashboard/category/types');
             }catch(err){
-
+                req.flash('success', 'Type not Updated')
+                res.redirect('/dashboard/category/types');
             }
     },
 
@@ -155,11 +157,11 @@ const categoryService = {
                 page,
                 limit: 10,
             }
-            const classes = await RoomsSchema.paginate({}, options);
-            return res.render('screens/categoryScreens/classScreen', {
+            const rooms = await RoomsSchema.paginate({}, options);
+            return res.render('screens/categoryScreens/roomScreen', {
                 thisUser: req.user,
                 csrfToken,
-                dataProvided:classes
+                dataProvided:rooms
             })
         } catch (err) {
 
@@ -168,13 +170,13 @@ const categoryService = {
         }
     },
     addRoom : async(req,res)=>{
-        const {classEnglish ,classArabic} = req.body;
+        const {nameEnglish ,nameArabic} = req.body;
         try{
-          const classadd = new RoomsSchema({
-              nameEnglish : classEnglish,
-              nameArabic: classArabic
+          const roomadd = new RoomsSchema({
+              nameEnglish,
+              nameArabic
           })
-        await classadd.save()
+        await roomadd.save()
          req.flash('success', 'Room Added Succesfully')
           res.redirect('/dashboard/category/rooms');
 
@@ -188,10 +190,10 @@ const categoryService = {
         let csrfToken = req.csrfToken();
 
         try{
-            const Classes = await RoomsSchema.findById(id);
-                 return res.render('screens/categoryScreens/editClassScreen', {
+            const rooms = await RoomsSchema.findById(id);
+                 return res.render('screens/categoryScreens/editRoomScreen', {
                 thisUser: req.user,
-                dataProvided: Classes,
+                dataProvided: rooms,
                 csrfToken
             })
 
@@ -202,17 +204,18 @@ const categoryService = {
     },
     updateOneRoom : async (req,res)=>{
 
-        const {classEnglish,classArabic} = req.body;
+        const {nameEnglish,nameArabic} = req.body;
 
         try{
-            let type = await RoomsSchema.findById(req.query.id);
-                type.nameArabic = classArabic;
-                type.nameEnglish = classEnglish;
-                await type.save();
-                req.flash('success', 'Class Updated Succesfully')
+            let room = await RoomsSchema.findById(req.query.id);
+                room.nameArabic = nameArabic;
+                room.nameEnglish = nameEnglish;
+                await room.save();
+                req.flash('success', 'Room Updated Succesfully')
                 res.redirect('/dashboard/category/rooms');
         }catch(err){
-
+            req.flash('error', 'Room not updated' );
+            res.redirect('/dashboard/category/rooms');
         }
     },
     deleteOneRoom: async (req,res)=>{
@@ -222,7 +225,7 @@ const categoryService = {
             res.redirect('/dashboard/category/rooms');
     }catch(err){
         req.flash('error', 'Cant delete it;' );
-        res.redirect('/dashboard/category/class');
+        res.redirect('/dashboard/category/rooms');
     }
     },
     searchShowRoom: async (req, res) => {
@@ -238,7 +241,7 @@ const categoryService = {
                 ]
             });
             
-            return res.render('screens/categoryScreens/classScreen', {
+            return res.render('screens/categoryScreens/roomScreen', {
                 thisUser: req.user,
                 csrfToken,
                 table_search,
@@ -248,7 +251,7 @@ const categoryService = {
         } catch (err) {
 
             req.flash('error', 'Something Went wrong')
-            return res.render('screens/categoryScreens/classScreen', {
+            return res.render('screens/categoryScreens/roomScreen', {
                 thisUser: req.user,
                 tbSearch: {},
                 table_search,

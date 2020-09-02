@@ -20,21 +20,21 @@ block content
                         .card
                             .card-header
                                 h3.card-title Rooms Info
-                            form#addClassForm(action="/dashboard/category/rooms/add" method="post" role="form")
+                            form#addRoomForm(action="/dashboard/category/rooms/add" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
                                         label(for="serviceenglish") Room Name [ English ]
-                                        input.form-control#serviceenglish(type="text", name="classEnglish", placeholder="Enter Type Name in english")
+                                        input.form-control#serviceenglish(type="text", name="nameEnglish", placeholder="Enter Type Name in english")
                                     .form-group.col-md-10
                                         label(for="servicearabic") Room Name [ Arabic ]
-                                        input.form-control#servicearabic(type="text", name="classArabic", placeholder="Enter Type name in arabic")
+                                        input.form-control#servicearabic(type="text", name="nameArabic", placeholder="Enter Type name in arabic")
                                 .card-footer
                                     button.btn.btn-primary.float-right(type="submit") Add Room
                     .col-7
                         .card
                             .card-header
-                                h3.card-title All Class 
+                                h3.card-title All Rooms 
                                 .card-tools
                                 form(action=`/dashboard/category/rooms/searchResult`, method="post")
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
@@ -64,11 +64,11 @@ block content
                                                     td #{tb.nameEnglish}
                                                     td #{tb.nameArabic}
                                                     td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/category/class/edit/${tb.id}`)
+                                                        a.btn-sm.btn-primary(href=`/dashboard/category/rooms/edit/${tb.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
-                                                        form(action=`/dashboard/category/class/delete/${tb.id}`, method="post")
+                                                        form(action=`/dashboard/category/rooms/delete/${tb.id}`, method="post")
                                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                             button.btn-sm.btn-danger(type="submit")
                                                                 i.fas.fa-trash-alt
@@ -116,4 +116,4 @@ block content
                                         li.page-item
                                             a.page-link(href=`/dashboard/logistic/citys?p=${page + 1}`) »
 block scripts 
-        script(src="/static/vendor/js/addClass.js", type="text/javascript")
+        script(src="/static/vendor/js/addRoom.js", type="text/javascript")

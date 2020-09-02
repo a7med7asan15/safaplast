@@ -4,7 +4,7 @@ Dropzone.autoDiscover = false;
 $(function () {
   var imagesArray = [];
   var csrf = $("meta[name=csrf-token]").attr("content");    
-  $('.storeArea').select2();
+  $('.nameArea').select2();
   $('.norooms').select2();
   $('.types').select2();
   $('.amenties').select2();
@@ -72,16 +72,17 @@ $(function () {
 
   Inputmask().mask(document.querySelectorAll("input"));
   
-    const validator = $("#addnewstore").validate({
+    const validator = $("#addnewprop").validate({
       rules: {
-        storeEnglish: {
+        nameEnglish: {
           required: true,
         },
-        storeArabic: {
+        nameArabic: {
           required: true,
         },
         mobileNumber: {
           required: true,
+          minlength:11,
         },
         price:{
           required: true,
@@ -92,42 +93,55 @@ $(function () {
         rooms: {
           required: true,
         },
-        area: {
+        nameArea: {
           required: true,
         },
-        addressEnglish: {
+        amenties: {
           required: true,
         },
-        addressArabic: {
+        desEnglish: {
+          required: true,
+        },
+        desArabic: {
+          required: true,
+        },
+        images: {
           required: true,
         },
 
 
       },
       messages: {
-        storeEnglish: {
+        nameEnglish: {
           required: "Please Enter English Name",
         },
-        storeArabic: {
+        nameArabic: {
           required: "Please Enter Arabic Name",
         },
         mobileNumber: {
           required: "Please Enter Valid Mobile Number",
+          minlength: "Please Verify That it is not less than 11 Charachters",
         },
-        storeArea: {
+        nameArea: {
           required: "Please Enter Area",
         },
         type: {
           required: "Please Enter Type",
         },
-        type: {
+        rooms: {
           required: "Please Enter Rooms",
         },
-        addressEnglish: {
+        amenties: {
+          required: "Please Enter Amenties",
+        },
+        desEnglish: {
           required: "Please Enter Address in English",
         },
-        addressArabic: {
+        desArabic: {
           required: "Please Enter Address in Arabic",
+        },
+        images: {
+          required: "Please Add Images",
         },
 
       },

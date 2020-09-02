@@ -123,7 +123,7 @@ categoryService.addTypes
 
 router.post( '/rooms/add',
 
-validationBody(schemas.addClassSchema),
+validationBody(schemas.addRoomSchema),
 
 csrfProtection, 
 
@@ -132,7 +132,7 @@ categoryService.addRoom
 )
 router.post( '/rooms/edit',
 
-validationBody(schemas.addClassSchema),
+validationBody(schemas.addRoomSchema),
 
 csrfProtection, 
 

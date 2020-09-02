@@ -44,7 +44,7 @@ router.use(   authMiddleware ,   idAdmin   );
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// Store READ ROUTES  // ++++// //////
+// +++ /// Property READ ROUTES  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
@@ -52,7 +52,7 @@ router.use(   authMiddleware ,   idAdmin   );
 
 
 //---------------------
-// Read Store Requests 
+// Read Property Requests 
 //--------------------
 
 
@@ -63,7 +63,7 @@ router.get( '/',
 csrfProtection, 
 
 
-propertyService.listAllStores
+propertyService.listAllProps
 
 
 );
@@ -73,7 +73,7 @@ router.get( '/add',
 
 csrfProtection, 
 
-propertyService.addStorePage
+propertyService.addPropPage
 
 
 );
@@ -82,19 +82,18 @@ propertyService.addStorePage
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// Store CREATE ROUTES  // ++++// //////
+// +++ /// Property CREATE ROUTES  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
 router.post( '/add',
 
+ validationBody(schemas.addPropSchema),
 
-// validationBody(schemas.addStoreSchema),
-
-// csrfProtection, 
+ csrfProtection, 
 
 
-propertyService.createStore
+propertyService.createProp
 
 
 );
@@ -103,7 +102,7 @@ propertyService.createStore
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// EDIT Store  // ++++// //////
+// +++ /// EDIT Property  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
@@ -117,12 +116,12 @@ propertyService.showOne
 );
 
 //---------------------------
-// Update Store Route 
+// Update Property Route 
 //---------------------------
 
 router.post('/edit', 
 
- validationBody(schemas.addStoreSchema),
+ validationBody(schemas.addPropSchema),
 
 csrfProtection,
 
@@ -132,10 +131,10 @@ propertyService.update
 
 
 //---------------------------
-// Delete Store Route 
+// Delete Property Route 
 //---------------------------
 
-router.post('/delete/:storeId',
+router.post('/delete/:propId',
 
 csrfProtection,
 
@@ -145,14 +144,14 @@ propertyService.destroy
 ); 
 
 //---------------------------
-// Store Search 
+// Property Search 
 //---------------------------
 
 router.post('/searchResult',
 
 csrfProtection,
 
-propertyService.searchShowStore
+propertyService.searchShowProp
 
 ); 
 

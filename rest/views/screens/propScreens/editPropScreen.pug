@@ -21,18 +21,18 @@ block content
                 .card
                     .card-header
                         h3.card-title Property Information
-                    form#addnewstore(role="form" action="/dashboard/stores/edit" method="POST")
+                    form#addnewprop(role="form" action=`/dashboard/propertys/edit/?id=${property.id}` method="POST")
                         .card-body.row
                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                             .form-group.col-md-12
                                 h3 Property General Information
 
                             .form-group.col-md-6
-                                label(for="storeEnglish") Property Name [English]
-                                input.form-control#storeEnglish(type="text", name="storeEnglish", placeholder="Enter Store Name In English" value=`${property.nameEnglish}`)
+                                label(for="nameEnglish") Property Name [English]
+                                input.form-control#nameEnglish(type="text", name="nameEnglish", placeholder="Enter Property Name In English" value=`${property.nameEnglish}`)
                             .form-group.col-md-6
-                                label(for="storeArabic") Property Name [Arabic]
-                                input.form-control#storeArabic(type="text", name="storeArabic", placeholder="Enter Store Name in Arabic" value=`${property.nameArabic}`)
+                                label(for="nameArabic") Property Name [Arabic]
+                                input.form-control#nameArabic(type="text", name="nameArabic", placeholder="Enter Property Name in Arabic" value=`${property.nameArabic}`)
 
                             .form-group.col-md-4
                                 label(for="mobilenumber") Mobile Number
@@ -40,7 +40,7 @@ block content
                             .col-md-12.pl-0
                                 .form-group.col-md-4
                                     label(for="mobilenumber") Price 
-                                    input.form-control(type="number", name="price" , value=`${property.price}`)            
+                                    input.form-control(type="number", name="price", value=`${property.price}`)            
                             .col-md-12.mt-5.mb-5
                                 h3 Advanced Information
                             .col-md-12
@@ -84,7 +84,7 @@ block content
                                 .col-md-4
                                     .form-group
                                         label Property Area
-                                        select.form-control.storeArea(name="area")
+                                        select.form-control.nameArea(name="nameArea")
                                             option( disabled) Select Area
                                             if areas
                                                 - var areas = areas
@@ -97,12 +97,12 @@ block content
                                 .col-md-6
                                     .form-group
                                         label Specific Address [ English ]
-                                        textarea.form-control(name="addressEnglish", rows="3", placeholder="Enter ..." )=property.Address.desriptionArabic
+                                        textarea.form-control(name="desEnglish", rows="3", placeholder="Enter ..." )=property.Address.desriptionArabic
                             .col-md-12
                                 .col-md-6
                                     .form-group
                                         label Specific Address [ Arabic ]
-                                        textarea.form-control(name="addressArabic", rows="3", placeholder="Enter ...")=property.Address.descriptionEnglish
+                                        textarea.form-control(name="desArabic", rows="3", placeholder="Enter ...")=property.Address.descriptionEnglish
                             .col-md-12
                                 div#dropi.dropzone.dz_clickable
                         .card-footer
@@ -114,6 +114,6 @@ block content
 
 
 block scripts 
-        script(src="/static/vendor/js/store.js", type="text/javascript")
+        script(src="/static/vendor/js/property.js", type="text/javascript")
 
 

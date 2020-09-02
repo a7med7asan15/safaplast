@@ -1,20 +1,20 @@
 $(function () {
     Inputmask().mask(document.querySelectorAll("input"));
   
-    $("#addSizeForm").validate({
+    $("#addRoomForm").validate({
       rules: {
-        nameEnglish: {
+        classEnglish: {
           required: true,
         },
-        nameArabic: {
+        classArabic: {
           required: true,
         },
       },
       messages: {
-        nameEnglish: {
+        classEnglish: {
           required: "Please Enter English Name",
         },
-        nameArabic: {
+        classArabic: {
           required: "Please Enter Arabic Name",
         },
       },

@@ -10,7 +10,7 @@ const PropertySchema = require('../models/propertySchema');
 const AmentiesSchema = require('../models/amentiesSchema');
 
 const propertyService = {
-  listAllStores: async (req, res) => {
+  listAllProps: async (req, res) => {
     let page = 1;
     let limit = 1;
 
@@ -23,11 +23,9 @@ const propertyService = {
       const options = {
         page,
         limit: 10,
-        populate: 'storeOwner'
-
       }
       const propertys = await PropertySchema.paginate({}, options);
-      return res.render('screens/storeScreens/listAllStores', {
+      return res.render('screens/propScreens/listAllProps', {
         thisUser: req.user,
         csrfToken,
         propertys
@@ -38,14 +36,14 @@ const propertyService = {
     }
 
   },
-  addStorePage: async (req, res) => {
+  addPropPage: async (req, res) => {
     let csrfToken = req.csrfToken();
-    const areas = await AreaSchema.find();
+    try{
+      const areas = await AreaSchema.find();
     const type = await TypesSchema.find();
     const rooms = await RoomsSchema.find();
     const amen = await AmentiesSchema.find();
-
-    return res.render('screens/storeScreens/addStoreScreen', {
+    return res.render('screens/propScreens/addPropScreen', {
       thisUser: req.user,
       csrfToken,
       areas,
@@ -54,28 +52,32 @@ const propertyService = {
       amen
     })
 
+    }catch(err){
+      req.flash('error', 'Something went wrong, please reload')
+    }
+    
   },
-  createStore: async (req, res) => {
+  createProp: async (req, res) => {
     const {
-      storeEnglish,
-      storeArabic,
+      nameEnglish,
+      nameArabic,
       mobileNumber,
-      area,
+      nameArea,
       type,
       rooms,
       price,
-      addressArabic,
-      addressEnglish,
+      desArabic,
+      desEnglish,
       images,
       amenties
     } = req.body;
     const im = images.split(',')
     try {
-      const areaObj = await AreaSchema.findById(area);
-      const store = new PropertySchema({
+      const areaObj = await AreaSchema.findById(nameArea);
+      const prop = new PropertySchema({
         createdby : req.user.id,
-        nameEnglish: storeEnglish,
-        nameArabic:storeArabic,
+        nameEnglish,
+        nameArabic,
         type,
         price,
         rooms,
@@ -84,22 +86,23 @@ const propertyService = {
         cityId: areaObj.parent,
         areaId: areaObj.id,
         Address: {
-          desriptionArabic:addressArabic,
-          descriptionEnglish:addressEnglish,
+          desriptionArabic:desArabic,
+          descriptionEnglish:desEnglish,
         },
         
       });
       for(i=0 ; i<im.length ; i++){
-        store.images.push({imageLink : im[i]});
+        prop.images.push({imageLink : im[i]});
       }
-      await store.save();
+      await prop.save();
       
 
       req.flash('success', 'Property Added Succesfully')
       return res.json({err:false,message:"Property Added Successfuly"});
 
     } catch (err) {
-      return res.json({err:true,message:"Property Not Added Successfuly"});
+      req.flash('success', 'Property Not Added ')
+      return res.json({err:true,message:"Property Not Added "});
 
     }
   },
@@ -116,7 +119,7 @@ const propertyService = {
       const amen = await AmentiesSchema.find();
 
       const property = await PropertySchema.findById(id);
-      return res.render('screens/storeScreens/editStoreScreen', {
+      return res.render('screens/propScreens/editPropScreen', {
         thisUser: req.user,
         property,
         csrfToken,
@@ -129,26 +132,25 @@ const propertyService = {
     } catch (err) {
       req.flash('error', 'Something Went wrong')
       
-      return res.render('screens/storeScreens/editStoreScreen', {
+      return res.render('screens/propScreens/editPropScreen', {
         thisUser: req.user,
-        storeToEdit: {},
+        property: {},
         csrfToken
       })
     }
 
   },
   update: async (req, res) => {
-    const {id}= req.query;
     const {
-      storeEnglish,
-      storeArabic,
+      nameEnglish,
+      nameArabic,
       mobileNumber,
-      area,
+      nameArea,
       type,
       rooms,
       price,
-      addressArabic,
-      addressEnglish,
+      desArabic,
+      desEnglish,
       images,
       amenties
     } = req.body;
@@ -157,47 +159,47 @@ const propertyService = {
        im = images.split(',');
     } 
     try {
-      const updateStore = await PropertySchema.findById(id);
+      const updateProp = await PropertySchema.findById(req.query.id);
       let imagesLoop = [] ;
       if(im.length){
         for(i=0 ; i < im.length ; i++){
           imagesLoop.push({imageLink : im[i]});
         }
       }
-      updateStore.nameEnglish = storeEnglish;
-      updateStore.nameArabic = storeArabic;
-      updateStore.mobileNumber = mobileNumber;
-      updateStore.type = type;
-      updateStore.price = price;
-      updateStore.rooms = rooms;
-      updateStore.areaId = area;
-      updateStore.Address.desriptionArabic = addressArabic;
-      updateStore.Address.descriptionEnglish = addressEnglish;
-      updateStore.images = imagesLoop;
-      updateStore.amenties = amenties;
-       await updateStore.save();
-
+      updateProp.nameEnglish = nameEnglish;
+      updateProp.nameArabic = nameArabic;
+      updateProp.mobileNumber = mobileNumber;
+      updateProp.type = type;
+      updateProp.price = price;
+      updateProp.rooms = rooms;
+      updateProp.areaId = nameArea;
+      updateProp.Address.desriptionArabic = desArabic;
+      updateProp.Address.descriptionEnglish = desEnglish;
+      updateProp.images = imagesLoop;
+      updateProp.amenties = amenties;
+      await updateProp.save();
   
       req.flash('success', 'Property Updated Succesfully')
-      return res.json({err:false,message:"Property Updated Successfuly"});
+      return res.json({err:false,message:"Property Updated Succesfully"});
+      
 
     } catch (err) {
-      console.log(err);
       req.flash('error', {
-        message: 'Something Went wrong'
+        message: 'Property Not Updated'
       })
-      return  res.json({err:true,message:"Property NOT Updated Successfuly"});
+      return  res.json({err:true,message:"Property NOT Updated"});
+       
     }
 
   },
   destroy: async (req, res) => {
     const {
-      storeId
+      propId
     } = req.params;
     try {
-      const deleteStore = await PropertySchema.findByIdAndDelete(storeId);
+      const deleteProp = await PropertySchema.findByIdAndDelete(propId);
 
-      req.flash('success', `${deleteStore.storeEnglish} Deleted Successfully`)
+      req.flash('success', `${deleteProp.nameEnglish} Deleted Successfully`)
       return res.redirect(`/dashboard/propertys`)
     } catch (err) {
       req.flash('error', {
@@ -207,22 +209,22 @@ const propertyService = {
 
     }
   },
-  searchShowStore: async (req, res) => {
+  searchShowProp: async (req, res) => {
     try {
       let csrfToken = req.csrfToken();
       const {
         table_search,
       } = req.body;
-      const tbSearch = await StoreSchema.find({
+      const tbSearch = await PropertySchema.find({
         "$or": [
           {
-            storeArabic: {
+            nameArabic: {
               '$regex': table_search,
               '$options': 'i'
             }
           },
           {
-            storeEnglish: {
+            nameEnglish: {
               '$regex': table_search,
               '$options': 'i'
             }
@@ -235,7 +237,7 @@ const propertyService = {
           }
         ]
       });
-      return res.render('screens/storeScreens/listAllStores', {
+      return res.render('screens/propScreens/listAllProps', {
         thisUser: req.user,
         csrfToken,
         table_search,
@@ -245,7 +247,7 @@ const propertyService = {
     } catch (err) {
 
       req.flash('error', 'Something Went wrong')
-      return res.render('screens/storeScreens/listAllStores', {
+      return res.render('screens/propScreens/listAllProps', {
         thisUser: req.user,
         table_search,
         tbSearch: {},
