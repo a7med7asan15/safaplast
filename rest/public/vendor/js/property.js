@@ -83,6 +83,8 @@ $(function () {
         mobileNumber: {
           required: true,
           minlength:11,
+          maxlength:11,
+          pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
         },
         price:{
           required: true,
@@ -119,8 +121,10 @@ $(function () {
           required: "Please Enter Arabic Name",
         },
         mobileNumber: {
-          required: "Please Enter Valid Mobile Number",
-          minlength: "Please Verify That it is not less than 11 Charachters",
+          required: "Please Enter a Mobile Number",
+          minlength: "Minimum 11 characters",
+          maxlength: "Maximum 11 Characters",
+          pattern: "Please Enter Valid Mobile Number",
         },
         nameArea: {
           required: "Please Enter Area",
