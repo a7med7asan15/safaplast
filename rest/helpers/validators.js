@@ -75,6 +75,7 @@ module.exports  = {
             nameEnglish:Joi.string().required(),
             nameArabic:Joi.string().required(),
             price:Joi.string().required(),
+            sku:Joi.string().required(),
             mobileNumber: Joi.string().min(11).max(11).pattern(new RegExp(/['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)).required(),
             nameArea:Joi.string().required(),
             type:Joi.string().required(),

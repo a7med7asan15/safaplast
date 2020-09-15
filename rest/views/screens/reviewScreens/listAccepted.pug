@@ -57,11 +57,19 @@ block content
                                             td #{ product.orderId }
                                             td #{ product.nameCustomer }
                                             td #{ product.customerMobileNo }
-                                            td #{ product.propertyId.mobileNumber }                                     
+                                            td 
+                                                if product.propertyId
+                                                       #{product.propertyId.mobileNumber}     
+                                                else
+                                                        span N/M
+                                                                            
                                             td
-                                                a.btn-sm.btn-primary(href=`/list/${product.propertyId.slugArabic}` target="_blank")
-                                                    i.far.fa-eye
-                                                    |  Property                                        
+                                                if product.propertyId
+                                                        a.btn-sm.btn-primary(href=`/list/${product.propertyId.slugArabic}` target="_blank")
+                                                            i.far.fa-eye
+                                                            |  View Property 
+                                                else
+                                                        span Product Deleted                                               
                                             td
                                                 form(action=`/dashboard/booking/checkpoint?id=${product.id}&request=booked`, method="post")
                                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)

@@ -74,11 +74,8 @@ block content
                                                 input.qtyplus(type='button' value='+' name='child')
                                                 input#child.qty(type='text' name='child' value='0')
                                                 input.qtyminus(type='button' value='-' name='child')
-                                .form-group
-                                    input.form-control(type="text" name="nameCustomer" placeholder="الاسم")
-                                .form-group
-                                    input.form-control(type="number" name="customerMobileNo" placeholder="رقم التليفون")
                                 button.add_top_30.btn_1.full-width.purchase(type='submit') إحجز
+                                a.add_top_10.btn_1.secondary.full-width(href='/cart') سلة الحجوزات
                             .text-center
                                 small سنتواصل معك بأقصي سرعة
                         .box_detail.booking
@@ -104,6 +101,9 @@ block content
                                                 h3=rp.nameArabic
                                                 
                 script var propertyId = !{JSON.stringify(property._id)}
+                script var slug = !{JSON.stringify(property.slugArabic)}
+                script var name = !{JSON.stringify(property.nameArabic)}
+                script var price = !{JSON.stringify(property.price)}
 block scripts 
         script(src="/static/websiteAssets/js/input_qty.js")
         script(src="/static/vendor/js/sendReq.js", type="text/javascript")

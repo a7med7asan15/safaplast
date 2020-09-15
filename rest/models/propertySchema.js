@@ -19,6 +19,7 @@ const propertySchema  = new Schema({
     type:{  type : Schema.Types.ObjectId , ref : 'typesSchema' } ,
     rooms:{  type : Schema.Types.ObjectId , ref : 'roomsSchema' } ,
     price:{ type : Number } ,
+    sku:{ type : String , required:true } ,
     images:[images] ,
     amenties:[{ type : Schema.Types.ObjectId , ref : 'amentiSchema' }],
     cityId: { type : Schema.Types.ObjectId , ref : 'citySchema' } ,

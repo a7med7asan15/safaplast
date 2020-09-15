@@ -89,6 +89,9 @@ $(function () {
         price:{
           required: true,
         },
+        sku:{
+          required: true,
+        },
         type: {
           required: true,
         },
@@ -128,6 +131,9 @@ $(function () {
         },
         nameArea: {
           required: "Please Enter Area",
+        },
+        sku: {
+          required: "Please Enter Sku",
         },
         type: {
           required: "Please Enter Type",

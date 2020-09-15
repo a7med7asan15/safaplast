@@ -8,7 +8,23 @@ margin:0
 });
 
 
+
+
+function checkoutIcon (){
+    var cl = window.localStorage.getItem('cart');
+    if(JSON.parse(cl).length > 0 ){
+        var target = $('#addToCart');   
+        target.html(JSON.parse(cl).length);
+        return target.addClass('visible')
+
+    }
+    console.log();
+}
+
+
+
 $(function() {
+ 
 $('input[name="dateStart"]').daterangepicker({
 singleDatePicker:true,
 autoUpdateInput: false,
@@ -81,12 +97,6 @@ messages:{
     dateEnd:{
         required: "من فضلك ادخل تاريخ العودة",
     },
-    nameCustomer:{
-        required: "من فضلك ادخل مدة البقاء",
-    },
-    customerMobileNo:{
-        required: "من فضلك ادخل مدة البقاء",
-    }
 },
 highlight: function (element) {
     $(element).addClass("is-invalid");
@@ -98,33 +108,45 @@ highlight: function (element) {
 submitHandler:function(form,event){
     event.preventDefault();
     const serialData = $(form).serializeArray();
-    serialData.push({name:"propertyId" , value:propertyId })
-        $.ajax({
-            type: "POST",
-            url:'/orders/add',
-            data: serialData,
-            headers: {
-                'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
-               }, 
-            success:function(result){
-                console.log(result);
+    serialData.push({name:"propertyId" , value:propertyId})
+    serialData.push({name:"propertySlug" , value:slug})
+    serialData.push({name:"propertyName" , value:name})
+    serialData.push({name:"propertyPrice" , value:price})
+    var data = {}
+    $(serialData ).each(function(index, obj){
+        data[obj.name] = obj.value;
+    });
+    ProductManager.setProduct(data.propertyId,data.propertyName,data.adults,data.child,data.dateEnd,data.dateStart,data.propertyPrice, data.propertySlug )
+    ProductManager.updateIcon();
+    return $(form).find("input[type=text], textarea").val("");
+
+        // $.ajax({
+        //     type: "POST",
+        //     url:'/orders/add',
+        //     data: serialData,
+        //     headers: {
+        //         'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
+        //        }, 
+        //     success:function(result){
+        //         console.log(result);
                 
-                if(!result.err){
-                    localStorage.setItem("name", result.customerName);
-                    localStorage.setItem("orderId", result.orderId);
-                    return window.location.replace( "http://" + result.domainName + "/orders/confirm");
-                }else{
+        //         if(!result.err){
+        //             localStorage.setItem("name", result.customerName);
+        //             localStorage.setItem("orderId", result.orderId);
+        //             return window.location.replace( "http://" + result.domainName + "/orders/confirm");
+        //         }else{
 
                     
-                    let key = result.key
-                    let msg = result.msg
-                    let errors = {[key]: msg };
+        //             let key = result.key
+        //             let msg = result.msg
+        //             let errors = {[key]: msg };
                     
-                    return $validate.showErrors(errors);
-                }
+        //             return $validate.showErrors(errors);
+        //         }
 
-            } 
-        })
+        //     } 
+        // })
   },
 
 })
+ProductManager.updateIcon()

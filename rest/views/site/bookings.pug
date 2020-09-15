@@ -1,0 +1,41 @@
+extends ../websiteLayout.pug
+
+block content   
+    .container.margin_60_35
+        .row
+            .box_booking.col-md-8.loading
+                .loadingScreen
+                    i.icon-spin6.animate-spin
+            aside#sidebar.col-lg-4
+                .box_detail.booking
+                    .price
+                    form#reqForm(action="/orders" method="POST")
+                        #input-dates.form-group
+                            input.form-control(type='text' name='dateStart' placeholder='تاريخ الوصول' autocorrect="off")
+                            i.icon_calendar
+                        #input-dates.form-group
+                            input.form-control(type='text' name='dateEnd' placeholder='تاريخ الإنتهاء' autocorrect="off")
+                            i.icon_calendar
+                        .dropdown
+                            a(href='#' data-toggle='dropdown')
+                                | عدد فرد 
+                                span#qty_total 0
+                            .dropdown-menu.dropdown-menu-right
+                                .dropdown-menu-content
+                                    label كبار
+                                    .qty-buttons
+                                        input.qtyplus(type='button' value='+' name='adults')
+                                        input#adults.qty(type='text' name='adults' value='0')
+                                        input.qtyminus(type='button' value='-' name='adults')
+                                .dropdown-menu-content
+                                    label اطفال
+                                    .qty-buttons
+                                        input.qtyplus(type='button' value='+' name='child')
+                                        input#child.qty(type='text' name='child' value='0')
+                                        input.qtyminus(type='button' value='-' name='child')
+                        button#hagz.add_top_30.btn_1.full-width.purchase(type='submit') إتمام الحجز
+                    .text-center
+                        small سنتواصل معك بأقصي سرعة
+
+block scripts 
+      script(src="/static/vendor/js/checkit.js", type="text/javascript")            

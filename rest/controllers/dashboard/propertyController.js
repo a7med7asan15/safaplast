@@ -70,10 +70,18 @@ propertyService.listAllProps
 router.get( '/add',
 
 
-
 csrfProtection, 
 
 propertyService.addPropPage
+
+
+);
+router.get( '/:id',
+
+
+csrfProtection, 
+
+propertyService.propertyPage
 
 
 );
