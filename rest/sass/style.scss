@@ -463,6 +463,9 @@ a.btn_1,
 			background-color: $color-5;
 			color: #222!important;
 		}
+	&.secondary{
+		background-color: $color-5;
+	}	
 	&.full-width{
 		display: block;
 		width: 100%;
@@ -473,6 +476,10 @@ a.btn_1,
 			&:hover {
 				background-color: $color-3;
 				color: #fff!important;
+			}
+			&:disabled{
+				background-color: grey !important;
+				cursor: auto;
 			}
 		}
 		&.wishlist{
@@ -746,6 +753,22 @@ ul#top_menu {
 			position: relative;
 			top: 0;
 		}
+		span{
+			position: absolute;
+			top: 0;
+			display:none;
+			background-color: $color-5;
+			width: 20px;
+			height: 20px;
+			font-weight: 700;
+			color: $color_4;
+			align-items: center;
+			justify-content: center;
+			border-radius: 100%;
+			&.visible{
+				display:flex
+				}
+		}
 		@include tablet {
 			margin: 2px 0 0 10px;
 		}
@@ -758,8 +781,8 @@ ul#top_menu {
 			&.login,
 			&.wishlist_bt_top{
 				display: block;
-				width: 22px;
-				height: 23px;
+				width: 35px;
+				height: 35px;
 				position: relative;
 				top: 8px;
 				@include tablet {
@@ -767,10 +790,11 @@ ul#top_menu {
 				}
 				@include transition-default (opacity, 0.5s, ease);
 				&:before {
-					font-family: 'Glyphter';
-					@include fontSize(21px);
+					font-family: 'fontello';
+					@include fontSize(25px);
 					text-indent: 0;
 					position: absolute;
+					color: rgba($color-4,0.8);
 					left: 0;
 					top: 0;
 					font-weight: normal;
@@ -779,12 +803,13 @@ ul#top_menu {
 						color: #444;
 					}
 				}
+				
 			}
 			&.wishlist_bt_top {
 				text-indent: -9999px;
 				overflow: hidden;
 				&:before {
-						content:'\0043';
+						content:'\ede5';
 					}
 			}
 			&.login {
@@ -5055,12 +5080,35 @@ ul.list_3 {
 .box_booking{
 	@include box-shadow (0px 0px 30px 0px rgba(0, 0, 0, 0.10));
 	background-color: #fff;
-    padding: 25px;
+	padding: 25px;
+	min-height:auto;
 	margin-bottom: 25px;
+	position: relative;
+	&.loading{
+	.loadingScreen{
+		display:flex;
+	}	
+	}
+	.loadingScreen{
+	width: 100%;
+	height: 500px;
+	z-index:1000;
+    background-color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+		i{
+			color:$color-1;
+			font-size: 64px;
+		}
+	}
 }
 .strip_booking{
 	border-bottom:1px solid #ededed;
 	padding-bottom:15px;
+	margin-top:15px;
 	margin-bottom:15px;
 	&.last{
 		border-bottom:none;
@@ -5076,6 +5124,7 @@ ul.list_3 {
 			color:#999;
 			display:block;
 			font-size:11px !important;
+			margin-top:5px;
 		}
 	}
 	.date{
@@ -5145,11 +5194,13 @@ ul.info_booking{
 	border-right: 1px solid #ededed;
 	text-align:right;
 	li{
+		
 		margin-bottom:5px;
 		strong{
 			text-transform:uppercase;
 			display:block;
 			color:#555;
+			margin-bottom:5px;
 		}
 	}
 }

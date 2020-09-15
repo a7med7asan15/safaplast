@@ -63,7 +63,7 @@ homePageService.contactPage
 
 );
 router.get('/yourList', 
-homePageService.yourList
+homePageService.contactPage
 
 );
 router.post('/loadmore',
@@ -89,6 +89,10 @@ ordersService.addOrder
 
 router.get('/orders/confirm',
 ordersService.confirmOrder
+)
+
+router.get('/cart',
+homePageService.bookingService
 )
 
 

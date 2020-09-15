@@ -423,6 +423,9 @@ a.btn_1,
   .btn_1:hover {
     background-color: #FFC107;
     color: #222 !important; }
+  a.btn_1.secondary,
+  .btn_1.secondary {
+    background-color: #FFC107; }
   a.btn_1.full-width,
   .btn_1.full-width {
     display: block;
@@ -436,6 +439,10 @@ a.btn_1,
       .btn_1.full-width.purchase:hover {
         background-color: #32a067;
         color: #fff !important; }
+      a.btn_1.full-width.purchase:disabled,
+      .btn_1.full-width.purchase:disabled {
+        background-color: grey !important;
+        cursor: auto; }
     a.btn_1.full-width.wishlist,
     .btn_1.full-width.wishlist {
       border-color: #555;
@@ -706,6 +713,20 @@ ul#top_menu {
       margin-right: 0;
       position: relative;
       top: 0; }
+    ul#top_menu li span {
+      position: absolute;
+      top: 0;
+      display: none;
+      background-color: #FFC107;
+      width: 20px;
+      height: 20px;
+      font-weight: 700;
+      color: #121921;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%; }
+      ul#top_menu li span.visible {
+        display: flex; }
     @media (max-width: 991px) {
       ul#top_menu li {
         margin: 2px 0 0 10px; } }
@@ -716,8 +737,8 @@ ul#top_menu {
         opacity: 0.7; }
       ul#top_menu li a.login, ul#top_menu li a.wishlist_bt_top {
         display: block;
-        width: 22px;
-        height: 23px;
+        width: 35px;
+        height: 35px;
         position: relative;
         top: 8px;
         transition: opacity 0.5s ease; }
@@ -725,11 +746,12 @@ ul#top_menu {
           ul#top_menu li a.login, ul#top_menu li a.wishlist_bt_top {
             top: 2px; } }
         ul#top_menu li a.login:before, ul#top_menu li a.wishlist_bt_top:before {
-          font-family: 'Glyphter';
-          font-size: 21px;
-          font-size: 1.3125rem;
+          font-family: 'fontello';
+          font-size: 25px;
+          font-size: 1.5625rem;
           text-indent: 0;
           position: absolute;
+          color: rgba(18, 25, 33, 0.8);
           left: 0;
           top: 0;
           font-weight: normal;
@@ -740,7 +762,7 @@ ul#top_menu {
         text-indent: -9999px;
         overflow: hidden; }
         ul#top_menu li a.wishlist_bt_top:before {
-          content: '\0043'; }
+          content: '\ede5'; }
       ul#top_menu li a.login {
         text-indent: -9999px;
         overflow: hidden; }
@@ -4587,11 +4609,29 @@ ul.list_3 {
   box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   padding: 25px;
-  margin-bottom: 25px; }
+  min-height: auto;
+  margin-bottom: 25px;
+  position: relative; }
+  .box_booking.loading .loadingScreen {
+    display: flex; }
+  .box_booking .loadingScreen {
+    width: 100%;
+    height: 500px;
+    z-index: 1000;
+    background-color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0; }
+    .box_booking .loadingScreen i {
+      color: #004dda;
+      font-size: 64px; }
 
 .strip_booking {
   border-bottom: 1px solid #ededed;
   padding-bottom: 15px;
+  margin-top: 15px;
   margin-bottom: 15px; }
   .strip_booking.last {
     border-bottom: none; }
@@ -4608,7 +4648,8 @@ ul.list_3 {
     .strip_booking h3 span {
       color: #999;
       display: block;
-      font-size: 11px !important; }
+      font-size: 11px !important;
+      margin-top: 5px; }
   .strip_booking .date {
     background-color: #f8f8f8;
     text-align: center;
@@ -4676,7 +4717,8 @@ ul.info_booking {
     ul.info_booking li strong {
       text-transform: uppercase;
       display: block;
-      color: #555; }
+      color: #555;
+      margin-bottom: 5px; }
 
 .booking_buttons {
   margin-top: 20px; }

@@ -178,9 +178,9 @@ const homePageService ={
         });
 
     },
-    yourList:async(req,res)=>{
+    bookingService:async(req,res)=>{
         
-        return res.render('site/yourList',{
+        return res.render('site/bookings',{
             title: 'تواصل معنا', 
             metDescription: 'عنوان دهب دورز', 
             ogTitle: 'عنوان دهب دورز', 

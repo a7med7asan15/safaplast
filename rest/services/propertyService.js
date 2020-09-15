@@ -1,4 +1,3 @@
-const User = require('../models/Users');
 const {
   AreaSchema
 } = require('../models/citySchema');
@@ -65,6 +64,7 @@ const propertyService = {
       nameArea,
       type,
       rooms,
+      sku,
       price,
       desArabic,
       desEnglish,
@@ -81,6 +81,7 @@ const propertyService = {
         type,
         price,
         rooms,
+        sku,
         mobileNumber,
         amenties,
         cityId: areaObj.parent,
@@ -256,8 +257,20 @@ const propertyService = {
     }
 
 
-  }
+  },
+  propertyPage:async(req,res)=>{
+    var property = req.params.id
+    try{
+      var property = await PropertySchema.findById(property);
+      return res.render('screens/propScreens/showOneScreen',{
+        thisUser: req.user,
+        property: property,
+      });
+    }catch(err){
+      console.log(err);
+    }
 
+}
 }
 
 module.exports = propertyService

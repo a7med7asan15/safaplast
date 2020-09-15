@@ -5,6 +5,7 @@ var args = {
     rooms:[],
     area:[],
 };
+
 var loadmore = $('.col-lg-9 #loadmore');
 var cardsContainer = $('#cardsContainer .row')
 function card (page,image,h,p,price,area,slug,type,rooms){
