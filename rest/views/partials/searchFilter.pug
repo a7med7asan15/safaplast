@@ -19,14 +19,15 @@ aside#sidebar.col-lg-3
                  
                 .filter_type
                     h6 السعر
-                    .distance
-                        |  تكون فى حدود
-                        span
-                        |   جنية اليوم
-                    - avg = 800
-                    if(priceQuery)
-                        - avg = priceQuery    
-                    input(type="range", name="price",min=`${minPrice}`, max="1200", step="50", value=avg, data-orientation="horizontal")
+                    //type="text" name="price" 
+                    div(id="amount" style="border:0; color:#333; margin-bottom:10px")   
+                        | من  
+                        span.minVal
+                        |  إلي  
+                        span.maxVal
+                        input#minValPrice(type="text" name="minValPrice" hidden value=`${minValPrice}`)
+                        input#maxValPrice(type="text" name="maxValPrice" hidden value=`${maxValPrice}`)
+                    div#slider-range 
                 .filter_type
                     h6 المكان
                     ul
@@ -65,5 +66,4 @@ aside#sidebar.col-lg-3
                                         span.checkmark
                 .filter_type
                     h6 
-                    input.btn_1.add_top_10(style="width:100%;",type="submit" value="دورلى")   
-                       
+                    input.btn_1.add_top_10(style="width:100%;",type="submit" value="دورلى")  

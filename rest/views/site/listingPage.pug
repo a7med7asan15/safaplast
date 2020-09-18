@@ -1,26 +1,51 @@
 extends ../websiteLayout.pug
 
 block content   
+    main
+        //- include ../partials/filterListing
 
-   
-        main
-            //- include ../partials/filterListing
-            .container.margin_60_35
-                .row
-                    include ../partials/searchFilter.pug
-                    #cardsContainer.col-lg-9
-                        .row
-                            if (data.docs.length > 0 )
-                                include ../partials/homePageCard.pug
-                            else
-                                div(style="background-color:white; width:100%; height:200px; border:1px solid #ededed; display:flex; align-items:center; justify-content:center; text-align:center;")
-                                    h5 مفيش وحدات بالمواصفات الى انت عايزها     
-                        if (data.totalPages > 1)
-                            p#loadmore.text-center
-                                a.btn_1.rounded.add_top_30(href="") المزيد 
-                footer.plus_border     
-                #toTop
-            script var page = !{JSON.stringify(data.page)}   
-            script var totalPages = !{JSON.stringify(data.totalPages)} 
+        .container.margin_60_35
+            .row
+                include ../partials/searchFilter.pug
+                #cardsContainer.col-lg-9
+                    .row
+                        if (data.docs.length > 0 )
+                            include ../partials/homePageCard.pug
+                        else
+                            div(style="background-color:white; width:100%; height:200px; border:1px solid #ededed; display:flex; align-items:center; justify-content:center; text-align:center;")
+                                h5 مفيش وحدات بالمواصفات الى انت عايزها     
+                    if (data.totalPages > 1)
+                        p#loadmore.text-center
+                            a.btn_1.rounded.add_top_30(href="") المزيد 
+            footer.plus_border     
+            #toTop
+        script var page = !{JSON.stringify(data.page)}   
+        script var totalPages = !{JSON.stringify(data.totalPages)} 
+        script var minPrice = !{JSON.stringify(minPrice)} 
+        script var maxPrice = !{JSON.stringify(maxPrice)} 
+        script var minValPrice = !{JSON.stringify(minValPrice)} 
+        script var maxValPrice = !{JSON.stringify(maxValPrice)}
 block scripts 
-       script(src="/static/vendor/js/search.js", type="text/javascript")       
+    script(src="/static/vendor/js/search.js" type="text/javascript") 
+    script.
+        console.log(minValPrice);
+        $( function() {
+            $( "#slider-range" ).slider({
+            range: true,
+            min: maxPrice*-1,
+            max: minPrice*-1,
+            values: [ -1*maxValPrice, -1*minValPrice ],
+            slide: function( event, ui ) {
+                //$( "#amount" ).html( "من" + ui.values[ 1 ]*-1 + " لحد " + ui.values[ 0 ]*-1 );
+                $( "#amount>.minVal" ).html( ui.values[ 1 ]*-1 );
+                $( "#amount>.maxVal" ).html( ui.values[ 0 ]*-1 );
+                $( "#amount>#minValPrice" ).val( ui.values[ 1 ]*-1 );
+                $( "#amount>#maxValPrice" ).val( ui.values[ 0 ]*-1 );
+            }
+            });
+            $( "#amount>.minVal" ).html( $( "#slider-range" ).slider( "values", 1 )*-1 );
+            $( "#amount>.maxVal" ).html( $( "#slider-range" ).slider( "values", 0 )*-1 );
+            $( "#amount>#minValPrice" ).val( $( "#slider-range" ).slider( "values", 1 )*-1 );
+            $( "#amount>#maxValPrice" ).val( $( "#slider-range" ).slider( "values", 0 )*-1 );
+            
+        } );

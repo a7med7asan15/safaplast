@@ -23,21 +23,26 @@ html
     link(rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png")
     link(rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png")
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">  
+    link(href="/static/bower_components/admin-lte/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet")
     link(href="/static/websiteAssets/css/bootstrap-rtl.min.css" rel="stylesheet")
     link(href="/static/websiteAssets/css/style.css" rel="stylesheet")
     link(href="/static/websiteAssets/css/style-rtl.css" rel="stylesheet")
     link(href="/static/websiteAssets/css/vendors.css" rel="stylesheet")
+    link(href="/static/edits/edits.css" rel="stylesheet")
+    
 
 body    
   #page.theia-exception
     include partials/websiteHeader
     block content
 
+    script(src="/static/bower_components/admin-lte/plugins/jquery/jquery.min.js")  
+    
     script(src="/static/websiteAssets/js/common_scripts.js")
     script(src="/static/websiteAssets/js/functions_rtl.js")
     script(src="/static/websiteAssets/js/validate.js")
     script(src="/static/bower_components/jquery-validation/dist/jquery.validate.min.js", type="text/javascript")
-
+    script(src="/static/bower_components/admin-lte/plugins/jquery-ui/jquery-ui.min.js") 
     //  Map 
     script(src="http://maps.googleapis.com/maps/api/js")
     script(src="/static/websiteAssets/js/markerclusterer.js")

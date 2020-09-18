@@ -37,10 +37,6 @@ const homePageService ={
                 roomsQuery = req.query.room
                 query.rooms = roomsQuery;
             }
-            if(req.query.price){
-                priceQuery = req.query.price
-                query.price = { $lte: parseInt(priceQuery)};
-            }
             if(req.query.area){
                 areaQuery = req.query.area
                 query.areaId = areaQuery
@@ -49,7 +45,11 @@ const homePageService ={
                 amentiesQuery = req.query.amenties
                 query.amenties = amentiesQuery
             }
-
+            if(req.query.minValPrice || req.query.maxValPrice){
+                minValPrice = req.query.minValPrice;
+                maxValPrice = req.query.maxValPrice;
+                query.price =  { $gte: minValPrice, $lte: maxValPrice }
+            }
             let csrfToken = req.csrfToken();
        
                 const options = {
@@ -63,10 +63,28 @@ const homePageService ={
             const areas = await AreaSchema.find();
             const amen = await AmentiesSchema.find();
             const minmumPriceRange = await PropertySchema.find().sort({price:1}).limit(1);
+            const maxPriceRange = await PropertySchema.find().sort({price:-1}).limit(1);
             let minPrice = 100;   
+            let maxPrice = 200;  
             if(minmumPriceRange.length){
                 minPrice  = minmumPriceRange[0].price;
             }
+            if(maxPriceRange.length){
+                maxPrice  = maxPriceRange[0].price;
+            }
+            
+            if(req.query.minValPrice){
+                minValPrice = req.query.minValPrice;
+            }else{
+                minValPrice=minPrice;
+            }
+            if(req.query.maxValPrice){
+                maxValPrice = req.query.maxValPrice;
+            }
+            else{
+                maxValPrice=maxPrice;
+            }
+
             res.render('site/listingPage', { 
             title: ' باب دهب - اجر شقة فى دهب باليوم بأرخص الأسعار', 
             metDescription: 'شقق فى دهب بأرخص الأسعار دور على شقة باليوم فى دهب ', 
@@ -83,6 +101,9 @@ const homePageService ={
             amentiesQuery,
             csrfToken,
             minPrice,
+            maxPrice,
+            minValPrice, 
+            maxValPrice,
             amen
         })
              
@@ -100,7 +121,8 @@ const homePageService ={
             const relatedProducts = await PropertySchema.find({price:{$lte:property.price}}).limit(4).select(['slugArabic','nameArabic','images']);
             property.views = property.views  + 1;
             await property.save();
-             return res.render('site/page', {property :property,
+             return res.render('site/page', {
+            property :property,
              csrfToken,
              relatedProducts,
              title: property.nameArabic, 
