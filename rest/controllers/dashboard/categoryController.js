@@ -92,6 +92,26 @@ categoryService.showOneRoom
 
 );
 
+
+router.get( '/amenties',
+
+
+csrfProtection, 
+
+categoryService.showAmens
+
+
+);
+router.get( '/amenties/edit',
+
+
+csrfProtection, 
+
+categoryService.showOneAmen
+
+
+);
+
 // separate and add category 
 
 ////////////////////////////////////////////////
@@ -141,10 +161,28 @@ categoryService.updateOneRoom
 )
 
 
+router.post( '/amenties/add',
+
+validationBody(schemas.addAmenSchema),
+
+csrfProtection, 
+
+categoryService.addAmen
+
+)
+router.post( '/amenties/edit',
+
+validationBody(schemas.addAmenSchema),
+
+csrfProtection, 
+
+categoryService.updateOneAmen
+
+)
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// EDIT Color  // ++++// //////
+// +++ /// DELETE TYPE // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
@@ -162,7 +200,13 @@ csrfProtection,
 categoryService.deleteOneRoom
 
 )
+router.post( '/amenties/delete',
 
+csrfProtection, 
+
+categoryService.deleteOneAmen
+
+)
 
 //---------------------------
 // Update Color Route 
@@ -206,6 +250,18 @@ categoryService.searchShowRoom
 
 ); 
 
+//---------------------------
+// Class Search 
+//---------------------------
+
+router.post('/amenties/searchResult',
+
+csrfProtection,
+
+
+categoryService.searchShowAmen
+
+); 
 
 //---------------------------
 // Variant Search 

@@ -6,7 +6,7 @@ block content
             .container-fluid
                 .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark All Types
+                    h1.m-0.text-dark All Amenties
         .content
             .container-fluid
                 if successes
@@ -19,24 +19,33 @@ block content
                     .col-5
                         .card
                             .card-header
-                                h3.card-title Type Info
-                            form#addTypeForm(action="/dashboard/category/types/add" method="post" role="form")
+                                h3.card-title Amenity Info
+                            form#addAmenForm(action="/dashboard/category/amenties/add" method="post" role="form")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .form-group.col-md-10
-                                        label(for="serviceenglish") Type Name [ English ]
+                                        label(for="serviceenglish") Amenity Name [ English ]
                                         input.form-control#serviceenglish(type="text", name="nameEnglish", placeholder="Enter Type Name in english")
                                     .form-group.col-md-10
-                                        label(for="servicearabic") Type Name [ Arabic ]
+                                        label(for="servicearabic") Amenity Name [ Arabic ]
                                         input.form-control#servicearabic(type="text", name="nameArabic", placeholder="Enter Type name in arabic")
+                                    .col-md-10
+                                        .form-group
+                                        label Amenity Icon
+                                        select.form-control.am-icons(name="icon")
+                                            option(selected disabled data-image="0") Select Icon
+                                                - var numImg = 10
+                                                - for (var i = 1; i < numImg+1; i++) {
+                                                    option(value=`${i}` data-image=`/static/images/${i}.svg`) #{i}
+                                                - }
                                 .card-footer
-                                    button.btn.btn-primary.float-right(type="submit") Add Type
+                                    button.btn.btn-primary.float-right(type="submit") Add Amenity
                     .col-7
                         .card
                             .card-header
-                                h3.card-title All Types 
+                                h3.card-title All Amenties 
                                 .card-tools
-                                form(action=`/dashboard/category/types/searchResult`, method="post")
+                                form(action=`/dashboard/category/amenties/searchResult`, method="post")
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .input-group.input-group-sm.float-right(style="width: 150px;")
                                         if dataProvided
@@ -53,6 +62,7 @@ block content
                                             th ID
                                             th English 
                                             th Arabic 
+                                            th Icon
                                             th Edit
                                             th delete
                                     tbody
@@ -63,16 +73,19 @@ block content
                                                     td #{num++}
                                                     td #{tb.nameEnglish}
                                                     td #{tb.nameArabic}
+                                                    td 
+                                                        img(src=`/static/images/${tb.icon}.svg`)
                                                     td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/category/types/edit?id=${tb.id}`)
+                                                        a.btn-sm.btn-primary(href=`/dashboard/category/amenties/edit?id=${tb.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
-                                                        form(action=`/dashboard/category/types/delete?id=${tb.id}`, method="post")
+                                                        form(action=`/dashboard/category/amenties/delete?id=${tb.id}`, method="post")
                                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                             button.btn-sm.btn-danger(type="submit")
                                                                 i.fas.fa-trash-alt
                                                                 |  Delete
+                                        
                                         if dataProvided
                                             - var dataArray = dataProvided.docs
                                             - var hasPrev = dataProvided.hasPrevPage 
@@ -86,12 +99,14 @@ block content
                                                     td #{num++}
                                                     td #{dat.nameEnglish}
                                                     td #{dat.nameArabic}
+                                                    td 
+                                                        img(src=`/static/images/${dat.icon}.svg`)
                                                     td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/category/types/edit?id=${dat.id}`)
+                                                        a.btn-sm.btn-primary(href=`/dashboard/category/amenties/edit?id=${dat.id}`)
                                                             i.far.fa-edit
                                                             |  Edit
                                                     td
-                                                        form(action=`/dashboard/category/types/delete?id=${dat.id}`, method="post")
+                                                        form(action=`/dashboard/category/amenties/delete?id=${dat.id}`, method="post")
                                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                             button.btn-sm.btn-danger(type="submit")
                                                                 i.fas.fa-trash-alt
@@ -99,7 +114,7 @@ block content
                                 ul.pagination.pagination-sm.m-0.float-right
                                     if hasPrev
                                         li.page-item
-                                            a.page-link(href=href=`/dashboard/category/types?p=${page - 1}`) «
+                                            a.page-link(href=href=`/dashboard/category/amenties?p=${page - 1}`) «
                         
                                     if totalPages > 1
                                         while pages  < 3            
@@ -107,12 +122,12 @@ block content
                                                 if pages === page
                                                     a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
                                                 else
-                                                    a.page-link.active( href=`/dashboard/category/types?p=${pages}`)= pages
+                                                    a.page-link.active( href=`/dashboard/category/amenties?p=${pages}`)= pages
                                                     
                                             - pages++    
                                
                                     if hasNext
                                         li.page-item
-                                            a.page-link(href=`/dashboard/category/types?p=${page + 1}`) »
+                                            a.page-link(href=`/dashboard/category/amenties?p=${page + 1}`) »
 block scripts 
-        script(src="/static/vendor/js/addType.js", type="text/javascript")
+        script(src="/static/vendor/js/addAmen.js", type="text/javascript")

@@ -14,8 +14,8 @@ block content
                     .col-12
                         .card   
                             .card-header
-                                h3.card-title Room Information
-                            form#addRoomForm(action=`/dashboard/category/rooms/edit?id=${dataProvided.id}`, method="post" )
+                                h3.card-title Amenity Information
+                            form#addAmenForm(action=`/dashboard/category/amenties/edit?id=${dataProvided.id}`, method="post" )
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .col-md-12
@@ -26,7 +26,17 @@ block content
                                         .form-group.col-md-6
                                             label(for="typeArabic") Name [Arabic]
                                             input#typeArabic.form-control( type="text" name="nameArabic", value=`${dataProvided.nameArabic}`, placeholder="Enter Color Hex")
+                                    .col-md-10
+                                        .form-group
+                                        label Amenity Icon
+                                        select.form-control.am-icons(name="icon")
+                                            option(selected data-image=`/static/images/${dataProvided.icon}.svg` value=`${dataProvided.icon}`) #{dataProvided.icon}
+                                                - var numImg = 10
+                                                - for (var i = 1; i < numImg+1; i++) {
+                                                    option(value=`${i}` data-image=`/static/images/${i}.svg`) #{i}
+                                                - }
+
                                 .card-footer
-                                    button.btn.btn-primary.float-right(type="submit") Update Room
+                                    button.btn.btn-primary.float-right(type="submit") Update Amenity
 block scripts 
-        script(src="/static/vendor/js/addRoom.js", type="text/javascript")
+        script(src="/static/vendor/js/addAmen.js", type="text/javascript")

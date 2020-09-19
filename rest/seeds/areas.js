@@ -1,6 +1,6 @@
 const PropertySchema = require('../models/propertySchema');
 const OrdersSchema = require('../models/ordersSchema');
-const AmentiesSchema = require('../models/amentiesSchema');
+const {AmentiesSchema} = require('../models/amentiesSchema');
 const User  = require('../models/Users');
 const {CategoryParentSchema}  = require('../models/categorySchema');
 const orderid = require('order-id')('dahabdoor')

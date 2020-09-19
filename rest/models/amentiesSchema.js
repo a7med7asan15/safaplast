@@ -12,4 +12,6 @@ const amentiSchema = new Schema({
 
 })
 amentiSchema.plugin(mongoosePaginate);
-module.exports = mongoose.model('amentiSchema', amentiSchema);;
+const AmentiesSchema =  mongoose.model('amentiSchema', amentiSchema);
+
+module.exports = {AmentiesSchema}; 

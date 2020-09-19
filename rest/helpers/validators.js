@@ -71,6 +71,12 @@ module.exports  = {
             nameArabic:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
+        addAmenSchema:Joi.object().keys({
+            nameEnglish:Joi.string().required(),
+            nameArabic:Joi.string().required(),
+            icon:Joi.string().required(),
+            _csrf:Joi.string(), 
+        }),
         addPropSchema:Joi.object().keys({
             nameEnglish:Joi.string().required(),
             nameArabic:Joi.string().required(),

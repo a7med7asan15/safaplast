@@ -3,18 +3,18 @@ $(function () {
   
     $("#addRoomForm").validate({
       rules: {
-        classEnglish: {
+        nameEnglish: {
           required: true,
         },
-        classArabic: {
+        nameArabic: {
           required: true,
         },
       },
       messages: {
-        classEnglish: {
+        nameEnglish: {
           required: "Please Enter English Name",
         },
-        classArabic: {
+        nameArabic: {
           required: "Please Enter Arabic Name",
         },
       },
