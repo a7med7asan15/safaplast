@@ -10,29 +10,10 @@ block content
                 .box_detail.booking
                     .price
                     form#reqForm(action="/orders" method="POST")
-                        #input-dates.form-group
-                            input.form-control(type='text' name='dateStart' placeholder='تاريخ الوصول' autocorrect="off")
-                            i.icon_calendar
-                        #input-dates.form-group
-                            input.form-control(type='text' name='dateEnd' placeholder='تاريخ الإنتهاء' autocorrect="off")
-                            i.icon_calendar
-                        .dropdown
-                            a(href='#' data-toggle='dropdown')
-                                | عدد فرد 
-                                span#qty_total 0
-                            .dropdown-menu.dropdown-menu-right
-                                .dropdown-menu-content
-                                    label كبار
-                                    .qty-buttons
-                                        input.qtyplus(type='button' value='+' name='adults')
-                                        input#adults.qty(type='text' name='adults' value='0')
-                                        input.qtyminus(type='button' value='-' name='adults')
-                                .dropdown-menu-content
-                                    label اطفال
-                                    .qty-buttons
-                                        input.qtyplus(type='button' value='+' name='child')
-                                        input#child.qty(type='text' name='child' value='0')
-                                        input.qtyminus(type='button' value='-' name='child')
+                        .form-group
+                            input.form-control(type='text' name='cuName' placeholder='الاسم' autocorrect="off")
+                        .form-group
+                            input.form-control(type='text' name='cuMob' placeholder='رقم الموبايل' autocorrect="off")
                         button#hagz.add_top_30.btn_1.full-width.purchase(type='submit') إتمام الحجز
                     .text-center
                         small سنتواصل معك بأقصي سرعة

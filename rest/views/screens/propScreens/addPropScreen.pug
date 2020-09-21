@@ -40,10 +40,17 @@ block content
                             .form-group.col-md-4
                                 label(for="sku") SKU
                                 input.form-control(type="text", name="sku" placeholder="Enter Sku Property")            
-                            .col-md-12.pl-0
-                                .form-group.col-md-4
-                                    label(for="mobilenumber") Price 
-                                    input.form-control(type="number", name="price" placeholder="Enter Price")            
+                            .col-md-4
+                            .form-group.col-md-4
+                                label(for="mobilenumber") Price 
+                                input.form-control(type="number", name="price" placeholder="Enter Price") 
+                            .form-group.col-md-8
+                                label Brokers
+                                select.brokers(multiple,name="brokers", data-placeholder="Select Brokers", style="width: 100%;")
+                                    if brok 
+                                        for a in brok
+                                            option(value=`${a.id}`)=`${a.name} - ${a.mobileNo}` 
+                                
                             .col-md-12.mt-5.mb-5
                                 h3 Advanced Information
                             .col-md-12

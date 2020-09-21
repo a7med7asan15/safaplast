@@ -1,0 +1,80 @@
+extends ../../layout.pug
+
+
+block content
+    .content-header
+        .container-fluid
+            .row.mb-3.mt-3
+            .col-sm-6
+                h1.m-0.text-dark All Messages
+
+    .content
+        .container-fluid
+            if successes
+                for success in successes
+                    div.alert.alert-success #{ success }
+            if errors
+                for error, i in errors
+                    div.alert.alert-danger #{ error.message }
+            .row
+                .col-md-12        
+                    #accordion
+                        .card.card-primary
+                            .card-header(style="padding:0")
+                                h4.card-title(style="width:100%")
+                                    a(data-toggle='collapse' data-parent='#accordion' href='#collapseOne' style="display: block;padding: .75rem 1.25rem;")
+                                        | September
+                            #collapseOne.panel-collapse.collapse.show.in
+                                .card-body      
+                                    #accordion-month1
+                                        .card.card-light
+                                            .card-header(style="padding:0")
+                                                h4.card-title(style="width:100%")
+                                                    a(data-toggle='collapse' data-parent='#accordion-month1' href='#Month1' style="display: block;padding: .75rem 1.25rem;")
+                                                        | 19 September
+                                            #Month1.panel-collapse.collapse.show.in
+                                                .table-responsive.p-0(style='height: 300px;')
+                                                    table.table.table-head-fixed
+                                                        thead
+                                                            tr
+                                                                th Name 
+                                                                th Email
+                                                                th Mobile
+                                                                th Time
+                                                                th(colspan="3") Message
+                                                                th Status
+                                                        tbody
+                                                            tr
+                                                                td Ahmed Hassan
+                                                                td a7med7asan@gmail.com
+                                                                td 01159613046
+                                                                td 11:59:02
+                                                                td(colspan="3") Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.
+                                                                td 
+                                                                    .btn-group
+                                                                        button.btn.btn-info(type="button") Action
+                                                                        button.btn.btn-info.dropdown-toggle.dropdown-icon(type="button" data-toggle="dropdown")
+                                                                        span.sr-only Toggle Dropdown
+                                                                        .dropdown-menu(role="menu")
+                                                                            a.dropdown-item(href="#") Action
+                                                                            a.dropdown-item(href="#") Another action
+                                                                            a.dropdown-item(href="#") Something else here
+                                                                            .dropdown-divider
+                                                                            a.dropdown-item(href="#") Separated link
+                                                            tr
+                                                                td Ahmed Hassan
+                                                                td a7med7asan@gmail.com
+                                                                td 01159613046
+                                                                td 11:59:02
+                                                                td(colspan="3") Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.
+                                                                td Responded
+                                                            
+                                    #accordion-month2
+                                        .card.card-light
+                                            .card-header(style="padding:0")
+                                                h4.card-title(style="width:100%")
+                                                    a(data-toggle='collapse' data-parent='#accordion-month2' href='#Month2' style="display: block;padding: .75rem 1.25rem;")
+                                                        | 18 September
+                                            #Month2.panel-collapse.collapse.in
+                                                | No Messages to show
+

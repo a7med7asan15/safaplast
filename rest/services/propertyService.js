@@ -6,7 +6,9 @@ const {
   RoomsSchema
 } = require('../models/categorySchema');
 const PropertySchema = require('../models/propertySchema');
-const AmentiesSchema = require('../models/amentiesSchema');
+const {AmentiesSchema} = require('../models/amentiesSchema');
+const BrokerSchema = require('../models/brokerSchema');
+
 
 const propertyService = {
   listAllProps: async (req, res) => {
@@ -42,12 +44,14 @@ const propertyService = {
     const type = await TypesSchema.find();
     const rooms = await RoomsSchema.find();
     const amen = await AmentiesSchema.find();
+    const brok = await BrokerSchema.find();
     return res.render('screens/propScreens/addPropScreen', {
       thisUser: req.user,
       csrfToken,
       areas,
       type,
       rooms,
+      brok,
       amen
     })
 
@@ -69,7 +73,7 @@ const propertyService = {
       desArabic,
       desEnglish,
       images,
-      amenties
+      amenties, brokers
     } = req.body;
     const im = images.split(',')
     try {
@@ -84,6 +88,7 @@ const propertyService = {
         sku,
         mobileNumber,
         amenties,
+        brokers,
         cityId: areaObj.parent,
         areaId: areaObj.id,
         Address: {
@@ -118,6 +123,7 @@ const propertyService = {
       const type = await TypesSchema.find();
       const rooms = await RoomsSchema.find();
       const amen = await AmentiesSchema.find();
+      const brok = await BrokerSchema.find();
 
       const property = await PropertySchema.findById(id);
       return res.render('screens/propScreens/editPropScreen', {
@@ -127,7 +133,7 @@ const propertyService = {
         areas,
         type,
         rooms,
-        amen
+        amen, brok
 
       })
     } catch (err) {
@@ -153,7 +159,7 @@ const propertyService = {
       desArabic,
       desEnglish,
       images,
-      amenties
+      amenties, brokers
     } = req.body;
     let im = [];
     if(images){
@@ -178,6 +184,7 @@ const propertyService = {
       updateProp.Address.descriptionEnglish = desEnglish;
       updateProp.images = imagesLoop;
       updateProp.amenties = amenties;
+      updateProp.brokers = brokers;
       await updateProp.save();
   
       req.flash('success', 'Property Updated Succesfully')

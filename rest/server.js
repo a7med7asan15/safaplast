@@ -32,7 +32,8 @@ const  logisticController  =  require(  './controllers/dashboard/logisticControl
 const  categoryController  =  require(  './controllers/dashboard/categoryController'  );
 const  mediaController  =  require(  './controllers/dashboard/mediaController'  );
 const  homePageController  =  require(  './controllers/website/homePageController'  );
- 
+const  contactController  =  require(  './controllers/website/contactController'  );
+const  brokerController  =  require(  './controllers/dashboard/brokerController'  );
 
 /// Require Seeds 
 
@@ -194,9 +195,11 @@ app.use(   '/dashboard'   ,   authController   );
 app.use(   '/dashboard/users'   ,   usersController   );
 app.use(   '/dashboard/propertys'   ,  propertyController   );
 app.use(   '/dashboard/logistic'   ,   logisticController  );
+app.use(   '/dashboard/messages'   ,   contactController  );
 app.use(   '/dashboard/category'   ,   categoryController  ); 
 app.use(   '/dashboard/media'   ,   mediaController  ); 
 app.use(   '/dashboard/booking'   ,   reviewController  ); 
+app.use(   '/dashboard/brokers'   ,   brokerController  ); 
 app.get('*', function(req, res){
   return res.render('site/404.pug')
 });

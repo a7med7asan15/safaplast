@@ -24,17 +24,30 @@ function checkoutIcon (){
 
 
 $(function() {
- 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    console.log(today);
 $('input[name="dateStart"]').daterangepicker({
 singleDatePicker:true,
 autoUpdateInput: false,
 parentEl:'#input-dates',
 showDropdowns: false,
 opens: 'right',
+isInvalidDate: function(date) {
+    if (date.format('YYYY-MM-DD') <= today) {
+        return true; 
+    }
+},
 locale: {
 direction: 'rtl',
 cancelLabel: 'مسح',
 applyLabel:'تحديد',
+
 }
 });
 $('input[name="dateEnd"]').daterangepicker({
@@ -43,10 +56,17 @@ autoUpdateInput: false,
 parentEl:'#input-dates',
 showDropdowns: false,
 opens: 'right',
+isInvalidDate: function(date) {
+    if (date.format('YYYY-MM-DD') <= today) {
+        return true; 
+    }
+},
+
 locale: {
 direction: 'rtl',
 cancelLabel: 'مسح',
 applyLabel:'تحديد',
+
 }
 });
 

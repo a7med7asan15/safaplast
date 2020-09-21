@@ -8,7 +8,7 @@ $(function () {
   $('.norooms').select2();
   $('.types').select2();
   $('.amenties').select2();
-  
+  $('.brokers').select2();
 
   $("div#dropi").dropzone({ 
     addRemoveLinks: true,

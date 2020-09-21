@@ -92,6 +92,11 @@ module.exports  = {
             desEnglish:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
+        addbrokerSchema:Joi.object().keys({
+            name:Joi.string().required(),
+            mobileNo: Joi.string().min(11).max(11).pattern(new RegExp(/['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)).required(),
+            _csrf:Joi.string(), 
+        }),
         
 
     }

@@ -2,7 +2,7 @@
 const PropertySchema = require('../../models/propertySchema');
 const {TypesSchema,RoomsSchema} = require('../../models/categorySchema');
 const {AreaSchema} = require('../../models/citySchema');
-const AmentiesSchema = require('../../models/amentiesSchema');
+const {AmentiesSchema} = require('../../models/amentiesSchema');
 
 const homePageService ={
     
