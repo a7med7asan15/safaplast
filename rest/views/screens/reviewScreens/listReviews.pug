@@ -94,7 +94,7 @@ block content
                                             else if timeDiff < 259200 && timeDiff > 86400
                                                 - timeDiffStr = Math.floor(timeDiff/86400) + " days ago"
                                             else if timeDiff > 259200 
-                                                - timeDiffStr = dat.createdAt.toDateString()
+                                                - timeDiffStr = tb.createdAt.toDateString()
                                             tr
                                                 td #{ tb.orderId }
                                                 td #{timeDiffStr}
