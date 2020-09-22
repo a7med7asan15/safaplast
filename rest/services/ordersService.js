@@ -51,8 +51,9 @@ const ordersService = {
                 orders: orderComing,
             })
             await order.save();
-            req.flash('name', orders.cuName)
-            req.flash('ordernumber', orders.orderId)
+            req.flash('nameUser', order.nameCustomer)
+            req.flash('orderNumber', order.orderId)
+
             return res.json({
                 err: false,
                 message: "Product Added Succesfully",
@@ -68,11 +69,7 @@ const ordersService = {
 
     },
     confirmOrder: async (req, res) => {
-        const {name, id} = req.query;
-        res.render('site/confirm',{
-            name, 
-            orderNumber:id
-        });
+        res.render('site/confirm');
 
     }
 

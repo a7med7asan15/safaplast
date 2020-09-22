@@ -58,8 +58,8 @@ var $validate = $("#bookingReqForm").validate({
                 if (!result.err) {
                     //localStorage.setItem("name", data.cuName);
                    // localStorage.setItem("orderId", serialData.orderId);
-                   //ProductManager.clearProduct();
-                    return window.location.replace("http://" + result.domainName + "/orders/confirm?name=" + data.cuName + "&id=" + 123214);
+                   ProductManager.clearProduct();
+                    return window.location.replace("http://" + result.domainName + "/orders/confirm");
                 } else {
 
 

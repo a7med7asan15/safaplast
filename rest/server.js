@@ -155,9 +155,9 @@ app.use(
 
   res.locals.successes   =   req.flash("success");
 
-  res.locals.name   =   req.flash("name");
+  res.locals.nameUser  =   req.flash("nameUser");
 
-  res.locals.ordernumber   =   req.flash("ordernumber");
+  res.locals.orderNumber   =   req.flash("orderNumber");
 
   res.locals.failureFlash   =   req.flash("failureFlash");
 
