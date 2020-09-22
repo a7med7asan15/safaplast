@@ -41,7 +41,8 @@ const reviewService = {
             return res.render('screens/reviewScreens/listReviews', {
                 thisUser: req.user,
                 csrfToken,
-                dataProvided: bookings
+                dataProvided: bookings, 
+                dateNow: Date.now(),
             })
 
         } catch (err) {
@@ -66,7 +67,7 @@ const reviewService = {
                 order.review = request;
             }
             order.save();
-            console.log(order);
+    
             req.flash('success', `Succefully ${request}ed order`);
             res.redirect('/dashboard/booking')
         } catch (err) {
@@ -96,7 +97,7 @@ const reviewService = {
                 review: "accept",
                 status: "active"
             }, options)
-            console.log(bookings.docs);
+
             return res.render('screens/reviewScreens/listAccepted', {
                 thisUser: req.user,
                 csrfToken,
@@ -195,7 +196,7 @@ const reviewService = {
                     varient.aiProductId = colorId
                     varient.aiProductStatus = 'active';
                     await varient.save()
-                    console.log(varient);
+               
                 }
             }
             product.review = 'active';
@@ -300,7 +301,7 @@ const reviewService = {
 
             const csrfToken = req.csrfToken();
             const dataProvided = await TotalOrderSchema.findById(id).populate('orders.propertyId');
-            console.log(dataProvided);
+
             return res.render('screens/reviewScreens/revBooking', {
                 thisUser: req.user,
                 csrfToken,
@@ -319,14 +320,13 @@ const reviewService = {
             const {
                 table_search,
             } = req.body;
-            const tbSearch = await BrokerSchema.find({
+            const tbSearch = await TotalOrderSchema.find({
                 "$or": [
-                    { name: { '$regex': table_search, '$options': 'i' } },
-                    { mobileNo: { '$regex': table_search, '$options': 'i' } },
+                    { nameCustomer: { '$regex': table_search, '$options': 'i' } },
+                    { customerMobileNo: { '$regex': table_search, '$options': 'i' } },
                 ]
             });
-            
-            return res.render('screens/brokerScreens/addBroker', {
+            return res.render('screens/reviewScreens/listReviews', {
                 thisUser: req.user,
                 csrfToken,
                 table_search,
@@ -336,7 +336,7 @@ const reviewService = {
         } catch (err) {
 
             req.flash('error', 'Something Went wrong')
-            return res.render('screens/brokerScreens/addBroker', {
+            return res.render('screens/reviewScreens/listReviews', {
                 thisUser: req.user,
                 tbSearch: {},
                 table_search,

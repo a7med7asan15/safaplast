@@ -1,3 +1,4 @@
+//const orderid = require('order-id')('dahabdoor');
 var $validate = $("#bookingReqForm").validate({
     rules: {
         cuName: {
@@ -30,11 +31,11 @@ var $validate = $("#bookingReqForm").validate({
         //console.log(serialData);
         
         var products = ProductManager.getAllProducts();
-        var loopVar = products.length;
-        console.log(JSON.stringify(products));
         
         serialData.push({name:"orders", value: JSON.stringify(products)})
-        console.log(serialData);
+        //const orderId = orderid.generate().split('-').join('');
+        const orderId = 1234567
+        //serialData.push({name:"orderId", value: orderId})
         
         
         var data = {}
@@ -51,12 +52,14 @@ var $validate = $("#bookingReqForm").validate({
                 'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
             },
             success: function (result) {
-                console.log(result);
+
+                console.log(data);
 
                 if (!result.err) {
-                    localStorage.setItem("name", result.cuName);
-                    localStorage.setItem("orderId", result.orderId);
-                    return window.location.replace("http://" + result.domainName + "/orders/confirm");
+                    //localStorage.setItem("name", data.cuName);
+                   // localStorage.setItem("orderId", serialData.orderId);
+                   //ProductManager.clearProduct();
+                    return window.location.replace("http://" + result.domainName + "/orders/confirm?name=" + data.cuName + "&id=" + 123214);
                 } else {
 
 
@@ -68,7 +71,7 @@ var $validate = $("#bookingReqForm").validate({
 
                     return $validate.showErrors(errors);
                 }
-
+                
             }
         })
     },

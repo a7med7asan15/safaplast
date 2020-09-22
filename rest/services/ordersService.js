@@ -68,8 +68,11 @@ const ordersService = {
 
     },
     confirmOrder: async (req, res) => {
-
-        res.render('site/confirm');
+        const {name, id} = req.query;
+        res.render('site/confirm',{
+            name, 
+            orderNumber:id
+        });
 
     }
 

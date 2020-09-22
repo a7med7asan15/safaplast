@@ -144,7 +144,7 @@ reviewService.reviewOneBooking
 
 );
 
-router.get( '/searchResult',
+router.post( '/searchResult',
 
 
 csrfProtection, 

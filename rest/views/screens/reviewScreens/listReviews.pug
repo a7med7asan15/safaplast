@@ -52,10 +52,23 @@ block content
                                         - var pages = 1
                                         - var page = dataProvided.page 
                                         - var num = (page-1)*dataProvided.limit+1
+                                        - var timeDiff
+                                        - var timeDiffStr
                                         for dat in dataArray
+                                            -  timeDiff = (dateNow - dat.createdAt)/1000
+                                            if timeDiff < 60
+                                                - timeDiffStr = Math.floor(timeDiff) + " seconds ago"
+                                            else if timeDiff < 3600 && timeDiff > 60
+                                                - timeDiffStr = Math.floor(timeDiff/60) + " minutes ago"
+                                            else if timeDiff < 86400 && timeDiff > 3600
+                                                - timeDiffStr = Math.floor(timeDiff/3600) + " hours ago"
+                                            else if timeDiff < 259200 && timeDiff > 86400
+                                                - timeDiffStr = Math.floor(timeDiff/86400) + " days ago"
+                                            else if timeDiff > 259200 
+                                                - timeDiffStr = dat.createdAt.toDateString()
                                             tr
                                                 td #{ dat.orderId }
-                                                td #{ dat.createdAt.toDateString() }
+                                                td #{timeDiffStr }
                                                 td #{ dat.nameCustomer }
                                                 td #{ dat.customerMobileNo }
                                                 td #{ dat.status }
@@ -65,6 +78,35 @@ block content
                                                                                            
                                                 td
                                                     a.btn-sm.btn-primary(href=`/dashboard/booking/view?id=${dat.id}`)
+                                                        i.far.fa-eye
+                                                        |  view                                      
+                                    if tbSearch
+                                        - var timeDiff
+                                        - var timeDiffStr
+                                        for tb in tbSearch
+                                            -  timeDiff = (dateNow - tb.createdAt)/1000
+                                            if timeDiff < 60
+                                                - timeDiffStr = Math.floor(timeDiff) + " seconds ago"
+                                            else if timeDiff < 3600 && timeDiff > 60
+                                                - timeDiffStr = Math.floor(timeDiff/60) + " minutes ago"
+                                            else if timeDiff < 86400 && timeDiff > 3600
+                                                - timeDiffStr = Math.floor(timeDiff/3600) + " hours ago"
+                                            else if timeDiff < 259200 && timeDiff > 86400
+                                                - timeDiffStr = Math.floor(timeDiff/86400) + " days ago"
+                                            else if timeDiff > 259200 
+                                                - timeDiffStr = dat.createdAt.toDateString()
+                                            tr
+                                                td #{ tb.orderId }
+                                                td #{timeDiffStr}
+                                                td #{ tb.nameCustomer }
+                                                td #{ tb.customerMobileNo }
+                                                td #{ tb.status }
+                                                td #{ tb.review}
+                                                td #{ tb.totalPrice }
+                                                
+                                                                                           
+                                                td
+                                                    a.btn-sm.btn-primary(href=`/dashboard/booking/view?id=${tb.id}`)
                                                         i.far.fa-eye
                                                         |  view                                      
                                                                                       
