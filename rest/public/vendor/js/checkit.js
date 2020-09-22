@@ -5,22 +5,22 @@ var hagz = $('#hagz');
 
 
 
-function doCheck (){
+function doCheck() {
     bookingWrapper.removeClass('loading');
     var appender = ''
     var totalInvoice = 0;
     var dataAr = ProductManager.getAllProducts();
-    if(dataAr.length){
+    if (dataAr.length) {
 
- 
-    for(i=0 ; i < dataAr.length ; i++){
-        var startDate = new Date(dataAr[i].dateStart);
-        var endDate = new Date(dataAr[i].dateEnd);
-        var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
-        var numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-        var total = dataAr[i].price * numberOfNights;
-        totalInvoice = totalInvoice + total
-        appender = appender + `
+
+        for (i = 0; i < dataAr.length; i++) {
+            var startDate = new Date(dataAr[i].dateStart);
+            var endDate = new Date(dataAr[i].dateEnd);
+            var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+            var numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            var total = dataAr[i].price * numberOfNights;
+            totalInvoice = totalInvoice + total
+            appender = appender + `
         <div class="strip_booking">
         <div class="row">
           <div class="col-lg-2 col-md-2">
@@ -69,11 +69,11 @@ function doCheck (){
               </div>
           </div>
         </div>   </div>    `
-    }
-    bookingWrapper.html(appender)   
-    priceTag.html(`<span>${totalInvoice}جم <small>/ للحجز</small></span>`);
-    return bookingWrapper.removeClass('loading');
-    }else{
+        }
+        bookingWrapper.html(appender)
+        priceTag.html(`<span>${totalInvoice}جم <small>/ للحجز</small></span>`);
+        return bookingWrapper.removeClass('loading');
+    } else {
         bookingWrapper.removeClass('loading');
         bookingWrapper.html('<div style="display:flex; width:100%; height:100%; justify-content:center; align-items:center;"><h2>انت لسه محجزتش وحدة <a href="/"> إحجز دلوقتى</a></h2></div> ');
         priceTag.html(`<span>0 جم <small>/ للحجز</small></span>`)
@@ -81,20 +81,18 @@ function doCheck (){
     }
 
 
-} 
+}
 
-function deleter (e){
-ProductManager.removeProduct(e);
-ProductManager.updateIcon();
-return doCheck();
+function deleter(e) {
+    ProductManager.removeProduct(e);
+    ProductManager.updateIcon();
+    return doCheck();
 }
 
 $(function () {
 
-        return doCheck()
-
+    return doCheck();
     
- 
-    });
 
-   
+
+});

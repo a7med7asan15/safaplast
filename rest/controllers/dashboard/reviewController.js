@@ -133,29 +133,26 @@ reviewService.deleteProduct
 );
 
 
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-// +++ /// EDIT Color  // ++++// //////
-////////////////////////////////////////////////
-////////////////////////////////////////////////
+
+router.get( '/view',
 
 
-//---------------------------
-// Update Color Route 
-//---------------------------
+csrfProtection, 
+
+reviewService.reviewOneBooking
 
 
-//---------------------------
-// Delete Color Route 
-//---------------------------
+);
+
+router.get( '/searchResult',
 
 
+csrfProtection, 
 
-//---------------------------
-// Color Search 
-//---------------------------
+reviewService.searchShow
 
 
+);
 
 
 module.exports = router;

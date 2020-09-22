@@ -19,7 +19,6 @@ const reviewService = {
 
     showAllReviews: async (req, res) => {
         try {
-            console.log("Hello");
             let page = 1;
             let limit = 1;
 
@@ -34,11 +33,11 @@ const reviewService = {
 
             let csrfToken = req.csrfToken();
 
-            const bookings = await OrdersSchema.paginate({
+            const bookings = await TotalOrderSchema.paginate({
                 review: "pending",
                 status: "active"
             }, options)
-            console.log(bookings);
+          
             return res.render('screens/reviewScreens/listReviews', {
                 thisUser: req.user,
                 csrfToken,
@@ -291,7 +290,62 @@ const reviewService = {
             return res.redirect('/dashboard/review/deleted')
 
         }
-    }
+    },
+    reviewOneBooking: async(req,res) =>{
+        const {
+            id
+        } = req.query
+        
+        try {
+
+            const csrfToken = req.csrfToken();
+            const dataProvided = await TotalOrderSchema.findById(id).populate('orders.propertyId');
+            console.log(dataProvided);
+            return res.render('screens/reviewScreens/revBooking', {
+                thisUser: req.user,
+                csrfToken,
+                dataProvided
+            })
+        } catch (err) {
+            console.log(err)
+            res.send(err);
+
+        }
+
+    }, 
+    searchShow: async (req, res) => {
+        try {
+            let csrfToken = req.csrfToken();
+            const {
+                table_search,
+            } = req.body;
+            const tbSearch = await BrokerSchema.find({
+                "$or": [
+                    { name: { '$regex': table_search, '$options': 'i' } },
+                    { mobileNo: { '$regex': table_search, '$options': 'i' } },
+                ]
+            });
+            
+            return res.render('screens/brokerScreens/addBroker', {
+                thisUser: req.user,
+                csrfToken,
+                table_search,
+                tbSearch
+            })
+
+        } catch (err) {
+
+            req.flash('error', 'Something Went wrong')
+            return res.render('screens/brokerScreens/addBroker', {
+                thisUser: req.user,
+                tbSearch: {},
+                table_search,
+                csrfToken
+            })
+        }
+
+
+    },
 
 }
 

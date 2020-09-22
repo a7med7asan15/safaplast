@@ -92,6 +92,7 @@ ordersService.confirmOrder
 )
 
 router.get('/cart',
+csrfProtection,
 homePageService.bookingService
 )
 

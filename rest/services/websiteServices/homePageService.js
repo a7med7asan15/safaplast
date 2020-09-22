@@ -201,11 +201,12 @@ const homePageService ={
 
     },
     bookingService:async(req,res)=>{
-        
+        let csrfToken = req.csrfToken();
         return res.render('site/bookings',{
             title: 'تواصل معنا', 
             metDescription: 'عنوان دهب دورز', 
             ogTitle: 'عنوان دهب دورز', 
+            csrfToken
         });
 
     },

@@ -13,6 +13,7 @@ const ordersSchema  = new Schema({
     adults:{type:String},
     child:{type:String},
     nights:{type:Number},
+    totalPrice:{type:Number},
     propertyId: { type : Schema.Types.ObjectId , ref : 'propertySchema' },
 })
 
