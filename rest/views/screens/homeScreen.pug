@@ -21,29 +21,47 @@ block content
                                 a.small-box-footer(href="/dashboard/booking") More info 
                                   i.fas.fa-arrow-circle-right
                         .col-lg-3.col-6
-                            .small-box.bg-success
+                            .small-box.bg-warning
                                 .inner
                                     h3 #{acceptedOrders}
-                                    p Actual Orders
+                                    p Waiting for payment 
                                     .icon
                                         i.ion.ion-bag
-                                a.small-box-footer(href="/dashboard/booking/booked") More info 
+                                a.small-box-footer(href="/dashboard/booking/waiting") More info 
                                   i.fas.fa-arrow-circle-right
                         .col-lg-3.col-6
-                            .small-box.bg-danger
+                            .small-box.bg-success
                                 .inner
                                     h3 #{bookedOrders}
                                     p Booked Orders
                                     .icon
                                         i.ion.ion-bag
-                                a.small-box-footer(href="/dashboard/booking/accepted") More info 
+                                a.small-box-footer(href="/dashboard/booking/active") More info 
                                   i.fas.fa-arrow-circle-right
                         .col-lg-3.col-6
-                            .small-box.bg-warning
+                            .small-box.bg-primary
                                 .inner
                                     h3 #{totalPropertys}
                                     p Propertys
                                     .icon
                                         i.ion.ion-bag
-                                a.small-box-footer(href="/dashboard/booking/accepted") More info 
+                                a.small-box-footer(href="/dashboard/propertys") More info 
+                                  i.fas.fa-arrow-circle-right
+                        .col-lg-3.col-6
+                            .small-box.bg-danger
+                                .inner
+                                    h3 #{countBrokers}
+                                    p Brokers
+                                    .icon
+                                        i.ion.ion-bag
+                                a.small-box-footer(href="/dashboard/brokers") More info 
+                                  i.fas.fa-arrow-circle-right
+                        .col-lg-3.col-6
+                            .small-box.bg-info
+                                .inner
+                                    h3 #{countMsg}
+                                    p Messages
+                                    .icon
+                                        i.ion.ion-bag
+                                a.small-box-footer(href="/dashboard/messages") More info 
                                   i.fas.fa-arrow-circle-right

@@ -2,6 +2,8 @@
 var express = require('express');
 var router = express.Router();
 var csrf = require('csurf'); 
+var request = require('request');
+
 const csrfProtection = csrf();
 const contactService = require('../../services/websiteServices/contactService');
 
@@ -65,5 +67,29 @@ contactService.show
 
 
 );
+
+router.get( '/inactive',
+
+
+csrfProtection, 
+
+
+contactService.showOld
+
+
+);
+
+router.get( '/inactivate',
+
+
+csrfProtection, 
+
+
+contactService.delete
+
+
+);
+
+
 
 module.exports = router;

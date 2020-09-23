@@ -9,9 +9,9 @@ block content
                     h1.m-0.text-dark 
                         | Messages
                 .col-sm-6
-                        a.btn.btn-success.float-right(href="/dashboard/messages/inactive")
+                        a.btn.btn-success.float-right(href="/dashboard/messages")
                             
-                            |  Old Messages
+                            |  New Messages
 
     .content
         .container-fluid
@@ -33,8 +33,6 @@ block content
                                         th Name
                                         th Mobile Number 
                                         th Email 
-
-                                        th Contacted?   
                                         th(colspan="2") Message 
                                     tbody
                                         if dataProvided
@@ -65,9 +63,7 @@ block content
                                                     td #{dat.contactMobileNo }
                                                     td #{ dat.email_contact }
 
-                                                    td
-                                                        a.btn-sm.btn-primary(href=`/dashboard/messages/inactivate?id=${dat.id}`)
-                                                            |  Done 
+                                    
                                                     td(colspan="2" style="word-break: break-all;") #{ dat.message_contact }
 
 
@@ -76,17 +72,17 @@ block content
                             ul.pagination.pagination-sm.m-0.float-right
                                 if hasPrev
                                     li.page-item
-                                        a.page-link(href=href=`/dashboard/messages?p=${page - 1}`) «
+                                        a.page-link(href=href=`/dashboard/booking?p=${page - 1}`) «
                                 if totalPages > 1
                                     while pages  < 3            
                                         li.page-item
                                             if pages === page
                                                 a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
                                             else
-                                                a.page-link.active( href=`/dashboard/messages?p=${pages}`)= pages
+                                                a.page-link.active( href=`/dashboard/booking?p=${pages}`)= pages
 
                                         - pages++    
 
                                 if hasNext
                                     li.page-item
-                                        a.page-link(href=`/dashboard/messages?p=${page + 1}`) »                            
+                                        a.page-link(href=`/dashboard/booking?p=${page + 1}`) »                            

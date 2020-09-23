@@ -109,7 +109,7 @@ const reviewService = {
                 dataProvided: bookings, 
                 dateNow: Date.now(),
                 header:"Active Orders", 
-                enSearch:false
+                enSearch:true
             })
 
         } catch (err) {
@@ -149,7 +149,7 @@ const reviewService = {
                 dataProvided: bookings, 
                 dateNow: Date.now(),
                 header:"Declined Orders", 
-                enSearch:false
+                enSearch:true
             })
 
         } catch (err) {
@@ -189,7 +189,7 @@ const reviewService = {
                 dataProvided: bookings, 
                 dateNow: Date.now(),
                 header:"Waiting for Payment Orders", 
-                enSearch:false
+                enSearch:true
             })
 
         } catch (err) {
@@ -420,7 +420,7 @@ const reviewService = {
                 csrfToken,
                 table_search,
                 tbSearch, 
-                header:"Under Review: Search Results",
+                header:"Search Results",
                 dateNow: Date.now(),
             })
 

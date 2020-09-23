@@ -59,6 +59,7 @@ homePageService.faqPage
 
 );
 router.get('/contact', 
+csrfProtection,
 homePageService.contactPage
 
 );
@@ -96,7 +97,16 @@ csrfProtection,
 homePageService.bookingService
 )
 
+router.post( '/sendMsg',
 
+
+csrfProtection, 
+
+
+homePageService.sendMsg
+
+
+);
 
 //-----------------
 //  Login Request 

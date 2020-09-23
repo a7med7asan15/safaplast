@@ -1,7 +1,8 @@
 extends ../websiteLayout.pug
 
 block content   
-
+    //Site Key 6Le8rs8ZAAAAAKfO_HMOqTWHLos8guMBe6VgdL_u
+    // Secret Key 6Le8rs8ZAAAAANNqQUUwT0nCWmdEU2iOcWtrZ5rg
     .container.margin_60_35
         .row.justify-content-center
             .col-xl-6.col-lg-6.pr-xl-5
@@ -10,52 +11,74 @@ block content
                     h2  أرسل رسالة
                     p  سنتواصل معك في الحال
                     #message-contact
-                        form#contactform(method="post" action="assets/contact.php" autocomplete="off")
+                        form#contactForm(method="post" action="/sendMsg")
                             .row
                                 .col-md-6
                                     .form-group
                                         label  الاسم الاول
-                                        input.form-control#name_contact(type="text" name="name_contact")
+                                        input.form-control#name_contact(type="text" name="name_contact" )
                                 .col-md-6
                                     .form-group
                                         label الاسم الاخير
-                                        input.form-control#lastname_contact(type="text" name="lastname_contact")
+                                        input.form-control#lastname_contact(type="text" name="lastname_contact" )
                             .row
                                 .col-md-6
                                     .form-group
                                         label  البريد الالكتروني
-                                        input.form-control#email_contact(type="email" name="email_contact")
+                                        input.form-control#email_contact(type="email" name="email_contact" )
                                 .col-md-6
                                     .form-group
                                         label  موبايل
-                                        input.form-control#phone_contact(type="text" name="phone_contact")
+                                        input.form-control#phone_contact(type="text" name="phone_contact" )
                             .form-group
                                 label  اكتب رسالتك
-                                textarea.form-control#message_contact(name="message_contact" style="height:150px;")
-                            .row
-                                .col-md-6
-                                    .form-group
-                                        label  اجب من فضلك ؟ 3 + 1 =
-                                        input.form-control(type="text" name="verify_contact")
+                                textarea.form-control#message_contact(name="message_contact" style="height:150px;" )
+                            input(type="hidden" id="g-recaptcha-response" name="g-recaptcha-response")
+                            input(type="hidden" name="action" value="validate_captcha")
                             p.add_top_30
                                 input.btn_1.rounded#submit-contact(type="submit" value="Submit")
+
+                         
             .col-xl-6.col-lg-6.pl-xl-5
                 .box_contacts
-                    i.ti-support
-                    h2  محتاج مساعدة؟
-                    a(href="#0")  43 4324265622 
-                    | - 
-                    a(href="#0")  help@sparker.com
-                .box_contacts
                     i.ti-help-alt
-                    h2 أي أسئلة؟ 
-                    a(href="#0") 43 324242322 
-                    | - 
-                    a(href="#0") info@sparker.com
+                    h2  أي أسئلة؟ 
+                    a  01021257331
+                    |  -  
+                    a  infor@dahabdoors.com
                 .box_contacts
                     i.ti-home
                     h2  العنوان
-                    a(href="#0")  15 شارع دهب، دهب 
+                    a  المسبط - شارع النصر - أمام موقف الاتوبيسات السياحي 
                     br 
-                    | California - US
+                    | Dahab 
+block scripts
+    script(src="/static/vendor/js/msgReq.js")
+    script(src="https://www.google.com/recaptcha/api.js?render=6Le8rs8ZAAAAAKfO_HMOqTWHLos8guMBe6VgdL_u")
+    //script.
+        document.getElementById('contactform').addEventListener('submit',onSubmit);
 
+        function onSubmit(e){
+            e.preventDefault();
+
+            grecaptcha.execute('6Le8rs8ZAAAAAKfO_HMOqTWHLos8guMBe6VgdL_u', {action: 'homepage'}).then(function(token) {
+
+            / This data is not being used in the back end (Only the token), but have it here for you to experiment
+            const firstName = document.querySelector('name_contact').value; 
+            const lastName = document.querySelector('lastname_contact').value;
+            const captcha = token;
+
+                fetch('/sendMsg',{
+                method: 'POST',
+                headers:{
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json', 
+                    'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
+
+                },
+                body:JSON.stringify({firstName:firstName,lastName:lastName,captcha:captcha})
+                }).then(res => res.json()).then(data => { alert("msg: " + data.msg + ", success?: " + data.success + ", score: " + data.score)})     
+
+            });
+
+        }
