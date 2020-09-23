@@ -1,5 +1,5 @@
 const User = require('../models/Users');
-const OrdersSchema = require('../models/ordersSchema');
+const {OrdersSchema, TotalOrderSchema} = require('../models/ordersSchema');
 const PropertySchema = require('../models/propertySchema');
 const _ = require('lodash');
 
@@ -13,11 +13,10 @@ const authService ={
     },
     homepage: async(req,res)=>{
         try{
-            const countOrders = await OrdersSchema.count({review:'pending'});
-            const acceptedOrders = await OrdersSchema.count({review:'accept'});
-            const bookedOrders = await OrdersSchema.count({review:'booked'});
+            const countOrders = await TotalOrderSchema.count({review:'pending'});
+            const acceptedOrders = await TotalOrderSchema.count({status:'waiting'});
+            const bookedOrders = await TotalOrderSchema.count({review:'active'});
             const totalPropertys = await PropertySchema.count();
-            console.log(countOrders); 
             return  res.render('screens/homeScreen', { thisUser:req.user ,countOrders,acceptedOrders,totalPropertys,bookedOrders })
         }catch(err){
 
