@@ -261,7 +261,6 @@ const propertyService = {
         property: property,
       });
     } catch (err) {
-      console.log(err);
     }
 
   }, 

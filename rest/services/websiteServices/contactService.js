@@ -23,7 +23,6 @@ const contactService = {
             const msgs = await MsgSchema.paginate({
                 status:"active"
             }, options)
-            console.log(msgs)
         try {
             return res.render('screens/contactScreens/messages', {
                 thisUser: req.user,
@@ -33,7 +32,6 @@ const contactService = {
                 dateNow: Date.now(),
             })
         } catch (err) {
-            console.log(err);
             res.send(err);
         }
     },
@@ -56,7 +54,6 @@ const contactService = {
             const msgs = await MsgSchema.paginate({
                 status:"inactive"
             }, options)
-            console.log(msgs)
         try {
             return res.render('screens/contactScreens/decmessages', {
                 thisUser: req.user,
@@ -66,7 +63,6 @@ const contactService = {
                 dateNow: Date.now(),
             })
         } catch (err) {
-            console.log(err);
             res.send(err);
         }
     },

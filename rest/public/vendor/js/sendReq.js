@@ -18,7 +18,6 @@ function checkoutIcon (){
         return target.addClass('visible')
 
     }
-    console.log();
 }
 
 
@@ -31,7 +30,6 @@ $(function() {
 
     today = yyyy + '-' + mm + '-' + dd;
 
-    console.log(today);
 $('input[name="dateStart"]').daterangepicker({
 singleDatePicker:true,
 autoUpdateInput: false,
@@ -140,32 +138,7 @@ submitHandler:function(form,event){
     ProductManager.updateIcon();
     return $(form).find("input[type=text], textarea").val("");
 
-        // $.ajax({
-        //     type: "POST",
-        //     url:'/orders/add',
-        //     data: serialData,
-        //     headers: {
-        //         'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
-        //        }, 
-        //     success:function(result){
-        //         console.log(result);
-                
-        //         if(!result.err){
-        //             localStorage.setItem("name", result.customerName);
-        //             localStorage.setItem("orderId", result.orderId);
-        //             return window.location.replace( "http://" + result.domainName + "/orders/confirm");
-        //         }else{
-
-                    
-        //             let key = result.key
-        //             let msg = result.msg
-        //             let errors = {[key]: msg };
-                    
-        //             return $validate.showErrors(errors);
-        //         }
-
-        //     } 
-        // })
+        
   },
 
 })

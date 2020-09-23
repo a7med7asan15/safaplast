@@ -116,7 +116,6 @@ const natIdValidator = {
                           }
                             var natId = function (req, res, next) {
                               const d = req.body.natId
-                              console.log();
                               if(natIdValidator.isNatIdYear(d)){
                                 if(natIdValidator.isNatIdDate(d)){
                                   if(natIdValidator.isNatGovernate(d)){

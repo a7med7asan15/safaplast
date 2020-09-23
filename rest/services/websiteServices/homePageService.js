@@ -123,7 +123,6 @@ const homePageService = {
             })
 
         } catch (err) {
-            console.log(err);
 
         }
 
@@ -154,7 +153,6 @@ const homePageService = {
 
             })
         } catch (err) {
-            console.log(err);
             return res.render('site/404.pug')
 
         }
@@ -199,14 +197,12 @@ const homePageService = {
                 populate: "rooms type areaId"
             }
             const data = await PropertySchema.paginate(query, options);
-            console.log(data)
             res.json({
                 err: false,
                 data
             })
 
         } catch (err) {
-            console.log(err);
             res.json({
                 err: true
             })
@@ -252,7 +248,6 @@ const homePageService = {
                 captcha
             } = req.body;
             if (!req.body.captcha) {
-                console.log("err");
                 return res.json({
                     errors: true,
                     "success": false,

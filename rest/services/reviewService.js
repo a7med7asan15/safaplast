@@ -51,7 +51,6 @@ const reviewService = {
 
         } catch (err) {
             res.send(err)
-            console.log(err);
 
 
         }
@@ -114,7 +113,6 @@ const reviewService = {
 
         } catch (err) {
             res.send(err)
-            console.log(err);
 
 
         }
@@ -154,7 +152,6 @@ const reviewService = {
 
         } catch (err) {
             res.send(err)
-            console.log(err);
 
 
         }
@@ -194,7 +191,6 @@ const reviewService = {
 
         } catch (err) {
             res.send(err)
-            console.log(err);
 
 
         }
@@ -397,7 +393,6 @@ const reviewService = {
                 dataProvided
             })
         } catch (err) {
-            console.log(err)
             res.send(err);
 
         }

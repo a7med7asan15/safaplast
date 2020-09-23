@@ -7,8 +7,6 @@ module.exports  = {
             const result  = schemas.validate(req.body)
             if (result.error){
                 req.flash('error', result.error.details)
-                console.log(result.error.details)
-                console.log(req.baseUrl)
                 return res.redirect(req.baseUrl + req.url)
                 
             }

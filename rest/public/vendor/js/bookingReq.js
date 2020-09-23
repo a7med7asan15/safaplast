@@ -20,7 +20,6 @@ var $validate = $("#bookingReqForm").validate({
     },
     highlight: function (element) {
         $(element).addClass("is-invalid");
-        console.log(element)
     },
     unhighlight: function (element) {
         $(element).removeClass("is-invalid");
@@ -28,7 +27,6 @@ var $validate = $("#bookingReqForm").validate({
     submitHandler: function (form, event) {
         event.preventDefault();
         const serialData = $(form).serializeArray();
-        //console.log(serialData);
         
         var products = ProductManager.getAllProducts();
         
@@ -53,7 +51,6 @@ var $validate = $("#bookingReqForm").validate({
             },
             success: function (result) {
 
-                console.log(data);
 
                 if (!result.err) {
                     //localStorage.setItem("name", data.cuName);

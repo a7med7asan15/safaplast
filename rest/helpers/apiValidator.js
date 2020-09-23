@@ -6,7 +6,6 @@ module.exports  = {
         return (req,res,next)=>{
             const result  = schemas.validate(req.body)
             if (result.error){
-                console.log(result.error.details[0]);
                 return res.json({err:true,msg: result.error.details[0].context.label, key:result.error.details[0].context.key})
             }
             if(!req.value){ req.value= {}}

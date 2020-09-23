@@ -72,7 +72,6 @@ const userService ={
 
         const {username,email,mobilenumber,userrole } = req.body
         const {userId} = req.params 
-        console.log();
         try{
             const updateuser = await User.findById(userId)
             updateuser.username = username,
