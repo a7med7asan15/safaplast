@@ -12,7 +12,7 @@ const UsersSchema = mongoose.Schema({
     mobileNo:{ type: String},
     gender: { type: String, lowercase: true},
     role:{type:Number,default:1},
-    avatar:{type:String},
+    avatar:{type:String, default:"https://via.placeholder.com/150"},
     stores:[{ type : Schema.Types.ObjectId , ref:'storeSchema'}]
 });
 
