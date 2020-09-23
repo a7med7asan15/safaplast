@@ -6,7 +6,7 @@ const PropertySchema = require('../models/propertySchema')
 
 const mediaService = {
     uploadImageFiles: async (req,res)=>{
-        console.log(req.files)
+        //console.log(req.files)
       res.status(200).json({err:false ,filepath:req.files[0].location})
     },
     deleteImage:async (req,res)=>{

@@ -57,25 +57,50 @@ block content
                                         th Adults  
                                         th Child   
                                         th Nights  
-                                        th Total Price   
+                                        th Total Price  
+                                        th View Property 
                                     tbody
+                                        - var invalid = false
                                         for dat in dataProvided.orders
                                             tr
-                                                td #{dat.propertyId.nameArabic}
+                                                if dat.propertyId
+                                                    td #{dat.propertyId.nameArabic}
+
+                                                else
+                                                    td Unavailable Property
+                                                    - invalid = true
                                                 td #{dat.checkIn.toDateString()}
                                                 td #{dat.checkOut.toDateString()}
                                                 td #{dat.adults}
                                                 td #{dat.child}
                                                 td #{dat.nights}
                                                 td #{dat.totalPrice} 
+                                                if dat.propertyId
+                                                    td 
+                                                        a.btn-sm.btn-primary(href=`/dashboard/propertys/${dat.propertyId.id}`)
+                                                            i.far.fa-eye
+                                                            |  view 
+                                                else
+                                                    td Unavailable
+                    if invalid || dataProvided.status == "declined"
+                        p.text-danger لا يمكن القيام بهذه العملية
+                    else if dataProvided.status == "active"
+                        p.text-success لقد تمت العملية بالفعل
+                    else
+                        if dataProvided.status != "waiting"
+                            .ml-3.mb-3.mt-3
+                                form(action=`/dashboard/booking/confirm/${dataProvided.id}` method="POST")
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    button.btn.btn-success.float-right(type="submit") Confirm Booking
+                            .ml-3.mb-3.mt-3
+                                form(action=`/dashboard/booking/decline/${dataProvided.id}` method="POST")
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    button.btn.btn-danger.float-right(type="submit") Cannot Book
+                        if dataProvided.status == "waiting"
+                            .ml-3.mb-3.mt-3
+                                form(action=`/dashboard/booking/activate/${dataProvided.id}` method="POST")
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    button.btn.btn-primary.float-right(type="submit") Activate Booking
 
-                    .ml-3.mb-3.mt-3
-                        form(action="" method="" role)
-                            button.btn.btn-success.float-right(type="submit") Confirm Booking
-                    .ml-3.mb-3.mt-3
-                        form(action="" method="")
-                            button.btn.btn-danger.float-right(type="submit") Cannot Book
-                            
 
 
-                                                       

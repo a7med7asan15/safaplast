@@ -62,12 +62,30 @@ reviewService.showAllReviews
 
 
 );
-router.get( '/accepted',
+router.get( '/active',
 
 
 csrfProtection, 
 
-reviewService.showActualBookings
+reviewService.showActiveBookings
+
+
+);
+router.get( '/declined',
+
+
+csrfProtection, 
+
+reviewService.showDecBookings
+
+
+);
+router.get( '/waiting',
+
+
+csrfProtection, 
+
+reviewService.showWaitBookings
 
 
 );
@@ -81,12 +99,31 @@ reviewService.checkpoint
 
 )
 
-router.get( '/deleted',
+router.post( '/decline/:bookId',
 
 
 csrfProtection, 
 
-reviewService.showDeletedProducts
+reviewService.declineBook
+
+
+);
+
+router.post( '/confirm/:bookId',
+
+
+csrfProtection, 
+
+reviewService.confirmBook
+
+
+);
+router.post( '/activate/:bookId',
+
+
+csrfProtection, 
+
+reviewService.activateBook
 
 
 );

@@ -5,7 +5,9 @@ block content
         .container-fluid
             .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark Review Orders
+                    if header
+                        h1.m-0.text-dark 
+                            | #{header}
 
     .content
         .container-fluid
@@ -19,17 +21,18 @@ block content
                 .col-12
                     .card
                         .card-header
-                            h3.card-title All Pending Orders
-                            form(action=`/dashboard/booking/searchResult`, method="post")
-                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                .input-group.input-group-sm.float-right(style="width: 150px;")
-                                    if dataProvided
-                                        input.form-control.float-right(type="text" name="table_search" placeholder="Search")
-                                    if tbSearch
-                                        input.form-control.float-right(type="text", value = `${table_search}`, name="table_search" placeholder="Search")
-                                    .input-group-append
-                                    button.btn.btn-default(type="submit")
-                                        i.fas.fa-search
+                            h3.card-title Orders
+                            if enSearch
+                                form(action=`/dashboard/booking/searchResult`, method="post")
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    .input-group.input-group-sm.float-right(style="width: 150px;")
+                                        if dataProvided
+                                            input.form-control.float-right(type="text" name="table_search" placeholder="Search")
+                                        if tbSearch
+                                            input.form-control.float-right(type="text", value = `${table_search}`, name="table_search" placeholder="Search")
+                                        .input-group-append
+                                        button.btn.btn-default(type="submit")
+                                            i.fas.fa-search
                         .card-body.table-responsive.p-0
                             table.table.table-hover.text-nowrap
                                 thead
@@ -45,7 +48,7 @@ block content
                                     th Review 
                                 tbody
                                     if dataProvided
-                                        - var dataArray = dataProvided.docs.reverse()
+                                        - var dataArray = dataProvided.docs
                                         - var hasPrev = dataProvided.hasPrevPage 
                                         - var hasNext = dataProvided.hasNextPage 
                                         - var totalPages = dataProvided.totalPages 
@@ -71,11 +74,13 @@ block content
                                                 td #{timeDiffStr }
                                                 td #{ dat.nameCustomer }
                                                 td #{ dat.customerMobileNo }
-                                                td #{ dat.status }
-                                                td #{ dat.review}
+                                                td
+                                                    span(class=(dat.status==="active" ? 'btn-sm btn-success' : (dat.status==="declined" ? 'btn-sm btn-danger':'btn-sm btn-warning'))) #{ dat.status }
+                                                td
+                                                    span(class=(dat.review==="done" ? 'btn-sm btn-success ' : 'btn-sm btn-warning ')) #{ dat.review}
                                                 td #{ dat.totalPrice }
                                                 
-                                                                                           
+                                          
                                                 td
                                                     a.btn-sm.btn-primary(href=`/dashboard/booking/view?id=${dat.id}`)
                                                         i.far.fa-eye
@@ -83,7 +88,7 @@ block content
                                     if tbSearch
                                         - var timeDiff
                                         - var timeDiffStr
-                                        for tb in tbSearch
+                                        for tb in tbSearch.reverse()
                                             -  timeDiff = (dateNow - tb.createdAt)/1000
                                             if timeDiff < 60
                                                 - timeDiffStr = Math.floor(timeDiff) + " seconds ago"
@@ -100,8 +105,11 @@ block content
                                                 td #{timeDiffStr}
                                                 td #{ tb.nameCustomer }
                                                 td #{ tb.customerMobileNo }
-                                                td #{ tb.status }
-                                                td #{ tb.review}
+                                                td
+                                                    span(class=(tb.status==="active" ? 'btn-sm btn-success' : (tb.status==="declined" ? 'btn-sm btn-danger':'btn-sm btn-warning'))) #{ tb.status }
+                                                td
+                                                    span(class=(tb.review==="done" ? 'btn-sm btn-success ' : 'btn-sm btn-warning ')) #{ tb.review}
+                                                
                                                 td #{ tb.totalPrice }
                                                 
                                                                                            

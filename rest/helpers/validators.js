@@ -90,6 +90,7 @@ module.exports  = {
             images:Joi.string().required(),
             desArabic:Joi.string().required(),
             desEnglish:Joi.string().required(),
+            brokers:Joi.required(),
             _csrf:Joi.string(), 
         }),
         addbrokerSchema:Joi.object().keys({

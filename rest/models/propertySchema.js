@@ -22,7 +22,7 @@ const propertySchema  = new Schema({
     sku:{ type : String , required:true } ,
     images:[images] ,
     amenties:[{ type : Schema.Types.ObjectId , ref : 'amentiSchema' }],
-    brokers:[{ type : Schema.Types.ObjectId , ref : 'amentiSchema' }],
+    brokers:[{ type : Schema.Types.ObjectId , ref : 'brokerSchema' }],
     cityId: { type : Schema.Types.ObjectId , ref : 'citySchema' } ,
     areaId: { type : Schema.Types.ObjectId , ref : 'areaSchema' } ,
     Address: {

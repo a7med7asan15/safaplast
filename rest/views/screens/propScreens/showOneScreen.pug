@@ -1,55 +1,77 @@
 extends ../../layout.pug
 
 block content   
-    .card.card-solid
-        .card-body
-            .row.mb-5.pb-5
-                .col-12.col-sm-6
-                    h3.d-inline-block.d-sm-none LOWA Men’s Renegade GTX Mid Hiking Boots Review
-                    .col-12
-                        img.product-image(src="../../dist/img/prod-1.jpg", alt="Product Image")
-                    .col-12.product-image-thumbs
-                        .product-image-thumb.active
-                            img(src="../../dist/img/prod-1.jpg", alt="Product Image")
-                        .product-image-thumb
-                            img(src="../../dist/img/prod-2.jpg", alt="Product Image")
-                        .product-image-thumb
-                            img(src="../../dist/img/prod-3.jpg", alt="Product Image")
-                        .product-image-thumb
-                            img(src="../../dist/img/prod-4.jpg", alt="Product Image")
-                        .product-image-thumb
-                            img(src="../../dist/img/prod-5.jpg", alt="Product Image")
-                .col-12.col-sm-6
-                    h3.my-3 LOWA Men’s Renegade GTX Mid Hiking Boots Review
-                    p 
-                        strong SKU : 
-                        | dd0001
-                    hr
-                    p 
-                        strong Area : 
-                        | El Asla 
-                    hr
-                    p 
-                        strong Type : 
-                        | Villa 
-                    hr
-                    p 
-                        strong Room : 
-                        | 2 Bedrooms  
-                    hr
-                   
-                    .bg-gray.py-2.px-3.mt-4
-                        h2.mb-0.
+    if property
+        .card.card-solid
+            .card-body
+                .row.mb-2.pb-2
+                    .col-12.col-sm-6
+                        .col-12
+                            img.product-image(src=`${property.images[0].imageLink}` alt=`${property.images[0].slugArabic}` style="max-height: 400px;object-fit: cover;")
+                        .col-12.product-image-thumbs
+                            for dat, index in property.images
+                                if index == 0
+                                    .product-image-thumb.active
+                                        img(src=`${dat.imageLink}` alt=`${dat.slugArabic}`)
+                                else
+                                    .product-image-thumb
+                                        img(src=`${dat.imageLink}` alt=`${dat.slugArabic}`)
+
                             
-                            $80.00
-                            
-                        h4.mt-0
-                            small Ex Tax: $80.00 
-            .row.mt-5.pt-5
-                nav.w-100
-                    .nav.nav-tabs#product-tab(role="tablist")
-                        a.nav-item.nav-link.active#product-desc-tab(data-toggle="tab", href="#product-desc", role="tab", aria-controls="product-desc", aria-selected="true") Description
-                        a.nav-item.nav-link#product-comments-tab(data-toggle="tab", href="#product-comments", role="tab", aria-controls="product-comments", aria-selected="false") Amenties
-                .tab-content.p-3#nav-tabContent
-                    .tab-pane.fade.show.active#product-desc(role="tabpanel", aria-labelledby="product-desc-tab") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae condimentum erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed posuere, purus at efficitur hendrerit, augue elit lacinia arcu, a eleifend sem elit et nunc. Sed rutrum vestibulum est, sit amet cursus dolor fermentum vel. Suspendisse mi nibh, congue et ante et, commodo mattis lacus. Duis varius finibus purus sed venenatis. Vivamus varius metus quam, id dapibus velit mattis eu. Praesent et semper risus. Vestibulum erat erat, condimentum at elit at, bibendum placerat orci. Nullam gravida velit mauris, in pellentesque urna pellentesque viverra. Nullam non pellentesque justo, et ultricies neque. Praesent vel metus rutrum, tempus erat a, rutrum ante. Quisque interdum efficitur nunc vitae consectetur. Suspendisse venenatis, tortor non convallis interdum, urna mi molestie eros, vel tempor justo lacus ac justo. Fusce id enim a erat fringilla sollicitudin ultrices vel metus.
-                    .tab-pane.fade#product-comments(role="tabpanel", aria-labelledby="product-comments-tab") Vivamus rhoncus nisl sed venenatis luctus. Sed condimentum risus ut tortor feugiat laoreet. Suspendisse potenti. Donec et finibus sem, ut commodo lectus. Cras eget neque dignissim, placerat orci interdum, venenatis odio. Nulla turpis elit, consequat eu eros ac, consectetur fringilla urna. Duis gravida ex pulvinar mauris ornare, eget porttitor enim vulputate. Mauris hendrerit, massa nec aliquam cursus, ex elit euismod lorem, vehicula rhoncus nisl dui sit amet eros. Nulla turpis lorem, dignissim a sapien eget, ultrices venenatis dolor. Curabitur vel turpis at magna elementum hendrerit vel id dui. Curabitur a ex ullamcorper, ornare velit vel, tincidunt ipsum.
+                    .col-12.col-sm-6
+                        h3.my-3 #{property.nameArabic} - #{property.nameEnglish}
+                        p 
+                            strong SKU : 
+                            | #{property.sku}
+                        hr
+                        p 
+                            strong Area : 
+                            | #{property.areaId.nameArabic} - #{property.areaId.nameEnglish}
+                        hr
+                        p 
+                            strong Type : 
+                            | #{property.type.nameArabic} - #{property.type.nameEnglish} 
+                        hr
+                        p 
+                            strong Room : 
+                            | #{property.rooms.nameArabic} - #{property.rooms.nameEnglish}   
+                        hr
+
+                        .bg-gray.py-2.px-3.mt-4
+                            h2.mb-0
+
+                                | #{property.price} 
+                                small EGP/night
+                            h4.mt-0
+                                small Ex Tax:  #{property.price} EGP/night
+
+                .row.mt-5.pt-5
+                    nav.w-100
+                        .nav.nav-tabs#product-tab(role="tablist")
+                            a.nav-item.nav-link.active#product-desc-tab(data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true") Address
+                            a.nav-item.nav-link#product-comments-tab(data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false") Amenties
+                            a.nav-item.nav-link#brokers-tab(data-toggle="tab" href="#brokers" role="tab" aria-controls="brokers" aria-selected="false") Brokers
+
+                    .tab-content.p-3#nav-tabContent
+                        .tab-pane.fade.show.active#product-desc(role="tabpanel" aria-labelledby="product-desc-tab") 
+                            | #{property.Address.desriptionArabic} 
+                            br 
+                            br 
+
+                            | #{property.Address.descriptionEnglish} 
+
+                        .tab-pane.fade#product-comments(role="tabpanel" aria-labelledby="product-comments-tab") 
+                            ul.nav
+                                for am in property.amenties
+                                    li(style="display:block;width:100%")
+                                        img.mr-4(src=`/static/images/${am.icon}.svg`, alt)
+                                        | #{am.nameArabic}
+                                    
+                        .tab-pane.fade#brokers(role="tabpanel" aria-labelledby="brokers-tab") 
+                            ul.nav
+                                for am in property.brokers
+                                    li(style="display:block;width:100%")
+                                        | #{am.name} - #{am.mobileNo}
+                                    
+block scripts
+    script(src="/static/bower_components/admin-lte/dist/js/demo.js")

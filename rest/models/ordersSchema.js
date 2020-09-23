@@ -23,7 +23,7 @@ const totalOrderSchema = new Schema({
     totalPrice:{type:Number},
     customerMobileNo:{type:String},
     review:{type:String,default:'pending'},
-    status:{type:String,default:'active'},
+    status:{type:String,default:'pending'},
     createdAt: { type: Date, default: Date.now },
     orders:[ordersSchema],
 

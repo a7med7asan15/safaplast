@@ -28,14 +28,16 @@ const reviewService = {
             const options = {
                 page,
                 limit: 20,
-                populate: 'propertyId'
+                populate: 'propertyId', 
+                sort:{
+                    createdAt: 'desc'
+                }
             }
 
             let csrfToken = req.csrfToken();
 
             const bookings = await TotalOrderSchema.paginate({
-                review: "pending",
-                status: "active"
+                review:"pending", 
             }, options)
           
             return res.render('screens/reviewScreens/listReviews', {
@@ -43,6 +45,8 @@ const reviewService = {
                 csrfToken,
                 dataProvided: bookings, 
                 dateNow: Date.now(),
+                header:"Under Review", 
+                enSearch:true,
             })
 
         } catch (err) {
@@ -76,9 +80,9 @@ const reviewService = {
 
         }
     },
-    showActualBookings: async (req, res) => {
+    showActiveBookings: async (req, res) => {
         try {
-
+            const csrfToken = req.csrfToken();
             let page = 1;
             let limit = 1;
 
@@ -88,24 +92,109 @@ const reviewService = {
             const options = {
                 page,
                 limit: 20,
-                populate: 'propertyId'
+                populate: 'propertyId', 
+                sort:{
+                    createdAt: 'desc'
+                }
             }
 
-            let csrfToken = req.csrfToken();
-
-            const bookings = await OrdersSchema.paginate({
-                review: "accept",
+            const bookings = await TotalOrderSchema.paginate({
+                review: "done",
                 status: "active"
             }, options)
-
-            return res.render('screens/reviewScreens/listAccepted', {
+          
+            return res.render('screens/reviewScreens/listReviews', {
                 thisUser: req.user,
                 csrfToken,
-                dataProvided: bookings
+                dataProvided: bookings, 
+                dateNow: Date.now(),
+                header:"Active Orders", 
+                enSearch:false
             })
 
         } catch (err) {
             res.send(err)
+            console.log(err);
+
+
+        }
+
+    },
+    showDecBookings: async (req, res) => {
+        try {
+            const csrfToken = req.csrfToken();
+            let page = 1;
+            let limit = 1;
+
+            if (req.query.p) {
+                page = parseInt(req.query.p, 10)
+            }
+            const options = {
+                page,
+                limit: 20,
+                populate: 'propertyId', 
+                sort:{
+                    createdAt: 'desc'
+                }
+            }
+
+            const bookings = await TotalOrderSchema.paginate({
+                review: "done",
+                status: "declined"
+            }, options)
+          
+            return res.render('screens/reviewScreens/listReviews', {
+                thisUser: req.user,
+                csrfToken,
+                dataProvided: bookings, 
+                dateNow: Date.now(),
+                header:"Declined Orders", 
+                enSearch:false
+            })
+
+        } catch (err) {
+            res.send(err)
+            console.log(err);
+
+
+        }
+    },
+    showWaitBookings: async (req, res) => {
+
+        try {
+            const csrfToken = req.csrfToken();
+            let page = 1;
+            let limit = 1;
+
+            if (req.query.p) {
+                page = parseInt(req.query.p, 10)
+            }
+            const options = {
+                page,
+                limit: 20,
+                populate: 'propertyId', 
+                sort:{
+                    createdAt: 'desc'
+                }
+            }
+
+            const bookings = await TotalOrderSchema.paginate({
+                review: "done",
+                status: "waiting"
+            }, options)
+          
+            return res.render('screens/reviewScreens/listReviews', {
+                thisUser: req.user,
+                csrfToken,
+                dataProvided: bookings, 
+                dateNow: Date.now(),
+                header:"Waiting for Payment Orders", 
+                enSearch:false
+            })
+
+        } catch (err) {
+            res.send(err)
+            console.log(err);
 
 
         }
@@ -301,7 +390,7 @@ const reviewService = {
 
             const csrfToken = req.csrfToken();
             const dataProvided = await TotalOrderSchema.findById(id).populate('orders.propertyId');
-
+            
             return res.render('screens/reviewScreens/revBooking', {
                 thisUser: req.user,
                 csrfToken,
@@ -331,6 +420,7 @@ const reviewService = {
                 csrfToken,
                 table_search,
                 tbSearch, 
+                header:"Under Review: Search Results",
                 dateNow: Date.now(),
             })
 
@@ -347,7 +437,58 @@ const reviewService = {
 
 
     },
+    declineBook: async (req, res) => {
+        const {
+            bookId
+        } = req.params
+        try {
+            
+            const book = await TotalOrderSchema.findById(bookId);
+            book.status = "declined";
+            book.review = "done";
+            book.save();
+            req.flash('success', 'Booking declined')
+            return res.redirect('/dashboard/booking')
+        } catch (err) {
+            req.flash('error ', 'Error, Failed to do the task')
+            return res.redirect('/dashboard/booking')
 
+        }
+    },
+    confirmBook: async (req, res) => {
+        const {
+            bookId
+        } = req.params
+        try {
+            const book = await TotalOrderSchema.findById(bookId);
+            book.status = "waiting";
+            book.review = "done";
+            book.save();
+            req.flash('success', 'Booking is now waiting for payment')
+            return res.redirect('/dashboard/booking')
+        } catch (err) {
+            req.flash('error ', 'Error, Failed to do the task')
+            return res.redirect('/dashboard/booking')
+
+        }
+    },
+    activateBook: async (req, res) => {
+        const {
+            bookId
+        } = req.params
+        try {
+            const book = await TotalOrderSchema.findById(bookId);
+            book.status = "active";
+            book.review = "done";
+            book.save();
+            req.flash('success', 'Booking Activated')
+            return res.redirect('/dashboard/booking')
+        } catch (err) {
+            req.flash('error ', 'Error, Failed to do the task')
+            return res.redirect('/dashboard/booking')
+
+        }
+    },
 }
 
 module.exports = reviewService

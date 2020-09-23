@@ -21,7 +21,7 @@ block content
                 .card
                     .card-header
                         h3.card-title Property Information
-                    form#addnewprop(role="form" action=`/dashboard/propertys/edit/?id=${property.id}` method="POST")
+                    form#addnewprop(role="form" action=`/dashboard/propertys/edit?id=${property.id}` method="POST")
                         .card-body.row
                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                             .form-group.col-md-12
@@ -29,18 +29,31 @@ block content
 
                             .form-group.col-md-6
                                 label(for="nameEnglish") Property Name [English]
-                                input.form-control#nameEnglish(type="text", name="nameEnglish", placeholder="Enter Property Name In English" value=`${property.nameEnglish}`)
+                                input.form-control#nameEnglish(type="text" name="nameEnglish" placeholder="Enter Property Name In English" value=`${property.nameEnglish}`)
                             .form-group.col-md-6
                                 label(for="nameArabic") Property Name [Arabic]
-                                input.form-control#nameArabic(type="text", name="nameArabic", placeholder="Enter Property Name in Arabic" value=`${property.nameArabic}`)
+                                input.form-control#nameArabic(type="text" name="nameArabic" placeholder="Enter Property Name in Arabic" value=`${property.nameArabic}`)
 
                             .form-group.col-md-4
                                 label(for="mobilenumber") Mobile Number
-                                input.form-control(type="text", name="mobileNumber" value=`${property.mobileNumber}`)            
-                            .col-md-12.pl-0
-                                .form-group.col-md-4
-                                    label(for="mobilenumber") Price 
-                                    input.form-control(type="number", name="price", value=`${property.price}`)            
+                                input.form-control(type="text" name="mobileNumber" value=`${property.mobileNumber}`)            
+                            .form-group.col-md-4
+                                label(for="sku") SKU
+                                input.form-control(type="text" name="sku" value=`${property.sku}`)            
+                            .col-md-4
+
+                            .form-group.col-md-4
+                                label(for="mobilenumber") Price 
+                                input.form-control(type="number" name="price", value=`${property.price}`) 
+                            .form-group.col-md-8
+                                label Brokers
+                                select.brokers(multiple,name="brokers" data-placeholder="Select Brokers" style="width: 100%;")
+                                    if brok 
+                                        for a in brok
+                                            - var selecBrok = false 
+                                            -if(property.brokers.includes(a.id.toString()))
+                                                -selecBrok = true
+                                            option(value=`${a.id}` , selected=selecBrok)=`${a.name} - ${a.mobileNo}`            
                             .col-md-12.mt-5.mb-5
                                 h3 Advanced Information
                             .col-md-12
@@ -69,15 +82,15 @@ block content
                                                         selecRooms = true
                                                     option(value=`${r.id}` selected=selecRooms)=`${r.nameEnglish} - ${r.nameArabic}`      
                                 .col-md-4
-                                        .form-group
-                                            label Amenities
-                                            select.amenties(multiple,name="amenties", data-placeholder="Select Amenties", style="width: 100%;")
-                                                if amen 
-                                                    for a in amen
-                                                        - var selecAmen = false 
-                                                        -if(property.amenties.includes(a.id.toString()))
-                                                            -selecAmen = true
-                                                        option(value=`${a.id}` , selected=selecAmen)=`${a.nameEnglish} - ${a.nameArabic}` 
+                                    .form-group
+                                        label Amenities
+                                        select.amenties(multiple,name="amenties" data-placeholder="Select Amenties" style="width: 100%;")
+                                            if amen 
+                                                for a in amen
+                                                    - var selecAmen = false 
+                                                    -if(property.amenties.includes(a.id.toString()))
+                                                        -selecAmen = true
+                                                    option(value=`${a.id}` , selected=selecAmen)=`${a.nameEnglish} - ${a.nameArabic}` 
                             .col-md-12.mt-5.mb-5
                                 h3 Property Info
                             .col-md-12
@@ -97,23 +110,23 @@ block content
                                 .col-md-6
                                     .form-group
                                         label Description in English
-                                        textarea.form-control(name="desEnglish", rows="3", placeholder="Enter ..." )=property.Address.desriptionArabic
+                                        textarea.form-control(name="desEnglish" rows="3" placeholder="Enter ..." )=property.Address.desriptionArabic
                             .col-md-12
                                 .col-md-6
                                     .form-group
                                         label Description in Arabic
-                                        textarea.form-control(name="desArabic", rows="3", placeholder="Enter ...")=property.Address.descriptionEnglish
+                                        textarea.form-control(name="desArabic" rows="3" placeholder="Enter ...")=property.Address.descriptionEnglish
                             .col-md-12
                                 div#dropi.dropzone.dz_clickable
                         .card-footer
                             button.btn.btn-primary.float-right(type="submit") Update Property
-   
+
     script var data = !{JSON.stringify(property.images).replace(/<\//g, '<\\/')}
     script var postId = !{JSON.stringify(property._id)}
     script var add = !{false}
 
 
 block scripts 
-        script(src="/static/vendor/js/property.js", type="text/javascript")
+    script(src="/static/vendor/js/property.js" type="text/javascript")
 
 

@@ -6,7 +6,9 @@ const {
   RoomsSchema
 } = require('../models/categorySchema');
 const PropertySchema = require('../models/propertySchema');
-const {AmentiesSchema} = require('../models/amentiesSchema');
+const {
+  AmentiesSchema
+} = require('../models/amentiesSchema');
 const BrokerSchema = require('../models/brokerSchema');
 
 
@@ -39,26 +41,26 @@ const propertyService = {
   },
   addPropPage: async (req, res) => {
     let csrfToken = req.csrfToken();
-    try{
+    try {
       const areas = await AreaSchema.find();
-    const type = await TypesSchema.find();
-    const rooms = await RoomsSchema.find();
-    const amen = await AmentiesSchema.find();
-    const brok = await BrokerSchema.find();
-    return res.render('screens/propScreens/addPropScreen', {
-      thisUser: req.user,
-      csrfToken,
-      areas,
-      type,
-      rooms,
-      brok,
-      amen
-    })
+      const type = await TypesSchema.find();
+      const rooms = await RoomsSchema.find();
+      const amen = await AmentiesSchema.find();
+      const brok = await BrokerSchema.find();
+      return res.render('screens/propScreens/addPropScreen', {
+        thisUser: req.user,
+        csrfToken,
+        areas,
+        type,
+        rooms,
+        brok,
+        amen
+      })
 
-    }catch(err){
+    } catch (err) {
       req.flash('error', 'Something went wrong, please reload')
     }
-    
+
   },
   createProp: async (req, res) => {
     const {
@@ -73,13 +75,14 @@ const propertyService = {
       desArabic,
       desEnglish,
       images,
-      amenties, brokers
+      amenties,
+      brokers
     } = req.body;
     const im = images.split(',')
     try {
       const areaObj = await AreaSchema.findById(nameArea);
       const prop = new PropertySchema({
-        createdby : req.user.id,
+        createdby: req.user.id,
         nameEnglish,
         nameArabic,
         type,
@@ -92,85 +95,63 @@ const propertyService = {
         cityId: areaObj.parent,
         areaId: areaObj.id,
         Address: {
-          desriptionArabic:desArabic,
-          descriptionEnglish:desEnglish,
+          desriptionArabic: desArabic,
+          descriptionEnglish: desEnglish,
         },
-        
+
       });
-      for(i=0 ; i<im.length ; i++){
-        prop.images.push({imageLink : im[i]});
+      for (i = 0; i < im.length; i++) {
+        prop.images.push({
+          imageLink: im[i]
+        });
       }
       await prop.save();
-      
+
 
       req.flash('success', 'Property Added Succesfully')
-      return res.json({err:false,message:"Property Added Successfuly"});
+      return res.json({
+        err: false,
+        message: "Property Added Successfuly"
+      });
 
     } catch (err) {
       req.flash('success', 'Property Not Added ')
-      return res.json({err:true,message:"Property Not Added "});
+      return res.json({
+        err: true,
+        message: "Property Not Added "
+      });
 
     }
   },
-  showOne: async (req, res) => {
-    req.session.lastlink = req.url
-    let csrfToken = req.csrfToken();
-    try {
-      var {
-        id
-      } = req.query
-      const areas = await AreaSchema.find();
-      const type = await TypesSchema.find();
-      const rooms = await RoomsSchema.find();
-      const amen = await AmentiesSchema.find();
-      const brok = await BrokerSchema.find();
-
-      const property = await PropertySchema.findById(id);
-      return res.render('screens/propScreens/editPropScreen', {
-        thisUser: req.user,
-        property,
-        csrfToken,
-        areas,
-        type,
-        rooms,
-        amen, brok
-
-      })
-    } catch (err) {
-      req.flash('error', 'Something Went wrong')
-      
-      return res.render('screens/propScreens/editPropScreen', {
-        thisUser: req.user,
-        property: {},
-        csrfToken
-      })
-    }
-
-  },
+  
   update: async (req, res) => {
     const {
       nameEnglish,
       nameArabic,
       mobileNumber,
       nameArea,
+      sku,
       type,
       rooms,
       price,
       desArabic,
       desEnglish,
       images,
-      amenties, brokers
+      amenties,
+      brokers
     } = req.body;
     let im = [];
-    if(images){
-       im = images.split(',');
-    } 
+    if (images) {
+      im = images.split(',');
+    }
     try {
       const updateProp = await PropertySchema.findById(req.query.id);
-      let imagesLoop = [] ;
-      if(im.length){
-        for(i=0 ; i < im.length ; i++){
-          imagesLoop.push({imageLink : im[i]});
+      let imagesLoop = [];
+      if (im.length) {
+        for (i = 0; i < im.length; i++) {
+          imagesLoop.push({
+            imageLink: im[i]
+          });
         }
       }
       updateProp.nameEnglish = nameEnglish;
@@ -185,18 +166,25 @@ const propertyService = {
       updateProp.images = imagesLoop;
       updateProp.amenties = amenties;
       updateProp.brokers = brokers;
+      updateProp.sku = sku;
       await updateProp.save();
-  
+
       req.flash('success', 'Property Updated Succesfully')
-      return res.json({err:false,message:"Property Updated Succesfully"});
-      
+      return res.json({
+        err: false,
+        message: "Property Updated Succesfully"
+      });
+
 
     } catch (err) {
       req.flash('error', {
         message: 'Property Not Updated'
       })
-      return  res.json({err:true,message:"Property NOT Updated"});
-       
+      return res.json({
+        err: true,
+        message: "Property NOT Updated"
+      });
+
     }
 
   },
@@ -224,8 +212,7 @@ const propertyService = {
         table_search,
       } = req.body;
       const tbSearch = await PropertySchema.find({
-        "$or": [
-          {
+        "$or": [{
             nameArabic: {
               '$regex': table_search,
               '$options': 'i'
@@ -236,7 +223,7 @@ const propertyService = {
               '$regex': table_search,
               '$options': 'i'
             }
-          }, 
+          },
           {
             mobileNumber: {
               '$regex': table_search,
@@ -265,19 +252,57 @@ const propertyService = {
 
 
   },
-  propertyPage:async(req,res)=>{
-    var property = req.params.id
-    try{
-      var property = await PropertySchema.findById(property);
-      return res.render('screens/propScreens/showOneScreen',{
+  propertyPage: async (req, res) => {
+    var propertyId = req.params.id
+    try {
+      var property = await PropertySchema.findById(propertyId).populate('areaId type rooms amenties brokers');
+      return res.render('screens/propScreens/showOneScreen', {
         thisUser: req.user,
         property: property,
       });
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
 
-}
+  }, 
+  showOne: async (req, res) => {
+    const {
+      propId
+    } = req.params
+    let csrfToken = req.csrfToken();
+
+
+    try {
+
+      const areas = await AreaSchema.find();
+      const type = await TypesSchema.find();
+      const rooms = await RoomsSchema.find();
+      const amen = await AmentiesSchema.find();
+      const brok = await BrokerSchema.find();
+
+      const property = await PropertySchema.findById(propId);
+      return res.render('screens/propScreens/editPropScreen', {
+        thisUser: req.user,
+        property,
+        csrfToken,
+        areas,
+        type,
+        rooms,
+        amen,
+        brok
+
+      })
+    } catch (err) {
+      req.flash('error', 'Something Went wrong')
+      console.log(err);
+      return res.render('screens/propScreens/editPropScreen', {
+        thisUser: req.user,
+        property: {},
+        csrfToken
+      })
+    }
+
+  },
 }
 
 module.exports = propertyService

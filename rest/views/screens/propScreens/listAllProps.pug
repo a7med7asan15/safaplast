@@ -33,7 +33,9 @@ block content
                                     tr
 
                                     th Property Name
+                                    th SKU
                                     th Status
+                                    th View
                                     th Edit
                                     th Delete
                                 tbody
@@ -41,10 +43,15 @@ block content
                                         for tb in tbSearch
                                             tr
                                                 td #{tb.nameEnglish}
+                                                td #{ tb.sku }
                                                 td 
                                                     span.tag.tag-success Active
                                                 td
-                                                    a.btn-sm.btn-primary(href=`/dashboard/propertys/edit/${tb.id}`)
+                                                    a.btn-sm.btn-primary(href=`/dashboard/propertys/${tb.id}`)
+                                                        i.far.fa-edit
+                                                        |  View
+                                                td
+                                                    a.btn-sm.btn-warning(href=`/dashboard/propertys/edit?id=${tb.id}`)
                                                         i.far.fa-edit
                                                         |  Edit
                                                 td
@@ -56,15 +63,21 @@ block content
                                     if propertys
                                         for property in propertys.docs
                                             tr
-                                            td #{ property.sku }
-                                            td
-                                                span.tag.tag-success #{ property.status }
-                                            td
-                                                a.btn-sm.btn-primary(href=`/dashboard/propertys/${property.id}`)
-                                                    i.far.fa-edit
-                                                    |  view
-                                            td
-                                                form(action=`/dashboard/propertys/delete/${property.id}`, method="post")
-                                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                                    button.btn-sm.btn-danger(type="submit")
-                                                        i.fas.fa-trash-alt
+                                                td #{ property.nameEnglish }
+                                                td #{ property.sku}
+                                                td
+                                                    span.tag.tag-success #{ property.status }
+                                                td
+                                                    a.btn-sm.btn-primary(href=`/dashboard/propertys/${property.id}`)
+                                                        i.far.fa-edit
+                                                        |  View
+                                               
+                                                td
+                                                    a.btn-sm.btn-warning(href=`/dashboard/propertys/edit/${property.id}`)
+                                                        i.far.fa-edit
+                                                        |  Edit
+                                                td
+                                                    form(action=`/dashboard/propertys/delete/${property.id}`, method="post")
+                                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                        button.btn-sm.btn-danger(type="submit")
+                                                            i.fas.fa-trash-alt
