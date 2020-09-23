@@ -408,6 +408,8 @@ const reviewService = {
                 "$or": [
                     { nameCustomer: { '$regex': table_search, '$options': 'i' } },
                     { customerMobileNo: { '$regex': table_search, '$options': 'i' } },
+                    { orderId: { '$regex': table_search, '$options': 'i' } },
+                    { createdAt: { '$regex': table_search, '$options': 'i' } },
                 ]
             });
             return res.render('screens/reviewScreens/listReviews', {
