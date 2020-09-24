@@ -15,7 +15,6 @@ const propertySchema  = new Schema({
     nameArabic:{ type : String, required: true} ,
     slugEnglish:{ type: String, slug: ["nameEnglish"], slug_padding_size: 4,  unique: true } ,
     slugArabic:{ type: String, slug: ["nameArabic"], slug_padding_size: 4,  unique: true } ,
-    mobileNumber:{ type : String } ,
     type:{  type : Schema.Types.ObjectId , ref : 'typesSchema' } ,
     rooms:{  type : Schema.Types.ObjectId , ref : 'roomsSchema' } ,
     price:{ type : Number } ,

@@ -247,6 +247,7 @@ const homePageService = {
                 email_contact,
                 captcha
             } = req.body;
+            console.log(req.body)
             if (!req.body.captcha) {
                 return res.json({
                     errors: true,

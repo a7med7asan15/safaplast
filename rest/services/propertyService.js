@@ -66,7 +66,6 @@ const propertyService = {
     const {
       nameEnglish,
       nameArabic,
-      mobileNumber,
       nameArea,
       type,
       rooms,
@@ -89,7 +88,6 @@ const propertyService = {
         price,
         rooms,
         sku,
-        mobileNumber,
         amenties,
         brokers,
         cityId: areaObj.parent,
@@ -128,7 +126,6 @@ const propertyService = {
     const {
       nameEnglish,
       nameArabic,
-      mobileNumber,
       nameArea,
       sku,
       type,
@@ -156,7 +153,6 @@ const propertyService = {
       }
       updateProp.nameEnglish = nameEnglish;
       updateProp.nameArabic = nameArabic;
-      updateProp.mobileNumber = mobileNumber;
       updateProp.type = type;
       updateProp.price = price;
       updateProp.rooms = rooms;
@@ -224,12 +220,6 @@ const propertyService = {
               '$options': 'i'
             }
           },
-          {
-            mobileNumber: {
-              '$regex': table_search,
-              '$options': 'i'
-            }
-          }
         ]
       });
       return res.render('screens/propScreens/listAllProps', {

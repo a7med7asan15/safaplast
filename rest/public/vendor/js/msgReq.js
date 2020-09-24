@@ -62,19 +62,25 @@ var $validate = $("#contactForm").validate({
             },
             success: function (result) {
                 if (!result.err) {
+                    console.log("Hello")
                     grecaptcha.execute('6Le8rs8ZAAAAAKfO_HMOqTWHLos8guMBe6VgdL_u', {
                         action: 'submit'
                     }).then(function (token) {
                         data.captcha = token;
+                        console.log(token);
                     });
                     $("#message-contact").slideUp(750, function () {
                         $('#message-contact').hide();
 
                         $('#message-contact')
-                            .after('<p>سيتم الارسال..شكرا</p><i class="icon-spin4 animate-spin loader"></i>')
-                            
+                            .after('<p>سيتم الارسال..شكرا</p>')
+
+
+
+
                     });
 
+                    console.log(data);
                     //localStorage.setItem("name", data.cuName);
                     // localStorage.setItem("orderId", serialData.orderId);
                     //return window.location.replace("http://" + result.domainName + "/orders/confirm");

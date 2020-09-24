@@ -36,7 +36,7 @@ block content
                             input(type="hidden" id="g-recaptcha-response" name="g-recaptcha-response")
                             input(type="hidden" name="action" value="validate_captcha")
                             p.add_top_30
-                                input.btn_1.rounded#submit-contact(type="submit" value="Submit")
+                                input.btn_1.rounded#submit-contact(data-sitekey="6Le8rs8ZAAAAAKfO_HMOqTWHLos8guMBe6VgdL_u" type="submit" value="Submit")
 
                          
             .col-xl-6.col-lg-6.pl-xl-5
@@ -52,33 +52,7 @@ block content
                     a  المسبط - شارع النصر - أمام موقف الاتوبيسات السياحي 
                     br 
                     | Dahab 
-block scripts
-    script(src="/static/vendor/js/msgReq.js")
+block scripts 
+    //script(src="http://malsup.github.com/jquery.form.js")
     script(src="https://www.google.com/recaptcha/api.js?render=6Le8rs8ZAAAAAKfO_HMOqTWHLos8guMBe6VgdL_u")
-    //script.
-        document.getElementById('contactform').addEventListener('submit',onSubmit);
-
-        function onSubmit(e){
-            e.preventDefault();
-
-            grecaptcha.execute('6Le8rs8ZAAAAAKfO_HMOqTWHLos8guMBe6VgdL_u', {action: 'homepage'}).then(function(token) {
-
-            / This data is not being used in the back end (Only the token), but have it here for you to experiment
-            const firstName = document.querySelector('name_contact').value; 
-            const lastName = document.querySelector('lastname_contact').value;
-            const captcha = token;
-
-                fetch('/sendMsg',{
-                method: 'POST',
-                headers:{
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json', 
-                    'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
-
-                },
-                body:JSON.stringify({firstName:firstName,lastName:lastName,captcha:captcha})
-                }).then(res => res.json()).then(data => { alert("msg: " + data.msg + ", success?: " + data.success + ", score: " + data.score)})     
-
-            });
-
-        }
+    script(src="/static/vendor/js/msgReq.js")
