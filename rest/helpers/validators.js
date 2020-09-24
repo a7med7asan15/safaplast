@@ -6,9 +6,8 @@ module.exports  = {
         return (req,res,next)=>{
             const result  = schemas.validate(req.body)
             if (result.error){
-                req.flash('error', result.error.details)
-                return res.redirect(req.baseUrl + req.url)
-                
+                req.flash('error', result.error.details);
+                return res.redirect(req.baseUrl + req.url);   
             }
             if(!req.value){ req.value= {}}
             req.value['body'] = result.value;
@@ -83,7 +82,7 @@ module.exports  = {
             nameArea:Joi.string().required(),
             type:Joi.string().required(),
             rooms:Joi.string().required(),
-            amenties:Joi.string().required(),
+            amenties:Joi.array().items(Joi.string()),
             images:Joi.string().required(),
             desArabic:Joi.string().required(),
             desEnglish:Joi.string().required(),
