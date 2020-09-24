@@ -34,6 +34,7 @@ block scripts
             range: true,
             min: maxPrice*-1,
             max: minPrice*-1,
+            step:10,
             values: [ -1*maxValPrice, -1*minValPrice ],
             slide: function( event, ui ) {
                 //$( "#amount" ).html( "من" + ui.values[ 1 ]*-1 + " لحد " + ui.values[ 0 ]*-1 );
