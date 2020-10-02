@@ -162,9 +162,9 @@ $(function () {
         $(element).removeClass("is-invalid");
       },
       submitHandler:function(form,e){
-        var link = '/dashboard/propertys/add';
+        var link = '/dashboard/products/add';
         if(!add){
-           link =`/dashboard/propertys/edit?id=${postId}`;
+           link =`/dashboard/products/edit?id=${postId}`;
         }
           e.preventDefault();  
           var serialData = $( form ).serializeArray();

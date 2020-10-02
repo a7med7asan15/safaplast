@@ -2,7 +2,7 @@ const {Storage} = require('@google-cloud/storage');
 const storage = new Storage();
 const {deleteImage} = require('../middlewares/uploadImage');
 
-const PropertySchema = require('../models/propertySchema')
+const ProductSchema = require('../models/productSchema')
 
 const mediaService = {
     uploadImageFiles: async (req,res)=>{
@@ -16,9 +16,9 @@ const mediaService = {
           imageName = imageName[imageName.length - 1]
       try{
         if(exist === 'true'){
-          const property = await PropertySchema.findById(postId);
-                property.images.id(imageId).remove();
-                await property.save();
+          const product = await ProductSchema.findById(postId);
+                product.images.id(imageId).remove();
+                await product.save();
         } 
         const deleteFile = await deleteImage(imageName);
       }catch(err){

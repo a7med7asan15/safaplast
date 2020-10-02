@@ -4,11 +4,11 @@ nav.main-header.navbar.navbar-expand.navbar-dark.navbar-light
       a.nav-link(data-widget="pushmenu", href="#", role="button")
         i.fas.fa-bars
     li.nav-item.d-none.d-sm-inline-block
-      a.nav-link(href="/" target="_blank") Website
+      a.nav-link(href="/" target="_blank") الموقع
     li.nav-item.d-none.d-sm-inline-block
-      a.nav-link(href="/dashboard") Dashboard
+      a.nav-link(href="/dashboard") لوحة التحكم
     li.nav-item.d-none.d-sm-inline-block
-      a.nav-link(href="/dashboard/messages") Messages
+      a.nav-link(href="/dashboard/messages") الرسائل
 
   ul.navbar-nav.mr-auto-navbav
     //- li.nav-item.dropdown
@@ -45,7 +45,7 @@ nav.main-header.navbar.navbar-expand.navbar-dark.navbar-light
             li.user-header
                 img.img-circle(width="100" ,src=`${thisUser.avatar}`, alt="User Image")
                 p #{thisUser.username}
-                  small Member since Nov. 2012
+                  //small Member since Nov. 2012
             li(style="display:flex; height:auto; justify-content:space-between;align-items:center").user-footer
               a.btn.btn-default.btn-flat(href=`/dashboard/users/edit/${thisUser.id}`) Profile
               form(action="/dashboard/logout" method="post" style="display:inline-block; margin-bottom:0px; width:100%;").form-group

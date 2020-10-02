@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf'); 
 const csrfProtection = csrf();
-const propertyService = require('../../services/propertyService');
+const productService = require('../../services/productService');
 
 
 // uploading Middleware 
@@ -44,7 +44,7 @@ router.use(   authMiddleware ,   idAdmin   );
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// Property READ ROUTES  // ++++// //////
+// +++ /// ProductREAD ROUTES  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
@@ -52,7 +52,7 @@ router.use(   authMiddleware ,   idAdmin   );
 
 
 //---------------------
-// Read Property Requests 
+// Read ProductRequests 
 //--------------------
 
 
@@ -63,7 +63,7 @@ router.get( '/',
 csrfProtection, 
 
 
-propertyService.listAllProps
+productService.list
 
 
 );
@@ -73,16 +73,16 @@ router.get( '/add',
 
 csrfProtection, 
 
-propertyService.addPropPage
+productService.addPage
 
 
 );
-router.get( '/:id',
+router.get( '/:dataId',
 
 
 csrfProtection, 
 
-propertyService.propertyPage
+productService.preview
 
 
 );
@@ -91,18 +91,18 @@ propertyService.propertyPage
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// Property CREATE ROUTES  // ++++// //////
+// +++ /// ProductCREATE ROUTES  // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
 router.post( '/add',
 
- validationBody(schemas.addPropSchema),
+ validationBody(schemas.addProdSchema),
 
  csrfProtection, 
 
 
-propertyService.createProp
+productService.create
 
 
 );
@@ -111,21 +111,21 @@ propertyService.createProp
 
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
-// +++ /// EDIT Property  // ++++// //////
+// +++ /// EDIT Product // ++++// //////
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
-router.get('/edit/:propId', 
+router.get('/edit/:dataId', 
 
 
 csrfProtection,
 
-propertyService.showOne
+productService.showOne
 
 );
 
 //---------------------------
-// Update Property Route 
+// Update ProductRoute 
 //---------------------------
 
 router.post('/edit', 
@@ -134,33 +134,33 @@ router.post('/edit',
 
 csrfProtection,
 
-propertyService.update
+productService.update
 
 );
 
 
 //---------------------------
-// Delete Property Route 
+// Delete ProductRoute 
 //---------------------------
 
-router.post('/delete/:propId',
+router.post('/delete/:dataId',
 
 csrfProtection,
 
 
-propertyService.destroy
+productService.destroy
 
 ); 
 
 //---------------------------
-// Property Search 
+// ProductSearch 
 //---------------------------
 
 router.post('/searchResult',
 
 csrfProtection,
 
-propertyService.searchShowProp
+productService.searchShow
 
 ); 
 

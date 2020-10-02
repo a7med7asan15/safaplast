@@ -1,19 +1,10 @@
-const {
-  AreaSchema
-} = require('../models/citySchema');
-const {
-  TypesSchema,
-  RoomsSchema
-} = require('../models/categorySchema');
-const PropertySchema = require('../models/propertySchema');
-const {
-  AmentiesSchema
-} = require('../models/amentiesSchema');
-const BrokerSchema = require('../models/brokerSchema');
+
+const ProductSchema = require('../models/productSchema');
 
 
-const propertyService = {
-  listAllProps: async (req, res) => {
+
+const productService = {
+  list: async (req, res) => {
     let page = 1;
     let limit = 1;
 
@@ -27,11 +18,11 @@ const propertyService = {
         page,
         limit: 10,
       }
-      const propertys = await PropertySchema.paginate({}, options);
+      const products = await ProductSchema.paginate({}, options);
       return res.render('screens/propScreens/listAllProps', {
         thisUser: req.user,
         csrfToken,
-        propertys
+        products
       })
 
     } catch (err) {
@@ -39,7 +30,7 @@ const propertyService = {
     }
 
   },
-  addPropPage: async (req, res) => {
+  addPage: async (req, res) => {
     let csrfToken = req.csrfToken();
     try {
       const areas = await AreaSchema.find();
@@ -62,7 +53,7 @@ const propertyService = {
     }
 
   },
-  createProp: async (req, res) => {
+  create: async (req, res) => {
     const {
       nameEnglish,
       nameArabic,
@@ -80,7 +71,7 @@ const propertyService = {
     const im = images.split(',')
     try {
       const areaObj = await AreaSchema.findById(nameArea);
-      const prop = new PropertySchema({
+      const prop = new ProductSchema({
         createdby: req.user.id,
         nameEnglish,
         nameArabic,
@@ -106,17 +97,17 @@ const propertyService = {
       await prop.save();
 
 
-      req.flash('success', 'Property Added Succesfully')
+      req.flash('success', 'Product Added Succesfully')
       return res.json({
         err: false,
-        message: "Property Added Successfuly"
+        message: "Product Added Successfuly"
       });
 
     } catch (err) {
-      req.flash('success', 'Property Not Added ')
+      req.flash('success', 'ProductNot Added ')
       return res.json({
         err: true,
-        message: "Property Not Added "
+        message: "ProductNot Added "
       });
 
     }
@@ -142,7 +133,7 @@ const propertyService = {
       im = images.split(',');
     }
     try {
-      const updateProp = await PropertySchema.findById(req.query.id);
+      const updateProp = await ProductSchema.findById(req.query.id);
       let imagesLoop = [];
       if (im.length) {
         for (i = 0; i < im.length; i++) {
@@ -165,20 +156,20 @@ const propertyService = {
       updateProp.sku = sku;
       await updateProp.save();
 
-      req.flash('success', 'Property Updated Succesfully')
+      req.flash('success', 'ProductUpdated Succesfully')
       return res.json({
         err: false,
-        message: "Property Updated Succesfully"
+        message: "ProductUpdated Succesfully"
       });
 
 
     } catch (err) {
       req.flash('error', {
-        message: 'Property Not Updated'
+        message: 'ProductNot Updated'
       })
       return res.json({
         err: true,
-        message: "Property NOT Updated"
+        message: "ProductNOT Updated"
       });
 
     }
@@ -189,25 +180,25 @@ const propertyService = {
       propId
     } = req.params;
     try {
-      const deleteProp = await PropertySchema.findByIdAndDelete(propId);
+      const deleteProp = await ProductSchema.findByIdAndDelete(propId);
 
       req.flash('success', `${deleteProp.nameEnglish} Deleted Successfully`)
-      return res.redirect(`/dashboard/propertys`)
+      return res.redirect(`/dashboard/products`)
     } catch (err) {
       req.flash('error', {
         message: 'Something Went wrong'
       })
-      return res.redirect(`/dashboard/propertys`)
+      return res.redirect(`/dashboard/products`)
 
     }
   },
-  searchShowProp: async (req, res) => {
+  searchShow: async (req, res) => {
     try {
       let csrfToken = req.csrfToken();
       const {
         table_search,
       } = req.body;
-      const tbSearch = await PropertySchema.find({
+      const tbSearch = await ProductSchema.find({
         "$or": [{
             nameArabic: {
               '$regex': table_search,
@@ -242,13 +233,13 @@ const propertyService = {
 
 
   },
-  propertyPage: async (req, res) => {
-    var propertyId = req.params.id
+  preview: async (req, res) => {
+    var dataId = req.params.id
     try {
-      var property = await PropertySchema.findById(propertyId).populate('areaId type rooms amenties brokers');
+      var product= await ProductSchema.findById(dataId).populate('areaId type rooms amenties brokers');
       return res.render('screens/propScreens/showOneScreen', {
         thisUser: req.user,
-        property: property,
+        dataProvided: product,
       });
     } catch (err) {
     }
@@ -269,10 +260,10 @@ const propertyService = {
       const amen = await AmentiesSchema.find();
       const brok = await BrokerSchema.find();
 
-      const property = await PropertySchema.findById(propId);
+      const product= await ProductSchema.findById(propId);
       return res.render('screens/propScreens/editPropScreen', {
         thisUser: req.user,
-        property,
+        dataProvided,
         csrfToken,
         areas,
         type,
@@ -286,7 +277,7 @@ const propertyService = {
       console.log(err);
       return res.render('screens/propScreens/editPropScreen', {
         thisUser: req.user,
-        property: {},
+        dataProvided: {},
         csrfToken
       })
     }
@@ -294,4 +285,4 @@ const propertyService = {
   },
 }
 
-module.exports = propertyService
+module.exports = productService

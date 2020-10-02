@@ -26,14 +26,11 @@ require('./config/passport'),(passport);
 
 const  usersController  =  require(  './controllers/dashboard/usersController'  );
 const  authController  =  require(  './controllers/dashboard/authController'  );
-const  reviewController  =  require(  './controllers/dashboard/reviewController'  );
-const  propertyController  =  require(  './controllers/dashboard/propertyController'  );
+const  productController  =  require(  './controllers/dashboard/productController'  );
 const  logisticController  =  require(  './controllers/dashboard/logisticController'  );
-const  categoryController  =  require(  './controllers/dashboard/categoryController'  );
 const  mediaController  =  require(  './controllers/dashboard/mediaController'  );
 const  homePageController  =  require(  './controllers/website/homePageController'  );
 const  contactController  =  require(  './controllers/website/contactController'  );
-const  brokerController  =  require(  './controllers/dashboard/brokerController'  );
 
 /// Require Seeds 
 
@@ -193,13 +190,11 @@ app.use(   passport.session()   );
 app.use(   '/'   ,   homePageController   );
 app.use(   '/dashboard'   ,   authController   );
 app.use(   '/dashboard/users'   ,   usersController   );
-app.use(   '/dashboard/propertys'   ,  propertyController   );
+app.use(   '/dashboard/products'   ,  productController   );
 app.use(   '/dashboard/logistic'   ,   logisticController  );
 app.use(   '/dashboard/messages'   ,   contactController  );
-app.use(   '/dashboard/category'   ,   categoryController  ); 
 app.use(   '/dashboard/media'   ,   mediaController  ); 
-app.use(   '/dashboard/booking'   ,   reviewController  ); 
-app.use(   '/dashboard/brokers'   ,   brokerController  ); 
+
 app.get('*', function(req, res){
   return res.render('site/404.pug')
 });
@@ -214,9 +209,7 @@ app.get('*', function(req, res){
 
 
 seedUser()
-// seedProperty()
-// seedOrders()
-seedAmenties()
+
 
 app.listen(process.env.STATUS === "PROD" ? process.env.PORT : 3001, () => {
   console.log(`Server is running ${process.env.STATUS === "PROD" ? process.env.PORT : 3001}`);

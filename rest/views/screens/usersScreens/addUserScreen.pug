@@ -5,7 +5,7 @@ block content
                 .container-fluid
                     .row.mb-3.mt-3
                         .col-sm-6
-                            h1.m-0.text-dark Add New Account
+                            h1.m-0.text-dark أضف حساب جديد
                     .content
                         .container-fluid
                             if successes
@@ -18,40 +18,40 @@ block content
                                 .col-12
                                     .card
                                         .card-header
-                                            h3.card-title User Data
+                                            h3.card-title بيانات المستخدم
                                         form#adduserForm(action="/dashboard/users/add" method="post" enctype="multipart/form-data")
                                             .card-body.row
                                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                 .col-md-12
                                                     .form-group.col-md-6
-                                                        label.control-label(for="username") Username
-                                                        input.form-control#username(type="text", name="username", value=`${sessionData ? sessionData.username : ''}`, placeholder="Enter Username")
+                                                        label.control-label(for="username") اسم المستخدم
+                                                        input.form-control#username(type="text", name="username", value=`${sessionData ? sessionData.username : ''}`, placeholder="أدخل اسم المستخدم")
                                                 .col-md-12
                                                     .form-group.col-md-6
-                                                        label(for="email") Email address
-                                                        input.form-control#email(type="email", name="email",value=`${sessionData ? sessionData.email : ''}` , placeholder="Enter email Address")
+                                                        label(for="email") البريد الالكتروني
+                                                        input.form-control#email(type="email", name="email",value=`${sessionData ? sessionData.email : ''}` , placeholder="أدخل البريد الالكتروني")
                                                 .col-md-12
                                                     .form-group.col-md-6
-                                                        label(for="password") Password
-                                                        input.form-control#password(type="password", name="password",value=`${sessionData ? sessionData.password : ''}` , placeholder="Password")
+                                                        label(for="password") الرقم السري
+                                                        input.form-control#password(type="password", name="password",value=`${sessionData ? sessionData.password : ''}` , placeholder=" أدخل الرقم السري")
                                                 .col-md-12
                                                     .form-group.col-md-6
-                                                        label(for="mobilenumber") Mobile Number
-                                                        input.form-control(type="text", value=`${sessionData ? sessionData.mobilenumber : ''}` , name="mobilenumber")
+                                                        label(for="mobilenumber") التليفون المحمول
+                                                        input.form-control(type="text", value=`${sessionData ? sessionData.mobilenumber : ''}` , name="mobilenumber" placeholder="أدخل الرقم المحمول")
                                                 .col-md-12
                                                     .form-group.col-md-6
-                                                        label(for="exampleInputFile") File input
+                                                        label(for="exampleInputFile") أدخل صورة شخصية
                                                         .input-group
                                                         .custom-file
                                                             input.custom-file-input#exampleInputFile(type="file" name="avatar")
-                                                            label.custom-file-label(for="exampleInputFile") Choose file
-                                                .col-md-12
+                                                            label.custom-file-label(for="exampleInputFile") اختر صورة
+                                                //.col-md-12
                                                     .form-group.col-md-3
                                                         label(for="userrole") User Role
                                                         select.form-control#userrole(name="userrole", value=`${sessionData ? sessionData.userrole : ''}` )
                                                             option(value="0") Admin
                                                             option(value="1") Store Owner
                                             .card-footer
-                                                 button.btn.btn-primary.float-right(type="submit") Add User
+                                                 button.btn.btn-primary.float-right(type="submit") أضف مستخدم
 block scripts 
         script(src="/static/vendor/js/addUser.js", type="text/javascript")

@@ -1,14 +1,5 @@
-const PropertySchema = require('../../models/propertySchema');
-const {
-    TypesSchema,
-    RoomsSchema
-} = require('../../models/categorySchema');
-const {
-    AreaSchema
-} = require('../../models/citySchema');
-const {
-    AmentiesSchema
-} = require('../../models/amentiesSchema');
+const ProductSchema = require('../../models/productSchema');
+
 const {
     MsgSchema
 } = require('../../models/msgSchema');
@@ -69,15 +60,15 @@ const homePageService = {
                 limit: 10,
                 populate: "rooms type areaId"
             }
-            const data = await PropertySchema.paginate(query, options);
+            const data = await ProductSchema.paginate(query, options);
             const types = await TypesSchema.find();
             const rooms = await RoomsSchema.find();
             const areas = await AreaSchema.find();
             const amen = await AmentiesSchema.find();
-            const minmumPriceRange = await PropertySchema.find().sort({
+            const minmumPriceRange = await ProductSchema.find().sort({
                 price: 1
             }).limit(1);
-            const maxPriceRange = await PropertySchema.find().sort({
+            const maxPriceRange = await ProductSchema.find().sort({
                 price: -1
             }).limit(1);
             let minPrice = 100;
@@ -133,10 +124,10 @@ const homePageService = {
                 slug
             } = req.params;
             let csrfToken = req.csrfToken();
-            const property = await PropertySchema.findOne({
+            const property = await ProductSchema.findOne({
                 slugArabic: slug
             }).populate(['type', 'areaId', 'amenties', "rooms"])
-            const relatedProducts = await PropertySchema.find({
+            const relatedProducts = await ProductSchema.find({
                 price: {
                     $lte: property.price
                 }
@@ -196,7 +187,7 @@ const homePageService = {
                 limit: 10,
                 populate: "rooms type areaId"
             }
-            const data = await PropertySchema.paginate(query, options);
+            const data = await ProductSchema.paginate(query, options);
             res.json({
                 err: false,
                 data

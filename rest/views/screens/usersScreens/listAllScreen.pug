@@ -5,25 +5,25 @@ block content
             .container-fluid
                 .row.mb-3.mt-3
                     .col-sm-6
-                        h1.m-0.text-dark All Accounts
+                        h1.m-0.text-dark جميع الحسابات
                     .col-sm-6
                         a.btn.btn-success.float-right(href="/dashboard/users/add")
                             i.fas.fa-plus
-                            |  Add New User 
+                            |  أضف حساب جديد
         .content
             .container-fluid
                 .row
                     .col-12
                         .card
                             .card-header
-                                h3.card-title All Users
+                                h3.card-title جميع المستخدمين
                                 form(action=`/dashboard/users/searchResult`, method="post")
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .input-group.input-group-sm.float-right(style="width: 150px;")
                                         if users
-                                            input.form-control.float-right(type="text", name="table_search", placeholder="Search")
+                                            input.form-control.float-right(type="text", name="table_search", placeholder="ابحث")
                                         if tbSearch
-                                            input.form-control.float-right(type="text", value = `${table_search}`, name="table_search", placeholder="Search")
+                                            input.form-control.float-right(type="text", value = `${table_search}`, name="table_search", placeholder="ابحث")
                                         .input-group-append
                                         button.btn.btn-default(type="submit")
                                             i.fas.fa-search
@@ -31,12 +31,11 @@ block content
                                 table.table.table-hover.text-nowrap
                                     thead
                                         tr
-                                        th ID
-                                        th Username
-                                        th Email
-                                        th Status
-                                        th Edit
-                                        th delete
+                                        th #
+                                        th اسم المستخدم
+                                        th البريد الالكتروني
+                                        th تعديل
+                                        th حذف
                                     tbody
                                         if tbSearch
                                             for tb in tbSearch
@@ -44,8 +43,6 @@ block content
                                                 td #{ tb.index }
                                                 td #{ tb.username }
                                                 td #{ tb.email }
-                                                td
-                                                    span.tag.tag-success Active
                                                 td
                                                     a.btn-sm.btn-primary(href=`/dashboard/users/edit/${tb.id}`)
                                                         i.far.fa-edit
@@ -61,8 +58,6 @@ block content
                                                 td #{ user.index }
                                                 td #{ user.username }
                                                 td #{ user.email }
-                                                td
-                                                    span.tag.tag-success Active
                                                 td
                                                     a.btn-sm.btn-primary(href=`/dashboard/users/edit/${user.id}`)
                                                         i.far.fa-edit

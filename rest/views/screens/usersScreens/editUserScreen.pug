@@ -5,11 +5,11 @@ block content
         .container-fluid
             .row.mb-5.mt-5.pr-2.pl-2
                 .col-sm-6
-                    h1.m-0.text-dark Edit User
+                    h1.m-0.text-dark تعديل المستخدم
                 .col-sm-6
                     a.btn.btn-warning.float-right(href=`/dashboard/users/edit/${userToEdit.id}/changepassword`)
                         i.fas.fa-lock
-                        |  Change Password 
+                        |  تغيير الرقم السري 
         .content.mt-5
             .container-fluid
                 if successes
@@ -22,30 +22,30 @@ block content
                     .col-12
                         .card   
                             .card-header
-                                h3.card-title User Data
+                                h3.card-title بيانات المستخدم
                             form#adduserForm(action=`/dashboard/users/edit/${userToEdit.id}`, method="post" ,enctype="multipart/form-data")
                                 .card-body.row
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     .col-md-12
                                         .form-group.col-md-6
-                                            label.control-label(for="username") Username
-                                            input.form-control#username(type="text" name="username",value=`${userToEdit.username}`, placeholder="Enter Username")
+                                            label.control-label(for="username") اسم المستخدم
+                                            input.form-control#username(type="text" name="username",value=`${userToEdit.username}`, placeholder="ادخل اسم المستخدم")
                                     .col-md-12
                                         .form-group.col-md-6
-                                            label(for="email") Email address
-                                            input.form-control#email(type="email" name="email",value=`${userToEdit.email}`, placeholder="Enter email Address")
+                                            label(for="email") البريد الالكتروني
+                                            input.form-control#email(type="email" name="email",value=`${userToEdit.email}`, placeholder="أدخل البريد الالكتروني")
                                     .col-md-12
                                         .form-group.col-md-6
-                                            label(for="mobilenumber") Mobile Number
-                                            input.form-control(type="text" name="mobilenumber", value=`${userToEdit.mobileNo}`)
+                                            label(for="mobilenumber") رقم المحمول
+                                            input.form-control(type="text" name="mobilenumber", value=`${userToEdit.mobileNo}` placeholder="أدخل رقم المحمول")
                                     .col-md-12
                                                 .form-group.col-md-6
-                                                    label(for="exampleInputFile") File input
+                                                    label(for="exampleInputFile") أضف صورة شخصية
                                                     .input-group
                                                     .custom-file
                                                         input.custom-file-input#exampleInputFile(type="file" name="avatar")
-                                                        label.custom-file-label(for="exampleInputFile") Choose file
-                                    .col-md-12
+                                                        label.custom-file-label(for="exampleInputFile") اختر صورة
+                                    //.col-md-12
                                         .form-group.col-md-6
                                             label(for="userrole") User Role
                                             select.form-control#userrole(name="userrole",value=`${userToEdit.role}`)
@@ -53,6 +53,6 @@ block content
                                                 option(value="1") Store Owner
 
                                 .card-footer
-                                    button.btn.btn-primary.float-right(type="submit") Update User
+                                    button.btn.btn-primary.float-right(type="submit") حفظ التعديلات
 block scripts 
     script(src="/static/vendor/js/addUser.js" type="text/javascript")
