@@ -64,7 +64,7 @@ $(function () {
   }
   // World map by jvectormap
   $('#world-map').vectorMap({
-    map              : 'usa_en',
+    map              : 'world_en',
     backgroundColor  : 'transparent',
     regionStyle      : {
       initial: {

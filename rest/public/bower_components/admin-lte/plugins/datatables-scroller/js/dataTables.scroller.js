@@ -1,15 +1,15 @@
-/*! Scroller 2.0.1
- * ©2011-2019 SpryMedia Ltd - datatables.net/license
+/*! Scroller 2.0.0
+ * ©2011-2018 SpryMedia Ltd - datatables.net/license
  */
 
 /**
  * @summary     Scroller
  * @description Virtual rendering for DataTables
- * @version     2.0.1
+ * @version     2.0.0
  * @file        dataTables.scroller.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
- * @copyright   Copyright 2011-2019 SpryMedia Ltd.
+ * @copyright   Copyright 2011-2018 SpryMedia Ltd.
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -419,7 +419,7 @@ $.extend( Scroller.prototype, {
 			}
 		}
 
-		if ( animate === undefined || animate )
+		if ( typeof animate == 'undefined' || animate )
 		{
 			this.s.ani = ani;
 			$(this.dom.scroller).animate( {
@@ -429,7 +429,7 @@ $.extend( Scroller.prototype, {
 				// the final scroll event fired
 				setTimeout( function () {
 					that.s.ani = false;
-				}, 250 );
+				}, 25 );
 			} );
 		}
 		else
@@ -560,9 +560,6 @@ $.extend( Scroller.prototype, {
 		dt.on( 'init.scroller', function () {
 			that.measure( false );
 
-			// Setting to `jump` will instruct _draw to calculate the scroll top
-			// position
-			that.s.scrollType = 'jump';
 			that._draw();
 
 			// Update the scroller when the DataTable is redrawn
@@ -662,6 +659,8 @@ $.extend( Scroller.prototype, {
 			that = this,
 			heights = this.s.heights,
 			iScrollTop = this.dom.scroller.scrollTop,
+			iActualScrollTop = iScrollTop,
+			iScrollBottom = iScrollTop + heights.viewport,
 			iTableHeight = $(this.s.dt.nTable).height(),
 			displayStart = this.s.dt._iDisplayStart,
 			displayLen = this.s.dt._iDisplayLength,
@@ -675,9 +674,12 @@ $.extend( Scroller.prototype, {
 			this.s.topRowFloat = 0;
 		}
 
-		iScrollTop = this.s.scrollType === 'jump' ?
-			this._domain( 'virtualToPhysical', this.s.topRowFloat * heights.row ) :
+		iScrollTop = this.scrollType === 'jump' ?
+			this._domain( 'physicalToVirtual', this.s.topRowFloat * heights.row ) :
 			iScrollTop;
+
+		// This doesn't work when scrolling with the mouse wheel
+		$(that.dom.scroller).scrollTop(iScrollTop);
 
 		// Store positional information so positional calculations can be based
 		// upon the current table draw position
@@ -784,11 +786,11 @@ $.extend( Scroller.prototype, {
 		if ( val < magic ) {
 			return val;
 		}
-		else if ( dir === 'virtualToPhysical' && val >= heights.virtual - magic ) {
+		else if ( dir === 'virtualToPhysical' && val > heights.virtual - magic ) {
 			diff = heights.virtual - val;
 			return heights.scroll - diff;
 		}
-		else if ( dir === 'physicalToVirtual' && val >= heights.scroll - magic ) {
+		else if ( dir === 'physicalToVirtual' && val > heights.scroll - magic ) {
 			diff = heights.scroll - val;
 			return heights.virtual - diff;
 		}
@@ -801,12 +803,17 @@ $.extend( Scroller.prototype, {
 		// causing a kink in the scrolling ratio. It does mean the scrollbar is
 		// non-linear, but with such massive data sets, the scrollbar is going
 		// to be a best guess anyway
-		var m = (heights.virtual - magic - magic) / (heights.scroll - magic - magic);
+		var xMax = dir === 'virtualToPhysical' ?
+			heights.virtual :
+			heights.scroll;
+		var yMax = dir === 'virtualToPhysical' ?
+			heights.scroll :
+			heights.virtual;
+
+		var m = (yMax - magic) / (xMax - magic);
 		var c = magic - (m*magic);
 
-		return dir === 'virtualToPhysical' ?
-			(val-c) / m :
-			(m*val) + c;
+		return (m*val) + c;
 	},
 
 	/**
@@ -1188,7 +1195,7 @@ Scroller.oDefaults = Scroller.defaults;
  *  @name      Scroller.version
  *  @static
  */
-Scroller.version = "2.0.1";
+Scroller.version = "2.0.0";
 
 
 

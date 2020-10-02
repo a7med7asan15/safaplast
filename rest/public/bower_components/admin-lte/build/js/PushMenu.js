@@ -22,7 +22,8 @@ const PushMenu = (($) => {
   }
 
   const Default = {
-    autoCollapseSize: 992,
+    autoCollapseSize: false,
+    screenCollapseSize: 768,
     enableRemember: false,
     noTransitionAfterReload: true
   }
@@ -37,9 +38,10 @@ const PushMenu = (($) => {
   }
 
   const ClassName = {
+    SIDEBAR_OPEN: 'sidebar-open',
     COLLAPSED: 'sidebar-collapse',
     OPEN: 'sidebar-open',
-    CLOSED: 'sidebar-closed'
+    SIDEBAR_MINI: 'sidebar-mini'
   }
 
   /**
@@ -52,26 +54,20 @@ const PushMenu = (($) => {
       this._element = element
       this._options = $.extend({}, Default, options)
 
+      this._init()
+
       if (!$(Selector.OVERLAY).length) {
         this._addOverlay()
       }
-
-      this._init()
     }
 
     // Public
 
-    expand() {
-      if (this._options.autoCollapseSize) {
-        if ($(window).width() <= this._options.autoCollapseSize) {
-          $(Selector.BODY).addClass(ClassName.OPEN)
-        }
-      }
-
-      $(Selector.BODY).removeClass(ClassName.COLLAPSED).removeClass(ClassName.CLOSED)
+    show() {
+      $(Selector.BODY).addClass(ClassName.OPEN).removeClass(ClassName.COLLAPSED)
 
       if(this._options.enableRemember) {
-        localStorage.setItem(`remember${EVENT_KEY}`, ClassName.OPEN)
+          localStorage.setItem(`remember${EVENT_KEY}`, ClassName.OPEN);
       }
 
       const shownEvent = $.Event(Event.SHOWN)
@@ -79,41 +75,41 @@ const PushMenu = (($) => {
     }
 
     collapse() {
-      if (this._options.autoCollapseSize) {
-        if ($(window).width() <= this._options.autoCollapseSize) {
-          $(Selector.BODY).removeClass(ClassName.OPEN).addClass(ClassName.CLOSED)
-        }
-      }
-
-      $(Selector.BODY).addClass(ClassName.COLLAPSED)
+      $(Selector.BODY).removeClass(ClassName.OPEN).addClass(ClassName.COLLAPSED)
 
       if(this._options.enableRemember) {
-        localStorage.setItem(`remember${EVENT_KEY}`, ClassName.COLLAPSED)
+          localStorage.setItem(`remember${EVENT_KEY}`, ClassName.COLLAPSED);
       }
 
       const collapsedEvent = $.Event(Event.COLLAPSED)
       $(this._element).trigger(collapsedEvent)
     }
 
-    toggle() {
-      if (!$(Selector.BODY).hasClass(ClassName.COLLAPSED)) {
-        this.collapse()
+    isShown() {
+      if ($(window).width() >= this._options.screenCollapseSize) {
+        return !$(Selector.BODY).hasClass(ClassName.COLLAPSED)
       } else {
-        this.expand()
+        return $(Selector.BODY).hasClass(ClassName.OPEN)
       }
     }
 
-    autoCollapse(resize = false) {
+    toggle() {
+      if (this.isShown()) {
+        this.collapse()
+      } else {
+        this.show()
+      }
+    }
+
+    autoCollapse() {
       if (this._options.autoCollapseSize) {
         if ($(window).width() <= this._options.autoCollapseSize) {
-          if (!$(Selector.BODY).hasClass(ClassName.OPEN)) {
-            this.collapse()
+          if (this.isShown()) {
+            this.toggle()
           }
-        } else if (resize == true) {
-          if ($(Selector.BODY).hasClass(ClassName.OPEN)) {
-            $(Selector.BODY).removeClass(ClassName.OPEN)
-          } else if($(Selector.BODY).hasClass(ClassName.CLOSED)) {
-            this.expand()
+        } else {
+          if (!this.isShown()) {
+            this.toggle()
           }
         }
       }
@@ -121,24 +117,15 @@ const PushMenu = (($) => {
 
     remember() {
       if(this._options.enableRemember) {
-        let toggleState = localStorage.getItem(`remember${EVENT_KEY}`)
+        var toggleState = localStorage.getItem(`remember${EVENT_KEY}`);
         if (toggleState == ClassName.COLLAPSED){
           if (this._options.noTransitionAfterReload) {
-              $("body").addClass('hold-transition').addClass(ClassName.COLLAPSED).delay(50).queue(function() {
-                $(this).removeClass('hold-transition')
-                $(this).dequeue()
-              })
-          } else {
-            $("body").addClass(ClassName.COLLAPSED)
-          }
-        } else {
-          if (this._options.noTransitionAfterReload) {
-            $("body").addClass('hold-transition').removeClass(ClassName.COLLAPSED).delay(50).queue(function() {
-              $(this).removeClass('hold-transition')
+            $("body").addClass('hold-transition').addClass(ClassName.COLLAPSED).delay(10).queue(function() {
+              $(this).removeClass('hold-transition');
               $(this).dequeue()
-            })
+            });
           } else {
-            $("body").removeClass(ClassName.COLLAPSED)
+            $("body").addClass(ClassName.COLLAPSED);
           }
         }
       }
@@ -151,7 +138,7 @@ const PushMenu = (($) => {
       this.autoCollapse()
 
       $(window).resize(() => {
-        this.autoCollapse(true)
+        this.autoCollapse()
       })
     }
 
@@ -179,7 +166,7 @@ const PushMenu = (($) => {
           $(this).data(DATA_KEY, data)
         }
 
-        if (typeof operation === 'string' && operation.match(/collapse|expand|toggle/)) {
+        if (operation === 'toggle') {
           data[operation]()
         }
       })

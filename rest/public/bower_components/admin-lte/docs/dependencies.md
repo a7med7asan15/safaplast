@@ -18,11 +18,6 @@ AdminLTE depends on two main frameworks. The downloadable package contains both 
 AdminLTE makes use of the following plugins. For documentation, updates or license information, please visit the provided links.
 {: .lead}
 
-> Note!
-> You need to load the js/css files of the plugin that you want to use.
-> AdminLTE doesn't load automatically all plugins, this would cause huge load times on every page load.
-{:.quote-warning}
-
 <div class="row px-3">
   <div class="col-sm-3">
     <ul class="list-unstyled">
@@ -50,7 +45,6 @@ AdminLTE makes use of the following plugins. For documentation, updates or licen
       <li><a href="https://select2.org/" target="_blank">Select2</a></li>
       <li><a href="https://tempusdominus.github.io/bootstrap-4/" target="_blank">Tempus Dominus</a></li>
       <li><a href="https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox#readme" target="_blank">Bootstrap4 Duallistbox</a></li>
-      <li><a href="https://github.com/Johann-S/bs-custom-file-input#readme" target="_blank">bs-custom-file-input</a></li>
     </ul>
   </div>
   <div class="col-sm-3">
@@ -83,7 +77,6 @@ AdminLTE makes use of the following plugins. For documentation, updates or licen
       <li><a href="https://fullcalendar.io/">FullCalendar 4</a></li>
       <li><a href="https://github.com/aterrien/jQuery-Knob#readme">jQuery Knob</a></li>
       <li><a href="https://jqueryui.com/" target="_blank">jQuery UI</a></li>
-      <li><a href="https://jqueryvalidation.org/" target="_blank">jQuery Validation</a></li>
       <li><a href="https://www.vincentbroute.fr/mapael/" target="_blank">jQuery Mapael</a></li>
       <li><a href="https://github.com/bbmumford/jqvmap#readme" target="_blank">jQuery Vector Map</a></li>
       <li><a href="https://kingsora.github.io/OverlayScrollbars/" target="_blank">Overlay Scrollbars</a></li>

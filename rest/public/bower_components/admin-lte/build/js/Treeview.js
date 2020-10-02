@@ -32,19 +32,16 @@ const Treeview = (($) => {
   }
 
   const ClassName = {
-    LI               : 'nav-item',
-    LINK             : 'nav-link',
-    TREEVIEW_MENU    : 'nav-treeview',
-    OPEN             : 'menu-open',
-    SIDEBAR_COLLAPSED: 'sidebar-collapse'
+    LI           : 'nav-item',
+    LINK         : 'nav-link',
+    TREEVIEW_MENU: 'nav-treeview',
+    OPEN         : 'menu-open'
   }
 
   const Default = {
-    trigger              : `${Selector.DATA_WIDGET} ${Selector.LINK}`,
-    animationSpeed       : 300,
-    accordion            : true,
-    expandSidebar        : false,
-    sidebarButtonSelector: '[data-widget="pushmenu"]'
+    trigger       : `${Selector.DATA_WIDGET} ${Selector.LINK}`,
+    animationSpeed: 300,
+    accordion     : true
   }
 
   /**
@@ -76,10 +73,6 @@ const Treeview = (($) => {
         parentLi.addClass(ClassName.OPEN)
         $(this._element).trigger(expandedEvent)
       })
-
-      if (this._config.expandSidebar) {
-        this._expandSidebar()
-      }
     }
 
     collapse(treeviewMenu, parentLi) {
@@ -94,23 +87,13 @@ const Treeview = (($) => {
     }
 
     toggle(event) {
-
       const $relativeTarget = $(event.currentTarget)
-      const $parent = $relativeTarget.parent()
-
-      let treeviewMenu = $parent.find('> ' + Selector.TREEVIEW_MENU)
+      const treeviewMenu    = $relativeTarget.next()
 
       if (!treeviewMenu.is(Selector.TREEVIEW_MENU)) {
-
-        if (!$parent.is(Selector.LI)) {
-          treeviewMenu = $parent.parent().find('> ' + Selector.TREEVIEW_MENU)
-        }
-
-        if (!treeviewMenu.is(Selector.TREEVIEW_MENU)) {
-          return
-        }
+        return
       }
-      
+
       event.preventDefault()
 
       const parentLi = $relativeTarget.parents(Selector.LI).first()
@@ -131,21 +114,15 @@ const Treeview = (($) => {
       })
     }
 
-    _expandSidebar() {
-      if ($('body').hasClass(ClassName.SIDEBAR_COLLAPSED)) {
-        $(this._config.sidebarButtonSelector).PushMenu('expand')
-      }
-    }
-
     // Static
 
     static _jQueryInterface(config) {
       return this.each(function () {
-        let data = $(this).data(DATA_KEY)
-        const _options = $.extend({}, Default, $(this).data())
+        let data      = $(this).data(DATA_KEY)
+        const _config = $.extend({}, Default, $(this).data())
 
         if (!data) {
-          data = new Treeview($(this), _options)
+          data = new Treeview($(this), _config)
           $(this).data(DATA_KEY, data)
         }
 

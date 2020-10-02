@@ -99,8 +99,7 @@
 
   &.user-block-sm {
     img {
-      width: $img-size-sm;
-      height: $img-size-sm;
+      @extend .img-sm;
     }
 
     .username,
@@ -123,29 +122,29 @@
 }
 
 .img-sm {
-  height: $img-size-sm;
-  width: $img-size-sm;
+  height: 30px !important;
+  width: 30px !important;
 
   + .img-push {
-    margin-left: $img-size-sm + $img-size-push;
+    margin-left: 40px;
   }
 }
 
 .img-md {
-  width: $img-size-md;
-  height: $img-size-md;
+  width: 60px;
+  height: 60px;
 
   + .img-push {
-    margin-left: $img-size-md + $img-size-push;
+    margin-left: 70px;
   }
 }
 
 .img-lg {
-  width: $img-size-lg;
-  height: $img-size-lg;
+  width: 100px;
+  height: 100px;
 
   + .img-push {
-    margin-left: $img-size-lg + $img-size-push;
+    margin-left: 110px;
   }
 }
 
@@ -288,26 +287,6 @@
   }
 }
 
-.tab-pane {
-  // Box overlay for LOADING STATE effect on Tab Panels
-  > .overlay-wrapper {
-    position: relative;
-    > .overlay {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      flex-direction: column;
-      margin-top: -$card-spacer-x;
-      margin-left: -$card-spacer-x;
-      height: calc(100% + 2 * #{$card-spacer-x});
-      width: calc(100% + 2 * #{$card-spacer-x});
-
-      &.dark {
-        color: $white;
-      }
-    }
-  }
-}
-
 // Ribbon
 .ribbon-wrapper {
   height: $ribbon-wrapper-size;
@@ -379,7 +358,6 @@
   bottom: 1.25rem;
   position: fixed;
   right: 1.25rem;
-  z-index: $zindex-control-sidebar + 1;
 
   &:focus {
     box-shadow: none;
@@ -463,17 +441,4 @@ blockquote {
   margin-top: 0;
   margin-bottom: .5rem;
   padding-bottom: .5rem;
-}
-
-
-// Badge BTN Style
-.badge-btn {
-  border-radius: $button-border-radius-xs;
-  font-size: $button-font-size-xs;
-  font-weight: 400;
-  padding: $button-padding-y-xs*2 $button-padding-x-xs*2;
-}
-
-.badge-btn.badge-pill {
-  padding: .375rem .6rem;
 }

@@ -114,8 +114,8 @@ const seedUser = async ()=>{
        const newUser = new User({
         index:'1',
         username: 'Admin',
-        email:'info@dahabdoors.com',
-        pin: 'The12345..',
+        email:'admin@admin.com',
+        pin: '1234',
         role:0
        })
       await newUser.save()

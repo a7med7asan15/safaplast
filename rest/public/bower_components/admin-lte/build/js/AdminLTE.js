@@ -7,7 +7,6 @@ import TodoList from './TodoList'
 import CardWidget from './CardWidget'
 import CardRefresh from './CardRefresh'
 import Dropdown from './Dropdown'
-import Toasts from './Toasts'
 
 export {
   ControlSidebar,
@@ -18,6 +17,5 @@ export {
   TodoList,
   CardWidget,
   CardRefresh,
-  Dropdown,
-  Toasts
+  Dropdown
 }

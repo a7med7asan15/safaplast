@@ -9,15 +9,11 @@
   }
 }
 
-.text-xs {
-  font-size: $font-size-xs !important;
-}
-
 .text-sm {
   font-size: $font-size-sm !important;
 }
 
-.text-md {
+.text-xs {
   font-size: $font-size-base !important;
 }
 
@@ -32,6 +28,6 @@
 // text color variations
 @each $name, $color in $colors {
   .text-#{$name} {
-    color: #{$color} !important;
+    color: #{$color};
   }
 }

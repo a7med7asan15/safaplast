@@ -1,35 +1,17 @@
-.ui-slider-range.ui-corner-all.ui-widget-header{
-    background: #004dda;
-}
-.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content{
-    background: #e6e6e6;
-    border:0;
-    height:5px;
-    width:90%;
-}
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
-    width: 20px;
-    height: 20px;
-    background-size: 100%;
-    border-radius:50%;
-    border: 2px solid #004dda;
-    box-shadow: 0 0 8px rgba(0,0,0,.3);
-    outline:0 !important;
+/* Dashboard Edits */
+.user-panel .image{
+    padding-right: .8rem;
+    padding-left: .8rem;
 }
 
-.ui-slider-horizontal .ui-slider-handle {
-    top: -.5em;
+.card-title{
+    float:right;
 }
 
-.ui-slider-handle.ui-corner-all.ui-state-default.ui-state-active{
-    background: #b9b9b9;
+.btn-default {
+    background-color: #f8f9fa;
+    border-color: #ddd;
+    color: #444;
 }
 
-#amount span{
-    font-weight: bold;
-    color: #004dda;
-}
-
-.main-menu{
-    top:0;
-}
+/* Website Edits */

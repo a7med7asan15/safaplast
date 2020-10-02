@@ -1,4 +1,4 @@
-/*! FixedHeader 3.1.6-dev
+/*! FixedHeader 3.1.5
  * ©2009-2018 SpryMedia Ltd - datatables.net/license
  */
 
@@ -6,7 +6,7 @@
  * @summary     FixedHeader
  * @description Fix a table's header or footer, so it is always visible while
  *              scrolling
- * @version     3.1.6-dev
+ * @version     3.1.5
  * @file        dataTables.fixedHeader.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -134,13 +134,15 @@ $.extend( FixedHeader.prototype, {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * API methods
 	 */
-
+	
 	/**
-	 * Kill off FH and any events
+	 * Enable / disable the fixed elements
+	 *
+	 * @param  {boolean} enable `true` to enable, `false` to disable
 	 */
-	destroy: function () {
-		this.s.dt.off( '.dtfc' );
-		$(window).off( this.s.namespace );
+	enable: function ( enable )
+	{
+		this.s.enable = enable;
 
 		if ( this.c.header ) {
 			this._modeChange( 'in-place', 'header', true );
@@ -149,29 +151,8 @@ $.extend( FixedHeader.prototype, {
 		if ( this.c.footer && this.dom.tfoot.length ) {
 			this._modeChange( 'in-place', 'footer', true );
 		}
-	},
 
-	/**
-	 * Enable / disable the fixed elements
-	 *
-	 * @param  {boolean} enable `true` to enable, `false` to disable
-	 */
-	enable: function ( enable, update )
-	{
-		this.s.enable = enable;
-
-		if ( update || update === undefined ) {
-			this._positions();
-			this._scroll( true );
-		}
-	},
-
-	/**
-	 * Get enabled status
-	 */
-	enabled: function ()
-	{
-		return this.s.enable;
+		this.update();
 	},
 	
 	/**
@@ -210,15 +191,6 @@ $.extend( FixedHeader.prototype, {
 	 */
 	update: function ()
 	{
-		var table = this.s.dt.table().node();
-
-		if ( $(table).is(':visible') ) {
-			this.enable( true, false );
-		}
-		else {
-			this.enable( false, false );
-		}
-
 		this._positions();
 		this._scroll( true );
 	},
@@ -263,7 +235,16 @@ $.extend( FixedHeader.prototype, {
 		} );
 
 		dt.on( 'destroy.dtfc', function () {
-			that.destroy();
+			if ( that.c.header ) {
+				that._modeChange( 'in-place', 'header', true );
+			}
+
+			if ( that.c.footer && that.dom.tfoot.length ) {
+				that._modeChange( 'in-place', 'footer', true );
+			}
+
+			dt.off( '.dtfc' );
+			$(window).off( that.s.namespace );
 		} );
 
 		this._positions();
@@ -313,7 +294,7 @@ $.extend( FixedHeader.prototype, {
 				.appendTo( 'body' );
 
 			// Insert a fake thead/tfoot into the DataTable to stop it jumping around
-			itemDom.placeholder = itemElement.clone( false );
+			itemDom.placeholder = itemElement.clone( false )
 			itemDom.placeholder
 				.find( '*[id]' )
 				.removeAttr( 'id' );
@@ -531,7 +512,6 @@ $.extend( FixedHeader.prototype, {
 		position.left = tableNode.offset().left;
 		position.theadTop = thead.offset().top;
 		position.tbodyTop = tbody.offset().top;
-		position.tbodyHeight = tbody.outerHeight();
 		position.theadHeight = position.tbodyTop - position.theadTop;
 
 		if ( tfoot.length ) {
@@ -562,11 +542,12 @@ $.extend( FixedHeader.prototype, {
 		var position = this.s.position;
 		var headerMode, footerMode;
 
+		if ( ! this.s.enable ) {
+			return;
+		}
+
 		if ( this.c.header ) {
-			if ( ! this.s.enable ) {
-				headerMode = 'in-place';
-			}
-			else if ( ! position.visible || windowTop <= position.theadTop - this.c.headerOffset ) {
+			if ( ! position.visible || windowTop <= position.theadTop - this.c.headerOffset ) {
 				headerMode = 'in-place';
 			}
 			else if ( windowTop <= position.tfootTop - position.theadHeight - this.c.headerOffset ) {
@@ -584,10 +565,7 @@ $.extend( FixedHeader.prototype, {
 		}
 
 		if ( this.c.footer && this.dom.tfoot.length ) {
-			if ( ! this.s.enable ) {
-				headerMode = 'in-place';
-			}
-			else if ( ! position.visible || windowTop + position.windowHeight >= position.tfootBottom + this.c.footerOffset ) {
+			if ( ! position.visible || windowTop + position.windowHeight >= position.tfootBottom + this.c.footerOffset ) {
 				footerMode = 'in-place';
 			}
 			else if ( position.windowHeight + windowTop > position.tbodyTop + position.tfootHeight + this.c.footerOffset ) {
@@ -612,7 +590,7 @@ $.extend( FixedHeader.prototype, {
  * @type {String}
  * @static
  */
-FixedHeader.version = "3.1.6-dev";
+FixedHeader.version = "3.1.5";
 
 /**
  * Defaults
@@ -673,29 +651,17 @@ DataTable.Api.register( 'fixedHeader.enable()', function ( flag ) {
 		var fh = ctx._fixedHeader;
 
 		flag = ( flag !== undefined ? flag : true );
-		if ( fh && flag !== fh.enabled() ) {
+		if ( fh && flag !== fh.s.enable ) {
 			fh.enable( flag );
 		}
 	} );
-} );
-
-DataTable.Api.register( 'fixedHeader.enabled()', function () {
-	if ( this.context.length ) {
-		var fx = this.content[0]._fixedHeader;
-
-		if ( fh ) {
-			return fh.enabled();
-		}
-	}
-
-	return false;
 } );
 
 DataTable.Api.register( 'fixedHeader.disable()', function ( ) {
 	return this.iterator( 'table', function ( ctx ) {
 		var fh = ctx._fixedHeader;
 
-		if ( fh && fh.enabled() ) {
+		if ( fh && fh.s.enable ) {
 			fh.enable( false );
 		}
 	} );

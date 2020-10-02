@@ -69,7 +69,7 @@ const ControlSidebar = (($) => {
 
     // Public
 
-    collapse() {
+    show() {
       // Show the control sidebar
       if (this._config.controlsidebarSlide) {
         $('html').addClass(ClassName.CONTROL_SIDEBAR_ANIMATE)
@@ -82,11 +82,11 @@ const ControlSidebar = (($) => {
         $('body').removeClass(ClassName.CONTROL_SIDEBAR_OPEN)
       }
 
-      const collapsedEvent = $.Event(Event.COLLAPSED)
-      $(this._element).trigger(collapsedEvent)
+      const expandedEvent = $.Event(Event.EXPANDED)
+      $(this._element).trigger(expandedEvent)
     }
 
-    show() {
+    collapse() {
       // Collapse the control sidebar
       if (this._config.controlsidebarSlide) {
         $('html').addClass(ClassName.CONTROL_SIDEBAR_ANIMATE)
@@ -101,19 +101,19 @@ const ControlSidebar = (($) => {
         $('body').addClass(ClassName.CONTROL_SIDEBAR_OPEN)
       }
 
-      const expandedEvent = $.Event(Event.EXPANDED)
-      $(this._element).trigger(expandedEvent)
+      const collapsedEvent = $.Event(Event.COLLAPSED)
+      $(this._element).trigger(collapsedEvent)
     }
 
     toggle() {
-      const shouldClose = $('body').hasClass(ClassName.CONTROL_SIDEBAR_OPEN) || $('body')
+      const shouldOpen = $('body').hasClass(ClassName.CONTROL_SIDEBAR_OPEN) || $('body')
         .hasClass(ClassName.CONTROL_SIDEBAR_SLIDE)
-      if (shouldClose) {
-        // Close the control sidebar
-        this.collapse()
-      } else {
+      if (shouldOpen) {
         // Open the control sidebar
         this.show()
+      } else {
+        // Close the control sidebar
+        this.collapse()
       }
     }
 
@@ -246,10 +246,9 @@ const ControlSidebar = (($) => {
     static _jQueryInterface(operation) {
       return this.each(function () {
         let data = $(this).data(DATA_KEY)
-        const _options = $.extend({}, Default, $(this).data())
 
         if (!data) {
-          data = new ControlSidebar(this, _options)
+          data = new ControlSidebar(this, $(this).data())
           $(this).data(DATA_KEY, data)
         }
 
@@ -289,4 +288,3 @@ const ControlSidebar = (($) => {
 })(jQuery)
 
 export default ControlSidebar
-  

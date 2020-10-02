@@ -28,6 +28,7 @@ $('.sidebar-toggle-btn').PushMenu(options)
 | Name | Type | Default | Description
 |-|-|-|-
 |autoCollapseSize | Boolean/Number | FALSE | Screen width in pixels to trigger auto collapse sidebar
+|screenCollapseSize | Number | 768 | Screen width in pixels for small screens.
 |enableRemember | Boolean | FALSE | Remember sidebar state and set after page refresh.
 |noTransitionAfterReload | Boolean | TRUE | Hold Transition after page refresh.
 {: .table .table-bordered .bg-light}
@@ -60,8 +61,6 @@ Example: `$(document).on('shown.lte.pushmenu', handleExpandedEvent)`
 | Method | Description
 |-|-
 |toggle | Toggles the state of the menu between expanded and collapsed.
-|collapse | Collapses the sidebar menu.
-|expand | Expands the sidebar menu
 {: .table .table-bordered .bg-light}
 
 Example: `$('[data-widget="pushmenu"]').PushMenu('toggle')`

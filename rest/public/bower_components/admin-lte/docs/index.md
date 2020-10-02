@@ -15,13 +15,20 @@ Visit the releases section on Github and download the [latest release](https://g
 
 ###### __Via NPM__
 ```bash
-npm install admin-lte@^3.0 --save
+npm install admin-lte@3.0.0-beta.2 --save
 ```
 
 ###### __Via Yarn__
 ```bash
-yarn add admin-lte@^3.0
+yarn add admin-lte@3.0.0-beta.2
 ```
+
+###### __Via Bower__
+```bash
+bower install admin-lte#3.0.0-beta.2
+```
+>  If bower asks which version of jQuery to use, choose version 3 or above.
+{: .quote-info}
 
 ###### __Via Composer__
 ```bash

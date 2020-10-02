@@ -40,7 +40,7 @@
 }
 
 .progress-group {
-  margin-bottom: map-get($spacers, 2);
+  @extend .mb-2;
 }
 
 // size variation

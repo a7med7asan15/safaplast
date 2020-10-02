@@ -70,22 +70,3 @@ a.text-muted:hover {
     color: lighten($gray-500, 20%);
   }
 }
-
-// Accent colors (theme colors)
-@each $name, $color in $theme-colors {
-  @include accent-variant($name, $color);
-}
-
-// Accent colors (colors)
-@each $name, $color in $colors {
-  @include accent-variant($name, $color);
-}
-
-// Accent button override fix
-[class*="accent-"] {
-  @each $name, $color in $theme-colors {
-    a.btn-#{$name} {
-      color: color-yiq($color);
-    }
-  }
-}

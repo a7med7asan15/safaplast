@@ -5,6 +5,7 @@
 // Logo style
 .logo-xs,
 .logo-xl {
+  margin: 0;
   opacity: 1;
   position: absolute;
   visibility: visible;
@@ -44,58 +45,17 @@
     @include sidebar-mini-breakpoint;
   }
 }
-@include media-breakpoint-down(md) {
-  .sidebar-mini.sidebar-collapse .main-sidebar {
-    box-shadow: none !important;
-  }
-}
 
 .sidebar-mini-md {
   @include media-breakpoint-up(md) {
     @include sidebar-mini-breakpoint;
   }
 }
-@include media-breakpoint-down(sm) {
-  .sidebar-mini-md.sidebar-collapse .main-sidebar {
-    box-shadow: none !important;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
 
 .sidebar-collapse {
-  .main-sidebar.sidebar-focused,
-  .main-sidebar:hover {
-    .nav-header {
-      display: inline-block;
-    }
-  }
-
   .sidebar-no-expand.main-sidebar.sidebar-focused,
   .sidebar-no-expand.main-sidebar:hover {
     width: $sidebar-mini-width;
-
-    .nav-header {
-      display: none;
-    }
 
     .brand-link {
       width: $sidebar-mini-width !important;
@@ -105,31 +65,11 @@
       float: none !important;
     }
 
-    .logo-xs {
-      animation-name: fadeIn;
-      animation-duration: $transition-speed;
-      animation-fill-mode: both;
-      visibility: visible;
-    }
-
-    .logo-xl {
-      animation-name: fadeOut;
-      animation-duration: $transition-speed;
-      animation-fill-mode: both;
-      visibility: hidden;
-    }
-
-    .nav-sidebar.nav-child-indent .nav-treeview {
-      padding-left: 0;
-    }
-
     .brand-text,
     .user-panel > .info,
     .nav-sidebar .nav-link p {
       margin-left: -10px;
-      animation-name: fadeOut;
-      animation-duration: $transition-speed;
-      animation-fill-mode: both;
+      opacity: 0;
       visibility: hidden;
       width: 0;
     }

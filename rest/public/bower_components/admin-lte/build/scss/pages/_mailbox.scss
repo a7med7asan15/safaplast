@@ -41,7 +41,7 @@
 }
 
 .mailbox-attachments {
-  @include list-unstyled;
+  @extend .list-unstyled;
   li {
     border: 1px solid #eee;
     float: left;

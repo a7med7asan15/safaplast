@@ -4,7 +4,7 @@ title: Layout
 ---
 
 > ##### Tip!
-> The [starter page](https://adminlte.io/themes/v3/starter.html) is a good place to start building your app if you'd like to start from scratch.
+> The starter page is a good place to start building your app if you'd like to start from scratch.
 {: .quote-info .mt-0}
 
 The layout consists of four major parts:
@@ -41,9 +41,7 @@ You can also use the following classes for responsive changes with placing
   - use the class `.layout-*-footer-not-fixed` to get a not fixed footer.
 
 > ##### Tip!
-> If you want to use anchors with a fixed navbar, you need to add `.anchor` to you hidden anchor, e.g. `<a id="testAnchor" class="anchor"></a>`. 
-> 
-> To get a smooth scrolling to the anchor you need to add `.scroll-smooth` to your HTML tag like this `<html class="scroll-smooth">` otherwise it jumps directly to your anchor, `.scroll-smooth` can cause issues with a Chrome extension called ScrollAnywhere.
+> If you want to use anchors with a fixed navbar, you need to add `.anchor` to you hidden anchor, e.g. `<a id="testAnchor" class="anchor"></a>`.
 {: .quote-info}
 
 
@@ -54,15 +52,9 @@ AdminLTE 3.0 provides a set of color variations to apply to your sidebar (light 
 - `.navbar-*`
 - `.sidebar-dark-*`
 - `.sidebar-light-*`
-- `.accent-*`
-
-> ###### New
-> You can use override the link/accent color in AdminLTE, you can add `.accent-*` to `body`.
-{: .quote-info}
 
 > ###### Info
 > You can combine `.navbar-*` with `.navbar-light` or `.navbar-dark`.
-{: .quote-info}
 
 The following colors are available:
 
@@ -112,9 +104,6 @@ For custom colored custom-range you can add this classes:
 For custom colored custom-switch you can add this classes:
 - `.custom-switch-off-*` (for custom switch off)
 - `.custom-switch-on-*` (for custom switch on)
-
-##### Toasts
-You can also use `bg-*` beside the `.toast` to get a nice colored toast.
 
 ##### Plugin Support
 You can use the all the colors above with these plugins:

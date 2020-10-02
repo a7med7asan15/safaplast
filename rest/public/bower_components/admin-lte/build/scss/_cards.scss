@@ -2,18 +2,9 @@
 // Component: Cards
 //
 
-// Color variants
-@each $name, $color in $theme-colors {
-  @include cards-variant($name, $color);
-}
-
-@each $name, $color in $colors {
-  @include cards-variant($name, $color);
-}
-
 .card {
+  @extend .mb-3;
   @include box-shadow($card-shadow);
-  margin-bottom: map-get($spacers, 3);
 
   &.bg-dark {
     .card-header {
@@ -84,113 +75,6 @@
   .border-left {
     border-left: 1px solid $card-border-color;
   }
-
-  &.card-tabs {
-    &:not(.card-outline) {
-      & > .card-header {
-        border-bottom: 0;
-
-        .nav-item {
-          &:first-child .nav-link {
-            margin-left: -1px;
-          }
-        }
-      }
-    }
-
-    &.card-outline {
-      .nav-item {
-        border-bottom: 0;
-
-        &:first-child .nav-link {
-          border-left: 0;
-          margin-left: 0;
-        }
-      }
-    }
-
-    .card-tools {
-      margin: .3rem .5rem;
-    }
-
-    &:not(.expanding-card).collapsed-card {
-      .card-header {
-        border-bottom: 0;
-
-        .nav-tabs {
-          border-bottom: 0;
-
-          .nav-item {
-            margin-bottom: 0;
-          }
-        }
-      }
-    }
-
-    &.expanding-card {
-      .card-header {
-        .nav-tabs {
-          .nav-item {
-            margin-bottom: -1px;
-          }
-        }
-      }
-    }
-  }
-
-  &.card-outline-tabs {
-    border-top: 0;
-
-    .card-header {
-      .nav-item {
-        &:first-child .nav-link {
-          border-left: 0;
-          margin-left: 0;
-        }
-      }
-
-      a {
-        border-top: 3px solid transparent;
-
-        &:hover {
-          border-top: 3px solid $nav-tabs-border-color;
-        }
-
-        &.active {
-          &:hover {
-            margin-top: 0;
-          }
-        }
-      }
-    }
-
-    .card-tools {
-      margin: .5rem .5rem .3rem;
-    }
-
-    &:not(.expanding-card).collapsed-card .card-header {
-      border-bottom: 0;
-
-      .nav-tabs {
-        border-bottom: 0;
-
-        .nav-item {
-          margin-bottom: 0;
-        }
-      }
-    }
-
-    &.expanding-card {
-      .card-header {
-        .nav-tabs {
-          .nav-item {
-            margin-bottom: -1px;
-          }
-        }
-      }
-    }
-  }
-
 }
 
 // Maximized Card Body Scroll fix
@@ -209,8 +93,8 @@ html.maximized-card {
 .card-header {
   background-color: transparent;
   border-bottom: 1px solid $card-border-color;
-  padding: (($card-spacer-y / 2) * 2) $card-spacer-x;
   position: relative;
+  padding: (($card-spacer-y / 2) * 2) $card-spacer-x;
 
   @if $enable-rounded {
     @include border-top-radius($border-radius);
@@ -222,14 +106,7 @@ html.maximized-card {
 
   > .card-tools {
     float: right;
-    margin-right: -$card-spacer-x / 2;
-
-    .input-group,
-    .nav,
-    .pagination {
-      margin-bottom: -$card-spacer-y / 2.5;
-      margin-top: -$card-spacer-y / 2.5;
-    }
+    margin-right: -$card-spacer-x/2;
 
     [data-toggle='tooltip'] {
       position: relative;
@@ -243,11 +120,6 @@ html.maximized-card {
   font-weight: $card-title-font-weight;
   margin: 0;
 }
-
-.card-text {
-  clear: both;
-}
-
 
 // Box Tools Buttons
 .btn-tool {
@@ -268,22 +140,12 @@ html.maximized-card {
   }
 }
 
-.text-sm {
-  .card-title {
-    font-size: $card-title-font-size-sm;
-  }
-
-  .nav-link {
-    padding: $card-nav-link-padding-sm-y $card-nav-link-padding-sm-x;
-  }
-}
-
 // Box Body
 .card-body {
   // @include border-radius-sides(0, 0, $border-radius, $border-radius);
-  // .no-header & {
-  //   @include border-top-radius($border-radius);
-  // }
+  .no-header & {
+    // @include border-top-radius($border-radius);
+  }
 
   // Tables within the box body
   > .table {
@@ -310,7 +172,7 @@ html.maximized-card {
 }
 
 .chart-legend {
-  @include list-unstyled;
+  @extend .list-unstyled;
   margin: 10px 0;
 
   > li {
@@ -339,8 +201,7 @@ html.maximized-card {
     }
 
     img {
-      height: $card-img-size;
-      width: $card-img-size;
+      @extend .img-sm;
       float: left;
     }
   }
@@ -464,11 +325,11 @@ html.maximized-card {
   max-width: 200px;
 }
 
-// Nav Tabs override
-.card-default {
-  .nav-item {
-    &:first-child .nav-link {
-      border-left: 0;
-    }
-  }
+// Color variants
+@each $name, $color in $theme-colors {
+  @include cards-variant($name, $color);
+}
+
+@each $name, $color in $colors {
+  @include cards-variant($name, $color);
 }
