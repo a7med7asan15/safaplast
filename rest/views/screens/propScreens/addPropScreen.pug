@@ -5,7 +5,7 @@ block content
         .container-fluid
             .row.mb-3.mt-3
             .col-sm-6
-                h1.m-0.text-dark Add New Property
+                h1.m-0.text-dark أضف منتج جديد
 
     .content
         .container-fluid
@@ -20,15 +20,15 @@ block content
             .col-12
                 .card
                     .card-header
-                        h3.card-title Property Information
+                        h3.card-title تفاصيل المنتج
                     form#addnewprop(role="form" action="/dashboard/propertys/add" method="POST")
                         .card-body.row
                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                             .form-group.col-md-12
-                                h3 Property General Information
+                                h3 تفاصيل عامة
 
                             .form-group.col-md-6
-                                label(for="nameEnglish") Property Name [English]
+                                label(for="nameEnglish") اسم المنتج
                                 input.form-control#nameEnglish(type="text", name="nameEnglish", placeholder="Enter Property Name In English")
                             .form-group.col-md-6
                                 label(for="nameArabic") Property Name [Arabic]
@@ -48,7 +48,7 @@ block content
                                             option(value=`${a.id}`)=`${a.name} - ${a.mobileNo}` 
                                 
                             .col-md-12.mt-5.mb-5
-                                h3 Advanced Information
+                                h3 معلومات متقدمة
                             .col-md-12
                                 .col-md-4
                                     .form-group

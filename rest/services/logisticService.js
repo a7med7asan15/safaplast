@@ -1,7 +1,7 @@
 const {
     CitySchema,
     AreaSchema
-} = require('../models/citySchema');
+} = require('../models/newsSchema');
 const _ = require('lodash');
 
 

@@ -1,29 +1,189 @@
-header.header_in
-    .container
-        .row
-            .col-lg-3.col-12
-                #logo
-                    a(href="/")
-                        img(src="/static/images/dahabdoorslogo.svg" , width='150px' ,height='auto')
-                        span beta
-            .col-lg-9.col-12
-                    ul#top_menu
+header#mainHeader.main-header
+    // Top Bar
+    .top-bar.bg-gray
+        .container
+            .row
+                .col-sm-12.col-md-4.is-hidden-sm-down
+                    ul.nav-top.nav-top-left.list-inline.t-right
                         li
-                            a.btn_add(href="/contact") تواصل معنا
-                        li   
-                            a( class="wishlist_bt_top" href="/cart")
-                            span#addToCart
-                            
+                            a(href='/auth')
+                                i.fa.fa-user
+                                | تسجيل الدخول
+                        li
+                            a(href='/faq')
+                                i.fa.fa-question-circle
+                                | اسئلة شائعة
+    // End Top Bar
+    // Header Header
+    .header-header.bg-white
+        .container
+            .row.row-rl-0.row-tb-20.row-md-cell
+                .brand.col-md-3.t-xs-center.t-md-right.valign-middle
+                    a.logo(href='/')
+                        img(src='/static/websiteAssets/images/logo.png' alt='' width='250')
+                .header-search.col-md-9
+                    .row.row-tb-10
+                        .col-sm-8
+                            form.search-form(action="/searchResult" method="POST")
+                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                .input-group
+                                    input.form-control.input-lg.search-input(name="searchBar" type='text' placeholder='ادخل متجر' required='required')
+                                    .input-group-btn
+                                        .input-group
+                                            select.form-control.input-lg.search-select(name="categorySelect")
+                                                option(selected value="all") اختر الفئة
+                                                if category
+                                                    for cat, i in category 
+                                                        if i < 5
+                                                            option(value=`${cat.id}`) #{cat.nameArabic}
+                                                option(value="all") جميع الفئات
+                                            .input-group-btn
+                                                button.btn.btn-lg.btn-search.btn-block(type='submit')
+                                                    i.fa.fa-search.font-16
+                        .col-sm-4.t-xs-center.t-md-left.mb-15
+                            .header-cart
+                                a(href='/cart')
+                                    span.icon.lnr.lnr-cart
+                            .header-wishlist.mr-20
+                                a(href='/wishlist')
+                                    span.icon.lnr.lnr-heart.font-30
+                            .header-wishlist.mr-20
+                                a(href='/auth')
+                                    span.icon.lnr.lnr-user.font-30
+    // End Header Header
+    // Header Menu
+    .header-menu.bg-blue
+        .container
+            nav.nav-bar
+                .nav-header
+                    span.nav-toggle(data-toggle='#header-navbar')
+                        i
+                        i
+                        i
+                #header-navbar.nav-collapse
+                    ul.nav-menu
+                        li.active
+                            a(href='index.html') الرئيسية
+                        li.dropdown-mega-menu
+                            a(href='/stores') صفقات
+                            .mega-menu
+                                .row.row-v-10
+                                    .col-md-3
+                                        figure.deal-thumbnail.embed-responsive.embed-responsive-4by3(data-bg-img='assets/images/deals/deal_04.jpg')
+                                            .label-discount.top-10.left-10 -60%
+                                            .deal-about.p-10.pos-a.bottom-0.right-0
+                                                .rating.mb-10
+                                                    span.rating-stars.rate-allow(data-rating='3')
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                h6.deal-title.mb-10
+                                                    a.color-lighter(href='deal_single.html') هنالك العديد من الأنواع المتوفرة
 
-                    a.btn_mobile(href="#menu")
-                        .hamburger.hamburger--spin#hamburger
-                            .hamburger-box
-                                .hamburger-inner
-                    nav#menu.main-menu
-                        ul
-                            li
-                                span
-                                    a(href="/") الرئيسية
-                            li
-                                span
-                                    a(href="/faq") الأسئلة الشائعة
+                                    .col-md-3
+                                        figure.deal-thumbnail.embed-responsive.embed-responsive-4by3(data-bg-img='assets/images/deals/deal_03.jpg')
+                                            .label-discount.top-10.left-10 -15%
+                                            .deal-about.p-10.pos-a.bottom-0.right-0
+                                                .rating.mb-10
+                                                    span.rating-stars.rate-allow(data-rating='2')
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                h6.deal-title.mb-10
+                                                    a.color-lighter(href='deal_single.html') هنالك العديد من الأنواع المتوفرة
+                                    .col-md-3
+                                        figure.deal-thumbnail.embed-responsive.embed-responsive-4by3(data-bg-img='assets/images/deals/deal_04.jpg')
+                                            .label-discount.top-10.left-10 -60%
+                                            .deal-about.p-10.pos-a.bottom-0.right-0
+                                                .rating.mb-10
+                                                    span.rating-stars.rate-allow(data-rating='3')
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                h6.deal-title.mb-10
+                                                    a.color-lighter(href='deal_single.html') هنالك العديد من الأنواع المتوفرة
+                                    .col-md-3
+                                        figure.deal-thumbnail.embed-responsive.embed-responsive-4by3(data-bg-img='assets/images/deals/deal_05.jpg')
+                                            .label-discount.top-10.left-10 -60%
+                                            .deal-about.p-10.pos-a.bottom-0.right-0
+                                                .rating.mb-10
+                                                    span.rating-stars.rate-allow(data-rating='5')
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                        i.fa.fa-star-o
+                                                h6.deal-title.mb-10
+                                                    a.color-lighter(href='deal_single.html') هنالك العديد من الأنواع المتوفرة
+
+                        li
+                            a(href='/stores') متاجر
+
+                        //li
+                            a(href='#') المدونة
+                            ul
+                                li
+                                    a(href='#') مظهر كلاسيكي
+                                    ul
+                                        li
+                                            a(href='blog_classic_right_sidebar.html') الشريط الجانبي عن اليمين
+                                        li
+                                            a(href='blog_classic_left_sidebar.html') الشريط الجانبي عن اليسار
+                                        li
+                                            a(href='blog_classic_fullwidth.html') العرض الكامل
+                                li
+                                    a(href='#') عرض الشبكة
+                                    ul
+                                        li
+                                            a(href='blog_grid_3col.html') 3 أعمدة
+                                        li
+                                            a(href='blog_grid_2col.html') 2 أعمدة
+                                        li
+                                            a(href='blog_grid_right_sidebar.html') الشريط الجانبي عن اليمين
+                                li
+                                    a(href='#') عرض القائمة
+                                    ul
+                                        li
+                                            a(href='blog_list_right_sidebar.html') الشريط الجانبي عن اليمين
+                                        li
+                                            a(href='blog_list_left_sidebar.html') الشريط الجانبي عن اليسار
+                                        li
+                                            a(href='blog_list_fullwidth.html') العرض الكامل
+                                li
+                                    a(href='#') صفحة التدوينة
+                                    ul
+                                        li
+                                            a(href='blog_single_standard.html') تدوينة عادية
+                                        li
+                                            a(href='blog_single_gallery.html') تدوينة البوم الصور
+                                        li
+                                            a(href='blog_single_youtube.html') تدوينة فيديو يوتيوب
+                                        li
+                                            a(href='blog_single_vimeo.html') تدوينة فيديو Vimeo
+                                        li
+                                            a(href='blog_single_map.html') تدوينة خرائط جوجل
+                                        li
+                                            a(href='blog_single_quote.html') تدوينة الاقتباس
+                                        li
+                                            a(href='blog_single_audio.html') تدوينة صوتية
+                        li
+                            a(href='#') فئات
+                            ul
+                                if category
+                                    for cat, i in category 
+                                        if i < 10
+                                            li
+                                                a(href=`/categories?type=${cat.slugArabic}`) #{cat.nameArabic} 
+                                li
+                                    a(href='/categories?type=all') عرض كل العروض
+
+
+                .nav-menu.nav-menu-fixed
+                    a(href='/check') تأكد من صلاحية كارت   
+    // End Header Menu

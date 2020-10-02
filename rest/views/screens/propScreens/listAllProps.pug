@@ -5,18 +5,18 @@ block content
         .container-fluid
             .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark All Propertys 
+                    h1.m-0.text-dark جميع المنتجات 
                 .col-sm-6
                     a.btn.btn-success.float-right(href="/dashboard/propertys/add")
                         i.fas.fa-plus
-                        |  Add New Property
+                        |  أضف منتج جديد
     .content
         .container-fluid
             .row
                 .col-12
                     .card
                         .card-header
-                            h3.card-title All Properties
+                            h3.card-title كل المنتجات
                             form(action=`/dashboard/propertys/searchResult`, method="post")
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .input-group.input-group-sm.float-right(style="width: 150px;")
@@ -32,7 +32,7 @@ block content
                                 thead
                                     tr
 
-                                    th Property Name
+                                    th اسم المنتج
                                     th SKU
                                     th Status
                                     th View

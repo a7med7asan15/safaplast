@@ -191,7 +191,12 @@ app.use(   '/'   ,   homePageController   );
 app.use(   '/dashboard'   ,   authController   );
 app.use(   '/dashboard/users'   ,   usersController   );
 app.use(   '/dashboard/products'   ,  productController   );
-app.use(   '/dashboard/logistic'   ,   logisticController  );
+app.use(   '/dashboard/certificates'   ,   logisticController  );
+app.use(   '/dashboard/clients'   ,   logisticController  );
+app.use(   '/dashboard/news'   ,   logisticController  );
+app.use(   '/dashboard/portfolio'   ,   logisticController  );
+app.use(   '/dashboard/settings'   ,   logisticController  );
+app.use(   '/dashboard/slider'   ,   logisticController  );
 app.use(   '/dashboard/messages'   ,   contactController  );
 app.use(   '/dashboard/media'   ,   mediaController  ); 
 
