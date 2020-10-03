@@ -1,5 +1,6 @@
 
 const ProductSchema = require('../models/productSchema');
+const TypeSchema = require('../models/productSchema');
 
 
 
@@ -19,10 +20,10 @@ const productService = {
         limit: 10,
       }
       const products = await ProductSchema.paginate({}, options);
-      return res.render('screens/propScreens/listAllProps', {
+      return res.render('screens/productScreens/listAll', {
         thisUser: req.user,
         csrfToken,
-        products
+        dataProvided: products
       })
 
     } catch (err) {
@@ -33,19 +34,11 @@ const productService = {
   addPage: async (req, res) => {
     let csrfToken = req.csrfToken();
     try {
-      const areas = await AreaSchema.find();
-      const type = await TypesSchema.find();
-      const rooms = await RoomsSchema.find();
-      const amen = await AmentiesSchema.find();
-      const brok = await BrokerSchema.find();
-      return res.render('screens/propScreens/addPropScreen', {
+      const types = await TypeSchema.find();
+      return res.render('screens/productScreens/add', {
         thisUser: req.user,
         csrfToken,
-        areas,
-        type,
-        rooms,
-        brok,
-        amen
+        types
       })
 
     } catch (err) {
@@ -55,46 +48,27 @@ const productService = {
   },
   create: async (req, res) => {
     const {
-      nameEnglish,
-      nameArabic,
-      nameArea,
-      type,
-      rooms,
-      sku,
-      price,
-      desArabic,
-      desEnglish,
-      images,
-      amenties,
-      brokers
+      type, 
+      images, 
+      title, 
+      htmlInfo, 
+      htmlTable, 
     } = req.body;
     const im = images.split(',')
     try {
-      const areaObj = await AreaSchema.findById(nameArea);
-      const prop = new ProductSchema({
-        createdby: req.user.id,
-        nameEnglish,
-        nameArabic,
-        type,
-        price,
-        rooms,
-        sku,
-        amenties,
-        brokers,
-        cityId: areaObj.parent,
-        areaId: areaObj.id,
-        Address: {
-          desriptionArabic: desArabic,
-          descriptionEnglish: desEnglish,
-        },
 
+      const product = new ProductSchema({
+        type, 
+        title, 
+        htmlInfo, 
+        htmlTable
       });
       for (i = 0; i < im.length; i++) {
-        prop.images.push({
+        product.images.push({
           imageLink: im[i]
         });
       }
-      await prop.save();
+      await product.save();
 
 
       req.flash('success', 'Product Added Succesfully')
@@ -104,10 +78,10 @@ const productService = {
       });
 
     } catch (err) {
-      req.flash('success', 'ProductNot Added ')
+      req.flash('success', 'Product Not Added ')
       return res.json({
         err: true,
-        message: "ProductNot Added "
+        message: "Product Not Added "
       });
 
     }

@@ -13,18 +13,20 @@ const images = new Schema({
 
 const productSchema  = new Schema({
     title :  { type: String , required: true},
-    type  :  { type: String , required: true},
+    type  :  { type : Schema.Types.ObjectId , ref:'typeSchema'},
     images  :  [images],
-    
+    htmlInfo: { type: String , required: true}, 
+    htmlTable: { type: String , required: true}, 
+    slug:{ type: String, slug: ["title"], slug_padding_size: 4,  unique: true } ,
 
 })
 
 
 
 productSchema.plugin(slug, {
-        lang: "ar",
-    }),
-    productSchema.plugin(mongoosePaginate);
+        lang: "en",
+    });
+productSchema.plugin(mongoosePaginate);
 const ProductSchema = mongoose.model('productSchema', productSchema);
 
 

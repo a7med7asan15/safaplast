@@ -1,0 +1,77 @@
+extends ../../layout.pug
+
+block content   
+    if property
+        .card.card-solid
+            .card-body
+                .row.mb-2.pb-2
+                    .col-12.col-sm-6
+                        .col-12
+                            img.product-image(src=`${property.images[0].imageLink}` alt=`${property.images[0].slugArabic}` style="max-height: 400px;object-fit: cover;")
+                        .col-12.product-image-thumbs
+                            for dat, index in property.images
+                                if index == 0
+                                    .product-image-thumb.active
+                                        img(src=`${dat.imageLink}` alt=`${dat.slugArabic}`)
+                                else
+                                    .product-image-thumb
+                                        img(src=`${dat.imageLink}` alt=`${dat.slugArabic}`)
+
+                            
+                    .col-12.col-sm-6
+                        h3.my-3 #{property.nameArabic} - #{property.nameEnglish}
+                        p 
+                            strong SKU : 
+                            | #{property.sku}
+                        hr
+                        p 
+                            strong Area : 
+                            | #{property.areaId.nameArabic} - #{property.areaId.nameEnglish}
+                        hr
+                        p 
+                            strong Type : 
+                            | #{property.type.nameArabic} - #{property.type.nameEnglish} 
+                        hr
+                        p 
+                            strong Room : 
+                            | #{property.rooms.nameArabic} - #{property.rooms.nameEnglish}   
+                        hr
+
+                        .bg-gray.py-2.px-3.mt-4
+                            h2.mb-0
+
+                                | #{property.price} 
+                                small EGP/night
+                            h4.mt-0
+                                small Ex Tax:  #{property.price} EGP/night
+
+                .row.mt-5.pt-5
+                    nav.w-100
+                        .nav.nav-tabs#product-tab(role="tablist")
+                            a.nav-item.nav-link.active#product-desc-tab(data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true") Address
+                            a.nav-item.nav-link#product-comments-tab(data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false") Amenties
+                            a.nav-item.nav-link#brokers-tab(data-toggle="tab" href="#brokers" role="tab" aria-controls="brokers" aria-selected="false") Brokers
+
+                    .tab-content.p-3#nav-tabContent
+                        .tab-pane.fade.show.active#product-desc(role="tabpanel" aria-labelledby="product-desc-tab") 
+                            | #{property.Address.desriptionArabic} 
+                            br 
+                            br 
+
+                            | #{property.Address.descriptionEnglish} 
+
+                        .tab-pane.fade#product-comments(role="tabpanel" aria-labelledby="product-comments-tab") 
+                            ul.nav
+                                for am in property.amenties
+                                    li(style="display:block;width:100%")
+                                        img.mr-4(src=`/static/images/${am.icon}.svg`, alt)
+                                        | #{am.nameArabic}
+                                    
+                        .tab-pane.fade#brokers(role="tabpanel" aria-labelledby="brokers-tab") 
+                            ul.nav
+                                for am in property.brokers
+                                    li(style="display:block;width:100%")
+                                        | #{am.name} - #{am.mobileNo}
+                                    
+block scripts
+    script(src="/static/bower_components/admin-lte/dist/js/demo.js")

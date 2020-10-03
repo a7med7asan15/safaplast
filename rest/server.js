@@ -27,8 +27,15 @@ require('./config/passport'),(passport);
 const  usersController  =  require(  './controllers/dashboard/usersController'  );
 const  authController  =  require(  './controllers/dashboard/authController'  );
 const  productController  =  require(  './controllers/dashboard/productController'  );
-const  logisticController  =  require(  './controllers/dashboard/logisticController'  );
 const  mediaController  =  require(  './controllers/dashboard/mediaController'  );
+const  clientController  =  require(  './controllers/dashboard/clientController'  );
+const  settingController  =  require(  './controllers/dashboard/settingController'  );
+const  newsController  =  require(  './controllers/dashboard/newsController'  );
+const  sliderController  =  require(  './controllers/dashboard/sliderController'  );
+const  testimonialController  =  require(  './controllers/dashboard/testimonialController'  );
+const  typeController  =  require(  './controllers/dashboard/typeController'  );
+const  certificateController  =  require(  './controllers/dashboard/certificateController'  );
+
 const  homePageController  =  require(  './controllers/website/homePageController'  );
 const  contactController  =  require(  './controllers/website/contactController'  );
 
@@ -191,12 +198,14 @@ app.use(   '/'   ,   homePageController   );
 app.use(   '/dashboard'   ,   authController   );
 app.use(   '/dashboard/users'   ,   usersController   );
 app.use(   '/dashboard/products'   ,  productController   );
-app.use(   '/dashboard/certificates'   ,   logisticController  );
-app.use(   '/dashboard/clients'   ,   logisticController  );
-app.use(   '/dashboard/news'   ,   logisticController  );
-app.use(   '/dashboard/portfolio'   ,   logisticController  );
-app.use(   '/dashboard/settings'   ,   logisticController  );
-app.use(   '/dashboard/slider'   ,   logisticController  );
+app.use(   '/dashboard/certificates'   ,   certificateController  );
+app.use(   '/dashboard/clients'   ,   clientController  );
+app.use(   '/dashboard/news'   ,   newsController  );
+app.use(   '/dashboard/settings'   ,   settingController  );
+app.use(   '/dashboard/slider'   ,   sliderController  );
+app.use(   '/dashboard/testimonials'   ,   testimonialController  );
+app.use(   '/dashboard/type'   ,   typeController  );
+
 app.use(   '/dashboard/messages'   ,   contactController  );
 app.use(   '/dashboard/media'   ,   mediaController  ); 
 
