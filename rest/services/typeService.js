@@ -1,3 +1,5 @@
+const TypeSchema = require('../models/typeSchema');
+
 const typeService = {
 
     show: async (req, res) => {
@@ -16,14 +18,15 @@ const typeService = {
                 page,
                 limit: 10,
             }
-            const citys = await CitySchema.paginate({}, options);
-            return res.render('screens/logisticsScreens/cityScreens', {
+            const types = await TypeSchema.paginate({}, options);
+            return res.render('screens/typeScreens/listAdd', {
                 thisUser: req.user,
                 csrfToken,
-                citys
+                dataProvided:types, 
+                title: "أنواع المنتجات"
             })
         } catch (err) {
-
+            console.log(err)
             res.send(err);
 
         }

@@ -6,7 +6,7 @@ block content
         .container-fluid
             .row.mb-3.mt-3
             .col-sm-6
-                h1.m-0.text-dark All Cards
+                h1.m-0.text-dark جميع أنواع المنتجات
     .content
         .container-fluid
             if successes
@@ -19,42 +19,28 @@ block content
                 .col-5
                     .card
                         .card-header
-                            h3.card-title Card Info
-                        form#addData(action="/dashboard/cards" method="post" role="form" autocomplete="off")
+                            h3.card-title نوع المنتج
+                        form#addData(action="/dashboard/type" method="post" role="form" autocomplete="off")
                             .card-body.row
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .form-group.col-md-10
-                                    label Card Number
-                                    input.form-control#cardNum(type="text" name="cardNum" placeholder="Enter Card Number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "19")
-                                .form-group.col-md-10
-                                    label Start Date
-                                    #startDate.input-group.date(data-target-input='nearest')
-                                        .input-group-append(data-target='#startDate' data-toggle='datetimepicker')
-                                            .input-group-text
-                                                i.fa.fa-calendar
-                                        input.form-control.datetimepicker-input.startDate(type='text' name="startDate" data-target='#startDate' data-toggle='datetimepicker')
-                                .form-group.col-md-10
-                                    label End Date
-                                    #endDate.input-group.date(data-target-input='nearest')
-                                        .input-group-append(data-target='#endDate' data-toggle='datetimepicker')
-                                            .input-group-text
-                                                i.fa.fa-calendar
-                                        input.form-control.datetimepicker-input.endDate(type='text' name="endDate" data-target='#endDate' data-toggle='datetimepicker')
+                                    label الاسم
+                                    input.form-control#cardNum(type="text" name="name" placeholder="نوع المنتج" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "19")
                             .card-footer
-                                button.btn.btn-primary.float-right(type="submit") Add Card
+                                button.btn.btn-primary.float-right(type="submit") أضف النوع
 
                 .col-7
                     .card
                         .card-header
-                            h3.card-title All Cards
+                            h3.card-title كل الانواع
                             .card-tools
-                            form(action=`/dashboard/cards/searchResult`, method="post")
+                            form(action=`/dashboard/type/searchResult`, method="post")
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .input-group.input-group-sm.float-right(style="width: 150px;")
                                     if dataProvided
-                                        input.form-control.float-right(type="text" name="table_search" placeholder="Search")
+                                        input.form-control.float-right(type="text" name="table_search" placeholder="بحث")
                                     if tbSearch
-                                        input.form-control.float-right(type="text", value = `${table_search}`, name="table_search" placeholder="Search")
+                                        input.form-control.float-right(type="text", value = `${table_search}`, name="table_search" placeholder="بحث")
                                     .input-group-append
                                     button.btn.btn-default(type="submit")
                                         i.fas.fa-search
@@ -62,35 +48,22 @@ block content
                             table.table.table-sm.table-hover.text-nowrap
                                 thead
                                     tr
-                                        th ID
-                                        th Card Number 
-                                        th Start Date
-                                        th End Date
-                                        th Validity
-                                        th Edit
-                                        th delete
+                                        th #
+                                        th الاسم
+                                        th تعديل
+                                        th حذف
                                 tbody
                                     if tbSearch
                                         - var num = 1
                                         for tb in tbSearch
                                             tr
                                                 td #{num++}
-                                                td #{tb.value}
-                                                td #{tb.startDate.toJSON().slice(0,10).split('-').reverse().join('/')} 
-                                                td #{tb.endDate.toJSON().slice(0,10).split('-').reverse().join('/')} 
-                                                td 
-                                                    if tb.endDate > dateNow
-                                                        span.badge.badge-success
-                                                            | valid
-                                                    else
-                                                        span.badge.badge-danger
-                                                            | invalid
                                                 td
-                                                    a.btn-sm.btn-primary(href=`/dashboard/cards/edit/${tb.id}`)
+                                                    a.btn-sm.btn-primary(href=`/dashboard/type/edit/${tb.id}`)
                                                         i.far.fa-edit
                                                         |  Edit
                                                 td
-                                                    form(action=`/dashboard/cards/delete/${tb.id}`, method="post")
+                                                    form(action=`/dashboard/type/delete/${tb.id}`, method="post")
                                                         input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                         button.btn-sm.btn-danger(type="submit")
                                                             i.fas.fa-trash-alt
@@ -106,22 +79,13 @@ block content
                                         for dat in datArray
                                             tr
                                                 td #{num++}
-                                                td #{dat.value}
-                                                td #{dat.startDate.toJSON().slice(0,10).split('-').reverse().join('/')} 
-                                                td #{dat.endDate.toJSON().slice(0,10).split('-').reverse().join('/')}
-                                                td 
-                                                    if dat.endDate > dateNow
-                                                        span.badge.badge-success
-                                                            | valid
-                                                    else
-                                                        span.badge.badge-danger
-                                                            | invalid
+                                                td #{dat.name}
                                                 td
-                                                    a.btn-sm.btn-primary(href=`/dashboard/cards/edit/${dat.id}`)
+                                                    a.btn-sm.btn-primary(href=`/dashboard/type/edit/${dat.id}`)
                                                         i.far.fa-edit
                                                         |  Edit
                                                 td
-                                                    form(action=`/dashboard/cards/delete/${dat.id}`, method="post")
+                                                    form(action=`/dashboard/type/delete/${dat.id}`, method="post")
                                                         input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                         button.btn-sm.btn-danger(type="submit")
                                                             i.fas.fa-trash-alt
@@ -130,7 +94,7 @@ block content
                             ul.pagination.pagination-sm.m-0.float-right
                                 if hasPrev
                                     li.page-item
-                                        a.page-link(href=`/dashboard/cards?p=${page - 1}`) «
+                                        a.page-link(href=`/dashboard/type?p=${page - 1}`) «
 
                                 if totalPages > 1
                                     while pages  < 3            
@@ -138,13 +102,13 @@ block content
                                             if pages === page
                                                 a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
                                             else
-                                                a.page-link.active( href=`/dashboard/cards?p=${pages}`)= pages
+                                                a.page-link.active( href=`/dashboard/type?p=${pages}`)= pages
 
                                         - pages++    
 
                                 if hasNext
                                     li.page-item
-                                        a.page-link(href=`/dashboard/cards?p=${page + 1}`) »
+                                        a.page-link(href=`/dashboard/type?p=${page + 1}`) »
 
     script. 
         var d = new Date();

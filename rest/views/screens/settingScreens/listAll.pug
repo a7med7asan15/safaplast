@@ -21,9 +21,9 @@ block content
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .input-group.input-group-sm.float-right(style="width: 150px;")
                                     if propertys
-                                        input.form-control.float-right(type="text" name="table_search" placeholder="Search")
+                                        input.form-control.float-right(type="text" name="table_search" placeholder="بحث")
                                     if tbSearch
-                                        input.form-control.float-right(type="text", value = `${table_search}`, name="table_search" placeholder="Search")
+                                        input.form-control.float-right(type="text", value = `${table_search}`, name="table_search" placeholder="بحث")
                                     .input-group-append
                                     button.btn.btn-default(type="submit")
                                         i.fas.fa-search
