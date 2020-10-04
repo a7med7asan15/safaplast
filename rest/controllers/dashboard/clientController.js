@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf'); 
 const csrfProtection = csrf();
-const logisticService = require('../../services/logisticService');
+const clientService = require('../../services/clientService');
 
 // uploading Middleware 
 // Multer Js 
@@ -55,27 +55,18 @@ router.use(   authMiddleware ,   idAdmin   );
 
 
 
-router.get( '/citys',
+router.get( '/',
 
 
 csrfProtection, 
 
 
-logisticService.show
+clientService.show
 
 
 );
 
-router.get( '/areas',
 
-
-csrfProtection, 
-
-
-logisticService.showArea
-
-
-);
 
 
 
@@ -90,7 +81,7 @@ logisticService.showArea
 
 
 
-router.post( '/citys',
+router.post( '/',
 
 
 validationBody(schemas.addCitySchema),
@@ -98,22 +89,12 @@ validationBody(schemas.addCitySchema),
 csrfProtection, 
 
 
-logisticService.add
+clientService.add
 
 
 );
 
-router.post( '/areas',
 
-validationBody(schemas.addAreaSchema),
-
-csrfProtection, 
-
-
-logisticService.addArea
-
-
-);
 
 
 ////////////////////////////////////////////////
@@ -127,33 +108,27 @@ logisticService.addArea
 // Edit City Route 
 //---------------------------
 
-router.get('/citys/edit/:cityId', 
+router.get('/edit/:dataId', 
 
 csrfProtection,
 
-logisticService.showOneCity
+clientService.showOne
 
 );
 
-router.get('/areas/edit/:areaId', 
 
-csrfProtection,
-
-logisticService.showOneArea
-
-);
 
 //---------------------------
 // Update City Route 
 //---------------------------
 
-router.post('/citys/edit/:cityId', 
+router.post('/edit/:dataId', 
 
 validationBody(schemas.addCitySchema),
 
 csrfProtection,
 
-logisticService.updateCity
+clientService.update
 
 );
 
@@ -162,54 +137,15 @@ logisticService.updateCity
 // Delete City Route 
 //---------------------------
 
-router.post('/citys/delete/:cityId',
+router.post('/delete/:dataId',
 
 csrfProtection,
 
 
-logisticService.destroyCity
+clientService.destroy
 
 ); 
 
-//---------------------------
-// Update Area Route 
-//---------------------------
-
-router.post('/areas/edit/:areaId', 
-
-validationBody(schemas.addAreaSchema),
-
-csrfProtection,
-
-logisticService.updateArea
-
-);
-
-
-//---------------------------
-// Delete Area Route 
-//---------------------------
-
-router.post('/areas/delete/:areaId',
-
-csrfProtection,
-
-
-logisticService.destroyArea
-
-); 
-
-//---------------------------
-// Delete Area Route 
-//---------------------------
-router.post('/areas/search',
-
-
-csrfProtection,
-
-logisticService.searchArea
-
-);
 
 
 ////////////////////////////////////////////////
@@ -221,27 +157,14 @@ logisticService.searchArea
 // City Search 
 //---------------------------
 
-router.post('/citys/searchResult',
+router.post('/searchResult',
 
 csrfProtection,
 
 
-logisticService.searchShowCity
+clientService.searchShow
 
 ); 
 
-
-//---------------------------
-// Area Search 
-//---------------------------
-
-router.post('/areas/searchResult',
-
-csrfProtection,
-
-
-logisticService.searchShowArea
-
-); 
 
 module.exports = router;

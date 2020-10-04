@@ -142,7 +142,7 @@ const typeService = {
         }
     },
 
-    searchShowCity: async (req, res) => {
+    searchShow: async (req, res) => {
         try {
             let csrfToken = req.csrfToken();
             const {
