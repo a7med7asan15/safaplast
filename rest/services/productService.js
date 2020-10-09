@@ -1,6 +1,6 @@
 
 const ProductSchema = require('../models/productSchema');
-const TypeSchema = require('../models/productSchema');
+const TypeSchema = require('../models/typeSchema');
 
 
 
@@ -18,12 +18,14 @@ const productService = {
       const options = {
         page,
         limit: 10,
+        populate: 'type'
       }
       const products = await ProductSchema.paginate({}, options);
       return res.render('screens/productScreens/listAll', {
         thisUser: req.user,
         csrfToken,
-        dataProvided: products
+        dataProvided: products, 
+        title: "جميع المنتجات"
       })
 
     } catch (err) {
@@ -38,11 +40,12 @@ const productService = {
       return res.render('screens/productScreens/add', {
         thisUser: req.user,
         csrfToken,
-        types
+        types, 
+        title:"منتج جديد"
       })
 
     } catch (err) {
-      req.flash('error', 'Something went wrong, please reload')
+      req.flash('error', 'من فضلك أعد المحاولة, please reload')
     }
 
   },
@@ -50,15 +53,16 @@ const productService = {
     const {
       type, 
       images, 
+      code, 
       title, 
       htmlInfo, 
       htmlTable, 
     } = req.body;
     const im = images.split(',')
     try {
-
       const product = new ProductSchema({
         type, 
+        code,
         title, 
         htmlInfo, 
         htmlTable
@@ -71,43 +75,34 @@ const productService = {
       await product.save();
 
 
-      req.flash('success', 'Product Added Succesfully')
+      req.flash('success', 'تم إضافة المنتج بنجاح')
       return res.json({
         err: false,
         message: "Product Added Successfuly"
       });
 
     } catch (err) {
-      req.flash('success', 'Product Not Added ')
-      return res.json({
-        err: true,
-        message: "Product Not Added "
-      });
+      console.log(err);
+      req.flash('error', 'أعد المحاولة')
 
     }
   },
   
   update: async (req, res) => {
     const {
-      nameEnglish,
-      nameArabic,
-      nameArea,
-      sku,
-      type,
-      rooms,
-      price,
-      desArabic,
-      desEnglish,
-      images,
-      amenties,
-      brokers
+      type, 
+      images, 
+      code, 
+      title, 
+      htmlInfo, 
+      htmlTable, 
     } = req.body;
     let im = [];
     if (images) {
       im = images.split(',');
     }
     try {
-      const updateProp = await ProductSchema.findById(req.query.id);
+      const updateData = await ProductSchema.findById(req.query.id);
       let imagesLoop = [];
       if (im.length) {
         for (i = 0; i < im.length; i++) {
@@ -116,30 +111,24 @@ const productService = {
           });
         }
       }
-      updateProp.nameEnglish = nameEnglish;
-      updateProp.nameArabic = nameArabic;
-      updateProp.type = type;
-      updateProp.price = price;
-      updateProp.rooms = rooms;
-      updateProp.areaId = nameArea;
-      updateProp.Address.desriptionArabic = desArabic;
-      updateProp.Address.descriptionEnglish = desEnglish;
-      updateProp.images = imagesLoop;
-      updateProp.amenties = amenties;
-      updateProp.brokers = brokers;
-      updateProp.sku = sku;
-      await updateProp.save();
+      updateData.title = title;
+      updateData.type = type;
+      updateData.code = code;
+      updateData.images = imagesLoop;
+      updateData.htmlInfo = htmlInfo;
+      updateData.htmlTable = htmlTable;
+      await updateData.save();
 
-      req.flash('success', 'ProductUpdated Succesfully')
+      req.flash('success', 'تم تعديل المنتج بنجاح')
       return res.json({
         err: false,
-        message: "ProductUpdated Succesfully"
+        message: "Product Updated Succesfully"
       });
 
 
     } catch (err) {
       req.flash('error', {
-        message: 'ProductNot Updated'
+        message: 'من فضلك أعد المحاولة'
       })
       return res.json({
         err: true,
@@ -151,16 +140,16 @@ const productService = {
   },
   destroy: async (req, res) => {
     const {
-      propId
+      dataId
     } = req.params;
     try {
-      const deleteProp = await ProductSchema.findByIdAndDelete(propId);
+      const deleteData = await ProductSchema.findByIdAndDelete(dataId);
 
-      req.flash('success', `${deleteProp.nameEnglish} Deleted Successfully`)
+      req.flash('success', `${deleteData.title} تم حذف المنتج`)
       return res.redirect(`/dashboard/products`)
     } catch (err) {
       req.flash('error', {
-        message: 'Something Went wrong'
+        message: 'من فضلك أعد المحاولة'
       })
       return res.redirect(`/dashboard/products`)
 
@@ -174,20 +163,26 @@ const productService = {
       } = req.body;
       const tbSearch = await ProductSchema.find({
         "$or": [{
-            nameArabic: {
+            title: {
               '$regex': table_search,
               '$options': 'i'
             }
           },
           {
-            nameEnglish: {
+            code: {
+              '$regex': table_search,
+              '$options': 'i'
+            }
+          },
+          {
+            'type.name': {
               '$regex': table_search,
               '$options': 'i'
             }
           },
         ]
-      });
-      return res.render('screens/propScreens/listAllProps', {
+      }).populate('type')
+      return res.render('screens/productScreens/listAll', {
         thisUser: req.user,
         csrfToken,
         table_search,
@@ -195,11 +190,11 @@ const productService = {
       })
 
     } catch (err) {
-
-      req.flash('error', 'Something Went wrong')
-      return res.render('screens/propScreens/listAllProps', {
+      console.log(err)
+      req.flash('error', 'من فضلك أعد المحاولة')
+      return res.render('screens/productScreens/listAll', {
         thisUser: req.user,
-        table_search,
+        table_search:"",
         tbSearch: {},
         csrfToken
       })
@@ -207,49 +202,41 @@ const productService = {
 
 
   },
-  preview: async (req, res) => {
+  /*preview: async (req, res) => {
     var dataId = req.params.id
     try {
       var product= await ProductSchema.findById(dataId).populate('areaId type rooms amenties brokers');
-      return res.render('screens/propScreens/showOneScreen', {
+      return res.render('screens/productScreens/showOneScreen', {
         thisUser: req.user,
         dataProvided: product,
       });
     } catch (err) {
     }
 
-  }, 
+  }, */
   showOne: async (req, res) => {
     const {
-      propId
+      dataId
     } = req.params
     let csrfToken = req.csrfToken();
 
 
     try {
 
-      const areas = await AreaSchema.find();
-      const type = await TypesSchema.find();
-      const rooms = await RoomsSchema.find();
-      const amen = await AmentiesSchema.find();
-      const brok = await BrokerSchema.find();
+      const types = await TypeSchema.find();
 
-      const product= await ProductSchema.findById(propId);
-      return res.render('screens/propScreens/editPropScreen', {
+      const product= await ProductSchema.findById(dataId).populate('type');
+      return res.render('screens/productScreens/edit', {
         thisUser: req.user,
-        dataProvided,
+        dataProvided:product,
         csrfToken,
-        areas,
-        type,
-        rooms,
-        amen,
-        brok
+        types,
 
       })
     } catch (err) {
-      req.flash('error', 'Something Went wrong')
+      req.flash('error', 'من فضلك أعد المحاولة')
       console.log(err);
-      return res.render('screens/propScreens/editPropScreen', {
+      return res.render('screens/productScreens/edit', {
         thisUser: req.user,
         dataProvided: {},
         csrfToken
@@ -257,6 +244,10 @@ const productService = {
     }
 
   },
+  redirectHome: async (req, res) => {
+    return res.redirect(`/dashboard/products`)
+  } 
+  
 }
 
 module.exports = productService

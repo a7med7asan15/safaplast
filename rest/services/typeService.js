@@ -40,31 +40,29 @@ const typeService = {
 
 
         const {
-            nameEnglish,
-            nameArabic
+            name
         } = req.body;
 
 
         try {
 
 
-            const newCity = new CitySchema({
+            const newData = new TypeSchema({
 
 
-                nameEnglish,
+                name
 
-                nameArabic
 
 
             })
 
 
-            await newCity.save();
+            await newData.save();
 
-            return res.redirect('/dashboard/logistic/citys');
+            return res.redirect('/dashboard/type');
 
         } catch (err) {
-
+            res.send("error")
         }
 
 
@@ -90,7 +88,7 @@ const typeService = {
                 csrfToken
             })
         } catch (err) {
-            req.flash('error', 'Something Went wrong')
+            req.flash('error', 'من فضلك أعد المحاولة')
             return res.render('screens/logisticsScreens/editCityScreen', {
                 thisUser: req.user,
                 cityToEdit: {},
@@ -119,7 +117,7 @@ const typeService = {
             return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
         } catch (err) {
             req.flash('error', {
-                message: 'Something Went wrong'
+                message: 'من فضلك أعد المحاولة'
             })
             return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
         }
@@ -138,7 +136,7 @@ const typeService = {
             return res.redirect(`/dashboard/logistic/citys`)
         } catch (err) {
             req.flash('error', {
-                message: 'Something Went wrong'
+                message: 'من فضلك أعد المحاولة'
             })
             return res.redirect(`/dashboard/logistic/citys`)
 
@@ -176,7 +174,7 @@ const typeService = {
 
         } catch (err) {
 
-            req.flash('error', 'Something Went wrong')
+            req.flash('error', 'من فضلك أعد المحاولة')
             return res.render('screens/logisticsScreens/cityScreens', {
                 thisUser: req.user,
                 tbSearch: {},

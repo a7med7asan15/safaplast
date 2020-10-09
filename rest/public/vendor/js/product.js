@@ -4,12 +4,36 @@ Dropzone.autoDiscover = false;
 $(function () {
   var imagesArray = [];
   var csrf = $("meta[name=csrf-token]").attr("content");    
-  $('.nameArea').select2();
-  $('.norooms').select2();
-  $('.types').select2();
-  $('.amenties').select2();
-  $('.brokers').select2();
 
+  $('.types').select2();
+  $('.htmlInfo').summernote({
+    direction: 'ltr',
+    toolbar: [
+      // [groupName, [list of button]]
+      ['style', ['bold', 'italic', 'underline']],
+      //['font', ['strikethrough', 'superscript', 'subscript']],
+      //['fontsize', ['fontsize']],
+      //['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      //['height', ['height']]
+    ]
+  });
+  $('.htmlTable').summernote({
+    direction: 'ltr',
+    toolbar: [
+      // [groupName, [list of button]]
+      ['style', ['bold', 'italic', 'underline']],
+      //['font', ['strikethrough', 'superscript', 'subscript']],
+      //['fontsize', ['fontsize']],
+      //['color', ['color']],
+      ['table', ['table']],
+      //['height', ['height']]
+    ]
+  });
+  if(!add){
+    $('.htmlInfo').summernote('code',htmlInfoVal);
+    $('.htmlTable').summernote('code',htmlTableVal);
+ }
   $("div#dropi").dropzone({ 
     addRemoveLinks: true,
     url: "/dashboard/media/uploadimage",
@@ -71,89 +95,32 @@ $(function () {
   });
 
   Inputmask().mask(document.querySelectorAll("input"));
-  
-    const validator = $("#addnewprop").validate({
+
+    const validator = $("#addnewdata").validate({
+      ignore: ".note-editor *",
       rules: {
-        nameEnglish: {
+        title: {
           required: true,
         },
-        nameArabic: {
-          required: true,
-        },
-        mobileNumber: {
-          required: true,
-          minlength:11,
-          maxlength:11,
-          pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
-        },
-        price:{
-          required: true,
-        },
-        sku:{
+        code: {
           required: true,
         },
         type: {
           required: true,
         },
-        rooms: {
-          required: true,
-        },
-        nameArea: {
-          required: true,
-        },
-        amenties: {
-          required: true,
-        },
-        desEnglish: {
-          required: true,
-        },
-        desArabic: {
-          required: true,
-        },
-        images: {
-          required: true,
-        },
-
+        
 
       },
       messages: {
-        nameEnglish: {
-          required: "Please Enter English Name",
+        title: {
+          required: "أدخل اسم المنتج",
         },
-        nameArabic: {
-          required: "Please Enter Arabic Name",
-        },
-        mobileNumber: {
-          required: "Please Enter a Mobile Number",
-          minlength: "Minimum 11 characters",
-          maxlength: "Maximum 11 Characters",
-          pattern: "Please Enter Valid Mobile Number",
-        },
-        nameArea: {
-          required: "Please Enter Area",
-        },
-        sku: {
-          required: "Please Enter Sku",
+        code: {
+          required: "أدخل كود المنتج",
         },
         type: {
-          required: "Please Enter Type",
+          required: "أدخل نوع المنتج",
         },
-        rooms: {
-          required: "Please Enter Rooms",
-        },
-        amenties: {
-          required: "Please Enter Amenties",
-        },
-        desEnglish: {
-          required: "Please Enter Address in English",
-        },
-        desArabic: {
-          required: "Please Enter Address in Arabic",
-        },
-        images: {
-          required: "Please Add Images",
-        },
-
       },
       highlight: function (element) {
         $(element).addClass("is-invalid");

@@ -1,7 +1,7 @@
 // checker controller routes
 var express = require('express');
 var router = express.Router();
-var csrf = require('csurf'); 
+var csrf = require('csurf');
 const csrfProtection = csrf();
 const productService = require('../../services/productService');
 
@@ -9,35 +9,41 @@ const productService = require('../../services/productService');
 // uploading Middleware 
 // Multer Js 
 
-const { upload } = require('../../middlewares/uploadImage');
+const {
+    upload
+} = require('../../middlewares/uploadImage');
 
 
 // Validation Middleware 
 // Joi Js
 const {
 
-validationBody, 
+    validationBody,
 
-schemas } = require('../../helpers/validators');
+    schemas
+} = require('../../helpers/validators');
 
 // Authenticte Middlewares 
 const {
 
-idAdmin,
+    idAdmin,
 
-sameEmail,
+    sameEmail,
 
-preUsedEmail,
+    preUsedEmail,
 
-authMiddleware } = require('../../middlewares/authenticator');
-const { schema } = require('../../models/Users');
+    authMiddleware
+} = require('../../middlewares/authenticator');
+const {
+    schema
+} = require('../../models/Users');
 
 
 /// Auth Use MiddleWares 
 
 
 
-router.use(   authMiddleware ,   idAdmin   );
+router.use(authMiddleware, idAdmin);
 
 
 
@@ -57,35 +63,35 @@ router.use(   authMiddleware ,   idAdmin   );
 
 
 
-router.get( '/',
+router.get('/',
 
 
-csrfProtection, 
+    csrfProtection,
 
 
-productService.list
-
-
-);
-
-router.get( '/add',
-
-
-csrfProtection, 
-
-productService.addPage
+    productService.list
 
 
 );
-router.get( '/:dataId',
+
+router.get('/add',
 
 
-csrfProtection, 
+    csrfProtection,
 
-productService.preview
+    productService.addPage
 
 
 );
+// router.get( '/:dataId',
+
+
+// csrfProtection, 
+
+// productService.preview
+
+
+// );
 
 
 
@@ -95,14 +101,14 @@ productService.preview
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
-router.post( '/add',
+router.post('/add',
 
- validationBody(schemas.addProdSchema),
+    validationBody(schemas.addProdSchema),
 
- csrfProtection, 
+    csrfProtection,
 
 
-productService.create
+    productService.create
 
 
 );
@@ -115,12 +121,12 @@ productService.create
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
-router.get('/edit/:dataId', 
+router.get('/edit/:dataId',
 
 
-csrfProtection,
+    csrfProtection,
 
-productService.showOne
+    productService.showOne
 
 );
 
@@ -128,13 +134,13 @@ productService.showOne
 // Update ProductRoute 
 //---------------------------
 
-router.post('/edit', 
+router.post('/edit',
 
- validationBody(schemas.addPropSchema),
+    validationBody(schemas.addProdSchema),
 
-csrfProtection,
+    csrfProtection,
 
-productService.update
+    productService.update
 
 );
 
@@ -145,12 +151,12 @@ productService.update
 
 router.post('/delete/:dataId',
 
-csrfProtection,
+    csrfProtection,
 
 
-productService.destroy
+    productService.destroy
 
-); 
+);
 
 //---------------------------
 // ProductSearch 
@@ -158,10 +164,18 @@ productService.destroy
 
 router.post('/searchResult',
 
-csrfProtection,
+    csrfProtection,
 
-productService.searchShow
+    productService.searchShow
 
-); 
+);
+
+router.get('/searchResult',
+
+    csrfProtection,
+
+    productService.redirectHome
+
+);
 
 module.exports = router;

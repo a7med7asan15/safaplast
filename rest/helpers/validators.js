@@ -6,6 +6,7 @@ module.exports  = {
         return (req,res,next)=>{
             const result  = schemas.validate(req.body)
             if (result.error){
+                console.log(result.error);
                 req.flash('error', result.error.details);
                 return res.redirect(req.baseUrl + req.url);   
             }
@@ -47,48 +48,20 @@ module.exports  = {
         emailSchema:Joi.object().keys({
             email :Joi.string().email().required(),
         }),
-        addAreaSchema:Joi.object().keys({
-            nameEnglish:Joi.string().required(),
-            nameArabic:Joi.string().required(),
-            parentCity:Joi.string().required(),
-            _csrf:Joi.string(), 
-        }),
-        addCitySchema:Joi.object().keys({
-            nameEnglish:Joi.string().required(),
-            nameArabic:Joi.string().required(),
+        addProdSchema:Joi.object().keys({
+            title:Joi.string().required(),
+            code:Joi.string().required(),
+            type:Joi.string().required(),
+            htmlInfo:Joi.string().required(),
+            htmlTable:Joi.string().required(),
+            images:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
         addTypeSchema:Joi.object().keys({
-            nameEnglish:Joi.string().required(),
-            nameArabic:Joi.string().required(),
+            name:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
-        addRoomSchema:Joi.object().keys({
-            nameEnglish:Joi.string().required(),
-            nameArabic:Joi.string().required(),
-            _csrf:Joi.string(), 
-        }),
-        addAmenSchema:Joi.object().keys({
-            nameEnglish:Joi.string().required(),
-            nameArabic:Joi.string().required(),
-            icon:Joi.string().required(),
-            _csrf:Joi.string(), 
-        }),
-        addPropSchema:Joi.object().keys({
-            nameEnglish:Joi.string().required(),
-            nameArabic:Joi.string().required(),
-            price:Joi.string().required(),
-            sku:Joi.string().required(),
-            nameArea:Joi.string().required(),
-            type:Joi.string().required(),
-            rooms:Joi.string().required(),
-            amenties:Joi.array().items(Joi.string()),
-            images:Joi.string().required(),
-            desArabic:Joi.string().required(),
-            desEnglish:Joi.string().required(),
-            brokers:Joi.required(),
-            _csrf:Joi.string(), 
-        }),
+        
         addbrokerSchema:Joi.object().keys({
             name:Joi.string().required(),
             mobileNo: Joi.string().min(11).max(11).pattern(new RegExp(/['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)).required(),

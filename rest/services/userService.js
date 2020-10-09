@@ -19,7 +19,7 @@ const userService = {
                 title: "قائمة المستخدمين"
             })
         } catch (err) {
-            req.flash('error', 'Something Went wrong')
+            req.flash('error', 'من فضلك أعد المحاولة')
             return res.render('screens/usersScreens/listAllScreen')
         }
 
@@ -38,7 +38,7 @@ const userService = {
                 csrfToken
             })
         } catch (err) {
-            req.flash('error', 'Something Went wrong')
+            req.flash('error', 'من فضلك أعد المحاولة')
             return res.render('screens/usersScreens/editUserScreen', {
                 thisUser: req.user,
                 userToEdit: {},
@@ -91,7 +91,7 @@ const userService = {
             req.flash('success', 'User Added Succesfully')
             return res.redirect('/dashboard/users/add')
         } catch (err) {
-            req.flash('error', 'Something Went wrong')
+            req.flash('error', 'من فضلك أعد المحاولة')
             return res.redirect('/dashboard/users/add')
         }
     },
@@ -124,7 +124,7 @@ const userService = {
             return res.redirect(`/dashboard/users/edit/${userId}`)
         } catch (err) {
             req.flash('error', {
-                message: 'Something Went wrong'
+                message: 'من فضلك أعد المحاولة'
             })
             return res.redirect(`/dashboard/users/edit/${userId}`)
         }
@@ -140,7 +140,7 @@ const userService = {
             return res.redirect(`/dashboard/users`)
         } catch (err) {
             req.flash('error', {
-                message: 'Something Went wrong'
+                message: 'من فضلك أعد المحاولة'
             })
             return res.redirect(`/dashboard/users`)
 
@@ -185,7 +185,7 @@ const userService = {
 
         } catch (err) {
             req.flash('error', {
-                message: 'Something Went wrong'
+                message: 'من فضلك أعد المحاولة'
             })
             return res.redirect(`/dashboard/users/edit/${userId}/changepassword`)
         }
@@ -243,7 +243,7 @@ const userService = {
 
         } catch (err) {
 
-            req.flash('error', 'Something Went wrong')
+            req.flash('error', 'من فضلك أعد المحاولة')
             return res.render('screens/usersScreens/listAllScreen', {
                 thisUser: req.user,
                 table_search,

@@ -45,7 +45,7 @@ preUsedEmail :  async (req,res,next)=>{
 
     } catch(err){
 
-        req.flash('error', 'Something Went wrong')
+        req.flash('error', 'من فضلك أعد المحاولة')
         return res.redirect('/dashboard/users/add')
 
     }     
@@ -67,7 +67,7 @@ sameEmail: async (req,res,next)=>{
         }
         return next();
     } catch(err){
-        req.flash('error', 'Something Went wrong')
+        req.flash('error', 'من فضلك أعد المحاولة')
         return res.redirect('/dashboard/users/add')
     }     
     

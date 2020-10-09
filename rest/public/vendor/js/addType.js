@@ -1,21 +1,16 @@
 $(function () {
     Inputmask().mask(document.querySelectorAll("input"));
   
-    $("#addTypeForm").validate({
+    $("#addData").validate({
       rules: {
-        typeEnglish: {
+        name: {
           required: true,
         },
-        typeArabic: {
-          required: true,
-        },
+        
       },
       messages: {
-        typeEnglish: {
-          required: "Please Enter English Name",
-        },
-        typeArabic: {
-          required: "Please Enter Arabic Name",
+        name: {
+          required: "من فضلك أدخل نوع المنتج",
         },
       },
       highlight: function (element) {

@@ -84,7 +84,7 @@ typeService.show
 router.post( '/',
 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addTypeSchema),
 
 csrfProtection, 
 
@@ -124,7 +124,7 @@ typeService.showOne
 
 router.post('/edit/:dataId', 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addTypeSchema),
 
 csrfProtection,
 

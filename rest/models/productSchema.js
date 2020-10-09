@@ -15,8 +15,9 @@ const productSchema  = new Schema({
     title :  { type: String , required: true},
     type  :  { type : Schema.Types.ObjectId , ref:'typeSchema'},
     images  :  [images],
-    htmlInfo: { type: String , required: true}, 
-    htmlTable: { type: String , required: true}, 
+    htmlInfo: { type: String , default:"#"}, 
+    htmlTable: { type: String , default:"#"}, 
+    code: { type: String , required: true},
     slug:{ type: String, slug: ["title"], slug_padding_size: 4,  unique: true } ,
 
 })

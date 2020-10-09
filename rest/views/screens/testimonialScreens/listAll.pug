@@ -36,8 +36,8 @@ block content
                                     th SKU
                                     th Status
                                     th View
-                                    th Edit
-                                    th Delete
+                                    th تعديل
+                                    th حذف
                                 tbody
                                     if tbSearch
                                         for tb in tbSearch
@@ -53,13 +53,13 @@ block content
                                                 td
                                                     a.btn-sm.btn-warning(href=`/dashboard/propertys/edit?id=${tb.id}`)
                                                         i.far.fa-edit
-                                                        |  Edit
+                                                        |  تعديل
                                                 td
                                                     form(action=`/dashboard/propertys/delete/${tb.id}`, method="post")
                                                         input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                         button.btn-sm.btn-danger(type="submit")
-                                                            i.fas.fa-trash-alt
-                                                            |  Delete
+                                                            i.far.fa-trash-alt
+                                                            |  حذف
                                     if propertys
                                         for property in propertys.docs
                                             tr
@@ -75,7 +75,7 @@ block content
                                                 td
                                                     a.btn-sm.btn-warning(href=`/dashboard/propertys/edit/${property.id}`)
                                                         i.far.fa-edit
-                                                        |  Edit
+                                                        |  تعديل
                                                 td
                                                     form(action=`/dashboard/propertys/delete/${property.id}`, method="post")
                                                         input(type="hidden" name="_csrf" value=`${csrfToken}`)
