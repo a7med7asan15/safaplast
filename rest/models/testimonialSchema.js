@@ -13,4 +13,4 @@ const testimonialSchema = new Schema({
 
 const TestimonialSchema =  mongoose.model('testimonialSchema', testimonialSchema);
 
-module.exports = {TestimonialSchema}
+module.exports = TestimonialSchema

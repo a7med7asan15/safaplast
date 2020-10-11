@@ -27,7 +27,8 @@ const typeService = {
             })
         } catch (err) {
             console.log(err)
-            res.send(err);
+            console.log(err);
+res.send("error");
 
         }
 
@@ -62,6 +63,7 @@ const typeService = {
             return res.redirect('/dashboard/type');
 
         } catch (err) {
+            req.flash('error', 'من فضلك أعد المحاولة')
             res.send("error")
         }
 
@@ -76,69 +78,63 @@ const typeService = {
         let csrfToken = req.csrfToken();
 
         try {
-            var {
-                cityId
+            const {
+                dataId
             } = req.params
 
-            const cityToEdit = await CitySchema.findById(cityId);
+            const type = await TypeSchema.findById(dataId);
 
-            return res.render('screens/logisticsScreens/editCityScreen', {
+            return res.render('screens/typeScreens/edit', {
                 thisUser: req.user,
-                cityToEdit: cityToEdit,
+                dataProvided: type,
                 csrfToken
             })
         } catch (err) {
             req.flash('error', 'من فضلك أعد المحاولة')
-            return res.render('screens/logisticsScreens/editCityScreen', {
+            return res.render('screens/typeScreens/edit', {
                 thisUser: req.user,
-                cityToEdit: {},
+                dataProvided: {},
                 csrfToken
             })
         }
 
     },
 
-    //Update City
+    //Update Data
     update: async (req, res) => {
         const {
-            nameEnglish,
-            nameArabic
+            name
         } = req.body
         const {
-            cityId
+            dataId
         } = req.params
         try {
-            const updateCity = await CitySchema.findById(cityId)
-            updateCity.nameEnglish = nameEnglish,
-                updateCity.nameArabic = nameArabic,
-                await updateCity.save();
+            const updateData = await TypeSchema.findById(dataId)
+            updateData.name = name,
+                await updateData.save();
             req.session.passedData = false
-            req.flash('success', 'City Updated Succesfully')
-            return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
+            req.flash('success', 'تم تعديل النوع بنجاح')
+            return res.redirect(`/dashboard/type/edit/${dataId}`)
         } catch (err) {
-            req.flash('error', {
-                message: 'من فضلك أعد المحاولة'
-            })
-            return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
+            req.flash('error', 'من فضلك أعد المحاولة')
+            return res.redirect(`/dashboard/type/edit/${dataId}`)
         }
 
     },
 
-    //Delete City
+    //Delete Data
     destroy: async (req, res) => {
         const {
-            cityId
+            dataId
         } = req.params;
         try {
-            const deleteCity = await CitySchema.findByIdAndDelete(cityId);
+            const deleteData = await TypeSchema.findByIdAndDelete(dataId);
 
-            req.flash('success', `${deleteCity.nameEnglish} Deleted Successfully`)
-            return res.redirect(`/dashboard/logistic/citys`)
+            req.flash('success', ` بنجاح ${deleteData.name} تم حذف`)
+            return res.redirect(`/dashboard/type`)
         } catch (err) {
-            req.flash('error', {
-                message: 'من فضلك أعد المحاولة'
-            })
-            return res.redirect(`/dashboard/logistic/citys`)
+            req.flash('error', 'من فضلك أعد المحاولة')
+            return res.redirect(`/dashboard/type`)
 
         }
     },
@@ -149,15 +145,9 @@ const typeService = {
             const {
                 table_search,
             } = req.body;
-            const tbSearch = await CitySchema.find({
+            const tbSearch = await TypeSchema.find({
                 "$or": [{
-                        nameEnglish: {
-                            '$regex': table_search,
-                            '$options': 'i'
-                        }
-                    },
-                    {
-                        nameArabic: {
+                        name: {
                             '$regex': table_search,
                             '$options': 'i'
                         }
@@ -165,7 +155,7 @@ const typeService = {
                 ]
             });
 
-            return res.render('screens/logisticsScreens/cityScreens', {
+            return res.render('screens/typeScreens/listAll', {
                 thisUser: req.user,
                 csrfToken,
                 table_search,
@@ -175,7 +165,7 @@ const typeService = {
         } catch (err) {
 
             req.flash('error', 'من فضلك أعد المحاولة')
-            return res.render('screens/logisticsScreens/cityScreens', {
+            return res.render('screens/typeScreens/listAll', {
                 thisUser: req.user,
                 tbSearch: {},
                 table_search,

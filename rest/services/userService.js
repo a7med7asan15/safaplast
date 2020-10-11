@@ -123,9 +123,7 @@ const userService = {
             req.flash('success', 'User Updated Succesfully')
             return res.redirect(`/dashboard/users/edit/${userId}`)
         } catch (err) {
-            req.flash('error', {
-                message: 'من فضلك أعد المحاولة'
-            })
+            req.flash('error', 'من فضلك أعد المحاولة')
             return res.redirect(`/dashboard/users/edit/${userId}`)
         }
 
@@ -139,9 +137,7 @@ const userService = {
             req.flash('success', `${deleteUser.name} Deleted Successfully`)
             return res.redirect(`/dashboard/users`)
         } catch (err) {
-            req.flash('error', {
-                message: 'من فضلك أعد المحاولة'
-            })
+            req.flash('error', 'من فضلك أعد المحاولة')
             return res.redirect(`/dashboard/users`)
 
         }
@@ -184,9 +180,7 @@ const userService = {
             return res.redirect(`/dashboard/users/edit/${userId}/changepassword`)
 
         } catch (err) {
-            req.flash('error', {
-                message: 'من فضلك أعد المحاولة'
-            })
+            req.flash('error', 'من فضلك أعد المحاولة')
             return res.redirect(`/dashboard/users/edit/${userId}/changepassword`)
         }
     },

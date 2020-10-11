@@ -32,7 +32,8 @@ const contactService = {
                 dateNow: Date.now(),
             })
         } catch (err) {
-            res.send(err);
+            console.log(err);
+            res.send("error");
         }
     },
     showOld: async (req, res) => {
@@ -63,7 +64,8 @@ const contactService = {
                 dateNow: Date.now(),
             })
         } catch (err) {
-            res.send(err);
+            console.log(err);
+res.send("error");
         }
     },
     delete: async (req, res) => {

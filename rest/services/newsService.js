@@ -1,4 +1,6 @@
-const typeService = {
+const NewsSchema = require('../models/newsSchema');
+
+const newsService = {
 
     show: async (req, res) => {
         let page = 1;
@@ -16,15 +18,18 @@ const typeService = {
                 page,
                 limit: 10,
             }
-            const citys = await CitySchema.paginate({}, options);
-            return res.render('screens/logisticsScreens/cityScreens', {
+            const dataProvided = await NewsSchema.paginate({
+                tag:"news"
+            }, options);
+            return res.render('screens/newsScreens/listAll', {
                 thisUser: req.user,
                 csrfToken,
-                citys
+                dataProvided
             })
         } catch (err) {
 
-            res.send(err);
+            console.log(err);
+            res.send("error");
 
         }
 
@@ -37,30 +42,35 @@ const typeService = {
 
 
         const {
-            nameEnglish,
-            nameArabic
+            title,
+            htmlArticle, 
+            featuredImage, 
+            tag
         } = req.body;
 
 
         try {
 
 
-            const newCity = new CitySchema({
+            const newData = new NewsSchema({
 
-
-                nameEnglish,
-
-                nameArabic
+                title,
+                htmlArticle, 
+                featuredImage, 
+                tag
 
 
             })
 
 
-            await newCity.save();
+            await newData.save();
 
-            return res.redirect('/dashboard/logistic/citys');
+            return res.redirect('/dashboard/news');
 
         } catch (err) {
+
+            console.log(err);
+            res.send("error");
 
         }
 
@@ -75,22 +85,22 @@ const typeService = {
         let csrfToken = req.csrfToken();
 
         try {
-            var {
-                cityId
+            const {
+                dataId
             } = req.params
 
-            const cityToEdit = await CitySchema.findById(cityId);
+            const dataProvided = await NewsSchema.findById(dataId);
 
-            return res.render('screens/logisticsScreens/editCityScreen', {
+            return res.render('screens/newsScreens/edit', {
                 thisUser: req.user,
-                cityToEdit: cityToEdit,
+                dataProvided,
                 csrfToken
             })
         } catch (err) {
             req.flash('error', 'من فضلك أعد المحاولة')
-            return res.render('screens/logisticsScreens/editCityScreen', {
+            return res.render('screens/newsScreens/edit', {
                 thisUser: req.user,
-                cityToEdit: {},
+                dataProvided: {},
                 csrfToken
             })
         }
@@ -100,25 +110,27 @@ const typeService = {
     //Update City
     update: async (req, res) => {
         const {
-            nameEnglish,
-            nameArabic
+            title,
+                htmlArticle, 
+                featuredImage, 
+                tag
         } = req.body
         const {
-            cityId
+            dataId
         } = req.params
         try {
-            const updateCity = await CitySchema.findById(cityId)
-            updateCity.nameEnglish = nameEnglish,
-                updateCity.nameArabic = nameArabic,
-                await updateCity.save();
+            const updateData = await NewsSchema.findById(dataId)
+            updateData.title = title,
+                updateData.htmlArticle = htmlArticle,
+                updateData.featuredImage = featuredImage,
+                updateData.tag = tag,
+                await updateData.save();
             req.session.passedData = false
-            req.flash('success', 'City Updated Succesfully')
-            return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
+            req.flash('success', 'تمت العملية بنجاح')
+            return res.redirect(`/dashboard/news/edit/${dataId}`)
         } catch (err) {
-            req.flash('error', {
-                message: 'من فضلك أعد المحاولة'
-            })
-            return res.redirect(`/dashboard/logistic/citys/edit/${cityId}`)
+            req.flash('error', 'من فضلك أعد المحاولة')
+            return res.redirect(`/dashboard/news/edit/${dataId}`)
         }
 
     },
@@ -126,18 +138,16 @@ const typeService = {
     //Delete City
     destroy: async (req, res) => {
         const {
-            cityId
+            dataId
         } = req.params;
         try {
-            const deleteCity = await CitySchema.findByIdAndDelete(cityId);
+            const deleteData = await NewsSchema.findByIdAndDelete(dataId);
 
-            req.flash('success', `${deleteCity.nameEnglish} Deleted Successfully`)
-            return res.redirect(`/dashboard/logistic/citys`)
+            req.flash('success', `تم الحذف`)
+            return res.redirect(`/dashboard/news`)
         } catch (err) {
-            req.flash('error', {
-                message: 'من فضلك أعد المحاولة'
-            })
-            return res.redirect(`/dashboard/logistic/citys`)
+            req.flash('error', 'من فضلك أعد المحاولة')
+            return res.redirect(`/dashboard/news`)
 
         }
     },
@@ -148,23 +158,18 @@ const typeService = {
             const {
                 table_search,
             } = req.body;
-            const tbSearch = await CitySchema.find({
+            const tbSearch = await NewsSchema.find({
                 "$or": [{
-                        nameEnglish: {
+                        title: {
                             '$regex': table_search,
                             '$options': 'i'
                         }
                     },
-                    {
-                        nameArabic: {
-                            '$regex': table_search,
-                            '$options': 'i'
-                        }
-                    },
-                ]
+                ], 
+                tag:"news"
             });
 
-            return res.render('screens/logisticsScreens/cityScreens', {
+            return res.render('screens/newsScreens/listAll', {
                 thisUser: req.user,
                 csrfToken,
                 table_search,
@@ -174,7 +179,7 @@ const typeService = {
         } catch (err) {
 
             req.flash('error', 'من فضلك أعد المحاولة')
-            return res.render('screens/logisticsScreens/cityScreens', {
+            return res.render('screens/newsScreens/listAll', {
                 thisUser: req.user,
                 tbSearch: {},
                 table_search,
@@ -186,4 +191,4 @@ const typeService = {
     },
 }
 
-module.exports = typeService
+module.exports = newsService

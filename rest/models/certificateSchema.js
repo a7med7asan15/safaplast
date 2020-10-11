@@ -12,4 +12,4 @@ const certificateSchema = new Schema({
 
 const CertificateSchema =  mongoose.model('certificateSchema', certificateSchema);
 
-module.exports = {CertificateSchema}
+module.exports = CertificateSchema

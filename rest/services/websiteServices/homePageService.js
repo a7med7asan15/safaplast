@@ -115,6 +115,9 @@ const homePageService = {
 
         } catch (err) {
 
+            console.log(err);
+            res.send("error");
+
         }
 
     },

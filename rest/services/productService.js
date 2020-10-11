@@ -1,4 +1,3 @@
-
 const ProductSchema = require('../models/productSchema');
 const TypeSchema = require('../models/typeSchema');
 
@@ -24,7 +23,7 @@ const productService = {
       return res.render('screens/productScreens/listAll', {
         thisUser: req.user,
         csrfToken,
-        dataProvided: products, 
+        dataProvided: products,
         title: "جميع المنتجات"
       })
 
@@ -40,8 +39,8 @@ const productService = {
       return res.render('screens/productScreens/add', {
         thisUser: req.user,
         csrfToken,
-        types, 
-        title:"منتج جديد"
+        types,
+        title: "منتج جديد"
       })
 
     } catch (err) {
@@ -51,20 +50,20 @@ const productService = {
   },
   create: async (req, res) => {
     const {
-      type, 
-      images, 
-      code, 
-      title, 
-      htmlInfo, 
-      htmlTable, 
+      type,
+      images,
+      code,
+      title,
+      htmlInfo,
+      htmlTable,
     } = req.body;
     const im = images.split(',')
     try {
       const product = new ProductSchema({
-        type, 
+        type,
         code,
-        title, 
-        htmlInfo, 
+        title,
+        htmlInfo,
         htmlTable
       });
       for (i = 0; i < im.length; i++) {
@@ -87,15 +86,15 @@ const productService = {
 
     }
   },
-  
+
   update: async (req, res) => {
     const {
-      type, 
-      images, 
-      code, 
-      title, 
-      htmlInfo, 
-      htmlTable, 
+      type,
+      images,
+      code,
+      title,
+      htmlInfo,
+      htmlTable,
     } = req.body;
     let im = [];
     if (images) {
@@ -127,9 +126,7 @@ const productService = {
 
 
     } catch (err) {
-      req.flash('error', {
-        message: 'من فضلك أعد المحاولة'
-      })
+      req.flash('error', 'من فضلك أعد المحاولة')
       return res.json({
         err: true,
         message: "ProductNOT Updated"
@@ -148,9 +145,7 @@ const productService = {
       req.flash('success', `${deleteData.title} تم حذف المنتج`)
       return res.redirect(`/dashboard/products`)
     } catch (err) {
-      req.flash('error', {
-        message: 'من فضلك أعد المحاولة'
-      })
+      req.flash('error', 'من فضلك أعد المحاولة')
       return res.redirect(`/dashboard/products`)
 
     }
@@ -194,7 +189,7 @@ const productService = {
       req.flash('error', 'من فضلك أعد المحاولة')
       return res.render('screens/productScreens/listAll', {
         thisUser: req.user,
-        table_search:"",
+        table_search: "",
         tbSearch: {},
         csrfToken
       })
@@ -225,10 +220,10 @@ const productService = {
 
       const types = await TypeSchema.find();
 
-      const product= await ProductSchema.findById(dataId).populate('type');
+      const product = await ProductSchema.findById(dataId).populate('type');
       return res.render('screens/productScreens/edit', {
         thisUser: req.user,
-        dataProvided:product,
+        dataProvided: product,
         csrfToken,
         types,
 
@@ -246,8 +241,8 @@ const productService = {
   },
   redirectHome: async (req, res) => {
     return res.redirect(`/dashboard/products`)
-  } 
-  
+  }
+
 }
 
 module.exports = productService

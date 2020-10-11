@@ -8,7 +8,7 @@ const { MsgSchema } = require('../models/msgSchema');
 const authService = {
     show: async (req, res) => {
         res.render('screens/authScreens/loginScreen', {
-            title: 'Hey',
+            title: 'Login',
             message: 'Hello there!'
         })
     },
