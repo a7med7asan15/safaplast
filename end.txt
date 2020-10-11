@@ -1,0 +1,6 @@
+doName=WUA2D3CF5LUHUQUL2ZED
+doSecret=tXYindNPe/mNOJBQlSymmnmyQlgJgvRtQy7jL2VMYtg
+doLink=ams3.digitaloceanspaces.com
+do_default_region=ams3
+doSpace=dahabdoors
+doEndpoint=ams3.digitaloceanspaces.com
