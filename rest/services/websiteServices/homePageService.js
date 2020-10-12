@@ -7,7 +7,18 @@ const {
 const homePageService = {
 
     show: async (req, res) => {
-        return res.redirect('/search');
+        let domainName = process.env.devDomain
+        if (process.env.STATUS === "PROD") {
+            domainName = process.env.hostDomain
+        }
+        res.render('site/homepage', {
+            title: 'ElsafaPlast for electric industries',
+            metDescription: 'Elsafa Plast Electric',
+            ogTitle: 'ElsafaPlast Electric',
+            ogDomain: domainName,
+
+        })
+
     },
     showSearch: async (req, res) => {
         try {
@@ -254,7 +265,7 @@ const homePageService = {
             const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
 
             request(verifyUrl, (err, response, body) => {
-                var valid=true;
+                var valid = true;
                 body = JSON.parse(body);
 
                 if (!body.success && body.success === undefined) {
@@ -268,20 +279,20 @@ const homePageService = {
                     return res.json({
                         "success": false,
                         "msg": "you might be a bot, sorry!",
-                        "score": body.score, 
+                        "score": body.score,
                     });
                 }
                 return res.json({
                     "success": true,
                     "msg": "captcha verification passed",
-                    "score": body.score, 
+                    "score": body.score,
                 });
                 // return json message or continue with your function. Example: loading new page, ect
                 //
-                
+
 
             });
-            if(valid){
+            if (valid) {
                 const msg = new MsgSchema({
                     name_contact,
                     lastname_contact,
@@ -291,21 +302,21 @@ const homePageService = {
                 })
                 await msg.save();
                 req.flash('success', "لقد تم إرسال الرسالة بنجاح")
- 
-            }else{
+
+            } else {
                 req.flash('errors', "من فضلك أعد المحاولة")
 
             }
-            
-            
+
+
 
 
         } catch (err) {
             req.flash('error', "من فضلك أعد المحاولة")
             return res.json({
-                "error":true,
+                "error": true,
                 errors: true,
-                message: "Error In Getting Message", 
+                message: "Error In Getting Message",
             })
         }
 

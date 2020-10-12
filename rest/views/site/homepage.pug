@@ -1,0 +1,447 @@
+extends ../websiteLayout.pug
+
+block content 
+
+    section#slider2.slider.slider-2
+        .carousel.owl-carousel.carousel-arrows.carousel-dots(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='false' data-nav='true' data-dots='false' data-space='0' data-loop='true' data-speed='3000' data-transition='fade' data-animate-out='fadeOut' data-animate-in='fadeIn')
+            .slide-item.align-v-h.bg-overlay
+                .bg-img
+                    img(src='/static/websiteAssets/images/sliders/2.jpg' alt='slide img')
+                .container
+                    .row
+                        .col-sm-8.col-md-8.col-lg-8.col-xl-6
+                            .slide__box.d-flex.flex-wrap.justify-content-between
+                                .slide__box-content
+                                    h2.slide__title Industrial Solutions With Best Machinery! 
+                                    p.slide__desc
+                                        | We produce positive results from ever-growing Industrial & manufacturing
+                                        | estates.
+                                    a.btn.btn__primary(href='#') More About Us
+                               
+            .slide-item.align-v-h.bg-overlay
+                .bg-img
+                    img(src='/static/websiteAssets/images/sliders/4.jpg' alt='slide img')
+                .container
+                    .row
+                        .col-sm-8.col-md-8.col-lg-8.col-xl-6
+                            .slide__box.d-flex.flex-wrap.justify-content-between
+                                .slide__box-content
+                                    h2.slide__title Manufacture A High Quality Products
+                                    p.slide__desc
+                                        | We produce positive results from ever-growing Industrial & manufacturing
+                                        | estates.
+                                    a.btn.btn__primary(href='#') More About Us
+                                
+
+    section#servicesCarousel.services.services-layout1.services-carousel.pt-0.mt-120
+        .bg-img
+            img(src='/static/websiteAssets/images/backgrounds/pattern/2.png' alt='background')
+        .container
+            .row.heading.mb-40
+                .col-sm-12.col-md-12.col-lg-6
+                    span.heading__subtitle Fast Growing Industrial & Manufacturing Estates.
+                    h2.heading__title Provides High Performance Services For Multiple Industries And Technologies!
+                // /.col-lg-6
+                .col-sm-12.col-md-12.col-lg-6
+                    p.heading__desc
+                        | Yet those that embrace change are thriving, building bigger, better, faster, and
+                        | stronger products than ever before. You are helping to lead the charge; we can help you build on your past
+                        | successes and prepare for future.
+                    .d-flex
+                        a.btn.btn__primary.mt-30.mr-30(href='/certificates') See our Certificates
+                        
+            .row
+                .col-sm-12.col-md-12.col-lg-12
+                    .carousel.owl-carousel.carousel-dots(data-slide='3' data-slide-md='2' data-slide-sm='1' data-autoplay='true' data-nav='false' data-dots='true' data-space='30' data-loop='true' data-speed='800')
+                        .service-item
+                            .service__img
+                                img.img-fluid(src='/static/websiteAssets/images/services/1.jpg' alt='service')
+                            // /.service-img
+                            .service__content
+                                h4.service__title Retail & Consumer
+                                p.service__desc
+                                    | Petroleum and natural gas are nonrenewable sources of energy, a liquid found
+                                    | underground that can be used to make gasoline.
+                                a.btn.btn__secondary.btn__link(href='#')
+                                    i.icon-arrow-right.arrow-rounded
+                                    span Read More
+                            // /.service-content
+                            // /.service-item
+                        .service-item
+                            .service__img
+                                img.img-fluid(src='/static/websiteAssets/images/services/2.jpg' alt='service')
+                            // /.service-img
+                            .service__content
+                                h4.service__title Sciences & Healthcare
+                                p.service__desc
+                                    | Professional discipline deals with designing, planning, construction and
+                                    | infrastructures management such as roads, tunnels, bridges.
+                                a.btn.btn__secondary.btn__link(href='#')
+                                    i.icon-arrow-right.arrow-rounded
+                                    span Read More
+                            // /.service-content
+                            // /.service-item
+                        .service-item
+                            .service__img
+                                img.img-fluid(src='/static/websiteAssets/images/services/3.jpg' alt='service')
+                            // /.service-img
+                            .service__content
+                                h4.service__title Industrial & Chemical
+                                p.service__desc
+                                    | Materials science principles to design, analyze, manufacture, and maintain
+                                    | mechanical systems. It is one of the oldest .
+                                a.btn.btn__secondary.btn__link(href='#')
+                                    i.icon-arrow-right.arrow-rounded
+                                    span Read More
+                            // /.service-content
+                            // /.service-item
+                        .service-item
+                            .service__img
+                                img.img-fluid(src='/static/websiteAssets/images/services/4.jpg' alt='service')
+                            // /.service-img
+                            .service__content
+                                h4.service__title Power Generation
+                                p.service__desc
+                                    | Produced in huge quantities and critical ingredients for products used by
+                                    | both
+                                    | industry and the general consumer.
+                                a.btn.btn__secondary.btn__link(href='#')
+                                    i.icon-arrow-right.arrow-rounded
+                                    span Read More
+                            // /.service-content
+                            // /.service-item
+                        .service-item
+                            .service__img
+                                img.img-fluid(src='/static/websiteAssets/images/services/5.jpg' alt='service')
+                            // /.service-img
+                            .service__content
+                                h4.service__title Food & Beverage
+                                p.service__desc
+                                    | The automotive industry comprises a wide range of companies involved in the
+                                    | design, development, manufacturing, and selling.
+                                a.btn.btn__secondary.btn__link(href='#')
+                                    i.icon-arrow-right.arrow-rounded
+                                    span Read More
+                            // /.service-content
+                            // /.service-item
+                        .service-item
+                            .service__img
+                                img.img-fluid(src='/static/websiteAssets/images/services/6.jpg' alt='service')
+                            // /.service-img
+                            .service__content
+                                h4.service__title Oil & Gas
+                                p.service__desc
+                                    | Building a bridge is a complex undertaking requiring knowledge and expertise.
+                                    | Several variables, including engineering.
+                                a.btn.btn__secondary.btn__link(href='#')
+                                    i.icon-arrow-right.arrow-rounded
+                                    span Read More
+                            // /.service-content
+                            // /.service-item
+                            // /.carousel
+                            // /.col-lg-12
+                            // /.row
+                            // /.container
+
+    section#banner4.banner.banner-4.bg-overlay.bg-overlay-gradient-2.bg-parallax.pt-120.pb-0
+        .bg-img
+            img(src='/static/websiteAssets/images/banners/4.jpg' alt='background')
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-7
+                    form.contact__form-panel.mr-50
+                        .row
+                            .col-sm-12.contact__form-panel-header
+                                h4 Explore our brochure
+                                p
+                                    | Complete control over products allows us to ensure our customers receive the best quality prices
+                                    | and service.
+                            .col-sm-6.col-md-6.col-lg-6
+                                .form-group
+                                    input.form-control(type='text' placeholder='Name')
+                            // /.col-lg-6
+                            .col-sm-6.col-md-6.col-lg-6
+                                .form-group
+                                    input.form-control(type='text' placeholder='Phone')
+                            // /.col-lg-6
+                            .col-sm-12.col-md-12.col-lg-12
+                                .form-group
+                                    
+                                    input.form-control(type='email' placeholder='Email')
+                            .col-sm-12.col-md-12.col-lg-12
+                                .g-recaptcha.mb-20(data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
+                            
+
+                            .col-sm-12.col-md-12.col-lg-12
+                                button.btn.btn__secondary.btn__block(type='submit') Download Brochure
+
+                .col-sm-12.col-md-12.col-lg-5
+                    .heading.heading-white.mb-40
+                        span.heading__subtitle Setting A Global Standard In Industrial Contracting.
+                        h3.heading__title Fast Growing Industrial & Manufacturing Estates.
+                        p.heading__desc
+                            | As a diversified construction management, design-build, and general contracting
+                            | firm, Axima Group is recognized as one of the World's leading Industry and Manufacturing.
+                   
+    //section#aboutLayout1.about.about-layout1.pt-120.pb-120
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-5
+                    .heading.mt-40.mb-30
+                        span.heading__subtitle Innovation From The Ground To The Skies.
+                        h2.heading__title Customized Solutions Fits Every Industry Needs!
+                        p.heading__desc
+                            | Yet those that embrace change are thriving, building bigger, better, faster, and
+                            | stronger products than ever before, We can help build on your past successes and prepare for future.
+                            | Axima Group is one of the leading Industry.
+                    // /heading
+                    a.btn.btn__primary.btn__bordered.mb-40(href='#') More About Us
+                // /.col-lg-5
+                .col-sm-12.col-md-10.col-lg-7
+                    .about__img
+                        img.img-fluid.w-100(src='/static/websiteAssets/images/about/1.jpg' alt='about')
+                        .cta__banner.d-flex
+                            .cta__icon
+                                i.icon-worker
+                            h5.cta__title Join Us And Be Part Of Our Team!
+                        // /.cta__banner
+                        // /.col-lg-7
+                        // /.row
+                        // /.container
+
+    //section#videoBanner.video-banner.video-banner-layout2.bg-overlay
+        .bg-img
+            img(src='/static/websiteAssets/images/backgrounds/1.jpg' alt='background')
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-12
+                    .video__btn.text-center
+                        a.popup-video(href='https://www.youtube.com/watch?4=&v=TKnufs85hXk')
+                            span.video__player-animation
+                            span.video__player-animation.video__player-animation-2
+                            .video__player
+                                i.fa.fa-play
+                    // /.video__btn
+                    // /.col-lg-12
+                    // /.row
+                    // /.container
+
+    section#portfolioCarousel.portfolio-carousel.portfolio-classic.pt-90.pb-70
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-12
+                    .carousel.owl-carousel.carousel-arrows(data-slide='3' data-slide-md='2' data-slide-sm='1' data-autoplay='true' data-nav='true' data-dots='false' data-space='30' data-loop='true' data-speed='800')
+                        .portfolio-item
+                            .portfolio__img
+                                img(src='/static/websiteAssets/images/case-studies/grid/1.jpg' alt='portfolio img')
+                                a.view__icon(href='#') View
+                            // /.portfolio-img
+                            .portfolio__content
+                                h4.portfolio__title
+                                    a(href='#') Floride Chemicals Factory
+                                .portfolio__cat
+                                    a(href='#') Chemicals
+                                    a(href='#') oil & Gas
+                                // /.portfolio-cat
+                                // /.portfolio-content
+                                // /.portfolio-item
+                        .portfolio-item
+                            .portfolio__img
+                                img(src='/static/websiteAssets/images/case-studies/grid/2.jpg' alt='portfolio img')
+                                a.view__icon(href='#') View
+                            // /.portfolio-img
+                            .portfolio__content
+                                h4.portfolio__title
+                                    a(href='#') Highway Energy Station
+                                .portfolio__cat
+                                    a(href='#') Construction 
+                                    a(href='#') Energy
+                                // /.portfolio-cat
+                                // /.portfolio-content
+                                // /.portfolio-item
+                        .portfolio-item
+                            .portfolio__img
+                                img(src='/static/websiteAssets/images/case-studies/grid/3.jpg' alt='portfolio img')
+                                a.view__icon(href='#') View
+                            // /.portfolio-img
+                            .portfolio__content
+                                h4.portfolio__title
+                                    a(href='#') Villy Manufacturing Inc
+                                .portfolio__cat
+                                    a(href='#') Engineering
+                                    a(href='#') Auto
+                                // /.portfolio-cat
+                                // /.portfolio-content
+                                // /.portfolio-item
+                        .portfolio-item
+                            .portfolio__img
+                                img(src='/static/websiteAssets/images/case-studies/grid/4.jpg' alt='portfolio img')
+                                a.view__icon(href='#') View
+                            // /.portfolio-img
+                            .portfolio__content
+                                h4.portfolio__title
+                                    a(href='#') Regulatory Compliance Seminar
+                                .portfolio__cat
+                                    a(href='#') Construction
+                                    a(href='#') Engineering
+                                // /.portfolio-cat
+                                // /.portfolio-content
+                                // /.portfolio-item
+                        .portfolio-item
+                            .portfolio__img
+                                img(src='/static/websiteAssets/images/case-studies/grid/5.jpg' alt='portfolio img')
+                                a.view__icon(href='#') View
+                            // /.portfolio-img
+                            .portfolio__content
+                                h4.portfolio__title
+                                    a(href='#') Documents & Electronic Data
+                                .portfolio__cat
+                                    a(href='#') Engineering
+                                    a(href='#') oil & Gas
+                                // /.portfolio-cat
+                                // /.portfolio-content
+                                // /.portfolio-item
+                                // /.carousel
+                                // /.col-lg-12
+                                // /.row
+                                // /.container
+
+    section#clients.clients.border-top
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-12
+                    .carousel.owl-carousel(data-slide='6' data-slide-md='4' data-slide-sm='2' data-autoplay='true' data-nav='false' data-dots='false' data-space='20' data-loop='true' data-speed='700')
+                        .client
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/clients/9.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/clients/10.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/clients/11.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/clients/12.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/clients/13.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/clients/11.png' alt='client')
+                        // /.client
+                        // /.carousel
+                        // /.col-lg-12
+                        // /.row
+                        // /.container
+
+    //section#Banner3.banner.banner-3.p-0
+        .container-fluid.col-padding-0
+            .row
+                .col-sm-12.col-md-12.col-lg-6.bg-theme
+                    .inner-padding
+                        .heading.heading-2.heading-white.mb-50
+                            span.heading__subtitle Providing Full Range Of High Services & Soultions Worldwide.
+                            h2.heading__title
+                                | We Produce Positive Results From Ever Growing Industrial & Manufacturing
+                                | Estates!
+                            p.heading__desc
+                                | Yet those that embrace change are thriving, building bigger, better, faster,
+                                | and stronger products than ever before, We can help build on your past successes and prepare for
+                                | future. Axima Group is one of the leading Industry and Manufacturing Corporation!
+                            p.heading__desc
+                                | As a diversified construction management, design-build, and general contracting
+                                | firm, Industic Group is recognized as one of the World's leading Industry and Manufacturing
+                                | Corporation!
+                        // /.heading
+                        a.btn.btn__white.btn__hover2.btn__lg(href='#') Schedule An Appointment
+                // /.col-lg-6
+                .col-sm-12.col-md-12.col-lg-6.bg-overlay.bg-parallax.pt-110.pb-110
+                    .bg-img
+                        img(src='/static/websiteAssets/images/banners/3.jpg' alt='background')
+                    .banner__features-box
+                        .banner__features-box-icon
+                            i.icon-gears
+                        h5.banner__features-box-title Latest Solutions, And Decades Of Experience.
+                        p.banner__features-box-desc
+                            | Axima is an Industrial Construction operator providing full range of
+                            | services in the sphere of Mechanical Engineering worldwide.
+                        ul.list-items.list-items-layout1.list-unstyled.mb-30
+                            li Quality Control System
+                            li 100% Satisfaction Guarantee
+                            li Highly Professional Staff
+                            li Accurate Testing Processes
+                        a.btn.btn__primary.btn__link(href='#')
+                            i.icon-arrow-right.arrow-rounded
+                            span Explore Axima Features
+                    // /.banner__features-box
+                    // /.col-lg-6
+                    // /.row
+                    // /.container
+
+    section#blogGridLayout2.blog.blog-grid.blog-grid-layout2.pt-120.pb-70
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-4
+                    .heading.mb-50
+                        span.heading__subtitle Latest Articles
+                        h2.heading__title Insight And Trends Updated Daily
+                        a.btn.btn__primary.btn__bordered.mt-10(href='news.html') Elsafa Plast in News
+                    // /.heading
+                    // /.col-lg-4
+                    // Blog Item #1
+                .col-sm-12.col-md-6.col-lg-4
+                    .blog-item
+                        .blog__img
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/blog/grid/1.jpg' alt='blog image')
+                        // /.entry-img
+                        .blog__content
+                            .blog__meta
+                                .blog__meta-cat
+                                    a(href='#') Oil & Gas
+                                    a(href='#') Insights
+                                // /.blog-meta-cat
+                                span.blog__meta-date Jan 20, 2019
+                            // /.blog-meta
+                            h4.blog__title
+                                a(href='#') Importers achieve cost savings through the First Sale rule!
+                            a.btn.btn__secondary.btn__link(href='#')
+                                i.icon-arrow-right.arrow-rounded
+                                span Read More
+                        // /.entry-content
+                        // /.blog-item
+                        // /.col-lg-4
+                        // Blog Item #2
+                .col-sm-12.col-md-6.col-lg-4
+                    .blog-item
+                        .blog__img
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/blog/grid/2.jpg' alt='blog image')
+                        // /.entry-img
+                        .blog__content
+                            .blog__meta
+                                .blog__meta-cat
+                                    a(href='#') Industry
+                                    a(href='#') Construction
+                                // /.blog-meta-cat
+                                span.blog__meta-date Oct 18, 2019
+                            // /.blog-meta
+                            h4.blog__title
+                                a(href='#') Cargo flow through better supply chain visibility, control.
+                            a.btn.btn__secondary.btn__link(href='#')
+                                i.icon-arrow-right.arrow-rounded
+                                span Read More
+                        // /.entry-content
+                        // /.blog-item
+                        // /.col-lg-4
+                        // /.row
+block scripts
+    script(src="https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
+
+

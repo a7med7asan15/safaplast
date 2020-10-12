@@ -44,3 +44,37 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
 }
 
 /* Website Edits */
+
+.header-layout2 .navbar {
+    height: 70px;
+}
+
+.navbar>.container, .navbar>.container-fluid{
+    height:inherit
+}
+
+.header-layout2 .navbar .navbar-brand{
+    height:auto !important
+}
+
+.header-layout2 .navbar .logo-dark{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:90%
+}
+.slide__box.d-flex.flex-wrap.justify-content-between{
+    padding: 40px;
+}
+.slider-2 .slide__box-content{
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.grecaptcha-badge { visibility: hidden; }
+.footer__contact {
+    background-color: #fafafa;
+}
+.contact .contact__form-panel{
+    margin-top:0
+}
