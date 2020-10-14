@@ -1,6 +1,9 @@
-doName=WUA2D3CF5LUHUQUL2ZED
-doSecret=tXYindNPe/mNOJBQlSymmnmyQlgJgvRtQy7jL2VMYtg
-doLink=ams3.digitaloceanspaces.com
-do_default_region=ams3
-doSpace=dahabdoors
-doEndpoint=ams3.digitaloceanspaces.com
+ Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/elsafaplastelec.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/elsafaplastelec.com/privkey.pem
+   Your cert will expire on 2021-01-12. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
