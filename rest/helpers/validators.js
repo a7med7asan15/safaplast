@@ -61,6 +61,15 @@ module.exports  = {
             name:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
+        addSlideSchema:Joi.object().keys({
+            title:Joi.string().required(),
+            subTitle:Joi.string(),
+            img:Joi.string(),
+            isButton:Joi.string(),
+            btnText:Joi.string(),
+            link:Joi.string(),
+            _csrf:Joi.string(), 
+        }),
         
         addbrokerSchema:Joi.object().keys({
             name:Joi.string().required(),

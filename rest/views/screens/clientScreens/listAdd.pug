@@ -6,7 +6,7 @@ block content
         .container-fluid
             .row.mb-3.mt-3
             .col-sm-6
-                h1.m-0.text-dark All Cards
+                h1.m-0.text-dark جميع العملاء
     .content
         .container-fluid
             if successes
@@ -19,27 +19,17 @@ block content
                 .col-5
                     .card
                         .card-header
-                            h3.card-title Card Info
-                        form#addData(action="/dashboard/cards" method="post" role="form" autocomplete="off")
+                            h3.card-title معلومات العميل
+                        form#addData(action="/dashboard/clients" method="post" role="form" autocomplete="off")
                             .card-body.row
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .form-group.col-md-10
-                                    label Card Number
+                                    label اسم العميل
+                                    input.form-control#cardNum(type="text" name="name" placeholder="أدخل اسم العميل" )
+                                .form-group.col-md-10
+                                    label لوجو العميل
                                     input.form-control#cardNum(type="text" name="cardNum" placeholder="Enter Card Number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "19")
-                                .form-group.col-md-10
-                                    label Start Date
-                                    #startDate.input-group.date(data-target-input='nearest')
-                                        .input-group-append(data-target='#startDate' data-toggle='datetimepicker')
-                                            .input-group-text
-                                                i.fa.fa-calendar
-                                        input.form-control.datetimepicker-input.startDate(type='text' name="startDate" data-target='#startDate' data-toggle='datetimepicker')
-                                .form-group.col-md-10
-                                    label End Date
-                                    #endDate.input-group.date(data-target-input='nearest')
-                                        .input-group-append(data-target='#endDate' data-toggle='datetimepicker')
-                                            .input-group-text
-                                                i.fa.fa-calendar
-                                        input.form-control.datetimepicker-input.endDate(type='text' name="endDate" data-target='#endDate' data-toggle='datetimepicker')
+
                             .card-footer
                                 button.btn.btn-primary.float-right(type="submit") Add Card
 

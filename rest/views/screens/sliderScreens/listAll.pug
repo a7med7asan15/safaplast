@@ -5,22 +5,22 @@ block content
         .container-fluid
             .row.mb-3.mt-3
                 .col-sm-6
-                    h1.m-0.text-dark جميع المنتجات 
+                    h1.m-0.text-dark جميع السلايدز 
                 .col-sm-6
-                    a.btn.btn-success.float-right(href="/dashboard/propertys/add")
+                    a.btn.btn-success.float-right(href="/dashboard/slider/add")
                         i.fas.fa-plus
-                        |  أضف منتج جديد
+                        |  أضف سلايد جديدة
     .content
         .container-fluid
             .row
                 .col-12
                     .card
                         .card-header
-                            h3.card-title كل المنتجات
-                            form(action=`/dashboard/propertys/searchResult`, method="post")
+                            h3.card-title كل السلايدز
+                            form(action=`/dashboard/slider/searchResult`, method="post")
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .input-group.input-group-sm.float-right(style="width: 150px;")
-                                    if propertys
+                                    if dataProvided
                                         input.form-control.float-right(type="text" name="table_search" placeholder="بحث")
                                     if tbSearch
                                         input.form-control.float-right(type="text", value = `${table_search}`, name="table_search" placeholder="بحث")
@@ -31,53 +31,80 @@ block content
                             table.table.table-hover.text-nowrap
                                 thead
                                     tr
-
-                                    th اسم المنتج
-                                    th SKU
-                                    th Status
-                                    th View
+                                    th #
+                                    th عنوان السلايد
+                                    th الفقرة
+                                    th لينك الزر
+                                    th عرض
                                     th تعديل
                                     th حذف
                                 tbody
                                     if tbSearch
                                         for tb in tbSearch
                                             tr
-                                                td #{tb.nameEnglish}
-                                                td #{ tb.sku }
-                                                td 
-                                                    span.tag.tag-success Active
+                                                td #{tb.title}
+                                                td #{ tb.subTitle }
+                                                td #{ tb.link }
                                                 td
-                                                    a.btn-sm.btn-primary(href=`/dashboard/propertys/${tb.id}`)
-                                                        i.far.fa-edit
-                                                        |  View
+                                                    a.btn-sm.btn-primary(href=`/dashboard/slider/${tb.id}`)
+                                                        i.far.fa-eye
+                                                        |  عرض
                                                 td
-                                                    a.btn-sm.btn-warning(href=`/dashboard/propertys/edit?id=${tb.id}`)
+                                                    a.btn-sm.btn-warning(href=`/dashboard/slider/edit/${tb.id}`)
                                                         i.far.fa-edit
                                                         |  تعديل
                                                 td
-                                                    form(action=`/dashboard/propertys/delete/${tb.id}`, method="post")
+                                                    form(action=`/dashboard/slider/delete/${tb.id}`, method="post")
                                                         input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                         button.btn-sm.btn-danger(type="submit")
                                                             i.far.fa-trash-alt
                                                             |  حذف
-                                    if propertys
-                                        for property in propertys.docs
+                                    if dataProvided
+                                        - var dataArray = dataProvided.docs
+                                        - var hasPrev = dataProvided.hasPrevPage 
+                                        - var hasNext = dataProvided.hasNextPage 
+                                        - var totalPages = dataProvided.totalPages 
+                                        - var pages = 1
+                                        - var page = dataProvided.page 
+                                        - var num = (page-1)*dataProvided.limit+1
+                                        for s in dataArray
                                             tr
-                                                td #{ property.nameEnglish }
-                                                td #{ property.sku}
+                                                td #{num++}
+                                                td #{ s.title}
+                                                td #{ s.subTitle }
+                                                td #{ s.link }                                
                                                 td
-                                                    span.tag.tag-success #{ property.status }
-                                                td
-                                                    a.btn-sm.btn-primary(href=`/dashboard/propertys/${property.id}`)
-                                                        i.far.fa-edit
-                                                        |  View
+                                                    a.btn-sm.btn-primary(href=`/dashboard/slider/${s.id}`)
+                                                        i.far.fa-eye
+                                                        |  عرض
                                                
                                                 td
-                                                    a.btn-sm.btn-warning(href=`/dashboard/propertys/edit/${property.id}`)
+                                                    a.btn-sm.btn-warning(href=`/dashboard/slider/edit/${s.id}`)
                                                         i.far.fa-edit
                                                         |  تعديل
                                                 td
-                                                    form(action=`/dashboard/propertys/delete/${property.id}`, method="post")
+                                                    form(action=`/dashboard/slider/delete/${s.id}`, method="post")
                                                         input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                         button.btn-sm.btn-danger(type="submit")
                                                             i.fas.fa-trash-alt
+                        .card-footer.clearfix
+                            ul.pagination.pagination-sm.m-0.float-right
+                                if hasPrev
+                                    li.page-item
+                                        a.page-link(href=`/dashboard/slider?p=${page - 1}`) «
+
+                                if totalPages > 1
+                                    while pages  < 3            
+                                        li.page-item
+                                            if pages === page
+                                                a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
+                                            else
+                                                a.page-link.active( href=`/dashboard/slider?p=${pages}`)= pages
+
+                                        - pages++    
+
+                                if hasNext
+                                    li.page-item
+                                        a.page-link(href=`/dashboard/slider?p=${page + 1}`) »
+
+                        

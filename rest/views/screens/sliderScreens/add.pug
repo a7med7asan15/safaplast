@@ -5,7 +5,7 @@ block content
         .container-fluid
             .row.mb-3.mt-3
             .col-sm-6
-                h1.m-0.text-dark أضف منتج جديد
+                h1.m-0.text-dark أضف سلايد جديدة
 
     .content
         .container-fluid
@@ -20,91 +20,36 @@ block content
             .col-12
                 .card
                     .card-header
-                        h3.card-title تفاصيل المنتج
-                    form#addnewprop(role="form" action="/dashboard/propertys/add" method="POST")
+                        h3.card-title تفاصيل السلايد
+                    form#addnewdata(role="form" action="/dashboard/slider/add" method="POST")
                         .card-body.row
                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                             .form-group.col-md-12
                                 h3 تفاصيل عامة
 
                             .form-group.col-md-6
-                                label(for="nameEnglish") اسم المنتج
-                                input.form-control#nameEnglish(type="text", name="nameEnglish", placeholder="Enter Property Name In English")
-                            .form-group.col-md-6
-                                label(for="nameArabic") Property Name [Arabic]
-                                input.form-control#nameArabic(type="text", name="nameArabic", placeholder="Enter Property Name in Arabic")
-
+                                label(for="nameEnglish") عنوان السلايد
+                                input.form-control#nameEnglish(type="text" name="title" placeholder="أدخل العنوان")
+                            .form-group.col-md-12
+                                label(for="nameArabic") الفقرة
+                                input.form-control#nameArabic(type="text" name="subTitle" placeholder="أدخل الفقرة")
+                            .col-md-4.mt-5.mb-5
+                                .form-check 
+                                    input.form-check-input#check_btn(type="checkbox" name="isButton" value="true")
+                                    label.form-check-label(for="check_btn") يوجد زر
                             .form-group.col-md-4
-                                label(for="sku") SKU
-                                input.form-control(type="text", name="sku" placeholder="Enter Sku Property")            
+                                label(for="sku") نص الزر
+                                input.form-control(type="text" name="btnText" placeholder="أدخل النص")            
                             .form-group.col-md-4
-                                label(for="mobilenumber") Price 
-                                input.form-control(type="number", name="price" placeholder="Enter Price") 
-                            .form-group.col-md-8
-                                label Brokers
-                                select.brokers(multiple,name="brokers", data-placeholder="Select Brokers", style="width: 100%;")
-                                    if brok 
-                                        for a in brok
-                                            option(value=`${a.id}`)=`${a.name} - ${a.mobileNo}` 
-                                
-                            .col-md-12.mt-5.mb-5
-                                h3 معلومات متقدمة
-                            .col-md-12
-                                .col-md-4
-                                    .form-group
-                                        label Property Type
-                                        select(name="type").form-control.types
-                                            option(selected disabled value='') Choose Type
-                                            if rooms
-                                                - var type = type
-                                                for t in type
-                                                    option(value=`${t.id}`)=`${t.nameEnglish} - ${t.nameArabic}` 
-                                .col-md-4
-                                    .form-group
-                                        label Property No. of rooms
-                                        select(name="rooms").form-control.norooms
-                                            option(selected disabled value='') Choose Room
-                                            if rooms
-                                                - var type = rooms
-                                                for t in type
-                                                    option(value=`${t.id}`)=`${t.nameEnglish} - ${t.nameArabic}`     
-                                .col-md-4
-                                    .form-group
-                                        label Amenties
-                                        select.amenties(multiple,name="amenties", data-placeholder="Select Amenties", style="width: 100%;")
-                                            if amen 
-                                                for a in amen
-                                                    option(value=`${a.id}`)=`${a.nameEnglish} - ${a.nameArabic}` 
-                            
-                            .col-md-12.mt-5.mb-5
-                                h3 Property Info
-                            .col-md-12
-                                .col-md-4
-                                    .form-group
-                                        label Property Area
-                                        select.form-control.nameArea(name="nameArea")
-                                            option(selected disabled) Select Area
-                                            if areas
-                                                - var type = areas
-                                                for t in type
-                                                    option(value=`${t.id}`)=`${t.nameEnglish} - ${t.nameArabic}` 
-                            .col-md-12
-                                .col-md-6
-                                    .form-group
-                                        label Description in English
-                                        textarea.form-control(name="desEnglish", rows="3", placeholder="Enter ...")
-                            .col-md-12
-                                .col-md-6
-                                    .form-group
-                                        label Description in Arabic
-                                        textarea.form-control(name="desArabic", rows="3", placeholder="Enter ...")
+                                label(for="mobilenumber") لينك الزر 
+                                input.form-control(type="text" name="link" placeholder="أدخل اللينك") 
                             .col-md-12
                                 div#dropi.dropzone.dz_clickable
                         .card-footer
-                            button.btn.btn-primary.float-right(type="submit") Add New Property
+                            button.btn.btn-primary.float-right(type="submit") أضف السلايد
 
-    script var data = !{false}
+    script var featImageEdit = !{false}
     script var add = !{true}
 
 block scripts 
-        script(src="/static/vendor/js/property.js", type="text/javascript")
+    script(src="/static/vendor/js/addSlide.js" type="text/javascript")

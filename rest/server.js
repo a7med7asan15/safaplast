@@ -203,14 +203,19 @@ app.use(   '/dashboard/clients'   ,   clientController  );
 app.use(   '/dashboard/news'   ,   newsController  );
 app.use(   '/dashboard/settings'   ,   settingController  );
 app.use(   '/dashboard/slider'   ,   sliderController  );
-app.use(   '/dashboard/testimonials'   ,   testimonialController  );
+//app.use(   '/dashboard/testimonials'   ,   testimonialController  );
 app.use(   '/dashboard/type'   ,   typeController  );
 
 app.use(   '/dashboard/messages'   ,   contactController  );
 app.use(   '/dashboard/media'   ,   mediaController  ); 
 
-app.get('*', function(req, res){
-  return res.render('site/404.pug')
+app.get('*', function (req, res) {
+
+  return res.render('site/404.pug', {
+    title: 'Elsafa Plast Electric',
+    metDescription: 'ElsafaPlast for electric industries',
+    ogTitle: 'Elsafa Plast Elec',
+  })
 });
 
 

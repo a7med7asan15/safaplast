@@ -78,3 +78,13 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
 .contact .contact__form-panel{
     margin-top:0
 }
+.blog-item .blog__img img{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+.product-slides .slide-item{
+    height:350px;
+}

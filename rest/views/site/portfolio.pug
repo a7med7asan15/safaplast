@@ -1,0 +1,165 @@
+extends ../websiteLayout.pug
+
+block content 
+    .blue-title
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-12
+                    h1.pt-40 Our Portfolio
+
+
+    section#blogGrid.blog.blog-grid.pt-20
+        .container
+            .row
+                // Blog Item #1
+                .col-sm-12.col-md-6.col-lg-4
+                    .blog-item
+                        .blog__img
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/blog/grid/1.jpg' alt='blog image')
+                        // /.entry-img
+                        .blog__content
+                            .blog__meta
+                                //.blog__meta-cat
+                                    a(href='#') Oil & Gas
+                                    a(href='#') Insights
+                                // /.blog-meta-cat
+                                span.blog__meta-date Jan 20, 2019
+                            // /.blog-meta
+                            h4.blog__title
+                                a(href='/singleNews') Importers achieve cost savings through the First Sale rule!
+                            a.btn.btn__secondary.btn__link(href='/singleNews')
+                                i.icon-arrow-right.arrow-rounded
+                                span Read More
+                        // /.entry-content
+                        // /.blog-item
+                        // /.col-lg-4
+                        // Blog Item #2
+                .col-sm-12.col-md-6.col-lg-4
+                    .blog-item
+                        .blog__img
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/blog/grid/2.jpg' alt='blog image')
+                        // /.entry-img
+                        .blog__content
+                            .blog__meta
+                                //.blog__meta-cat
+                                    a(href='#') Industry
+                                    a(href='#') Construction
+                                // /.blog-meta-cat
+                                span.blog__meta-date Oct 18, 2019
+                            // /.blog-meta
+                            h4.blog__title
+                                a(href='/singleNews') Cargo flow through better supply chain visibility, control.
+                            a.btn.btn__secondary.btn__link(href='/singleNews')
+                                i.icon-arrow-right.arrow-rounded
+                                span Read More
+                        // /.entry-content
+                        // /.blog-item
+                        // /.col-lg-4
+                        // Blog Item #3
+                .col-sm-12.col-md-6.col-lg-4
+                    .blog-item
+                        .blog__img
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/blog/grid/3.jpg' alt='blog image')
+                        // /.entry-img
+                        .blog__content
+                            .blog__meta
+                                //.blog__meta-cat
+                                    a(href='#') Engineering
+                                    a(href='#') Distribution
+                                // /.blog-meta-cat
+                                span.blog__meta-date Jan 20, 2019
+                            // /.blog-meta
+                            h4.blog__title
+                                a(href='#')
+                                    | Importance of specialized focus in portfolio, Oil & Gas
+                                    | Logistics?
+                            a.btn.btn__secondary.btn__link(href='/singleNews')
+                                i.icon-arrow-right.arrow-rounded
+                                span Read More
+                        // /.entry-content
+                        // /.blog-item
+                        // /.col-lg-4
+                        // Blog Item #4
+                .col-sm-12.col-md-6.col-lg-4
+                    .blog-item
+                        .blog__img
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/blog/grid/4.jpg' alt='blog image')
+                        // /.entry-img
+                        .blog__content
+                            .blog__meta
+                                //.blog__meta-cat
+                                    a(href='#') News
+                                    a(href='#') Industry
+                                // /.blog-meta-cat
+                                span.blog__meta-date Oct 24, 2017
+                            // /.blog-meta
+                            h4.blog__title
+                                a(href='/singleNews') Changes to our Trade Credit Policy and Procedures
+                            a.btn.btn__secondary.btn__link(href='/singleNews')
+                                i.icon-arrow-right.arrow-rounded
+                                span Read More
+                        // /.entry-content
+                        // /.blog-item
+                        // /.col-lg-4
+                        // Blog Item #5
+                .col-sm-12.col-md-6.col-lg-4
+                    .blog-item
+                        .blog__img
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/blog/grid/5.jpg' alt='blog image')
+                        // /.entry-img
+                        .blog__content
+                            .blog__meta
+                                //.blog__meta-cat
+                                    a(href='#') Insights
+                                    a(href='#') Industry
+                                // /.blog-meta-cat
+                                span.blog__meta-date Oct 27, 2017
+                            // /.blog-meta
+                            h4.blog__title
+                                a(href='/singleNews') New Additions to our great Metro trucks Fleet
+                            a.btn.btn__secondary.btn__link(href='/singleNews')
+                                i.icon-arrow-right.arrow-rounded
+                                span Read More
+                        // /.entry-content
+                        // /.blog-item
+                        // /.col-lg-4
+                        // Blog Item #6
+                .col-sm-12.col-md-6.col-lg-4
+                    .blog-item
+                        .blog__img
+                            a(href='#')
+                                img(src='/static/websiteAssets/images/blog/grid/6.jpg' alt='blog image')
+                        // /.entry-img
+                        .blog__content
+                            .blog__meta
+                                //.blog__meta-cat
+                                    a(href='#') News
+                                    a(href='#') Logistics
+                                // /.blog-meta-cat
+                                span.blog__meta-date Oct 24, 2017
+                            // /.blog-meta
+                            h4.blog__title
+                                a(href='/singleNews') The new Driver Training & Recruitment Program
+                            a.btn.btn__secondary.btn__link(href='/singleNews')
+                                i.icon-arrow-right.arrow-rounded
+                                span Read More
+                        // /.entry-content
+                        // /.blog-item
+                        // /.col-lg-4
+                        // /.row
+            .row
+                .col-sm-12.col-md-12.col-lg-12.text-center
+                    nav.pagination-area
+                        ul.pagination.mt-10.justify-content-center
+                            li
+                                a.current(href='#') 1
+                            li
+                                a(href='#') 2
+                            li
+                                a(href='#')
+                                    i.icon-arrow-right

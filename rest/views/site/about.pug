@@ -1,0 +1,433 @@
+extends ../websiteLayout.pug
+
+block content 
+
+    section#pageTitle.page-title.text-center.bg-overlay.bg-overlay-3.bg-parallax
+        .bg-img
+            img(src='assets/images/page-titles/1.jpg' alt='background')
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-6.offset-lg-3
+                    h1.pagetitle__heading About Axima
+                    p.pagetitle__desc
+                        | We produce positive results from ever-growing Industrial & manufacturing estates,
+                        | we have established a corporate mandate to maintain strong core values.
+                    nav(aria-label='breadcrumb')
+                        ol.breadcrumb.justify-content-center
+                            li.breadcrumb-item
+                                a(href='#') Home
+                            li.breadcrumb-item
+                                a(href='#') Company
+                            li.breadcrumb-item.active(aria-current='page') About Us
+
+    section#aboutLayout2.about.about-layout2.pt-120.pb-40
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-12.col-xl-9.offset-xl-1
+                    .heading.heading-3.mb-50
+                        span.heading__subtitle Setting A Global Standard In Industrial Contracting.
+                        h2.heading__title
+                            | Provides High Performance Services For Multiple Industries And Technologies!
+                    // /heading
+                    // /.col-xl-9
+                    // /.row
+                    .row
+                        .col-sm-12.col-md-10.col-lg-6.col-xl-5
+                            .about__img.mb-50
+                                img.img-fluid(src='assets/images/about/2.jpg' alt='about')
+                                .cta__banner
+                                    .cta__icon
+                                        i.icon-gears
+                                    h5.cta__title
+                                        | Latest Solutions, And 
+                                        br
+                                        |  Decades Of Experience.
+                                    a.btn.btn__white.btn__link(href='#')
+                                        i.icon-arrow-right.arrow-rounded.arrow-rounded-white
+                                // /.cta__banner
+                                // /.about-img
+                                // /.col-xl-5
+                                .col-sm-12.col-md-12.col-lg-6.col-xl-5
+                                    .about__text.mb-30
+                                        p
+                                            | Axima is a representative Industrial Construction operator providing full range of services and
+                                            | soultions in the sphere of Mechanical Engineering worldwide.
+                                        p
+                                            | The world is changing faster than ever before, business is no exception. Axima industries are
+                                            | threatened as technology disrupts and software “eats the world.” Yet those that embrace change are
+                                            | thriving, building bigger, better, faster, and stronger products than ever before. You are helping to
+                                            | lead the charge; we can help you build on your past successes and prepare for future.
+                                    ul.list-items.list-items-layout2.list-unstyled.mb-30
+                                        li Quality Control System, 100% Satisfaction Guarantee
+                                        li Highly Professional Staff, Accurate Testing Processes
+                                        li Unrivalled workmanship, Professional and Qualified
+                                        li Environmental Sensitivity, Personalised solutions
+                                    .about__signature.mb-30
+                                        a.btn.btn__primary.btn__bordered.mr-40(href='#') More About Us
+                                        img.signature(src='assets/images/about/singnture.png' alt='singnture')
+                                // /.col-xl-4
+                                .col-sm-12.col-md-12.col-lg-12.col-xl-2
+                                    .row
+                                        .col-sm-6.col-md-6.col-lg-6.col-xl-12
+                                            .counter-item
+                                                h4.counter 6,154
+                                                p.counter__desc portfolio Completed In The Last 5 Years
+                                            // /.counter-item
+                                            .divider__line.d-none.d-xl-block.mb-40
+                                        // /.col-lg-12
+                                        .col-sm-6.col-md-6.col-lg-6.col-xl-12
+                                            .counter-item
+                                                h4.counter 2,194
+                                                p.counter__desc Happy Customers Who Trusted Us
+                                            // /.counter-item
+                                            // /.col-lg-12
+                                            // /.row
+                                            // /.col-xl-2
+                                            // /.row
+                                            // /.container
+  
+  
+    section#portfolioCarousel.portfolio-carousel.portfolio-classic.pt-90.pb-70
+        .container
+            .row.mb-50
+                .col-sm-12.col-md-12.col-lg-7
+                    .heading
+                        span.heading__subtitle We Work With Global Industries!
+                        h3.heading__title.mb-0 Featured portfolio
+                    // /.heading
+                    // /.col-lg-7
+                    .col-sm-12.col-md-12.col-lg-5
+                        .cta__banner
+                            .bg-img
+                                img(src='assets/images/backgrounds/pattern/1.jpg' alt='background')
+                            h5.cta__title
+                                | Dedicated Customer 
+                                br
+                                |  Teams & An Agile Services
+                            p.cta__desc
+                                | Building relationships and portfolio that last. Serving an impressive list of
+                                | long-term clients with
+                                | experience and expertise in industries.
+                            a.btn.btn__white.btn__link(href='#')
+                                i.icon-arrow-right.arrow-rounded.arrow-rounded-white
+                                span View Our Works
+                        // /.cta__banner
+                        // /.col-lg-5
+                        // /.row
+                        .row
+                            .col-sm-12.col-md-12.col-lg-12
+                                .carousel.owl-carousel.carousel-arrows(data-slide='3' data-slide-md='2' data-slide-sm='1' data-autoplay='true' data-nav='true' data-dots='false' data-space='30' data-loop='true' data-speed='800')
+                                    .portfolio-item
+                                        .portfolio__img
+                                            img(src='assets/images/case-studies/grid/1.jpg' alt='portfolio img')
+                                            a.view__icon(href='#') View
+                                        // /.portfolio-img
+                                        .portfolio__content
+                                            h4.portfolio__title
+                                                a(href='#') Floride Chemicals Factory
+                                            .portfolio__cat
+                                                a(href='#') Chemicals
+                                                a(href='#') oil & Gas
+                                            // /.portfolio-cat
+                                            // /.portfolio-content
+                                            // /.portfolio-item
+                                            .portfolio-item
+                                                .portfolio__img
+                                                    img(src='assets/images/case-studies/grid/2.jpg' alt='portfolio img')
+                                                    a.view__icon(href='#') View
+                                                // /.portfolio-img
+                                                .portfolio__content
+                                                    h4.portfolio__title
+                                                        a(href='#') Highway Energy Station
+                                                    .portfolio__cat
+                                                        a(href='#') Construction 
+                                                        a(href='#') Energy
+                                                    // /.portfolio-cat
+                                                    // /.portfolio-content
+                                                    // /.portfolio-item
+                                                    .portfolio-item
+                                                        .portfolio__img
+                                                            img(src='assets/images/case-studies/grid/3.jpg' alt='portfolio img')
+                                                            a.view__icon(href='#') View
+                                                        // /.portfolio-img
+                                                        .portfolio__content
+                                                            h4.portfolio__title
+                                                                a(href='#') Villy Manufacturing Inc
+                                                            .portfolio__cat
+                                                                a(href='#') Engineering
+                                                                a(href='#') Auto
+                                                            // /.portfolio-cat
+                                                            // /.portfolio-content
+                                                            // /.portfolio-item
+                                                            .portfolio-item
+                                                                .portfolio__img
+                                                                    img(src='assets/images/case-studies/grid/4.jpg' alt='portfolio img')
+                                                                    a.view__icon(href='#') View
+                                                                // /.portfolio-img
+                                                                .portfolio__content
+                                                                    h4.portfolio__title
+                                                                        a(href='#') Regulatory Compliance Seminar
+                                                                    .portfolio__cat
+                                                                        a(href='#') Construction
+                                                                        a(href='#') Engineering
+                                                                    // /.portfolio-cat
+                                                                    // /.portfolio-content
+                                                                    // /.portfolio-item
+                                                                    .portfolio-item
+                                                                        .portfolio__img
+                                                                            img(src='assets/images/case-studies/grid/5.jpg' alt='portfolio img')
+                                                                            a.view__icon(href='#') View
+                                                                        // /.portfolio-img
+                                                                        .portfolio__content
+                                                                            h4.portfolio__title
+                                                                                a(href='#') Documents & Electronic Data
+                                                                            .portfolio__cat
+                                                                                a(href='#') Engineering
+                                                                                a(href='#') oil & Gas
+                                                                            // /.portfolio-cat
+                                                                            // /.portfolio-content
+                                                                            // /.portfolio-item
+                                                                            // /.carousel
+                                                                            // /.col-lg-12
+                                                                            // /.row
+                                                                            // /.container
+   
+    section#clients.clients.border-top
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-12
+                    .carousel.owl-carousel(data-slide='6' data-slide-md='4' data-slide-sm='2' data-autoplay='true' data-nav='false' data-dots='false' data-space='20' data-loop='true' data-speed='700')
+                        .client
+                            a(href='#')
+                                img(src='assets/images/clients/9.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='assets/images/clients/10.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='assets/images/clients/11.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='assets/images/clients/12.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='assets/images/clients/13.png' alt='client')
+                        // /.client
+                        .client
+                            a(href='#')
+                                img(src='assets/images/clients/11.png' alt='client')
+                        // /.client
+                        // /.carousel
+                        // /.col-lg-12
+                        // /.row
+                        // /.container
+ 
+    section#banner2.banner.banner-2.bg-overlay.bg-overlay-theme-2.bg-parallax.pt-120.pb-0
+        .bg-img
+            img(src='assets/images/banners/3.jpg' alt='background')
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-7
+                    form.contact__form-panel.mr-50
+                        .row
+                            .col-sm-12.contact__form-panel-header
+                                h4 Get In Touch
+                                p
+                                    | Complete control over products allows us to ensure our customers receive the best quality prices
+                                    | and service.
+                            .col-sm-6.col-md-6.col-lg-6
+                                .form-group
+                                    input.form-control(type='text' placeholder='Name')
+                            // /.col-lg-6
+                            .col-sm-6.col-md-6.col-lg-6
+                                .form-group
+                                    input.form-control(type='email' placeholder='Email')
+                            // /.col-lg-6
+                            .col-sm-6.col-md-6.col-lg-6
+                                .form-group
+                                    input.form-control(type='text' placeholder='Phone')
+                            // /.col-lg-6
+                            .col-sm-6.col-md-6.col-lg-6
+                                .form-group.form-group-select
+                                    select.form-control
+                                        option Select Your Industry
+                                        option Industry 1
+                                        option Industry 2
+                            .col-sm-12.col-md-12.col-lg-12
+                                .form-group
+                                    textarea.form-control(placeholder='Additional Details!')
+                            // /.col-lg-12
+                            .col-sm-12.col-md-12.col-lg-12
+                                button.btn.btn__primary.btn__block(type='submit') Submit Request
+                            // /.col-lg-12
+                            // /.row
+                            // /.contact__form-panel
+                            // /.col-lg-7
+                            .col-sm-12.col-md-12.col-lg-5
+                                .testimonials.testimonials-white
+                                    h6.testimonials__heading.color-white testimonials
+                                    .carousel.owl-carousel.carousel-arrows(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='true' data-nav='true' data-dots='false' data-space='0' data-loop='true' data-speed='800')
+                                        // Testimonial #1
+                                        .testimonial-item
+                                            .testimonial__content
+                                                p.testimonial__desc
+                                                    | I’ve seen great companies serving industry solutions in my career. But
+                                                    | not to the point where you feel that comfort and trust that we get with Industic Company.
+                                            // /.testimonial-content
+                                            .testimonial__meta
+                                                .testimonial__thumb
+                                                    img.img-fluid(src='assets/images/testimonials/thumbs/1.png' alt='author thumb')
+                                                // /.testimonial-thumb
+                                                h5.testimonial__meta-title Martin Hope
+                                                p.testimonial__meta-desc Pro Dust
+                                            // /.testimonial-meta
+                                            // /. testimonial-item
+                                            // Testimonial #2
+                                            .testimonial-item
+                                                .testimonial__content
+                                                    p.testimonial__desc
+                                                        | I’ve seen great companies serving industry solutions in my career. But
+                                                        | not to the point where you feel that comfort and trust that we get with Industic Company.
+                                                // /.testimonial-content
+                                                .testimonial__meta
+                                                    .testimonial__thumb
+                                                        img.img-fluid(src='assets/images/testimonials/thumbs/1.png' alt='author thumb')
+                                                    // /.testimonial-thumb
+                                                    h5.testimonial__meta-title Martin Hope
+                                                    p.testimonial__meta-desc Pro Dust
+                                                // /.testimonial-meta
+                                                // /. testimonial-item
+                                                // /.carousel
+                                                // /.testimonials
+                                                // /.col-lg-5
+                                                // /.row
+                                                // /.container
+
+    section#contactInfo.contact-info.pt-40.pb-20
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-7
+                    strong.text-center.d-block.mt-50.mb-20 We will get back to you within 24 hours.
+                // /.col-lg-7
+                .col-sm-12.col-md-12.col-lg-5
+                    .row
+                        .col-sm-6.col-md-6.col-lg-12.col-xl-6
+                            .contact__info-box
+                                .contact__info-box-icon
+                                    i.icon-phone
+                                // /.contact__info-box-icon
+                                .contact__info-box-text
+                                    span Call Us:
+                                    strong
+                                        a(href='tel:00123968574') (002) 123968574
+                                // /.contact__info-box-text
+                                // /.contact__info-box
+                                // /.col-lg-6
+                                .col-sm-6.col-md-6.col-lg-12.col-xl-6
+                                    .contact__info-box
+                                        .contact__info-box-icon
+                                            i.icon-envelope
+                                        // /.contact__info-box-icon
+                                        .contact__info-box-text
+                                            span Email Us:
+                                            strong
+                                                a(href='mailto:Axima@7oroof.com') Axima@7oroof.com
+                                        // /.contact__info-box-text
+                                        // /.contact__info-box
+                                        // /.col-lg-6
+                                        // /.row
+                                        // /.col-lg-5
+                                        // /.row
+                                        // /.container
+  
+    section#blogGrid.blog.blog-grid.pt-120.pb-70
+        .container
+            .row
+                .col-sm-12.col-md-12.col-lg-6.offset-lg-3
+                    .heading.text-center.mb-50
+                        span.heading__subtitle Latest Articles Updated Daily
+                        h2.heading__title Insight And Trends
+                        p.heading__desc
+                            | Follow our latest news and thoughts which focuses exclusively on insight,
+                            | industry trends, top news headlines.
+                    // /.heading
+                    // /.col-lg-6
+                    // /.row
+                    .row
+                        // Blog Item #1
+                        .col-sm-12.col-md-6.col-lg-4
+                            .blog-item
+                                .blog__img
+                                    a(href='#')
+                                        img(src='assets/images/blog/grid/1.jpg' alt='blog image')
+                                // /.entry-img
+                                .blog__content
+                                    .blog__meta
+                                        .blog__meta-cat
+                                            a(href='#') Oil & Gas
+                                            a(href='#') Insights
+                                        // /.blog-meta-cat
+                                        span.blog__meta-date Jan 20, 2019
+                                    // /.blog-meta
+                                    h4.blog__title
+                                        a(href='#') Importers achieve cost savings through the First Sale rule!
+                                    a.btn.btn__secondary.btn__link(href='#')
+                                        i.icon-arrow-right.arrow-rounded
+                                        span Read More
+                                // /.entry-content
+                                // /.blog-item
+                                // /.col-lg-4
+                                // Blog Item #2
+                                .col-sm-12.col-md-6.col-lg-4
+                                    .blog-item
+                                        .blog__img
+                                            a(href='#')
+                                                img(src='assets/images/blog/grid/2.jpg' alt='blog image')
+                                        // /.entry-img
+                                        .blog__content
+                                            .blog__meta
+                                                .blog__meta-cat
+                                                    a(href='#') Industry
+                                                    a(href='#') Construction
+                                                // /.blog-meta-cat
+                                                span.blog__meta-date Oct 18, 2019
+                                            // /.blog-meta
+                                            h4.blog__title
+                                                a(href='#') Cargo flow through better supply chain visibility, control.
+                                            a.btn.btn__secondary.btn__link(href='#')
+                                                i.icon-arrow-right.arrow-rounded
+                                                span Read More
+                                        // /.entry-content
+                                        // /.blog-item
+                                        // /.col-lg-4
+                                        // Blog Item #3
+                                        .col-sm-12.col-md-6.col-lg-4
+                                            .blog-item
+                                                .blog__img
+                                                    a(href='#')
+                                                        img(src='assets/images/blog/grid/3.jpg' alt='blog image')
+                                                // /.entry-img
+                                                .blog__content
+                                                    .blog__meta
+                                                        .blog__meta-cat
+                                                            a(href='#') Engineering
+                                                            a(href='#') Distribution
+                                                        // /.blog-meta-cat
+                                                        span.blog__meta-date Jan 20, 2019
+                                                    // /.blog-meta
+                                                    h4.blog__title
+                                                        a(href='#')
+                                                            | Importance of specialized focus in portfolio, Oil & Gas
+                                                            | Logistics?
+                                                    a.btn.btn__secondary.btn__link(href='#')
+                                                        i.icon-arrow-right.arrow-rounded
+                                                        span Read More
+                                                // /.entry-content
+                                                // /.blog-item
+                                                // /.col-lg-4
+                                                // /.row
+                                                // /.container

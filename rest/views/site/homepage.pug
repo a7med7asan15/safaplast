@@ -1,37 +1,23 @@
 extends ../websiteLayout.pug
 
 block content 
+    if slides
+        section#slider2.slider.slider-2
+            .carousel.owl-carousel.carousel-arrows.carousel-dots(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='false' data-nav='true' data-dots='false' data-space='0' data-loop='true' data-speed='3000' data-transition='fade' data-animate-out='fadeOut' data-animate-in='fadeIn')
+                for s in slides
+                    .slide-item.align-v-h.bg-overlay
+                        .bg-img
+                            img(src=`${s.img}` alt=`${s.title}`)
+                        .container
+                            .row
+                                .col-sm-8.col-md-8.col-lg-8.col-xl-6
+                                    .slide__box.d-flex.flex-wrap.justify-content-between
+                                        .slide__box-content
+                                            h2.slide__title #{s.title}
+                                            p.slide__desc #{s.subTitle}
+                                            if s.isButton === "true"    
+                                                a.btn.btn__primary(href=`${s.link}`) #{s.btnText}
 
-    section#slider2.slider.slider-2
-        .carousel.owl-carousel.carousel-arrows.carousel-dots(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='false' data-nav='true' data-dots='false' data-space='0' data-loop='true' data-speed='3000' data-transition='fade' data-animate-out='fadeOut' data-animate-in='fadeIn')
-            .slide-item.align-v-h.bg-overlay
-                .bg-img
-                    img(src='/static/websiteAssets/images/sliders/2.jpg' alt='slide img')
-                .container
-                    .row
-                        .col-sm-8.col-md-8.col-lg-8.col-xl-6
-                            .slide__box.d-flex.flex-wrap.justify-content-between
-                                .slide__box-content
-                                    h2.slide__title Industrial Solutions With Best Machinery! 
-                                    p.slide__desc
-                                        | We produce positive results from ever-growing Industrial & manufacturing
-                                        | estates.
-                                    a.btn.btn__primary(href='#') More About Us
-                               
-            .slide-item.align-v-h.bg-overlay
-                .bg-img
-                    img(src='/static/websiteAssets/images/sliders/4.jpg' alt='slide img')
-                .container
-                    .row
-                        .col-sm-8.col-md-8.col-lg-8.col-xl-6
-                            .slide__box.d-flex.flex-wrap.justify-content-between
-                                .slide__box-content
-                                    h2.slide__title Manufacture A High Quality Products
-                                    p.slide__desc
-                                        | We produce positive results from ever-growing Industrial & manufacturing
-                                        | estates.
-                                    a.btn.btn__primary(href='#') More About Us
-                                
 
     section#servicesCarousel.services.services-layout1.services-carousel.pt-0.mt-120
         .bg-img
@@ -49,7 +35,7 @@ block content
                         | successes and prepare for future.
                     .d-flex
                         a.btn.btn__primary.mt-30.mr-30(href='/certificates') See our Certificates
-                        
+
             .row
                 .col-sm-12.col-md-12.col-lg-12
                     .carousel.owl-carousel.carousel-dots(data-slide='3' data-slide-md='2' data-slide-sm='1' data-autoplay='true' data-nav='false' data-dots='true' data-space='30' data-loop='true' data-speed='800')
@@ -166,11 +152,11 @@ block content
                             // /.col-lg-6
                             .col-sm-12.col-md-12.col-lg-12
                                 .form-group
-                                    
+
                                     input.form-control(type='email' placeholder='Email')
                             .col-sm-12.col-md-12.col-lg-12
                                 .g-recaptcha.mb-20(data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
-                            
+
 
                             .col-sm-12.col-md-12.col-lg-12
                                 button.btn.btn__secondary.btn__block(type='submit') Download Brochure
@@ -182,7 +168,7 @@ block content
                         p.heading__desc
                             | As a diversified construction management, design-build, and general contracting
                             | firm, Axima Group is recognized as one of the World's leading Industry and Manufacturing.
-                   
+
     //section#aboutLayout1.about.about-layout1.pt-120.pb-120
         .container
             .row

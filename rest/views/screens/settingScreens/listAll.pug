@@ -20,7 +20,7 @@ block content
                             form(action=`/dashboard/propertys/searchResult`, method="post")
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 .input-group.input-group-sm.float-right(style="width: 150px;")
-                                    if propertys
+                                    if dataProvided
                                         input.form-control.float-right(type="text" name="table_search" placeholder="بحث")
                                     if tbSearch
                                         input.form-control.float-right(type="text", value = `${table_search}`, name="table_search" placeholder="بحث")
@@ -48,8 +48,8 @@ block content
                                                     span.tag.tag-success Active
                                                 td
                                                     a.btn-sm.btn-primary(href=`/dashboard/propertys/${tb.id}`)
-                                                        i.far.fa-edit
-                                                        |  View
+                                                        i.far.fa-eye
+                                                        |  عرض
                                                 td
                                                     a.btn-sm.btn-warning(href=`/dashboard/propertys/edit?id=${tb.id}`)
                                                         i.far.fa-edit
@@ -60,7 +60,7 @@ block content
                                                         button.btn-sm.btn-danger(type="submit")
                                                             i.far.fa-trash-alt
                                                             |  حذف
-                                    if propertys
+                                    if dataProvided
                                         for property in propertys.docs
                                             tr
                                                 td #{ property.nameEnglish }
@@ -69,8 +69,8 @@ block content
                                                     span.tag.tag-success #{ property.status }
                                                 td
                                                     a.btn-sm.btn-primary(href=`/dashboard/propertys/${property.id}`)
-                                                        i.far.fa-edit
-                                                        |  View
+                                                        i.far.fa-eye
+                                                        |  عرض
                                                
                                                 td
                                                     a.btn-sm.btn-warning(href=`/dashboard/propertys/edit/${property.id}`)

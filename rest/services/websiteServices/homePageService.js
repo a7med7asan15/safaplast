@@ -1,4 +1,5 @@
 const ProductSchema = require('../../models/productSchema');
+const SliderSchema = require('../../models/sliderSchema');
 
 const {
     MsgSchema
@@ -11,125 +12,15 @@ const homePageService = {
         if (process.env.STATUS === "PROD") {
             domainName = process.env.hostDomain
         }
+        const slides = await SliderSchema.find()
         res.render('site/homepage', {
             title: 'ElsafaPlast for electric industries',
             metDescription: 'Elsafa Plast Electric',
             ogTitle: 'ElsafaPlast Electric',
             ogDomain: domainName,
+            slides
 
         })
-
-    },
-    showSearch: async (req, res) => {
-        try {
-            let page = 1;
-            let limit = 1;
-            let typesQuery = [];
-            let roomsQuery = [];
-            let amentiesQuery = [];
-            let priceQuery = 100
-            let areaQuery = [];
-            let domainName = process.env.devDomain
-            if (process.env.STATUS === "PROD") {
-                domainName = process.env.hostDomain
-            }
-            const query = {
-                status: 'active'
-            }
-            if (req.query.p) {
-                page = parseInt(req.query.p, 10)
-
-            }
-            if (req.query.type) {
-                typesQuery = req.query.type;
-                query.type = typesQuery;
-            }
-            if (req.query.room) {
-                roomsQuery = req.query.room
-                query.rooms = roomsQuery;
-            }
-            if (req.query.area) {
-                areaQuery = req.query.area
-                query.areaId = areaQuery
-            }
-            if (req.query.amenties) {
-                amentiesQuery = req.query.amenties
-                query.amenties = amentiesQuery
-            }
-            if (req.query.minValPrice || req.query.maxValPrice) {
-                minValPrice = req.query.minValPrice;
-                maxValPrice = req.query.maxValPrice;
-                query.price = {
-                    $gte: minValPrice,
-                    $lte: maxValPrice
-                }
-            }
-            let csrfToken = req.csrfToken();
-
-            const options = {
-                page,
-                limit: 10,
-                populate: "rooms type areaId"
-            }
-            const data = await ProductSchema.paginate(query, options);
-            const types = await TypesSchema.find();
-            const rooms = await RoomsSchema.find();
-            const areas = await AreaSchema.find();
-            const amen = await AmentiesSchema.find();
-            const minmumPriceRange = await ProductSchema.find().sort({
-                price: 1
-            }).limit(1);
-            const maxPriceRange = await ProductSchema.find().sort({
-                price: -1
-            }).limit(1);
-            let minPrice = 100;
-            let maxPrice = 200;
-            if (minmumPriceRange.length) {
-                minPrice = minmumPriceRange[0].price;
-            }
-            if (maxPriceRange.length) {
-                maxPrice = maxPriceRange[0].price;
-            }
-
-            if (req.query.minValPrice) {
-                minValPrice = req.query.minValPrice;
-            } else {
-                minValPrice = minPrice;
-            }
-            if (req.query.maxValPrice) {
-                maxValPrice = req.query.maxValPrice;
-            } else {
-                maxValPrice = maxPrice;
-            }
-
-            res.render('site/listingPage', {
-                title: ' باب دهب - اجر شقة فى دهب باليوم بأرخص الأسعار',
-                metDescription: 'شقق فى دهب بأرخص الأسعار دور على شقة باليوم فى دهب ',
-                ogTitle: 'شقق فى دهب بأرخص الأسعار دور على شقة باليوم فى دهب ',
-                ogDomain: domainName,
-                data,
-                types,
-                areas,
-                rooms,
-                typesQuery,
-                roomsQuery,
-                priceQuery,
-                areaQuery,
-                amentiesQuery,
-                csrfToken,
-                minPrice,
-                maxPrice,
-                minValPrice,
-                maxValPrice,
-                amen
-            })
-
-        } catch (err) {
-
-            console.log(err);
-            res.send("error");
-
-        }
 
     },
     showOneProduct: async (req, res) => {
@@ -213,9 +104,63 @@ const homePageService = {
             })
         }
     },
-    faqPage: async (req, res) => {
+    blogPage: async (req, res) => {
 
-        return res.render('site/faq', {
+        return res.render('site/blog', {
+            title: 'الأسئلة الشائعة',
+            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+        });
+
+    },
+    portPage: async (req, res) => {
+
+        return res.render('site/portfolio', {
+            title: 'الأسئلة الشائعة',
+            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+        });
+
+    },
+    certPage: async (req, res) => {
+
+        return res.render('site/certificates', {
+            title: 'الأسئلة الشائعة',
+            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+        });
+
+    },
+    prodPage: async (req, res) => {
+
+        return res.render('site/products', {
+            title: 'الأسئلة الشائعة',
+            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+        });
+
+    },
+    aboutPage: async (req, res) => {
+
+        return res.render('site/about', {
+            title: 'الأسئلة الشائعة',
+            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+        });
+
+    },
+    singleNewsPage: async (req, res) => {
+
+        return res.render('site/singleNews', {
+            title: 'الأسئلة الشائعة',
+            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+        });
+
+    },
+    singleProduct: async (req, res) => {
+
+        return res.render('site/singleProduct', {
             title: 'الأسئلة الشائعة',
             metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
             ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
@@ -225,16 +170,6 @@ const homePageService = {
     contactPage: async (req, res) => {
         let csrfToken = req.csrfToken();
         return res.render('site/contact', {
-            title: 'تواصل معنا',
-            metDescription: 'عنوان دهب دورز',
-            ogTitle: 'عنوان دهب دورز',
-            csrfToken
-        });
-
-    },
-    bookingService: async (req, res) => {
-        let csrfToken = req.csrfToken();
-        return res.render('site/bookings', {
             title: 'تواصل معنا',
             metDescription: 'عنوان دهب دورز',
             ogTitle: 'عنوان دهب دورز',

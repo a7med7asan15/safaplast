@@ -48,13 +48,29 @@ homePageService.show
 
 );
 
-router.get('/search', 
-csrfProtection,
-homePageService.showSearch
+
+router.get('/portfolio', 
+homePageService.portPage
 
 );
-router.get('/faq', 
-homePageService.faqPage
+router.get('/blog', 
+homePageService.blogPage
+
+);
+router.get('/certificates', 
+homePageService.certPage
+
+);
+router.get('/products', 
+homePageService.prodPage
+
+);
+router.get('/singleNews', 
+homePageService.singleNewsPage
+
+);
+router.get('/singleProduct', 
+homePageService.singleProduct
 
 );
 router.get('/contact', 
@@ -62,13 +78,11 @@ csrfProtection,
 homePageService.contactPage
 
 );
-router.get('/yourList', 
-homePageService.contactPage
 
-);
-router.post('/loadmore',
-homePageService.loadMore
-)
+// router.get('/about-us', 
+// homePageService.aboutPage
+
+// );
 
 router.get('/list/:slug', 
 csrfProtection,
@@ -77,10 +91,7 @@ homePageService.showOneProduct
 
 );
 
-router.get('/cart',
-csrfProtection,
-homePageService.bookingService
-)
+
 
 router.post( '/sendMsg',
 

@@ -66,6 +66,17 @@ sliderService.show
 
 );
 
+router.get( '/add',
+
+
+csrfProtection, 
+
+
+sliderService.addPage
+
+
+);
+
 
 
 
@@ -81,10 +92,10 @@ sliderService.show
 
 
 
-router.post( '/',
+router.post( '/add',
 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addSlideSchema),
 
 csrfProtection, 
 

@@ -27,40 +27,65 @@ const sliderService = {
         } catch (err) {
 
             console.log(err);
-res.send("error");
+            res.send("error");
 
         }
 
 
 
     },
-
+    addPage: async (req, res) => {
+        let csrfToken = req.csrfToken();
+        try {
+          return res.render('screens/sliderScreens/add', {
+            thisUser: req.user,
+            csrfToken,
+            title: "منتج جديد"
+          })
+    
+        } catch (err) {
+            console.log(err)
+          res.send("error")
+        }
+    
+      },
     add: async (req, res) => {
 
 
 
         const {
-            nameEnglish,
-            nameArabic
+            title,
+            subTitle, 
+            img, 
+            link, 
+            btnText, 
+            isButton
         } = req.body;
 
 
         try {
-
+            var isBtn
+            if(!isButton){
+                isBtn="false"
+            }else{
+                isBtn = "true"
+            }
 
             const newData = new SliderSchema({
 
-
-                nameEnglish,
-
-                nameArabic
+                title,
+                subTitle, 
+                img, 
+                link, 
+                btnText, 
+                isButton:isBtn
 
 
             })
 
 
             await newData.save();
-
+            req.flash('success', 'تم الاضافة بنجاح')
             return res.redirect('/dashboard/slider');
 
         } catch (err) {
