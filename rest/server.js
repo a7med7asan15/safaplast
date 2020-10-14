@@ -245,7 +245,7 @@ if(process.env.STATUS === "PROD"){
     console.log('HTTPS SERVER running on port 443')
   })
   http.createServer(function(res,req){
-    res.writeHead(301,{"Location":"https://"+req.headers['host']+req.url})
+    res.writeHead(301,{"Location":"https://"+req.headers.host+req.url})
     res.end();
   }).listen(80)
 
