@@ -63,11 +63,11 @@ module.exports  = {
         }),
         addSlideSchema:Joi.object().keys({
             title:Joi.string().required(),
-            subTitle:Joi.string(),
-            img:Joi.string(),
-            isButton:Joi.string(),
-            btnText:Joi.string(),
-            link:Joi.string(),
+            subTitle:Joi.string().optional().allow(''),
+            img:Joi.string().optional().allow(''),
+            isButton:Joi.string().optional().allow(''),
+            btnText:Joi.string().optional().allow(''),
+            link:Joi.string().optional().allow(''),
             _csrf:Joi.string(), 
         }),
         
