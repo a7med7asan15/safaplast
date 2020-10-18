@@ -54,7 +54,11 @@ var $validate = $(".msgForm").validate({
 
         var data = {}
         $(serialData).each(function (index, obj) {
-            data[obj.name] = obj.value;
+            if(obj.name === "g-recaptcha-response"){
+                data["captcha"] = obj.value;
+            }else{
+                data[obj.name] = obj.value;
+            }
         });
 
         console.log(serialData)

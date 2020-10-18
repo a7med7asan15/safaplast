@@ -100,7 +100,6 @@ const homePageService = {
             const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
 
             request(verifyUrl, (err, response, body) => {
-                var valid = true;
                 body = JSON.parse(body);
                 console.log(body)
                 if (!body.success || body.success === undefined) {
@@ -155,9 +154,7 @@ const homePageService = {
             } = req.body;
             const secretKey = "6LffrNgZAAAAAC_jjurUcncB16jhpwJitnEq2N-F"
             const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
-            const setting = (await SettingSchema.find().limit(1))[0]
-            setting.dTimes = setting.dTimes + 1
-            setting.save()
+
             request(verifyUrl, (err, response, body) => {
                 body = JSON.parse(body);
                 if (!body.success || body.success === undefined) {
