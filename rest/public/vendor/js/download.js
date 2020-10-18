@@ -52,7 +52,8 @@ var $validate = $(".download_cat").validate({
         $(serialData).each(function (index, obj) {
             data[obj.name] = obj.value;
         });
-
+        console.log(serialData)
+        console.log(data)
 
         $.ajax({
             type: "POST",
@@ -63,8 +64,7 @@ var $validate = $(".download_cat").validate({
             },
             success: function (result) {
                 if (!result.err) {
-                        console.log(serialData)
-                        console.log(data)
+
                         console.log(result)
                         $(".download_cat .btn").prop('disabled', true);
                         setTimeout(function(){
@@ -75,8 +75,6 @@ var $validate = $(".download_cat").validate({
                     return window.location.replace(doLink);
                 } else {
                     $(".download_cat .btn").after('You cannot submit')
-
-                    return $validate.showErrors(errors);
                 }
 
             }

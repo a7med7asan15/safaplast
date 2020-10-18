@@ -57,18 +57,17 @@ var $validate = $(".msgForm").validate({
             data[obj.name] = obj.value;
         });
 
-
+        console.log(serialData)
+        console.log(data)
         $.ajax({
             type: "POST",
             url: '/sendMsg',
-            data: serialData,
+            data: data,
             headers: {
                 'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
             },
             success: function (result) {
                 if (!result.err) {
-                    console.log("Hello")
-                    console.log(data);
                     console.log(result)
                     //localStorage.setItem("name", data.cuName);
                     // localStorage.setItem("orderId", serialData.orderId);
@@ -85,7 +84,6 @@ var $validate = $(".msgForm").validate({
                 } else {
                     $("#message-contact .btn").after('You cannot submit')
 
-                    return $validate.showErrors(errors);
                 }
 
             }
