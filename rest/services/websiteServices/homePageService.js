@@ -174,7 +174,6 @@ const homePageService = {
                 })
                  msg.save();
 
-                 setting.save
                 return res.json({
                     "success": true,
                     "msg": "captcha verification passed",
