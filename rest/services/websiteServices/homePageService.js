@@ -96,7 +96,7 @@ const homePageService = {
                 message, 
                 captcha
             } = req.body;
-            const secretKey = "6Le8rs8ZAAAAANNqQUUwT0nCWmdEU2iOcWtrZ5rg"
+            const secretKey = "6LdDxdgZAAAAADauKRCexbZd-Fpb4B4pMhacjkFv"
             const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body['g-recaptcha-response']}`;
 
             request(verifyUrl, (err, response, body) => {
@@ -152,7 +152,7 @@ const homePageService = {
                 phone,
                 captcha
             } = req.body;
-            const secretKey = "6LffrNgZAAAAAC_jjurUcncB16jhpwJitnEq2N-F"
+            const secretKey = "6LdDxdgZAAAAADauKRCexbZd-Fpb4B4pMhacjkFv"
             const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body['g-recaptcha-response']}`;
 
             request(verifyUrl, (err, response, body) => {
