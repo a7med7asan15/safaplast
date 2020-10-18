@@ -7,3 +7,6 @@
    again. To non-interactively renew *all* of your certificates, run
    "certbot renew"
  - If you like Certbot, please consider supporting our work by:
+
+6Lc4v9gZAAAAADqeV0T2EqwLmjm-U1wauMKrjvki
+6Lc4v9gZAAAAAKd1Kp5-ktA_YV7btNBQW7KODCzM
