@@ -122,6 +122,7 @@ const homePageService = {
                     message_contact:message
                 })
                  msg.save();
+                 console.log(msg)
                 return res.json({
                     "success": true,
                     "msg": "captcha verification passed",
