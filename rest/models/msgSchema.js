@@ -10,7 +10,7 @@ const msgSchema = new Schema({
     message_contact:{type:String},
     contactMobileNo:{type:String},
     email_contact:{type:String},
-    status:{type:String,default:'Message'},
+    status:{type:String,default:'active'},
     createdAt: { type: Date, default: Date.now },
 })
 
