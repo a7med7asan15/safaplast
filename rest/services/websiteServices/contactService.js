@@ -30,6 +30,7 @@ const contactService = {
                 ensearch:false, 
                 dataProvided:msgs, 
                 dateNow: Date.now(),
+                title:"الرسائل القادمة"
             })
         } catch (err) {
             console.log(err);
@@ -62,6 +63,7 @@ const contactService = {
                 ensearch:false, 
                 dataProvided:msgs, 
                 dateNow: Date.now(),
+                title:"الرسائل القديمة"
             })
         } catch (err) {
             console.log(err);
@@ -76,10 +78,10 @@ res.send("error");
             const msg = await MsgSchema.findById(id);
             msg.status = 'inactive';
             msg.save();
-            req.flash('success', 'Message Responded ')
+            req.flash('success', 'تمت العملية بنجاح')
             return res.redirect('/dashboard/messages')
         } catch (err) {
-            req.flash('error ', 'Error In Message')
+            req.flash('error ', 'حدث خطأ برجاء اعادة المحاولة')
             return res.redirect('/dashboard/messages')
 
         }

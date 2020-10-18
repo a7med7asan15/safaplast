@@ -22,7 +22,8 @@ const certificateService = {
             return res.render('screens/certificateScreens/listAdd', {
                 thisUser: req.user,
                 csrfToken,
-                dataProvided
+                dataProvided, 
+                title:"الشهادات"
             })
         } catch (err) {
             console.log(err)

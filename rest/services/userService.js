@@ -35,7 +35,8 @@ const userService = {
             return res.render('screens/usersScreens/editUserScreen', {
                 thisUser: req.user,
                 userToEdit: userToEdit,
-                csrfToken
+                csrfToken, 
+                title:"بيانات مستخدم"
             })
         } catch (err) {
             req.flash('error', 'من فضلك أعد المحاولة')
@@ -57,7 +58,8 @@ const userService = {
         return res.render('screens/usersScreens/addUserScreen', {
             thisUser: req.user,
             csrfToken,
-            sessionData: passedData
+            sessionData: passedData, 
+            title:"اضافة مستخدم"
         })
     },
     create: async (req, res) => {
@@ -151,7 +153,8 @@ const userService = {
         return res.render('screens/usersScreens/changePasswordScreen', {
             thisUser: req.user,
             userToEdit,
-            csrfToken
+            csrfToken, 
+            title:"تعديل الرقم السري"
         })
     },
     changePassword: async (req, res) => {
@@ -232,7 +235,8 @@ const userService = {
                 thisUser: req.user,
                 csrfToken,
                 table_search,
-                tbSearch
+                tbSearch, 
+                title:"نتائج البحث"
             })
 
         } catch (err) {

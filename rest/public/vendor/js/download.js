@@ -1,4 +1,4 @@
-var $validate = $(".msgForm").validate({
+var $validate = $(".download_cat").validate({
     rules: {
         name: {
             required: true
@@ -13,9 +13,6 @@ var $validate = $(".msgForm").validate({
             maxlength: 11,
             //pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
         },
-        message:{
-            required:true
-        }
     },
     messages: {
         name: {
@@ -31,9 +28,6 @@ var $validate = $(".msgForm").validate({
             maxlength: "Enter Valid Phone",
             //pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
         },
-        message:{
-            required: "Please Enter Message"
-        }
     },
     highlight: function (element) {
         $(element).addClass("is-invalid");
@@ -60,7 +54,7 @@ var $validate = $(".msgForm").validate({
 
         $.ajax({
             type: "POST",
-            url: '/sendMsg',
+            url: '/downloadCatalog',
             data: serialData,
             headers: {
                 'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
@@ -70,18 +64,10 @@ var $validate = $(".msgForm").validate({
                     console.log("Hello")
                     console.log(data);
                     console.log(result)
+                    console.log(doLink)
                     //localStorage.setItem("name", data.cuName);
                     // localStorage.setItem("orderId", serialData.orderId);
-                    $("#message-contact").slideUp(750, function () {
-                        $('#message-contact').hide();
-
-                        $('#message-contact')
-                            .after('<h5>We will contact you soon..</h5>')
-
-
-
-
-                    });
+                    return window.location.replace(doLink);
                 } else {
                     let key = result.key
                     let msg = result.msg

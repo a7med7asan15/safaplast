@@ -24,7 +24,8 @@ const newsService = {
             return res.render('screens/newsScreens/listAll', {
                 thisUser: req.user,
                 csrfToken,
-                dataProvided
+                dataProvided, 
+                title:"الاخبار"
             })
         } catch (err) {
 
@@ -58,7 +59,8 @@ const newsService = {
             return res.render('screens/newsScreens/listAll', {
                 thisUser: req.user,
                 csrfToken,
-                dataProvided
+                dataProvided, 
+                title:"المشاريع السابقة"
             })
         } catch (err) {
 
@@ -141,7 +143,8 @@ const newsService = {
             return res.render('screens/newsScreens/edit', {
                 thisUser: req.user,
                 dataProvided,
-                csrfToken
+                csrfToken, 
+                title:"تعديل بوست"
             })
         } catch (err) {
             req.flash('error', 'من فضلك أعد المحاولة')
@@ -223,7 +226,8 @@ const newsService = {
                 thisUser: req.user,
                 csrfToken,
                 table_search,
-                tbSearch
+                tbSearch, 
+                title:"نتائج البحث"
             })
 
         } catch (err) {

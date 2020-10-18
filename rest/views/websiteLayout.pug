@@ -4,7 +4,8 @@ html(lang='en')
     meta(charset='UTF-8')
     //meta(name='viewport' content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible' content='ie=edge')
-    link(href='/static/websiteAssets/images/favicon/favicon.png' rel='icon')
+    if setting
+      link(href=`${setting.favicon}` rel='icon')
     if csrfToken
       meta(name="csrf-token", content=`${csrfToken}`)
     meta(name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no")
@@ -21,6 +22,7 @@ html(lang='en')
       meta(name="og:type" content=`${metDescription}`)
     link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Heebo:400,500,700%7cRajdhani:400,500,600,700&display=swap')
     link(rel='stylesheet' href='/static/websiteAssets/css/libraries.css')
+    link(rel="stylesheet" href="/static/bower_components/admin-lte/plugins/ekko-lightbox/ekko-lightbox.css")
     link(rel='stylesheet' href='/static/websiteAssets/css/style.css')
     link(rel='stylesheet' href='/static/edits/edits.css')
 

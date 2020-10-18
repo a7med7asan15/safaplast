@@ -181,7 +181,8 @@ const productService = {
         thisUser: req.user,
         csrfToken,
         table_search,
-        tbSearch
+        tbSearch, 
+        title:"نتائج البحث"
       })
 
     } catch (err) {
@@ -226,6 +227,7 @@ const productService = {
         dataProvided: product,
         csrfToken,
         types,
+        title:"تعديل منتج"
 
       })
     } catch (err) {

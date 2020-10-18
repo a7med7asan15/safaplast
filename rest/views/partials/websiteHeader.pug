@@ -2,10 +2,11 @@ header#header.header.header-layout2
     nav.navbar.navbar-expand-lg.sticky-navbar
         .container-fluid.px-0
             a.navbar-brand.bg-white(href='/')
-                img.logo-dark(src='/static/websiteAssets/images/logo/logo-dark.png' alt='logo')
+                img.logo-dark(src=`${setting.logo}` alt="Elsafa Plast Logo")
             button.navbar-toggler(type='button')
                 span.menu-lines
                     span
+
             .header-inner-wrapper.w-100.bg-theme
                 .d-flex
                     #mainNavigation.collapse.navbar-collapse
@@ -22,3 +23,19 @@ header#header.header.header-layout2
                                 a.nav__item-link(href='/blog') News
                             li.nav__item
                                 a.nav__item-link(href='/contact') Contact Us
+                        if setting
+                            ul.navbar-nav.ml-auto.social__icons
+                                li.nav__item
+                                    span.nav__item-link(style="padding:0")
+                                        | Follow us on:  
+                                li.nav__item
+                                    a(href=`${setting.facebook}` target="_blank")
+                                        i(class="fa fa-facebook-square")
+                                li.nav__item
+                                    a(href=`${setting.linkedin}` target="_blank")
+                                        i(class="fa fa-linkedin-square")
+                                if setting.youtube != "#"
+                                    li.nav__item
+                                        a(href=`${setting.youtube}` target="_blank")
+                                            i(class="fa fa-youtube-square")
+

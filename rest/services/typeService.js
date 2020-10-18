@@ -87,7 +87,8 @@ res.send("error");
             return res.render('screens/typeScreens/edit', {
                 thisUser: req.user,
                 dataProvided: type,
-                csrfToken
+                csrfToken, 
+                title:"تعديل النوع"
             })
         } catch (err) {
             req.flash('error', 'من فضلك أعد المحاولة')
@@ -159,7 +160,8 @@ res.send("error");
                 thisUser: req.user,
                 csrfToken,
                 table_search,
-                tbSearch
+                tbSearch, 
+                title:"نتائج البحث"
             })
 
         } catch (err) {

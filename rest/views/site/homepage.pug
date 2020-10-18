@@ -3,7 +3,7 @@ extends ../websiteLayout.pug
 block content 
     if slides
         section#slider2.slider.slider-2
-            .carousel.owl-carousel.carousel-arrows.carousel-dots(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='false' data-nav='true' data-dots='false' data-space='0' data-loop='true' data-speed='3000' data-transition='fade' data-animate-out='fadeOut' data-animate-in='fadeIn')
+            .carousel.owl-carousel.carousel-arrows.carousel-dots(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='true'  data-nav='true' data-dots='false' data-space='0' data-loop='true'  data-speed='1000' data-transition='fade' data-animate-out='fadeOut' data-animate-in='fadeIn')
                 for s in slides
                     .slide-item.align-v-h.bg-overlay
                         .bg-img
@@ -18,10 +18,7 @@ block content
                                             if s.isButton === "true"    
                                                 a.btn.btn__primary(href=`${s.link}`) #{s.btnText}
 
-
     section#servicesCarousel.services.services-layout1.services-carousel.pt-0.mt-120
-        .bg-img
-            img(src='/static/websiteAssets/images/backgrounds/pattern/2.png' alt='background')
         .container
             .row.heading.mb-40
                 .col-sm-12.col-md-12.col-lg-6
@@ -39,103 +36,26 @@ block content
             .row
                 .col-sm-12.col-md-12.col-lg-12
                     .carousel.owl-carousel.carousel-dots(data-slide='3' data-slide-md='2' data-slide-sm='1' data-autoplay='true' data-nav='false' data-dots='true' data-space='30' data-loop='true' data-speed='800')
-                        .service-item
+                        if portfolio
+                         for p in portfolio
+                          .service-item
                             .service__img
-                                img.img-fluid(src='/static/websiteAssets/images/services/1.jpg' alt='service')
-                            // /.service-img
+                                img.img-fluid(src=`${p.featuredImage}` alt=`${p.title}`)
                             .service__content
-                                h4.service__title Retail & Consumer
-                                p.service__desc
-                                    | Petroleum and natural gas are nonrenewable sources of energy, a liquid found
-                                    | underground that can be used to make gasoline.
-                                a.btn.btn__secondary.btn__link(href='#')
+                                h4.service__title #{p.title}
+                                a.btn.btn__secondary.btn__link(href=`/blog/${p.slug}`)
                                     i.icon-arrow-right.arrow-rounded
                                     span Read More
                             // /.service-content
                             // /.service-item
-                        .service-item
-                            .service__img
-                                img.img-fluid(src='/static/websiteAssets/images/services/2.jpg' alt='service')
-                            // /.service-img
-                            .service__content
-                                h4.service__title Sciences & Healthcare
-                                p.service__desc
-                                    | Professional discipline deals with designing, planning, construction and
-                                    | infrastructures management such as roads, tunnels, bridges.
-                                a.btn.btn__secondary.btn__link(href='#')
-                                    i.icon-arrow-right.arrow-rounded
-                                    span Read More
-                            // /.service-content
-                            // /.service-item
-                        .service-item
-                            .service__img
-                                img.img-fluid(src='/static/websiteAssets/images/services/3.jpg' alt='service')
-                            // /.service-img
-                            .service__content
-                                h4.service__title Industrial & Chemical
-                                p.service__desc
-                                    | Materials science principles to design, analyze, manufacture, and maintain
-                                    | mechanical systems. It is one of the oldest .
-                                a.btn.btn__secondary.btn__link(href='#')
-                                    i.icon-arrow-right.arrow-rounded
-                                    span Read More
-                            // /.service-content
-                            // /.service-item
-                        .service-item
-                            .service__img
-                                img.img-fluid(src='/static/websiteAssets/images/services/4.jpg' alt='service')
-                            // /.service-img
-                            .service__content
-                                h4.service__title Power Generation
-                                p.service__desc
-                                    | Produced in huge quantities and critical ingredients for products used by
-                                    | both
-                                    | industry and the general consumer.
-                                a.btn.btn__secondary.btn__link(href='#')
-                                    i.icon-arrow-right.arrow-rounded
-                                    span Read More
-                            // /.service-content
-                            // /.service-item
-                        .service-item
-                            .service__img
-                                img.img-fluid(src='/static/websiteAssets/images/services/5.jpg' alt='service')
-                            // /.service-img
-                            .service__content
-                                h4.service__title Food & Beverage
-                                p.service__desc
-                                    | The automotive industry comprises a wide range of companies involved in the
-                                    | design, development, manufacturing, and selling.
-                                a.btn.btn__secondary.btn__link(href='#')
-                                    i.icon-arrow-right.arrow-rounded
-                                    span Read More
-                            // /.service-content
-                            // /.service-item
-                        .service-item
-                            .service__img
-                                img.img-fluid(src='/static/websiteAssets/images/services/6.jpg' alt='service')
-                            // /.service-img
-                            .service__content
-                                h4.service__title Oil & Gas
-                                p.service__desc
-                                    | Building a bridge is a complex undertaking requiring knowledge and expertise.
-                                    | Several variables, including engineering.
-                                a.btn.btn__secondary.btn__link(href='#')
-                                    i.icon-arrow-right.arrow-rounded
-                                    span Read More
-                            // /.service-content
-                            // /.service-item
-                            // /.carousel
-                            // /.col-lg-12
-                            // /.row
-                            // /.container
-
+                        
     section#banner4.banner.banner-4.bg-overlay.bg-overlay-gradient-2.bg-parallax.pt-120.pb-0
         .bg-img
             img(src='/static/websiteAssets/images/banners/4.jpg' alt='background')
         .container
             .row
                 .col-sm-12.col-md-12.col-lg-7
-                    form.contact__form-panel.mr-50
+                    form.contact__form-panel.mr-50.download_cat(action=`${setting.catalog}`)
                         .row
                             .col-sm-12.contact__form-panel-header
                                 h4 Explore our brochure
@@ -144,18 +64,18 @@ block content
                                     | and service.
                             .col-sm-6.col-md-6.col-lg-6
                                 .form-group
-                                    input.form-control(type='text' placeholder='Name')
+                                    input.form-control(type='text' placeholder='Name' name="name")
                             // /.col-lg-6
                             .col-sm-6.col-md-6.col-lg-6
                                 .form-group
-                                    input.form-control(type='text' placeholder='Phone')
+                                    input.form-control(type='text' placeholder='Phone' name="phone")
                             // /.col-lg-6
                             .col-sm-12.col-md-12.col-lg-12
                                 .form-group
 
-                                    input.form-control(type='email' placeholder='Email')
+                                    input.form-control(type='email' placeholder='Email' name="email")
                             .col-sm-12.col-md-12.col-lg-12
-                                .g-recaptcha.mb-20(data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
+                                .g-recaptcha.mb-20(data-sitekey="6LffrNgZAAAAAIlQGgrmhTCwn2sTgeAHmRGIH5s2")
 
 
                             .col-sm-12.col-md-12.col-lg-12
@@ -306,8 +226,10 @@ block content
                                         // /.blog-meta
                                         h4.blog__title
                                             a(href=`/blog/${n.slug}`) #{n.title}
-
+    
+    script var doLink = !{JSON.stringify(setting.catalog)}
 block scripts
-    script(src="https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
+    script(src="https://www.google.com/recaptcha/api.js?render=6LffrNgZAAAAAIlQGgrmhTCwn2sTgeAHmRGIH5s2")
+    script(src="/static/vendor/js/download.js" type="text/javascript")
 
 

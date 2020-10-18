@@ -104,3 +104,11 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
 .clients .client img {
     width: 90px !important;
 }
+
+.social__icons li a{
+    font-size: 30px;
+}
+.social__icons li a:hover{
+    color:#fff;
+    
+}

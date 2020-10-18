@@ -22,7 +22,8 @@ const clientService = {
             return res.render('screens/clientScreens/listAdd', {
                 thisUser: req.user,
                 csrfToken,
-                dataProvided
+                dataProvided, 
+                title:"العملاء"
             })
         } catch (err) {
 

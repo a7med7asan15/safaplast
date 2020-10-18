@@ -86,6 +86,19 @@ homePageService.sendMsg
 
 );
 
+router.post( '/downloadCatalog',
+
+
+csrfProtection, 
+
+
+homePageService.downloadCatalog
+
+
+);
+
+
+
 //-----------------
 //  Login Request 
 //-----------------

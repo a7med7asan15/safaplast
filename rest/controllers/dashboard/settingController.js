@@ -84,7 +84,7 @@ settingService.show
 router.post( '/',
 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addSettingSchema),
 
 csrfProtection, 
 
@@ -95,76 +95,6 @@ settingService.add
 );
 
 
-
-
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-// +++ /// Store UPDATE ROUTES  // ++++// //////
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-
-
-//---------------------------
-// Edit City Route 
-//---------------------------
-
-router.get('/edit/:dataId', 
-
-csrfProtection,
-
-settingService.showOne
-
-);
-
-
-
-//---------------------------
-// Update City Route 
-//---------------------------
-
-router.post('/edit/:dataId', 
-
-validationBody(schemas.addCitySchema),
-
-csrfProtection,
-
-settingService.update
-
-);
-
-
-//---------------------------
-// Delete City Route 
-//---------------------------
-
-router.post('/delete/:dataId',
-
-csrfProtection,
-
-
-settingService.destroy
-
-); 
-
-
-
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-// +++ /// Search  // ++++// //////
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-//---------------------------
-// City Search 
-//---------------------------
-
-router.post('/searchResult',
-
-csrfProtection,
-
-
-settingService.searchShow
-
-); 
 
 
 module.exports = router;

@@ -1,3 +1,4 @@
+const SettingSchema = require('../models/settingSchema');
 const User  = require('../models/Users');
 
 
@@ -20,5 +21,22 @@ const seedUser = async ()=>{
 
 }
 
+const seedSetting = async ()=>{
 
-module.exports = {seedUser};
+  const setting = await SettingSchema.count({});
+  if(!setting){
+      const newSetting = new SettingSchema({
+       linkedin:'#',
+       facebook: '#',
+       youtube:'#',
+       catalog: '#',
+       logo:'#', 
+       favicon:"#"
+      })
+     await newSetting.save()
+     return console.log('Created New Settings') 
+   }
+}
+
+
+module.exports = {seedUser, seedSetting};

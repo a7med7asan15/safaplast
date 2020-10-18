@@ -22,7 +22,8 @@ const sliderService = {
             return res.render('screens/sliderScreens/listAll', {
                 thisUser: req.user,
                 csrfToken,
-                dataProvided
+                dataProvided, 
+                title:"السلايدز"
             })
         } catch (err) {
 
@@ -115,7 +116,8 @@ const sliderService = {
             return res.render('screens/sliderScreens/edit', {
                 thisUser: req.user,
                 dataProvided,
-                csrfToken
+                csrfToken, 
+                title:"تعديل سلايد"
             })
         } catch (err) {
             req.flash('error', 'من فضلك أعد المحاولة')
@@ -195,7 +197,8 @@ const sliderService = {
                 thisUser: req.user,
                 csrfToken,
                 table_search,
-                tbSearch
+                tbSearch, 
+                title:"نتائج البحث"
             })
 
         } catch (err) {

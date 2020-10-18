@@ -7,11 +7,11 @@ block content
                 .col-sm-6
 
                     h1.m-0.text-dark 
-                        | Messages
+                        | الرسائل
                 .col-sm-6
                         a.btn.btn-success.float-right(href="/dashboard/messages/inactive")
                             
-                            |  Old Messages
+                            |  الرسائل القديمة
 
     .content
         .container-fluid
@@ -29,13 +29,13 @@ block content
                                 table.table.table-hover
                                     thead
 
-                                        th Sent:
-                                        th Name
-                                        th Mobile Number 
-                                        th Email 
+                                        th أرسلت في:
+                                        th الاسم
+                                        th الهاتف
+                                        th الايميل 
 
-                                        th Contacted?   
-                                        th(colspan="2") Message 
+                                        th تم التواصل؟   
+                                        th(colspan="2") الرسالة 
                                     tbody
                                         if dataProvided
                                             - var dataArray = dataProvided.docs
@@ -50,25 +50,31 @@ block content
                                             for dat in dataArray
                                                 -  timeDiff = (dateNow - dat.createdAt)/1000
                                                 if timeDiff < 60
-                                                    - timeDiffStr = Math.floor(timeDiff) + " seconds ago"
+                                                    - timeDiffStr = " منذ " + Math.floor(timeDiff) + " ثواني "
                                                 else if timeDiff < 3600 && timeDiff > 60
-                                                    - timeDiffStr = Math.floor(timeDiff/60) + " minutes ago"
+                                                    - timeDiffStr = " منذ " + Math.floor(timeDiff/60) + " دقائق "
                                                 else if timeDiff < 86400 && timeDiff > 3600
-                                                    - timeDiffStr = Math.floor(timeDiff/3600) + " hours ago"
+                                                    - timeDiffStr = " منذ " + Math.floor(timeDiff/3600) + " ساعات "
                                                 else if timeDiff < 259200 && timeDiff > 86400
-                                                    - timeDiffStr = Math.floor(timeDiff/86400) + " days ago"
+                                                    - timeDiffStr = " منذ " + Math.floor(timeDiff/86400) + " أيام "
                                                 else if timeDiff > 259200 
                                                     - timeDiffStr = dat.createdAt.toDateString()
                                                 tr
                                                     td #{ timeDiffStr }
-                                                    td #{ dat.name_contact} #{dat.lastname_contact}
+                                                    td #{ dat.name_contact} 
                                                     td #{dat.contactMobileNo }
                                                     td #{ dat.email_contact }
 
                                                     td
                                                         a.btn-sm.btn-primary(href=`/dashboard/messages/inactivate?id=${dat.id}`)
                                                             |  Done 
-                                                    td(colspan="2" style="word-break: break-all;") #{ dat.message_contact }
+                                                    td(colspan="2" style="word-break: break-all;") 
+                                                        if dat.message_contact === "Download"
+                                                            span.badge.badge-success
+                                                                | Catalog Download
+                                                        else
+                                                            | #{dat.message_contact}
+
 
 
 

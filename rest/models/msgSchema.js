@@ -6,12 +6,11 @@ const Schema = mongoose.Schema;
 
 
 const msgSchema = new Schema({
-    name_contact:{type:String,required:true},
-    lastname_contact:{type:String,required:true},
-    message_contact:{type:String,required:true},
+    name_contact:{type:String},
+    message_contact:{type:String},
     contactMobileNo:{type:String},
     email_contact:{type:String},
-    status:{type:String,default:'active'},
+    status:{type:String,default:'Message'},
     createdAt: { type: Date, default: Date.now },
 })
 

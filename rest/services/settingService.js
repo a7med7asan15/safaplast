@@ -14,15 +14,13 @@ const settingService = {
         let csrfToken = req.csrfToken();
 
         try {
-            const options = {
-                page,
-                limit: 10,
-            }
-            const dataProvided = await SettingSchema.paginate({}, options);
-            return res.render('screens/settingScreens/listAll', {
+
+            const dataProvided = (await SettingSchema.find().limit(1))[0]
+            return res.render('screens/settingScreens/add', {
                 thisUser: req.user,
                 csrfToken,
-                dataProvided
+                dataProvided, 
+                title:"الاعدادات"
             })
         } catch (err) {
 
@@ -36,156 +34,37 @@ res.send("error");
     },
 
     add: async (req, res) => {
-
-
-
         const {
-            nameEnglish,
-            nameArabic
-        } = req.body;
-
-
-        try {
-
-
-            const newData = new SettingSchema({
-
-
-                nameEnglish,
-
-                nameArabic
-
-
-            })
-
-
-            await newData.save();
-
-            return res.redirect('/dashboard/settings');
-
-        } catch (err) {
-
-            console.log(err);
-            res.send("error");
-
-        }
-
-
-
-
-
-    },
-
-    showOne: async (req, res) => {
-        req.session.lastlink = req.url
-        let csrfToken = req.csrfToken();
-
-        try {
-            const {
-                dataId
-            } = req.params
-
-            const dataProvided = await SettingSchema.findById(dataId);
-
-            return res.render('screens/settingScreens/edit', {
-                thisUser: req.user,
-                dataProvided,
-                csrfToken
-            })
-        } catch (err) {
-            req.flash('error', 'من فضلك أعد المحاولة')
-            return res.render('screens/settingScreens/edit', {
-                thisUser: req.user,
-                dataProvided: {},
-                csrfToken
-            })
-        }
-
-    },
-
-    //Update City
-    update: async (req, res) => {
-        const {
-            nameEnglish,
-            nameArabic
+            facebook,
+            linkedin,
+            youtube,
+            logo, 
+            catalog, 
+            favicon
         } = req.body
-        const {
-            dataId
-        } = req.params
+
         try {
-            const updateData = await SettingSchema.findById(dataId)
-            updateData.nameEnglish = nameEnglish,
-                updateData.nameArabic = nameArabic,
+            const updateData = (await SettingSchema.find().limit(1))[0]
+            updateData.facebook = facebook,
+                updateData.linkedin = linkedin,
+                updateData.youtube = youtube,
+                updateData.logo=logo
+                updateData.catalog=catalog
+                updateData.favicon=favicon
                 await updateData.save();
             req.session.passedData = false
             req.flash('success', 'تمت العملية بنجاح')
-            return res.redirect(`/dashboard/settings/edit/${dataId}`)
+
+            return res.json({
+                err: false,
+                message: "تمت بنجاح"
+              });
         } catch (err) {
             req.flash('error', 'من فضلك أعد المحاولة')
-            return res.redirect(`/dashboard/settings/edit/${dataId}`)
         }
 
     },
 
-    //Delete City
-    destroy: async (req, res) => {
-        const {
-            dataId
-        } = req.params;
-        try {
-            const deleteData = await SettingSchema.findByIdAndDelete(dataId);
-
-            req.flash('success', `تم الحذف`)
-            return res.redirect(`/dashboard/settings`)
-        } catch (err) {
-            req.flash('error', 'من فضلك أعد المحاولة')
-            return res.redirect(`/dashboard/settings`)
-
-        }
-    },
-
-    searchShow: async (req, res) => {
-        try {
-            let csrfToken = req.csrfToken();
-            const {
-                table_search,
-            } = req.body;
-            const tbSearch = await SettingSchema.find({
-                "$or": [{
-                        nameEnglish: {
-                            '$regex': table_search,
-                            '$options': 'i'
-                        }
-                    },
-                    {
-                        nameArabic: {
-                            '$regex': table_search,
-                            '$options': 'i'
-                        }
-                    },
-                ]
-            });
-
-            return res.render('screens/settingScreens/listAll', {
-                thisUser: req.user,
-                csrfToken,
-                table_search,
-                tbSearch
-            })
-
-        } catch (err) {
-
-            req.flash('error', 'من فضلك أعد المحاولة')
-            return res.render('screens/settingScreens/listAll', {
-                thisUser: req.user,
-                tbSearch: {},
-                table_search,
-                csrfToken
-            })
-        }
-
-
-    },
 }
 
 module.exports = settingService

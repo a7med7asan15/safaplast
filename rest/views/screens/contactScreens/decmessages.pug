@@ -7,11 +7,11 @@ block content
                 .col-sm-6
 
                     h1.m-0.text-dark 
-                        | Messages
+                        | الرسائل
                 .col-sm-6
                         a.btn.btn-success.float-right(href="/dashboard/messages")
                             
-                            |  New Messages
+                            |  الرسائل الجديدة
 
     .content
         .container-fluid
@@ -29,11 +29,12 @@ block content
                                 table.table.table-hover
                                     thead
 
-                                        th Sent:
-                                        th Name
-                                        th Mobile Number 
-                                        th Email 
-                                        th(colspan="2") Message 
+                                        th أرسلت في:
+                                        th الاسم
+                                        th الهاتف
+                                        th الايميل 
+
+                                        th(colspan="2") الرسالة 
                                     tbody
                                         if dataProvided
                                             - var dataArray = dataProvided.docs
@@ -48,23 +49,27 @@ block content
                                             for dat in dataArray
                                                 -  timeDiff = (dateNow - dat.createdAt)/1000
                                                 if timeDiff < 60
-                                                    - timeDiffStr = Math.floor(timeDiff) + " seconds ago"
+                                                    - timeDiffStr = " منذ " + Math.floor(timeDiff) + " ثواني "
                                                 else if timeDiff < 3600 && timeDiff > 60
-                                                    - timeDiffStr = Math.floor(timeDiff/60) + " minutes ago"
+                                                    - timeDiffStr = " منذ " + Math.floor(timeDiff/60) + " دقائق "
                                                 else if timeDiff < 86400 && timeDiff > 3600
-                                                    - timeDiffStr = Math.floor(timeDiff/3600) + " hours ago"
+                                                    - timeDiffStr = " منذ " + Math.floor(timeDiff/3600) + " ساعات "
                                                 else if timeDiff < 259200 && timeDiff > 86400
-                                                    - timeDiffStr = Math.floor(timeDiff/86400) + " days ago"
+                                                    - timeDiffStr = " منذ " + Math.floor(timeDiff/86400) + " أيام "
                                                 else if timeDiff > 259200 
                                                     - timeDiffStr = dat.createdAt.toDateString()
                                                 tr
                                                     td #{ timeDiffStr }
-                                                    td #{ dat.name_contact} #{dat.lastname_contact}
+                                                    td #{ dat.name_contact} 
                                                     td #{dat.contactMobileNo }
                                                     td #{ dat.email_contact }
 
-                                    
-                                                    td(colspan="2" style="word-break: break-all;") #{ dat.message_contact }
+                                                    td(colspan="2" style="word-break: break-all;") 
+                                                        if dat.message_contact === "Download"
+                                                            span.badge.badge-success
+                                                                | Catalog Download
+                                                        else
+                                                            | #{dat.message_contact}
 
 
 
@@ -72,17 +77,17 @@ block content
                             ul.pagination.pagination-sm.m-0.float-right
                                 if hasPrev
                                     li.page-item
-                                        a.page-link(href=href=`/dashboard/booking?p=${page - 1}`) «
+                                        a.page-link(href=href=`/dashboard/messages/inactive?p=${page - 1}`) «
                                 if totalPages > 1
                                     while pages  < 3            
                                         li.page-item
                                             if pages === page
                                                 a.page-link.active( style="background-color:rgba(0,0,0,0.1); color:black;" )= pages
                                             else
-                                                a.page-link.active( href=`/dashboard/booking?p=${pages}`)= pages
+                                                a.page-link.active( href=`/dashboard/messages/inactive?p=${pages}`)= pages
 
                                         - pages++    
 
                                 if hasNext
                                     li.page-item
-                                        a.page-link(href=`/dashboard/booking?p=${page + 1}`) »                            
+                                        a.page-link(href=`/dashboard/messages/inactive?p=${page + 1}`) »                            

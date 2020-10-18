@@ -87,6 +87,15 @@ module.exports  = {
             tag:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
+        addSettingSchema:Joi.object().keys({
+            facebook:Joi.string().optional().allow(''),
+            linkedin:Joi.string().optional().allow(''),
+            logo:Joi.string().required(),
+            favicon:Joi.string().required(),
+            catalog:Joi.string().optional().allow(''),
+            youtube:Joi.string().optional().allow(''),
+            _csrf:Joi.string(), 
+        }),
         
         addbrokerSchema:Joi.object().keys({
             name:Joi.string().required(),

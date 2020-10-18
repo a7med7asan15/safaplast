@@ -12,6 +12,7 @@ const https = require('https')
 const  dotenv  =  require("dotenv");
 const fs = require("fs")
 
+
 var csrf = require('csurf');
 
 csrf({ cookie: true });
@@ -47,7 +48,7 @@ const  newsSiteController  =  require(  './controllers/website/newsSiteControlle
 
 /// Require Seeds 
 
-const  {  seedUser ,seedProperty ,seedOrders,seedAmenties}  =  require('./seeds/areas')
+const  {  seedUser ,seedSetting}  =  require('./seeds/areas')
 
 
 const app = express(); 
@@ -237,6 +238,7 @@ app.get('*', function (req, res) {
 
 
 seedUser()
+seedSetting()
 
 if(process.env.STATUS === "PROD"){
   const privateKey = fs.readFileSync('/etc/letsencrypt/live/elsafaplastelec.com/privkey.pem', 'utf8');
