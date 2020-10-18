@@ -61,10 +61,11 @@ var $validate = $(".download_cat").validate({
             },
             success: function (result) {
                 if (!result.err) {
-                    console.log("Hello")
-                    console.log(data);
-                    console.log(result)
-                    console.log(doLink)
+                    
+                        $("download_cat .btn").prop('disabled', true);
+                        setTimeout(function(){
+                            btn.prop('disabled', false);
+                        }, 10*1000);
                     //localStorage.setItem("name", data.cuName);
                     // localStorage.setItem("orderId", serialData.orderId);
                     return window.location.replace(doLink);
