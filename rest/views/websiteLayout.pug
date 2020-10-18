@@ -5,7 +5,8 @@ html(lang='en')
     //meta(name='viewport' content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible' content='ie=edge')
     if setting
-      link(href=`${setting.favicon}` rel='icon')
+      if setting.favicon
+        link(href=`${setting.favicon}` rel='icon')
     if csrfToken
       meta(name="csrf-token", content=`${csrfToken}`)
     meta(name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no")
@@ -37,7 +38,7 @@ html(lang='en')
 
 
     script(src='/static/websiteAssets/js/jquery-3.3.1.min.js')
-    script(src="/static/bower_components/jquery-validation/dist/jquery.validate.min.js", type="text/javascript")
+    script(src="/static/bower_components/jquery-validation/dist/jquery.validate.min.js" type="text/javascript")
     script(src='/static/websiteAssets/js/plugins.js')
     script(src='/static/websiteAssets/js/main.js')
 
