@@ -158,7 +158,9 @@ const homePageService = {
             const secretKey = "6LffrNgZAAAAAC_jjurUcncB16jhpwJitnEq2N-F"
             const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
             const setting = (await SettingSchema.find().limit(1))[0]
+            console.log(setting)
             setting.dTimes = setting.dTimes + 1
+            
             request(verifyUrl, (err, response, body) => {
                 var valid = true;
                 body = JSON.parse(body);
