@@ -97,7 +97,7 @@ const homePageService = {
                 captcha
             } = req.body;
             const secretKey = "6Le8rs8ZAAAAANNqQUUwT0nCWmdEU2iOcWtrZ5rg"
-            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
+            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body['g-recaptcha-response']}`;
 
             request(verifyUrl, (err, response, body) => {
                 body = JSON.parse(body);
@@ -153,7 +153,7 @@ const homePageService = {
                 captcha
             } = req.body;
             const secretKey = "6LffrNgZAAAAAC_jjurUcncB16jhpwJitnEq2N-F"
-            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
+            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body['g-recaptcha-response']}`;
 
             request(verifyUrl, (err, response, body) => {
                 body = JSON.parse(body);
