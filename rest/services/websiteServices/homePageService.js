@@ -5,6 +5,8 @@ const ClientSchema = require('../../models/clientSchema');
 const CertificateSchema = require('../../models/certificateSchema');
 const SettingSchema = require('../../models/settingSchema');
 const request = require('request')
+const  bodyParser  =  require('body-parser');
+
 
 const {
     MsgSchema
@@ -158,27 +160,19 @@ const homePageService = {
             const secretKey = "6LffrNgZAAAAAC_jjurUcncB16jhpwJitnEq2N-F"
             const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
             const setting = (await SettingSchema.find().limit(1))[0]
-            console.log(setting)
             setting.dTimes = setting.dTimes + 1
-            
+            setting.save()
             request(verifyUrl, (err, response, body) => {
-                var valid = true;
                 body = JSON.parse(body);
 
                 if (!body.success && body.success === undefined) {
                     valid = false
                     return res.json({
                         "success": false,
-                        "msg": "captcha verification failed"
+                        "msg": "captcha verification failed", 
+                        err:true
                     });
-                } else if (body.score < 0.5) {
-                    valid = false
-                    return res.json({
-                        "success": false,
-                        "msg": "you might be a bot, sorry!",
-                        "score": body.score,
-                    });
-                }
+                } 
                 const msg = new MsgSchema({
                     name_contact:name,
                     contactMobileNo: phone,
@@ -191,7 +185,7 @@ const homePageService = {
                 return res.json({
                     "success": true,
                     "msg": "captcha verification passed",
-                    "score": body.score,
+                    err:false
                 });
                 
 

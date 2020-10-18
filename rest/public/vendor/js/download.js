@@ -13,6 +13,10 @@ var $validate = $(".download_cat").validate({
             maxlength: 11,
             //pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
         },
+        'g-recaptcha-response':{
+            required:true
+        }
+
     },
     messages: {
         name: {
@@ -28,6 +32,9 @@ var $validate = $(".download_cat").validate({
             maxlength: "Enter Valid Phone",
             //pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
         },
+        'g-recaptcha-response':{
+            required:"Please Select Captcha"
+        }
     },
     highlight: function (element) {
         $(element).addClass("is-invalid");
@@ -61,10 +68,10 @@ var $validate = $(".download_cat").validate({
             },
             success: function (result) {
                 if (!result.err) {
-                    
+                        console.log(result)
                         $(".download_cat .btn").prop('disabled', true);
                         setTimeout(function(){
-                            btn.prop('disabled', false);
+                            $(".download_cat .btn").prop('disabled', false);
                         }, 10*1000);
                     //localStorage.setItem("name", data.cuName);
                     // localStorage.setItem("orderId", serialData.orderId);
