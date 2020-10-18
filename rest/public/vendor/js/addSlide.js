@@ -63,12 +63,12 @@ $(function () {
     $("#addnewdata").validate({
       //ignore: [],
       rules: {
-        name: {
+        title: {
           required: true,
         },
       },
       messages: {
-        name: {
+        title: {
           required: "Please Enter Title",
         },
         
@@ -82,9 +82,9 @@ $(function () {
       submitHandler: function (form, event) {
           event.preventDefault();
           const serialData = $(form).serializeArray();
-          var link = '/dashboard/clients/add';
+          var link = '/dashboard/slider/add';
         if(!add){
-           link =`/dashboard/clients/edit/${postId}`;
+           link =`/dashboard/slider/edit/${postId}`;
         }
         serialData.push({name:"img" , value: featImage })
           var sentdata = {}

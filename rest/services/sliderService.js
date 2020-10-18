@@ -41,7 +41,7 @@ const sliderService = {
             return res.render('screens/sliderScreens/add', {
                 thisUser: req.user,
                 csrfToken,
-                title: "منتج جديد"
+                title: "سلايد جديد"
             })
 
         } catch (err) {
@@ -133,16 +133,31 @@ const sliderService = {
     //Update City
     update: async (req, res) => {
         const {
-            nameEnglish,
-            nameArabic
+            title,
+            subTitle,
+            img,
+            link,
+            btnText,
+            isButton
         } = req.body
         const {
             dataId
         } = req.params
         try {
+            var isBtn
+            if (!isButton) {
+                isBtn = "false"
+            } else {
+                isBtn = "true"
+            }
             const updateData = await SliderSchema.findById(dataId)
-            updateData.nameEnglish = nameEnglish,
-                updateData.nameArabic = nameArabic,
+            updateData.title = title,
+            updateData.subTitle = subTitle,
+            updateData.img = img,
+            updateData.link = link,
+            updateData.btnText = btnText,
+            updateData.isButton = isBtn,
+
                 await updateData.save();
             req.session.passedData = false
             req.flash('success', 'تمت العملية بنجاح')
@@ -179,13 +194,13 @@ const sliderService = {
             } = req.body;
             const tbSearch = await SliderSchema.find({
                 "$or": [{
-                        nameEnglish: {
+                        title: {
                             '$regex': table_search,
                             '$options': 'i'
                         }
                     },
                     {
-                        nameArabic: {
+                        subTitle: {
                             '$regex': table_search,
                             '$options': 'i'
                         }

@@ -135,7 +135,7 @@ sliderService.showOne
 
 router.post('/edit/:dataId', 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addSlideSchema),
 
 csrfProtection,
 
