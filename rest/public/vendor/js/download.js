@@ -68,6 +68,7 @@ var $validate = $(".download_cat").validate({
             },
             success: function (result) {
                 if (!result.err) {
+                        console.log(serialData)
                         console.log(data)
                         console.log(result)
                         $(".download_cat .btn").prop('disabled', true);
