@@ -35,7 +35,6 @@ block content
                                     th عنوان السلايد
                                     th الفقرة
                                     th لينك الزر
-                                    th عرض
                                     th تعديل
                                     th حذف
                                 tbody
@@ -45,10 +44,6 @@ block content
                                                 td #{tb.title}
                                                 td #{ tb.subTitle }
                                                 td #{ tb.link }
-                                                td
-                                                    a.btn-sm.btn-primary(href=`/dashboard/slider/${tb.id}`)
-                                                        i.far.fa-eye
-                                                        |  عرض
                                                 td
                                                     a.btn-sm.btn-warning(href=`/dashboard/slider/edit/${tb.id}`)
                                                         i.far.fa-edit
@@ -73,10 +68,6 @@ block content
                                                 td #{ s.title}
                                                 td #{ s.subTitle }
                                                 td #{ s.link }                                
-                                                td
-                                                    a.btn-sm.btn-primary(href=`/dashboard/slider/${s.id}`)
-                                                        i.far.fa-eye
-                                                        |  عرض
                                                
                                                 td
                                                     a.btn-sm.btn-warning(href=`/dashboard/slider/edit/${s.id}`)
