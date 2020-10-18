@@ -62,7 +62,7 @@ var $validate = $(".download_cat").validate({
             success: function (result) {
                 if (!result.err) {
                     
-                        $("download_cat .btn").prop('disabled', true);
+                        $(".download_cat .btn").prop('disabled', true);
                         setTimeout(function(){
                             btn.prop('disabled', false);
                         }, 10*1000);
