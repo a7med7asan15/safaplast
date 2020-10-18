@@ -112,3 +112,6 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
     color:#fff;
     
 }
+.header-layout2 .navbar .navbar-brand {
+    height: 70px !important;
+}
