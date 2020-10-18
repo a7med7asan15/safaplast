@@ -36,21 +36,26 @@ aside.main-sidebar.sidebar-light-primary.elevation-4
             i.left.pr-2.fas.fa-building
             p
               | العملاء 
-        li.nav-item
-          a.nav-link(href="/dashboard/news")
+        li.nav-item.has-treeview
+          a.nav-link(href="#")
             i.left.pr-2.fas.fa-newspaper
             p
-              | الأخبار
+              | البوستات 
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link(href="/dashboard/news")
+                i.left.pr-2.fas.fa-newspaper
+                p الاخبار
+            li.nav-item
+              a.nav-link(href="/dashboard/news/portfolio")
+                i.left.pr-2.fas.fa-tasks
+                p المشاريع السابقة
         li.nav-item
-          a.nav-link(href="/dashboard/news")
+          a.nav-link(href="/dashboard/certificates")
             i.left.pr-2.fas.fa-stamp
             p
               | الشهادات
-        li.nav-item
-          a.nav-link(href="/dashboard/news")
-            i.left.pr-2.fas.fa-tasks
-            p
-              | المشاريع السابقة
         li.nav-item
           a.nav-link(href="/dashboard/slider")
             i.left.pr-2.fas.fa-images

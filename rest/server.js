@@ -41,6 +41,9 @@ const  certificateController  =  require(  './controllers/dashboard/certificateC
 
 const  homePageController  =  require(  './controllers/website/homePageController'  );
 const  contactController  =  require(  './controllers/website/contactController'  );
+const  productSiteController  =  require(  './controllers/website/productSiteController'  );
+const  newsSiteController  =  require(  './controllers/website/newsSiteController'  );
+
 
 /// Require Seeds 
 
@@ -198,6 +201,9 @@ app.use(   passport.session()   );
 
 
 app.use(   '/'   ,   homePageController   );
+app.use(   '/products'   ,   productSiteController   );
+app.use(   '/blog'   ,   newsSiteController   );
+
 app.use(   '/dashboard'   ,   authController   );
 app.use(   '/dashboard/users'   ,   usersController   );
 app.use(   '/dashboard/products'   ,  productController   );

@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 
 const clientSchema = new Schema({
     name :  { type: String , required: true},
-    logo :  { type: String , required: true},
+    img :  { type: String },
 })
 
 clientSchema.plugin(mongoosePaginate);

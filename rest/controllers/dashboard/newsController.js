@@ -65,8 +65,27 @@ newsService.show
 
 
 );
+router.get( '/portfolio',
 
 
+csrfProtection, 
+
+
+newsService.showPort
+
+
+);
+
+router.get( '/add',
+
+
+csrfProtection, 
+
+
+newsService.addPage
+
+
+);
 
 
 
@@ -81,10 +100,10 @@ newsService.show
 
 
 
-router.post( '/',
+router.post( '/add',
 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addNewsSchema),
 
 csrfProtection, 
 
@@ -124,7 +143,7 @@ newsService.showOne
 
 router.post('/edit/:dataId', 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addNewsSchema),
 
 csrfProtection,
 

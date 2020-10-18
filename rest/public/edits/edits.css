@@ -88,3 +88,19 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
 .product-slides .slide-item{
     height:350px;
 }
+
+.product-tables table{
+    table-layout: fixed;
+}
+
+.product-tables table tr td{
+    color: #0b2653
+}
+.product-tables table tr td:first-child{
+    background-color: #0b2653 ;
+    color:#fff
+}
+
+.clients .client img {
+    width: 90px !important;
+}

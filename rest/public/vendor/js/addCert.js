@@ -51,7 +51,7 @@ $(function () {
        })
 
        this.on("removedfile" ,function(file){
-        featuredImage = '';
+        featImage = '';
       
       })
 
@@ -60,7 +60,7 @@ $(function () {
  
   Inputmask().mask(document.querySelectorAll("input"));
   
-    $("#addnewdata").validate({
+    $("#addData").validate({
       //ignore: [],
       rules: {
         name: {
@@ -82,10 +82,8 @@ $(function () {
       submitHandler: function (form, event) {
           event.preventDefault();
           const serialData = $(form).serializeArray();
-          var link = '/dashboard/clients/add';
-        if(!add){
-           link =`/dashboard/clients/edit/${postId}`;
-        }
+          console.log(serialData)
+          var link = '/dashboard/certificates/add';
         serialData.push({name:"img" , value: featImage })
           var sentdata = {}
   
@@ -95,6 +93,7 @@ $(function () {
             
                
            });
+           console.log(sentdata)
            $.ajax({
 
               type: "POST",

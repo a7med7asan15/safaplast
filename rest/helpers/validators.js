@@ -61,6 +61,16 @@ module.exports  = {
             name:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
+        addClientSchema:Joi.object().keys({
+            name:Joi.string().required(),
+            img:Joi.string().optional().allow(''),
+            _csrf:Joi.string(), 
+        }),
+        addCertSchema:Joi.object().keys({
+            name:Joi.string().required(),
+            img:Joi.string().optional().allow(''),
+            _csrf:Joi.string(), 
+        }),
         addSlideSchema:Joi.object().keys({
             title:Joi.string().required(),
             subTitle:Joi.string().optional().allow(''),
@@ -68,6 +78,13 @@ module.exports  = {
             isButton:Joi.string().optional().allow(''),
             btnText:Joi.string().optional().allow(''),
             link:Joi.string().optional().allow(''),
+            _csrf:Joi.string(), 
+        }),
+        addNewsSchema:Joi.object().keys({
+            title:Joi.string().required(),
+            htmlArticle:Joi.string().required(),
+            featuredImage:Joi.string().optional().allow(''),
+            tag:Joi.string().required(),
             _csrf:Joi.string(), 
         }),
         

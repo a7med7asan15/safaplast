@@ -18,7 +18,7 @@ const clientService = {
                 page,
                 limit: 10,
             }
-            const dataProvided = await ClientSchema.paginate({}, options);
+            const dataProvided = await ClientSchema.find();
             return res.render('screens/clientScreens/listAdd', {
                 thisUser: req.user,
                 csrfToken,
@@ -41,7 +41,7 @@ const clientService = {
 
         const {
             name,
-            logo
+            img
         } = req.body;
 
 
@@ -53,7 +53,7 @@ const clientService = {
 
                 name,
 
-                logo
+                img
 
 
             })
@@ -76,57 +76,6 @@ const clientService = {
 
     },
 
-    showOne: async (req, res) => {
-        req.session.lastlink = req.url
-        let csrfToken = req.csrfToken();
-
-        try {
-            const {
-                dataId
-            } = req.params
-
-            const dataProvided = await ClientSchema.findById(dataId);
-
-            return res.render('screens/clientScreens/edit', {
-                thisUser: req.user,
-                dataProvided,
-                csrfToken
-            })
-        } catch (err) {
-            req.flash('error', 'من فضلك أعد المحاولة')
-            return res.render('screens/clientScreens/edit', {
-                thisUser: req.user,
-                dataProvided: {},
-                csrfToken
-            })
-        }
-
-    },
-
-    //Update City
-    update: async (req, res) => {
-        const {
-            name,
-            logo
-        } = req.body
-        const {
-            dataId
-        } = req.params
-        try {
-            const updateData = await ClientSchema.findById(dataId)
-            updateData.name = name,
-                updateData.logo = logo,
-                await updateData.save();
-            req.session.passedData = false
-            req.flash('success', 'تمت العملية بنجاح')
-            return res.redirect(`/dashboard/clients/edit/${dataId}`)
-        } catch (err) {
-            req.flash('error', 'من فضلك أعد المحاولة')
-            return res.redirect(`/dashboard/clients/edit/${dataId}`)
-        }
-
-    },
-
     //Delete City
     destroy: async (req, res) => {
         const {
@@ -144,43 +93,6 @@ const clientService = {
         }
     },
 
-    searchShow: async (req, res) => {
-        try {
-            let csrfToken = req.csrfToken();
-            const {
-                table_search,
-            } = req.body;
-            const tbSearch = await ClientSchema.find({
-                "$or": [{
-                        name: {
-                            '$regex': table_search,
-                            '$options': 'i'
-                        }
-                    },
-
-                ]
-            });
-
-            return res.render('screens/clientScreens/listAdd', {
-                thisUser: req.user,
-                csrfToken,
-                table_search,
-                tbSearch
-            })
-
-        } catch (err) {
-
-            req.flash('error', 'من فضلك أعد المحاولة')
-            return res.render('screens/clientScreens/listAdd', {
-                thisUser: req.user,
-                tbSearch: {},
-                table_search,
-                csrfToken
-            })
-        }
-
-
-    },
 }
 
 module.exports = clientService

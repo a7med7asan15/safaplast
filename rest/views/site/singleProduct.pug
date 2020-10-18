@@ -1,41 +1,29 @@
 extends ../websiteLayout.pug
 
 block content 
-    section#blogSingle.blog.blog-single.pt-40
-        .container
-            .row
-                .col-sm-12.col-md-6.col-lg-6
-                    #slider2.slider.slider-2.product-slides
-                        .carousel.owl-carousel.carousel-arrows.carousel-dots(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='false' data-nav='true' data-dots='true' data-space='0' data-loop='true' data-speed='3000' data-transition='fade' data-animate-out='fadeOut' data-animate-in='fadeIn')
-                            .slide-item.align-v-h.bg-overlay
-                                .bg-img
-                                    img(src='/static/websiteAssets/images/sliders/2.jpg' alt='slide img')
-
-
-                            .slide-item.align-v-h.bg-overlay
-                                .bg-img
-                                    img(src='/static/websiteAssets/images/sliders/4.jpg' alt='slide img')
+    if dataProvided
+        section#blogSingle.blog.blog-single.pt-40
+            .container
+                .row
+                    .col-sm-12.col-md-6.col-lg-6
+                        #slider2.slider.slider-2.product-slides
+                            .carousel.owl-carousel.carousel-arrows.carousel-dots(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='false' data-nav='true' data-dots='true' data-space='0' data-loop='true' data-speed='3000' data-transition='fade' data-animate-out='fadeOut' data-animate-in='fadeIn')
+                             if dataProvided.images
+                              for im in dataProvided.images
+                                .slide-item.align-v-h.bg-overlay
+                                    .bg-img
+                                        img(src=`${im.imageLink}` alt=`Elsafa PLast ${dataProvided.title}`)
 
 
 
-                .col-sm-12.col-md-6.col-lg-6
-                    .blog__content
-                        h3 Here is the first News
-                        .blog__desc
-                            p
-                                | The key to the success of any logistics contract is good logistics management. The key to good
-                                | management is the ability to identify the needs of the client and the countries in which the work
-                                | will take place, as well as being in a position to advise the best way forward. In today’s
-                                | international and remote locations, experience and understanding of logistics operations and local
-                                | networks is vital. With the many years of experience in our team, we have a detailed understanding
-                                | of the criticality or every aspect of the logistics world.               
-            .row
-                .col-sm-12.col-md-12.col-lg-12
-                    .product-tables
-                        p
-                        | The key to the success of any logistics contract is good logistics management. The key to good
-                        | management is the ability to identify the needs of the client and the countries in which the work
-                        | will take place, as well as being in a position to advise the best way forward. In today’s
-                        | international and remote locations, experience and understanding of logistics operations and local
-                        | networks is vital. With the many years of experience in our team, we have a detailed understanding
-                        | of the criticality or every aspect of the logistics world.
+                    .col-sm-12.col-md-6.col-lg-6
+                        .blog__content
+                            h3 
+                                | #{dataProvided.title}
+                            .blog__desc
+                                p !{dataProvided.htmlInfo}              
+                .row
+                    .col-sm-12.col-md-12.col-lg-12
+                        .product-tables
+                            p  !{dataProvided.htmlTable}
+                            

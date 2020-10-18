@@ -14,168 +14,24 @@ block content
                     ul.portfolio-filter.justify-content-center
                         li
                             a.filter.active(href='#' data-filter='all') All
-                        li
-                            a.filter(href='#' data-filter='.filter-energy') Energy
-                        li
-                            a.filter(href='#' data-filter='.filter-construction') Construction
-                        li
-                            a.filter(href='#' data-filter='.filter-oil') oil & Gas
-                        li
-                            a.filter(href='#' data-filter='.filter-chemicals') chemicals
-                        li
-                            a.filter(href='#' data-filter='.filter-engineering') engineering
-                    // /.portfolio-filter
-                    // /.col-lg-12
-                    // /.row
+                        if types
+                            for t in types 
+                                li
+                                    a.filter(href='#' data-filter=`.filter-${t.slug}`) #{t.name}
+
                     #filtered-items-wrap.row
                         // portfolio item #1
-                        .col-sm-6.col-md-4.col-lg-3.mix.filter-construction
-                            .portfolio-item
-                                .portfolio__img
-                                    img(src='/static/websiteAssets/images/case-studies/grid/1.jpg' alt='portfolio img')
-                                    a.view__icon(href='/singleProduct') View
-                                // /.portfolio-img
-                                .portfolio__content
-                                    h4.portfolio__title
-                                        a(href='/singleProduct') Floride Chemicals Factory
-                                    //.portfolio__cat
-                                        a(href='#') Chemicals
-                                        a(href='#') oil & Gas
-                                    // /.portfolio-cat
-                                    // /.portfolio-content
-                                    // /.portfolio-item
-                                    // /.col-lg-4
-                                    // portfolio item #2
-                        .col-sm-6.col-md-4.col-lg-3.mix.filter-energy
-                            .portfolio-item
-                                .portfolio__img
-                                    img(src='/static/websiteAssets/images/case-studies/grid/2.jpg' alt='portfolio img')
-                                    a.view__icon(href='/singleProduct') View
-                                // /.portfolio-img
-                                .portfolio__content
-                                    h4.portfolio__title
-                                        a(href='/singleProduct') Highway Energy Station
-                                    //.portfolio__cat
-                                        a(href='#') Construction 
-                                        a(href='#') Energy
-                                    // /.portfolio-cat
-                                    // /.portfolio-content
-                                    // /.portfolio-item
-                                    // /.col-lg-4
-                                    // portfolio item #3
-                        .col-sm-6.col-md-4.col-lg-3.mix.filter-oil
-                            .portfolio-item
-                                .portfolio__img
-                                    img(src='/static/websiteAssets/images/case-studies/grid/3.jpg' alt='portfolio img')
-                                    a.view__icon(href='/singleProduct') View
-                                // /.portfolio-img
-                                .portfolio__content
-                                    h4.portfolio__title
-                                        a(href='/singleProduct') Villy Manufacturing Inc
-                                    //.portfolio__cat
-                                        a(href='#') Engineering
-                                        a(href='#') Auto
-                                    // /.portfolio-cat
-                                    // /.portfolio-content
-                                    // /.portfolio-item
-                                    // /.col-lg-4
-                                    // portfolio item #4
-                        .col-sm-6.col-md-4.col-lg-3.mix.filter-chemicals
-                            .portfolio-item
-                                .portfolio__img
-                                    img(src='/static/websiteAssets/images/case-studies/grid/4.jpg' alt='portfolio img')
-                                    a.view__icon(href='/singleProduct') View
-                                // /.portfolio-img
-                                .portfolio__content
-                                    h4.portfolio__title
-                                        a(href='/singleProduct') Regulatory Compliance Seminar
-                                    //.portfolio__cat
-                                        a(href='#') Construction
-                                        a(href='#') Engineering
-                                    // /.portfolio-cat
-                                    // /.portfolio-content
-                                    // /.portfolio-item
-                                    // /.col-lg-4
-                                    // portfolio item #5
-                        .col-sm-6.col-md-4.col-lg-3.mix.filter-engineering
-                            .portfolio-item
-                                .portfolio__img
-                                    img(src='/static/websiteAssets/images/case-studies/grid/5.jpg' alt='portfolio img')
-                                    a.view__icon(href='/singleProduct') View
-                                // /.portfolio-img
-                                .portfolio__content
-                                    h4.portfolio__title
-                                        a(href='/singleProduct') Documents & Electronic Data
-                                    //.portfolio__cat
-                                        a(href='#') Engineering
-                                        a(href='#') oil & Gas
-                                    // /.portfolio-cat
-                                    // /.portfolio-content
-                                    // /.portfolio-item
-                                    // /.col-lg-4
-                                    // portfolio item #6
-                        .col-sm-6.col-md-4.col-lg-3.mix.filter-oil
-                            .portfolio-item
-                                .portfolio__img
-                                    img(src='/static/websiteAssets/images/case-studies/grid/6.jpg' alt='portfolio img')
-                                    a.view__icon(href='/singleProduct') View
-                                // /.portfolio-img
-                                .portfolio__content
-                                    h4.portfolio__title
-                                        a(href='/singleProduct') Role of the Importer
-                                    //.portfolio__cat
-                                        a(href='#') Energy
-                                        a(href='#') Chemicals
-                                    // /.portfolio-cat
-                                    // /.portfolio-content
-                                    // /.portfolio-item
-                                    // /.col-lg-4
-                                    // portfolio item #7
-                        .col-sm-6.col-md-4.col-lg-3.mix.filter-chemicals.portfolio-hidden
-                            .portfolio-item
-                                .portfolio__img
-                                    img(src='/static/websiteAssets/images/case-studies/grid/3.jpg' alt='portfolio img')
-                                    a.view__icon(href='/singleProduct') View
-                                // /.portfolio-img
-                                .portfolio__content
-                                    h4.portfolio__title
-                                        a(href='/singleProduct') Regulatory Compliance Seminar
-                                    //.portfolio__cat
-                                        a(href='#') Chemicals
-                                        a(href='#') oil & Gas
-                                    // /.portfolio-cat
-                                    // /.portfolio-content
-                                    // /.portfolio-item
-                                    // /.col-lg-4
-                                    // portfolio item #8
-                        .col-sm-6.col-md-4.col-lg-3.mix.filter-energy.portfolio-hidden
-                            .portfolio-item
-                                .portfolio__img
-                                    img(src='/static/websiteAssets/images/case-studies/grid/1.jpg' alt='portfolio img')
-                                    a.view__icon(href='/singleProduct') View
-                                // /.portfolio-img
-                                .portfolio__content
-                                    h4.portfolio__title
-                                        a(href='/singleProduct') Floride Chemicals Factory
-                                    //.portfolio__cat
-                                        a(href='#') Chemicals
-                                        a(href='#') oil & Gas
-                                    // /.portfolio-cat
-                                    // /.portfolio-content
-                                    // /.portfolio-item
-                                    // /.col-lg-4
-                                    // portfolio item #9
-                        .col-sm-6.col-md-4.col-lg-3.mix.filter-engineering.portfolio-hidden
-                            .portfolio-item
-                                .portfolio__img
-                                    img(src='/static/websiteAssets/images/case-studies/grid/2.jpg' alt='portfolio img')
-                                    a.view__icon(href='/singleProduct') View
-                                // /.portfolio-img
-                                .portfolio__content
-                                    h4.portfolio__title
-                                        a(href='/singleProduct') Villy Manufacturing Inc
-                                    //.portfolio__cat
-                                        a(href='#') Chemicals
-                                        a(href='#') oil & Gas
+                        if dataProvided
+                            for p in dataProvided
+                                .col-sm-6.col-md-4.col-lg-3.mix(class=`filter-${p.type.slug}`)
+                                    .portfolio-item
+                                        .portfolio__img
+                                            if p.images.length != 0
+                                                img(src=`${p.images[0].imageLink}` alt=`Elsafa Plast ${p.title}`)
+                                            a.view__icon(href=`/products/${p.slug}`) View
 
-              
+                                        .portfolio__content
+                                            h4.portfolio__title
+                                                a(href=`/products/${p.slug}`) #{p.title}
+
+                        

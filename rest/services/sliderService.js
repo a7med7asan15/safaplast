@@ -37,48 +37,48 @@ const sliderService = {
     addPage: async (req, res) => {
         let csrfToken = req.csrfToken();
         try {
-          return res.render('screens/sliderScreens/add', {
-            thisUser: req.user,
-            csrfToken,
-            title: "منتج جديد"
-          })
-    
+            return res.render('screens/sliderScreens/add', {
+                thisUser: req.user,
+                csrfToken,
+                title: "منتج جديد"
+            })
+
         } catch (err) {
             console.log(err)
-          res.send("error")
+            res.send("error")
         }
-    
-      },
+
+    },
     add: async (req, res) => {
 
 
 
         const {
             title,
-            subTitle, 
-            img, 
-            link, 
-            btnText, 
+            subTitle,
+            img,
+            link,
+            btnText,
             isButton
         } = req.body;
 
 
         try {
             var isBtn
-            if(!isButton){
-                isBtn="false"
-            }else{
+            if (!isButton) {
+                isBtn = "false"
+            } else {
                 isBtn = "true"
             }
 
             const newData = new SliderSchema({
 
                 title,
-                subTitle, 
-                img, 
-                link, 
-                btnText, 
-                isButton:isBtn
+                subTitle,
+                img,
+                link,
+                btnText,
+                isButton: isBtn
 
 
             })

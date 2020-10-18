@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 const newsSchema = new Schema({
     title :  { type: String , required: true},
     createdAt: { type: Date, default: Date.now },
-    featuredImage:{type:String, required: true},
+    featuredImage:{type:String},
     htmlArticle: { type: String , required: true}, 
     slug:{ type: String, slug: ["title"], slug_padding_size: 4,  unique: true },
     tag :  { type: String , default:"news"},

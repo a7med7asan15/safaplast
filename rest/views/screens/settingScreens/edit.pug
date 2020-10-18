@@ -21,7 +21,7 @@ block content
                 .card
                     .card-header
                         h3.card-title Property Information
-                    form#addnewprop(role="form" action=`/dashboard/propertys/edit?id=${property.id}` method="POST")
+                    form#addnewprop(role="form" action=`/dashboard/propertys/edit/${property.id}` method="POST")
                         .card-body.row
                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                             .form-group.col-md-12

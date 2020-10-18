@@ -131,7 +131,7 @@ $(function () {
       submitHandler:function(form,e){
         var link = '/dashboard/products/add';
         if(!add){
-           link =`/dashboard/products/edit?id=${postId}`;
+           link =`/dashboard/products/edit/${postId}`;
         }
           e.preventDefault();  
           var serialData = $( form ).serializeArray();

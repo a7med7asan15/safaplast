@@ -217,114 +217,27 @@ block content
             .row
                 .col-sm-12.col-md-12.col-lg-12
                     .carousel.owl-carousel.carousel-arrows(data-slide='3' data-slide-md='2' data-slide-sm='1' data-autoplay='true' data-nav='true' data-dots='false' data-space='30' data-loop='true' data-speed='800')
-                        .portfolio-item
-                            .portfolio__img
-                                img(src='/static/websiteAssets/images/case-studies/grid/1.jpg' alt='portfolio img')
-                                a.view__icon(href='#') View
-                            // /.portfolio-img
-                            .portfolio__content
-                                h4.portfolio__title
-                                    a(href='#') Floride Chemicals Factory
-                                .portfolio__cat
-                                    a(href='#') Chemicals
-                                    a(href='#') oil & Gas
-                                // /.portfolio-cat
-                                // /.portfolio-content
-                                // /.portfolio-item
-                        .portfolio-item
-                            .portfolio__img
-                                img(src='/static/websiteAssets/images/case-studies/grid/2.jpg' alt='portfolio img')
-                                a.view__icon(href='#') View
-                            // /.portfolio-img
-                            .portfolio__content
-                                h4.portfolio__title
-                                    a(href='#') Highway Energy Station
-                                .portfolio__cat
-                                    a(href='#') Construction 
-                                    a(href='#') Energy
-                                // /.portfolio-cat
-                                // /.portfolio-content
-                                // /.portfolio-item
-                        .portfolio-item
-                            .portfolio__img
-                                img(src='/static/websiteAssets/images/case-studies/grid/3.jpg' alt='portfolio img')
-                                a.view__icon(href='#') View
-                            // /.portfolio-img
-                            .portfolio__content
-                                h4.portfolio__title
-                                    a(href='#') Villy Manufacturing Inc
-                                .portfolio__cat
-                                    a(href='#') Engineering
-                                    a(href='#') Auto
-                                // /.portfolio-cat
-                                // /.portfolio-content
-                                // /.portfolio-item
-                        .portfolio-item
-                            .portfolio__img
-                                img(src='/static/websiteAssets/images/case-studies/grid/4.jpg' alt='portfolio img')
-                                a.view__icon(href='#') View
-                            // /.portfolio-img
-                            .portfolio__content
-                                h4.portfolio__title
-                                    a(href='#') Regulatory Compliance Seminar
-                                .portfolio__cat
-                                    a(href='#') Construction
-                                    a(href='#') Engineering
-                                // /.portfolio-cat
-                                // /.portfolio-content
-                                // /.portfolio-item
-                        .portfolio-item
-                            .portfolio__img
-                                img(src='/static/websiteAssets/images/case-studies/grid/5.jpg' alt='portfolio img')
-                                a.view__icon(href='#') View
-                            // /.portfolio-img
-                            .portfolio__content
-                                h4.portfolio__title
-                                    a(href='#') Documents & Electronic Data
-                                .portfolio__cat
-                                    a(href='#') Engineering
-                                    a(href='#') oil & Gas
-                                // /.portfolio-cat
-                                // /.portfolio-content
-                                // /.portfolio-item
-                                // /.carousel
-                                // /.col-lg-12
-                                // /.row
-                                // /.container
+                        if products
+                            for p in products
+                                .portfolio-item
+                                    .portfolio__img
+                                        img(src=`${p.images[0].imageLink}` alt=`Elsafa PLast ${p.title}`)
+                                        a.view__icon(href=`/products/${p.slug}`) View
+                                    // /.portfolio-img
+                                    .portfolio__content
+                                        h4.portfolio__title
+                                            a(href=`/products/${p.slug}`) #{p.title}
 
     section#clients.clients.border-top
         .container
             .row
                 .col-sm-12.col-md-12.col-lg-12
                     .carousel.owl-carousel(data-slide='6' data-slide-md='4' data-slide-sm='2' data-autoplay='true' data-nav='false' data-dots='false' data-space='20' data-loop='true' data-speed='700')
-                        .client
-                            a(href='#')
-                                img(src='/static/websiteAssets/images/clients/9.png' alt='client')
-                        // /.client
-                        .client
-                            a(href='#')
-                                img(src='/static/websiteAssets/images/clients/10.png' alt='client')
-                        // /.client
-                        .client
-                            a(href='#')
-                                img(src='/static/websiteAssets/images/clients/11.png' alt='client')
-                        // /.client
-                        .client
-                            a(href='#')
-                                img(src='/static/websiteAssets/images/clients/12.png' alt='client')
-                        // /.client
-                        .client
-                            a(href='#')
-                                img(src='/static/websiteAssets/images/clients/13.png' alt='client')
-                        // /.client
-                        .client
-                            a(href='#')
-                                img(src='/static/websiteAssets/images/clients/11.png' alt='client')
-                        // /.client
-                        // /.carousel
-                        // /.col-lg-12
-                        // /.row
-                        // /.container
+                        if clients
+                            for c in clients
+                                .client
+                                    img(src=`${c.img}` alt=`${c.title}`)
+
 
     //section#Banner3.banner.banner-3.p-0
         .container-fluid.col-padding-0
@@ -376,57 +289,24 @@ block content
                 .col-sm-12.col-md-12.col-lg-4
                     .heading.mb-50
                         span.heading__subtitle Latest Articles
-                        h2.heading__title Insight And Trends Updated Daily
-                        a.btn.btn__primary.btn__bordered.mt-10(href='news.html') Elsafa Plast in News
-                    // /.heading
-                    // /.col-lg-4
-                    // Blog Item #1
-                .col-sm-12.col-md-6.col-lg-4
-                    .blog-item
-                        .blog__img
-                            a(href='#')
-                                img(src='/static/websiteAssets/images/blog/grid/1.jpg' alt='blog image')
-                        // /.entry-img
-                        .blog__content
-                            .blog__meta
-                                .blog__meta-cat
-                                    a(href='#') Oil & Gas
-                                    a(href='#') Insights
-                                // /.blog-meta-cat
-                                span.blog__meta-date Jan 20, 2019
-                            // /.blog-meta
-                            h4.blog__title
-                                a(href='#') Importers achieve cost savings through the First Sale rule!
-                            a.btn.btn__secondary.btn__link(href='#')
-                                i.icon-arrow-right.arrow-rounded
-                                span Read More
-                        // /.entry-content
-                        // /.blog-item
-                        // /.col-lg-4
-                        // Blog Item #2
-                .col-sm-12.col-md-6.col-lg-4
-                    .blog-item
-                        .blog__img
-                            a(href='#')
-                                img(src='/static/websiteAssets/images/blog/grid/2.jpg' alt='blog image')
-                        // /.entry-img
-                        .blog__content
-                            .blog__meta
-                                .blog__meta-cat
-                                    a(href='#') Industry
-                                    a(href='#') Construction
-                                // /.blog-meta-cat
-                                span.blog__meta-date Oct 18, 2019
-                            // /.blog-meta
-                            h4.blog__title
-                                a(href='#') Cargo flow through better supply chain visibility, control.
-                            a.btn.btn__secondary.btn__link(href='#')
-                                i.icon-arrow-right.arrow-rounded
-                                span Read More
-                        // /.entry-content
-                        // /.blog-item
-                        // /.col-lg-4
-                        // /.row
+                        h2.heading__title Insights, Trends and More 
+                        a.btn.btn__primary.btn__bordered.mt-10(href='/blog') Elsafa Plast in News
+                if news
+                    for n, i in news
+                        if i<5
+                            .col-sm-12.col-md-6.col-lg-4
+                                .blog-item
+                                    .blog__img
+                                        a(href=`/blog/${n.slug}`)
+                                            img(src=`${n.featuredImage}` alt=`Elsafa Plast ${n.title}`)
+
+                                    .blog__content
+                                        .blog__meta
+                                            span.blog__meta-date #{n.createdAt.toDateString()}
+                                        // /.blog-meta
+                                        h4.blog__title
+                                            a(href=`/blog/${n.slug}`) #{n.title}
+
 block scripts
     script(src="https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
 

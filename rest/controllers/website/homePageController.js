@@ -5,6 +5,8 @@ var csrf = require('csurf');
 const csrfProtection = csrf()
 const passport = require('passport');
 const homePageService = require('../../services/websiteServices/homePageService');
+const newsService = require('../../services/websiteServices/newsService');
+
 
 // Validation Middleware 
 // Joi Js
@@ -50,46 +52,26 @@ homePageService.show
 
 
 router.get('/portfolio', 
-homePageService.portPage
+csrfProtection,
+newsService.portPage
 
 );
-router.get('/blog', 
-homePageService.blogPage
 
-);
 router.get('/certificates', 
+csrfProtection,
 homePageService.certPage
 
 );
-router.get('/products', 
-homePageService.prodPage
 
-);
-router.get('/singleNews', 
-homePageService.singleNewsPage
 
-);
-router.get('/singleProduct', 
-homePageService.singleProduct
 
-);
 router.get('/contact', 
 csrfProtection,
 homePageService.contactPage
 
 );
 
-// router.get('/about-us', 
-// homePageService.aboutPage
 
-// );
-
-router.get('/list/:slug', 
-csrfProtection,
-homePageService.showOneProduct
-
-
-);
 
 
 

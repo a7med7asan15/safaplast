@@ -81,10 +81,10 @@ clientService.show
 
 
 
-router.post( '/',
+router.post( '/add',
 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addClientSchema),
 
 csrfProtection, 
 
@@ -105,35 +105,6 @@ clientService.add
 
 
 //---------------------------
-// Edit City Route 
-//---------------------------
-
-router.get('/edit/:dataId', 
-
-csrfProtection,
-
-clientService.showOne
-
-);
-
-
-
-//---------------------------
-// Update City Route 
-//---------------------------
-
-router.post('/edit/:dataId', 
-
-validationBody(schemas.addCitySchema),
-
-csrfProtection,
-
-clientService.update
-
-);
-
-
-//---------------------------
 // Delete City Route 
 //---------------------------
 
@@ -147,24 +118,6 @@ clientService.destroy
 ); 
 
 
-
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-// +++ /// Search  // ++++// //////
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-//---------------------------
-// City Search 
-//---------------------------
-
-router.post('/searchResult',
-
-csrfProtection,
-
-
-clientService.searchShow
-
-); 
 
 
 module.exports = router;

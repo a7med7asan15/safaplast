@@ -5,8 +5,8 @@ block content
         .container-fluid
             .row.mb-3.mt-3
             .col-sm-6
-                h1.m-0.text-dark Update Property
-                - var property = property
+                h1.m-0.text-dark أضف مقال جديد
+
     .content
         .container-fluid
             if successes
@@ -20,108 +20,38 @@ block content
             .col-12
                 .card
                     .card-header
-                        h3.card-title Property Information
-                    form#addnewprop(role="form" action=`/dashboard/propertys/edit?id=${property.id}` method="POST")
+                        h3.card-title تفاصيل المقال
+                    form#addnewdata(role="form" action="/dashboard/products/add" method="POST")
                         .card-body.row
                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                            .form-group.col-md-12
-                                h3 Property General Information
 
-                            .form-group.col-md-6
-                                label(for="nameEnglish") Property Name [English]
-                                input.form-control#nameEnglish(type="text" name="nameEnglish" placeholder="Enter Property Name In English" value=`${property.nameEnglish}`)
-                            .form-group.col-md-6
-                                label(for="nameArabic") Property Name [Arabic]
-                                input.form-control#nameArabic(type="text" name="nameArabic" placeholder="Enter Property Name in Arabic" value=`${property.nameArabic}`)
-          
-                            .form-group.col-md-4
-                                label(for="sku") SKU
-                                input.form-control(type="text" name="sku" value=`${property.sku}`)            
-                            .form-group.col-md-4
-                                label(for="mobilenumber") Price 
-                                input.form-control(type="number" name="price", value=`${property.price}`) 
-                            .form-group.col-md-8
-                                label Brokers
-                                select.brokers(multiple,name="brokers" data-placeholder="Select Brokers" style="width: 100%;")
-                                    if brok 
-                                        for a in brok
-                                            - var selecBrok = false 
-                                            -if(property.brokers.includes(a.id.toString()))
-                                                -selecBrok = true
-                                            option(value=`${a.id}` , selected=selecBrok)=`${a.name} - ${a.mobileNo}`            
-                            .col-md-12.mt-5.mb-5
-                                h3 Advanced Information
+
+                            .form-group.col-md-12
+                                label(for="nameEnglish") عنوان المقال
+                                input.form-control#nameEnglish(type="text" name="title" placeholder="اكتب اسم المقال" value=`${dataProvided.title}`)
+                            .col-sm-6.col-md-6.col-lg-6
+                                .form-group.form-group-select
+                                    select.form-control(name="tag")
+                                        option(value="news") خبر 
+                                        option(value="portfolio") مشروع سابق
                             .col-md-12
-                                .col-md-4
-                                    .form-group
-                                        label Property Type
-                                        select(name="type").form-control.types
-                                            option( disabled value='') Choose Type
-                                            if type
-                                                - var type = type
-                                                for t in type
-                                                    - var selecType = false   
-                                                    if(t.id == property.type)
-                                                        - selecType = true
-                                                    option(value=`${t.id}` selected=selecType )=`${t.nameEnglish} - ${t.nameArabic}` 
-                                .col-md-4
-                                    .form-group
-                                        label Property No. of rooms
-                                        select(name="rooms").form-control.norooms
-                                            option(disabled value='') Choose No. of Rooms
-                                            if rooms
-                                                - var rooms = rooms
-                                                for r in rooms
-                                                    - var selecRooms = false   
-                                                    if(r.id == property.rooms)
-                                                        selecRooms = true
-                                                    option(value=`${r.id}` selected=selecRooms)=`${r.nameEnglish} - ${r.nameArabic}`      
-                                .col-md-4
-                                    .form-group
-                                        label Amenities
-                                        select.amenties(multiple,name="amenties" data-placeholder="Select Amenties" style="width: 100%;")
-                                            if amen 
-                                                for a in amen
-                                                    - var selecAmen = false 
-                                                    -if(property.amenties.includes(a.id.toString()))
-                                                        -selecAmen = true
-                                                    option(value=`${a.id}` , selected=selecAmen)=`${a.nameEnglish} - ${a.nameArabic}` 
-                            .col-md-12.mt-5.mb-5
-                                h3 Property Info
+                                .form-group
+                                    label المقال
+                                    textarea.htmlArticle(name="htmlArticle" placeholder="أدخل معلومات المقال هنا" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;")
+
                             .col-md-12
-                                .col-md-4
-                                    .form-group
-                                        label Property Area
-                                        select.form-control.nameArea(name="nameArea")
-                                            option( disabled) Select Area
-                                            if areas
-                                                - var areas = areas
-                                                for a in areas
-                                                    - var selecArea = false   
-                                                    if(a.id == property.areaId)
-                                                        - selecArea = true
-                                                    option(value=`${a.id}` selected=selecArea )=`${a.nameEnglish} - ${a.nameArabic}` 
-                            .col-md-12
-                                .col-md-6
-                                    .form-group
-                                        label Description in English
-                                        textarea.form-control(name="desEnglish" rows="3" placeholder="Enter ..." )=property.Address.desriptionArabic
-                            .col-md-12
-                                .col-md-6
-                                    .form-group
-                                        label Description in Arabic
-                                        textarea.form-control(name="desArabic" rows="3" placeholder="Enter ...")=property.Address.descriptionEnglish
-                            .col-md-12
+                                p أضف صورة المقال الأساسية
                                 div#dropi.dropzone.dz_clickable
                         .card-footer
-                            button.btn.btn-primary.float-right(type="submit") Update Property
-
-    script var data = !{JSON.stringify(property.images).replace(/<\//g, '<\\/')}
-    script var postId = !{JSON.stringify(property._id)}
+                            button.btn.btn-primary.float-right(type="submit") حفظ التعديلات
+    
+    script var featImageEdit = !{JSON.stringify(dataProvided.featuredImage)}
+    script var postId = !{JSON.stringify(dataProvided._id)}
+    script var htmlArticleVal = !{JSON.stringify(dataProvided.htmlArticle)}
     script var add = !{false}
 
 
 block scripts 
-    script(src="/static/vendor/js/property.js" type="text/javascript")
+    script(src="/static/vendor/js/addNews.js" type="text/javascript")
 
 

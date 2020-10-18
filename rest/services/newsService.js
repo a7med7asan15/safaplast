@@ -36,15 +36,63 @@ const newsService = {
 
 
     },
+    showPort: async (req, res) => {
+        let page = 1;
+        let limit = 1;
 
+        if (req.query.p) {
+            page = parseInt(req.query.p, 10)
+        }
+
+
+        let csrfToken = req.csrfToken();
+
+        try {
+            const options = {
+                page,
+                limit: 10,
+            }
+            const dataProvided = await NewsSchema.paginate({
+                tag:"portfolio"
+            }, options);
+            return res.render('screens/newsScreens/listAll', {
+                thisUser: req.user,
+                csrfToken,
+                dataProvided
+            })
+        } catch (err) {
+
+            console.log(err);
+            res.send("error");
+
+        }
+
+
+
+    },
+    addPage: async (req, res) => {
+        let csrfToken = req.csrfToken();
+        try {
+            return res.render('screens/newsScreens/add', {
+                thisUser: req.user,
+                csrfToken,
+                title: "بوست جديد"
+            })
+
+        } catch (err) {
+            console.log(err)
+            res.send("error")
+        }
+
+    },
     add: async (req, res) => {
 
 
 
         const {
             title,
-            htmlArticle, 
-            featuredImage, 
+            htmlArticle,
+            featuredImage,
             tag
         } = req.body;
 
@@ -55,10 +103,9 @@ const newsService = {
             const newData = new NewsSchema({
 
                 title,
-                htmlArticle, 
-                featuredImage, 
+                htmlArticle,
+                featuredImage,
                 tag
-
 
             })
 
@@ -111,9 +158,9 @@ const newsService = {
     update: async (req, res) => {
         const {
             title,
-                htmlArticle, 
-                featuredImage, 
-                tag
+            htmlArticle,
+            featuredImage,
+            tag
         } = req.body
         const {
             dataId
@@ -123,11 +170,15 @@ const newsService = {
             updateData.title = title,
                 updateData.htmlArticle = htmlArticle,
                 updateData.featuredImage = featuredImage,
-                updateData.tag = tag,
+                updateData.tag=tag
                 await updateData.save();
             req.session.passedData = false
             req.flash('success', 'تمت العملية بنجاح')
-            return res.redirect(`/dashboard/news/edit/${dataId}`)
+            //return res.redirect(`/dashboard/news/edit/${dataId}`)
+            return res.json({
+                err: false,
+                message: "تمت بنجاح"
+              });
         } catch (err) {
             req.flash('error', 'من فضلك أعد المحاولة')
             return res.redirect(`/dashboard/news/edit/${dataId}`)
@@ -160,13 +211,12 @@ const newsService = {
             } = req.body;
             const tbSearch = await NewsSchema.find({
                 "$or": [{
-                        title: {
-                            '$regex': table_search,
-                            '$options': 'i'
-                        }
-                    },
-                ], 
-                tag:"news"
+                    title: {
+                        '$regex': table_search,
+                        '$options': 'i'
+                    }
+                }, ],
+                tag: "news"
             });
 
             return res.render('screens/newsScreens/listAll', {
@@ -192,3 +242,4 @@ const newsService = {
 }
 
 module.exports = newsService
+

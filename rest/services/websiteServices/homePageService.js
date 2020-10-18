@@ -1,5 +1,8 @@
 const ProductSchema = require('../../models/productSchema');
 const SliderSchema = require('../../models/sliderSchema');
+const NewsSchema = require('../../models/newsSchema');
+const ClientSchema = require('../../models/clientSchema');
+const CertificateSchema = require('../../models/certificateSchema');
 
 const {
     MsgSchema
@@ -13,133 +16,38 @@ const homePageService = {
             domainName = process.env.hostDomain
         }
         const slides = await SliderSchema.find()
+        const products = await ProductSchema.find()
+        const news = await NewsSchema.find()
+        const clients = await ClientSchema.find()
         res.render('site/homepage', {
             title: 'ElsafaPlast for electric industries',
             metDescription: 'Elsafa Plast Electric',
             ogTitle: 'ElsafaPlast Electric',
             ogDomain: domainName,
-            slides
+            slides, 
+            products, 
+            news, 
+            clients
 
         })
 
     },
-    showOneProduct: async (req, res) => {
-        try {
-            const {
-                slug
-            } = req.params;
-            let csrfToken = req.csrfToken();
-            const property = await ProductSchema.findOne({
-                slugArabic: slug
-            }).populate(['type', 'areaId', 'amenties', "rooms"])
-            const relatedProducts = await ProductSchema.find({
-                price: {
-                    $lte: property.price
-                }
-            }).limit(4).select(['slugArabic', 'nameArabic', 'images']);
-            property.views = property.views + 1;
-            await property.save();
-            return res.render('site/page', {
-                property: property,
-                csrfToken,
-                relatedProducts,
-                title: property.nameArabic,
-                metDescription: property.Address.desriptionArabic,
-                ogTitle: property.nameArabic,
 
-            })
-        } catch (err) {
-            return res.render('site/404.pug')
 
-        }
-    },
-    loadMore: async (req, res) => {
-        try {
-            let page = 1;
-            let limit = 1;
-            let typesQuery = [];
-            let roomsQuery = [];
-            let priceQuery = 100
-            let areaQuery = [];
-            const query = {
 
-            }
-            if (req.query.p) {
-                page = parseInt(req.query.p, 10)
 
-            }
-            if (req.query.type) {
-                typesQuery = req.query.type;
-                query.type = typesQuery;
-            }
-            if (req.query.room) {
-                roomsQuery = req.query.room
-                query.rooms = roomsQuery;
-            }
-            if (req.query.price) {
-                priceQuery = req.query.price
-                query.price = {
-                    $lte: priceQuery
-                };
-            }
-            if (req.query.area) {
-                areaQuery = req.query.area
-                query.areaId = areaQuery
-            }
-
-            const options = {
-                page,
-                limit: 10,
-                populate: "rooms type areaId"
-            }
-            const data = await ProductSchema.paginate(query, options);
-            res.json({
-                err: false,
-                data
-            })
-
-        } catch (err) {
-            res.json({
-                err: true
-            })
-        }
-    },
-    blogPage: async (req, res) => {
-
-        return res.render('site/blog', {
-            title: 'الأسئلة الشائعة',
-            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-        });
-
-    },
-    portPage: async (req, res) => {
-
-        return res.render('site/portfolio', {
-            title: 'الأسئلة الشائعة',
-            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-        });
-
-    },
     certPage: async (req, res) => {
-
+        const certificates = await CertificateSchema.find()
         return res.render('site/certificates', {
             title: 'الأسئلة الشائعة',
             metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
             ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
+            dataProvided: certificates,
+
         });
 
     },
-    prodPage: async (req, res) => {
 
-        return res.render('site/products', {
-            title: 'الأسئلة الشائعة',
-            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-        });
-
-    },
     aboutPage: async (req, res) => {
 
         return res.render('site/about', {
@@ -149,24 +57,8 @@ const homePageService = {
         });
 
     },
-    singleNewsPage: async (req, res) => {
 
-        return res.render('site/singleNews', {
-            title: 'الأسئلة الشائعة',
-            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-        });
 
-    },
-    singleProduct: async (req, res) => {
-
-        return res.render('site/singleProduct', {
-            title: 'الأسئلة الشائعة',
-            metDescription: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-            ogTitle: 'اسئلة شائعة عن طريقة تأجير الوحدات فى دهب مع دهب دورز',
-        });
-
-    },
     contactPage: async (req, res) => {
         let csrfToken = req.csrfToken();
         return res.render('site/contact', {

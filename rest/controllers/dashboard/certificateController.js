@@ -81,10 +81,10 @@ certificateService.show
 
 
 
-router.post( '/',
+router.post( '/add',
 
 
-validationBody(schemas.addCitySchema),
+validationBody(schemas.addCertSchema),
 
 csrfProtection, 
 
@@ -108,13 +108,13 @@ certificateService.add
 // Edit City Route 
 //---------------------------
 
-router.get('/edit/:dataId', 
+// router.get('/edit/:dataId', 
 
-csrfProtection,
+// csrfProtection,
 
-certificateService.showOne
+// certificateService.showOne
 
-);
+// );
 
 
 
@@ -122,15 +122,15 @@ certificateService.showOne
 // Update City Route 
 //---------------------------
 
-router.post('/edit/:dataId', 
+// router.post('/edit/:dataId', 
 
-validationBody(schemas.addCitySchema),
+// validationBody(schemas.addCertSchema),
 
-csrfProtection,
+// csrfProtection,
 
-certificateService.update
+// certificateService.update
 
-);
+// );
 
 
 //---------------------------
@@ -157,14 +157,6 @@ certificateService.destroy
 // City Search 
 //---------------------------
 
-router.post('/searchResult',
-
-csrfProtection,
-
-
-certificateService.searchShow
-
-); 
 
 
 module.exports = router;
