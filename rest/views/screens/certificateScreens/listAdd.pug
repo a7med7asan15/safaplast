@@ -55,7 +55,7 @@ block content
                                                 td 
                                                     img(src=`${dat.img}` width="50")
                                                 td
-                                                    form(action=`/dashboard/clients/delete/${dat.id}`, method="post")
+                                                    form(action=`/dashboard/certificates/delete/${dat.id}`, method="post")
                                                         input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                         button.btn-sm.btn-danger(type="submit")
                                                             i.far.fa-trash-alt
