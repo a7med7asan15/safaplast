@@ -157,7 +157,8 @@ const homePageService = {
             } = req.body;
             const secretKey = "6LffrNgZAAAAAC_jjurUcncB16jhpwJitnEq2N-F"
             const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}`;
-
+            const setting = (await SettingSchema.find().limit(1))[0]
+            setting.dTimes++
             request(verifyUrl, (err, response, body) => {
                 var valid = true;
                 body = JSON.parse(body);
@@ -183,9 +184,7 @@ const homePageService = {
                     message_contact:"Download"
                 })
                  msg.save();
-                 const setting = (SettingSchema.find().limit(1))[0]
-                 console.log(setting)
-                 setting.dTimes++
+
                  setting.save
                 return res.json({
                     "success": true,
@@ -197,7 +196,7 @@ const homePageService = {
 
 
             });
-
+            
 
         } catch (err) {
             req.flash('error', "من فضلك أعد المحاولة")
