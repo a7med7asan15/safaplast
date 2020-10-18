@@ -83,11 +83,7 @@ var $validate = $(".msgForm").validate({
 
                     });
                 } else {
-                    let key = result.key
-                    let msg = result.msg
-                    let errors = {
-                        [key]: msg
-                    };
+                    $("#message-contact .btn").after('You cannot submit')
 
                     return $validate.showErrors(errors);
                 }

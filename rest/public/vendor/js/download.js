@@ -13,9 +13,7 @@ var $validate = $(".download_cat").validate({
             maxlength: 11,
             //pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
         },
-        '#g-recaptcha-response':{
-            required:true
-        }
+
 
     },
     messages: {
@@ -32,9 +30,6 @@ var $validate = $(".download_cat").validate({
             maxlength: "Enter Valid Phone",
             //pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
         },
-        '#g-recaptcha-response':{
-            required:"Please Select Captcha"
-        }
     },
     highlight: function (element) {
         $(element).addClass("is-invalid");
