@@ -79,11 +79,7 @@ var $validate = $(".download_cat").validate({
                     // localStorage.setItem("orderId", serialData.orderId);
                     return window.location.replace(doLink);
                 } else {
-                    let key = result.key
-                    let msg = result.msg
-                    let errors = {
-                        [key]: msg
-                    };
+                    $(".download_cat .btn").after('You cannot submit')
 
                     return $validate.showErrors(errors);
                 }

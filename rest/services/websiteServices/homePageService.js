@@ -164,7 +164,7 @@ const homePageService = {
             setting.save()
             request(verifyUrl, (err, response, body) => {
                 body = JSON.parse(body);
-
+                console.log(body)
                 if (!body.success && body.success === undefined) {
                     valid = false
                     return res.json({
