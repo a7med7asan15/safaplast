@@ -13,7 +13,7 @@ var $validate = $(".download_cat").validate({
             maxlength: 11,
             //pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
         },
-        'g-recaptcha-response':{
+        '#g-recaptcha-response':{
             required:true
         }
 
@@ -32,7 +32,7 @@ var $validate = $(".download_cat").validate({
             maxlength: "Enter Valid Phone",
             //pattern: /['0'][0-2]([0-2]|['5'])[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/,
         },
-        'g-recaptcha-response':{
+        '#g-recaptcha-response':{
             required:"Please Select Captcha"
         }
     },
@@ -62,12 +62,13 @@ var $validate = $(".download_cat").validate({
         $.ajax({
             type: "POST",
             url: '/downloadCatalog',
-            data: serialData,
+            data: data,
             headers: {
                 'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content")
             },
             success: function (result) {
                 if (!result.err) {
+                        console.log(data)
                         console.log(result)
                         $(".download_cat .btn").prop('disabled', true);
                         setTimeout(function(){
