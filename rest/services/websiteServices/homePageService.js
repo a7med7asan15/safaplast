@@ -103,20 +103,15 @@ const homePageService = {
                 var valid = true;
                 body = JSON.parse(body);
 
-                if (!body.success && body.success === undefined) {
+                if (!body.success || body.success === undefined) {
                     valid = false
                     return res.json({
                         "success": false,
-                        "msg": "captcha verification failed"
+                        "msg": "captcha verification failed", 
+                        "err":true, 
+                        err:true
                     });
-                } else if (body.score < 0.5) {
-                    valid = false
-                    return res.json({
-                        "success": false,
-                        "msg": "you might be a bot, sorry!",
-                        "score": body.score,
-                    });
-                }
+                } 
                 const msg = new MsgSchema({
                     name_contact:name,
                     contactMobileNo: phone,
@@ -128,7 +123,8 @@ const homePageService = {
                 return res.json({
                     "success": true,
                     "msg": "captcha verification passed",
-                    "score": body.score,
+                    err:false, 
+                    "err":false
                 });
                 
 
@@ -141,8 +137,8 @@ const homePageService = {
             req.flash('error', "من فضلك أعد المحاولة")
             console.log(err)
             return res.json({
-                "error": true,
-                errors: true,
+                "err": true,
+                err: true,
                 message: "Error In Getting Message",
             })
         }
@@ -164,13 +160,13 @@ const homePageService = {
             setting.save()
             request(verifyUrl, (err, response, body) => {
                 body = JSON.parse(body);
-                console.log(body)
-                if (!body.success && body.success === undefined) {
+                if (!body.success || body.success === undefined) {
                     valid = false
                     return res.json({
                         "success": false,
                         "msg": "captcha verification failed", 
-                        err:true
+                        err:true, 
+                        "err":true
                     });
                 } 
                 const msg = new MsgSchema({
@@ -185,7 +181,8 @@ const homePageService = {
                 return res.json({
                     "success": true,
                     "msg": "captcha verification passed",
-                    err:false
+                    err:false, 
+                    "err":false
                 });
                 
 
