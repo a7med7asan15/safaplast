@@ -102,7 +102,7 @@ const homePageService = {
             request(verifyUrl, (err, response, body) => {
                 var valid = true;
                 body = JSON.parse(body);
-
+                console.log(body)
                 if (!body.success || body.success === undefined) {
                     valid = false
                     return res.json({
