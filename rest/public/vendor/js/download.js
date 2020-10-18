@@ -56,8 +56,7 @@ var $validate = $(".download_cat").validate({
             
             
         });
-        console.log(serialData)
-        console.log(data)
+
 
         $.ajax({
             type: "POST",

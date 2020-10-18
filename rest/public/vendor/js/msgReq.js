@@ -59,8 +59,7 @@ var $validate = $(".msgForm").validate({
             
         });
 
-        console.log(serialData)
-        console.log(data)
+
         $.ajax({
             type: "POST",
             url: '/sendMsg',
