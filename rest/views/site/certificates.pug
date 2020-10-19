@@ -24,7 +24,8 @@ block content
                         .col-sm-12.col-md-3.col-lg-3
                             .feature-item
                                 .feature__img
-                                    a(href=`${c.img}` data-toggle="lightbox" data-title=`${c.name}` data-gallery="gallery")
+                                    //data-title=`${c.name}`
+                                    a(href=`${c.img}` data-toggle="lightbox"  data-title=`${c.name}` data-gallery="gallery")
                                         img.img-fluid(src=`${c.img}` alt=`Elsafa Plast certificate from ${c.name}`)
                                 // /.feature-img
                                 .feature__content
@@ -36,7 +37,9 @@ block scripts
             $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox({
-                alwaysShowClose: true
+                alwaysShowClose: false, 
+                maxWidth: 1000, 
+                width:1000, 
             });
             });
         })

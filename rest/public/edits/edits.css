@@ -123,3 +123,40 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
     height: 70px !important;
 }
 
+.ekko-lightbox .modal-dialog{
+    width: 100%;
+  max-width: none !important;
+    height: 100%;
+}
+
+.ekko-lightbox .modal-header{
+    position: fixed;
+    bottom: 0;
+    z-index: 99999;
+    background: rgba(0,0,0,0.4);
+    width: 100%;
+    border: 0;
+}
+
+.ekko-lightbox .modal-body{
+    background: 0;
+    margin-left: auto;
+    width: 80%;
+    margin-right: auto;
+}
+
+.ekko-lightbox .modal-content{
+    background: 0;
+    border: 0;
+    height: 100%;
+  min-height: 100%;
+}
+
+.ekko-lightbox .modal-title{
+    color: #fff;
+    font-size: 20px;
+}
+
+.ekko-lightbox .modal-header .close{
+    display: none;
+}
