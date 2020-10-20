@@ -44,7 +44,10 @@ block content
                                                 td #{numS++}
                                                 td #{tb.title }
                                                 td #{ tb.code }
-                                                td #{ tb.type.name }
+                                                if tb.type 
+                                                    td #{ tb.type.name }
+                                                else 
+                                                    td deleted
                                                 td
                                                     a.btn-sm.btn-warning(href=`/dashboard/products/edit/${tb.id}`)
                                                         i.far.fa-edit
@@ -68,7 +71,10 @@ block content
                                                 td #{num++}
                                                 td #{ dat.title }
                                                 td #{ dat.code}
-                                                td #{ dat.type.name}
+                                                if dat.type 
+                                                    td #{ dat.type.name }
+                                                else 
+                                                    td deleted
                                                 td
                                                     a.btn-sm.btn-warning(href=`/dashboard/products/edit/${dat.id}`)
                                                         i.far.fa-edit

@@ -23,7 +23,12 @@ block content
                         // portfolio item #1
                         if dataProvided
                             for p in dataProvided
-                                .col-sm-6.col-md-4.col-lg-3.mix(class=`filter-${p.type.slug}`)
+                                -var slugFilter
+                                if p.type 
+                                -slugFilter = p.type.slug
+                                else
+                                -slugFilter="undef"
+                                .col-sm-6.col-md-4.col-lg-3.mix(class=`filter-${slugFilter}`)
                                     .portfolio-item
                                         .portfolio__img
                                             if p.images.length != 0
