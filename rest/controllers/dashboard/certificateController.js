@@ -95,6 +95,31 @@ certificateService.add
 );
 
 
+router.get('/edit/:dataId',
+
+
+    csrfProtection,
+
+    certificateService.showOne
+
+);
+
+//---------------------------
+// Update ProductRoute 
+//---------------------------
+
+router.post('/edit/:dataId',
+
+    validationBody(schemas.addCertSchema),
+
+    csrfProtection,
+
+    certificateService.update
+
+);
+
+
+
 
 
 ////////////////////////////////////////////////

@@ -90,6 +90,7 @@ module.exports  = {
         addSettingSchema:Joi.object().keys({
             facebook:Joi.string().optional().allow(''),
             linkedin:Joi.string().optional().allow(''),
+            instagram:Joi.string().optional().allow(''),
             logo:Joi.string().required(),
             favicon:Joi.string().required(),
             catalog:Joi.string().optional().allow(''),

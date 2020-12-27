@@ -74,6 +74,61 @@ const certificateService = {
 
     },
 
+    update: async (req, res) => {
+        const {
+          name,
+          img,
+        } = req.body;
+        const {
+            dataId
+        } = req.params
+        try {
+          const updateData = await CertificateSchema.findById(dataId);
+
+          updateData.name = name;
+          updateData.img = img;
+          await updateData.save();
+    
+          req.flash('success', 'تم تعديل الشهادة بنجاح')
+          return res.redirect(`/dashboard/certificates/edit/${dataId}`)
+    
+    
+        } catch (err) {
+          req.flash('error', 'من فضلك أعد المحاولة')
+          return res.redirect(`/dashboard/certificates/edit/${dataId}`)
+    
+        }
+    
+      },
+    showOne: async (req, res) => {
+        const {
+          dataId
+        } = req.params
+        let csrfToken = req.csrfToken();
+    
+    
+        try {
+    
+    
+          const cert = await CertificateSchema.findById(dataId);
+          return res.render('screens/certificateScreens/edit', {
+            thisUser: req.user,
+            dataProvided: cert,
+            csrfToken,
+            title:"تعديل شهادة"
+    
+          })
+        } catch (err) {
+          req.flash('error', 'من فضلك أعد المحاولة')
+          console.log(err);
+          return res.render('screens/certificateScreens/edit', {
+            thisUser: req.user,
+            dataProvided: {},
+            csrfToken
+          })
+        }
+    
+      },
 
     //Delete City
     destroy: async (req, res) => {

@@ -1,0 +1,40 @@
+extends ../../layout.pug
+
+
+block content
+    .content-header
+        .container-fluid
+            .row.mb-3.mt-3
+            .col-sm-6
+                h1.m-0.text-dark تعديل شهادة
+    .content
+        .container-fluid
+            if successes
+                for success in successes
+                    div.alert.alert-success #{ success }
+            if errors
+                for error, i in errors
+                    div.alert.alert-danger #{ error.message }
+            .row
+                .col-12
+                    .card
+                        .card-header
+                            h3.card-title معلومات الشهادة
+                        form#addData(action="/dashboard/certificates/add" method="post" role="form" autocomplete="off")
+                            .card-body.row
+                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                .form-group.col-md-10
+                                    label اسم الشهادة
+                                    input.form-control#cardNum(type="text" name="name" placeholder="أدخل اسم الشهادة" value=`${dataProvided.name}`)
+                                .form-group.col-md-10
+                                    label صورة الشهادة
+                                    div#dropi.dropzone.dz_clickable
+
+                            .card-footer
+                                button.btn.btn-primary.float-right(type="submit") حفظ التعديلات
+
+    script var featImageEdit = !{JSON.stringify(dataProvided.img)}
+    script var add = !{false}
+    script var postId = !{JSON.stringify(dataProvided._id)}
+block scripts 
+    script(src="/static/vendor/js/addCert.js" type="text/javascript")

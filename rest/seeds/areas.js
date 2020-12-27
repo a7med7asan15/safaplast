@@ -10,8 +10,8 @@ const seedUser = async ()=>{
        const newUser = new User({
         index:'1',
         username: 'الحساب الأساسي',
-        email:'admin@admin.com',
-        pin: '1234',
+        email:'info@elsafaplastelec.com',
+        pin: '$$Elsafa2020',
         role:0
        })
       await newUser.save()
@@ -29,6 +29,7 @@ const seedSetting = async ()=>{
        linkedin:'#',
        facebook: '#',
        youtube:'#',
+       instagram:'#',
        catalog: '#',
        logo:'#', 
        favicon:"#"

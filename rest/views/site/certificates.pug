@@ -1,23 +1,17 @@
 extends ../websiteLayout.pug
 
 block content 
-    .blue-title
-        .container
-            .row
-                .col-sm-12.col-md-12.col-lg-12
-                    h1.pt-40 Certificates
 
-    section#awards.awards.pb-70.pt-20
+    section#page-title.page-title.page-title-layout10.text-center.bg-overlay.bg-overlay-3.bg-parallax
+        .bg-img
+            img(src="/static/images/bg.jpg" alt="background")
         .container
             .row
-                .col-sm-12.col-md-12.col-lg-12
-                    .heading.mb-50
-                        span.heading__subtitle Fast Growing Industrial & Manufacturing Estates.
-                        h5
-                            | Providing High Performance Services For Multiple Industries And Technologies!
-                    // /.heading
-                    // /.col-lg-8
-                    // /.row
+                .col-sm-12.col-md-12.col-lg-8.offset-lg-2
+            h1.pagetitle__heading Certificates
+
+    section#awards.awards
+        .container
             .row
                 if dataProvided
                     for c in dataProvided

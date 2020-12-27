@@ -15,15 +15,7 @@ const {
 const homePageService = {
 
     show: async (req, res) => {
-        const setting = (await SettingSchema.find().limit(1))[0]
-        return res.render('site/coming', {
-            title: 'Elsafa Plast',
-            metDescription: 'Elsafa Plast for electric Industries',
-            ogTitle: 'Elsafa Plast for electric Industries',
-            setting
-
-        });
-        /*
+        
         let domainName = process.env.devDomain
         if (process.env.STATUS === "PROD") {
             domainName = process.env.hostDomain
@@ -52,7 +44,7 @@ const homePageService = {
             portfolio,
             csrfToken
 
-        })*/
+        })
 
     },
 

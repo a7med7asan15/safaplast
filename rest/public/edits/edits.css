@@ -158,3 +158,56 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
     font-size: 20px;
 }
 
+.ekko-lightbox-nav-overlay{
+    position:fixed;
+    width:65%; 
+    right:0;
+    margin:auto;
+}
+.ekko-lightbox-nav-overlay a{
+    opacity:1;
+    font-size: 50px;
+}
+.slide__box.d-flex.flex-wrap.justify-content-between{
+    box-shadow: 0px 0px 17px 8px #7d7d7d;
+}
+
+.portfolio-item .portfolio__title a{
+    padding: 10px;
+    color:#fff;
+}
+
+.portfolio-item{
+    box-shadow: 0 0 12px 0 rgba(40, 40, 40, 0.46);
+    padding-bottom: 10px;
+    border-radius: 5px;
+    background-color: #0b2653;
+}
+
+.portfolio-classic .portfolio-item .portfolio__content{
+    background-color: inherit;
+}
+
+.page-title{
+    padding-top:50px;
+    padding-bottom:50px;
+}
+
+.blog-grid .blog-item{
+    box-shadow: 0 0 12px 0 rgba(40, 40, 40, 0.46);
+    border-radius:5px;
+    background: #0b2653;
+}
+
+.blog__content{
+    padding: 36px 20px 40px 40px;
+}
+
+.blog-item .blog__title a{
+    color:#fff;
+}
+
+.blog-item .btn__link{
+    color:#fff;
+}
+

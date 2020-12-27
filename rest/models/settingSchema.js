@@ -9,6 +9,7 @@ const settingSchema = new Schema({
     linkedin :  { type: String },
     youtube :  { type: String },
     facebook :  { type: String },
+    instagram :  { type: String },
     catalog :  { type: String },
     dTimes : { type: Number , default: 0},
     logo:{ type: String },

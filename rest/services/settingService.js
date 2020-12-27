@@ -38,6 +38,7 @@ res.send("error");
             facebook,
             linkedin,
             youtube,
+            instagram,
             logo, 
             catalog, 
             favicon
@@ -48,6 +49,7 @@ res.send("error");
             updateData.facebook = facebook,
                 updateData.linkedin = linkedin,
                 updateData.youtube = youtube,
+                updateData.instagram = instagram,
                 updateData.logo=logo
                 updateData.catalog=catalog
                 updateData.favicon=favicon

@@ -2,12 +2,14 @@
 extends ../websiteLayout.pug
 
 block content  
-    .blue-title
+    section#page-title.page-title.page-title-layout10.text-center.bg-overlay.bg-overlay-3.bg-parallax
+        .bg-img
+            img(src="/static/images/bg.jpg" alt="background")
         .container
             .row
-                .col-sm-12.col-md-12.col-lg-12
-                    h1.pt-40 Our Products
-    section#portfolioGrid.portfolio.portfolio-grid.portfolio-classic.pt-20
+                .col-sm-12.col-md-12.col-lg-8.offset-lg-2
+            h1.pagetitle__heading Our Products
+    section#portfolioGrid.portfolio.portfolio-grid.portfolio-classic
         .container
             .row
                 .col-sm-12.col-md-12.col-lg-12
@@ -28,7 +30,7 @@ block content
                                     -slugFilter = p.type.slug
                                 else
                                     -slugFilter="undef"
-                                .col-sm-6.col-md-4.col-lg-3.mix(class=`filter-${slugFilter}`)
+                                .col-sm-12.col-md-4.col-lg-4.mix(class=`filter-${slugFilter}`)
                                     .portfolio-item
                                         .portfolio__img
                                             if p.images.length != 0

@@ -84,6 +84,9 @@ $(function () {
           const serialData = $(form).serializeArray();
           console.log(serialData)
           var link = '/dashboard/certificates/add';
+          if(!add){
+            link =`/dashboard/certificates/edit/${postId}`;
+         }
         serialData.push({name:"img" , value: featImage })
           var sentdata = {}
   
