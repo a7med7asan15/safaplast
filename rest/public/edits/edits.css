@@ -197,8 +197,9 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
     box-shadow: 0 0 12px 0 rgba(40, 40, 40, 0.46);
     border-radius:5px;
     background: #231f20;
+    overflow:hidden;
 }
-.blog-grid .blog-item .blog__img{
+.blog-grid .blog-item .blog__img, .service-item .service__img img{
     max-height: 300px;
     margin-bottom: 0;
 }
@@ -232,16 +233,33 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
 .blog-item .btn__link{
     color:#fff;
 }
-.contact-panel li span, .footer__contact .footer__contact-item .footer__contact-item-text span{
+.contact .contact-panel li span, .footer__contact .footer__contact-item .footer__contact-item-text span{
     color: #231f20;
 }
 .contact .contact__form-panel{
     background-color: #231f20;
 }
-.contact__form-panel .contact__form-panel-header h4{
+.contact .contact__form-panel .contact__form-panel-header h4{
     color:#fff;
 }
 
-.contact__form-panel .form-control{
-    border-color:#ffffff6e;
+.contact .contact__form-panel .form-control{
+    border: 2px solid #ffffff6e;
+
 }
+
+.banner .contact__form-panel .contact__form-panel-header p{
+    color:#231f20;
+}
+.banner .contact__form-panel .form-control::placeholder{
+    color:#231f207a;
+}
+.heading__desc{
+    color:#231f20;
+}
+
+.contact .contact__form-panel .form-control:focus{
+    background-color: transparent;
+    border-color: #f87e13;
+}
+
