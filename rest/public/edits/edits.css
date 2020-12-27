@@ -202,7 +202,9 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
     max-height: 300px;
     margin-bottom: 0;
 }
-
+.feature__title{
+    direction: rtl;
+}
 .blog__content{
     padding: 36px 20px 40px 40px;
 }
