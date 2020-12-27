@@ -1,5 +1,4 @@
 Dropzone.autoDiscover = false;
-Dropzone.options.timeout = 360000;
 
 $(function () {
   
@@ -12,6 +11,7 @@ $(function () {
     addRemoveLinks: true,
     maxFiles:1,
     url: "/dashboard/media/uploadimage",
+    timeout:360000,
     headers: {
       'X-CSRF-TOKEN': csrf
      },
@@ -63,6 +63,7 @@ $(function () {
     addRemoveLinks: true,
     maxFiles:1,
     url: "/dashboard/media/uploadimage",
+    timeout:360000,
     headers: {
       'X-CSRF-TOKEN': csrf
      },
@@ -114,6 +115,7 @@ $(function () {
   $("div#dropi_logo").dropzone({ 
     addRemoveLinks: true,
     maxFiles:1,
+    timeout:360000,
     url: "/dashboard/media/uploadimage",
     headers: {
       'X-CSRF-TOKEN': csrf
