@@ -3,7 +3,7 @@ extends ../websiteLayout.pug
 block content 
     if slides
         section#slider2.slider.slider-2
-            .carousel.owl-carousel.carousel-arrows.carousel-dots(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='true'  data-nav='true' data-dots='false' data-space='0' data-loop='true'  data-speed='1000' data-transition='fade' data-animate-out='fadeOut' data-animate-in='fadeIn')
+            .carousel.owl-carousel.carousel-arrows.carousel-dots(data-slide='1' data-slide-md='1' data-slide-sm='1' data-autoplay='true' data-nav='true' data-dots='false' data-space='0' data-loop='true' data-speed='1000' data-transition='fade' data-animate-out='fadeOut' data-animate-in='fadeIn')
                 for s in slides
                     .slide-item.align-v-h.bg-overlay
                         .bg-img
@@ -37,19 +37,19 @@ block content
                 .col-sm-12.col-md-12.col-lg-12
                     .carousel.owl-carousel.carousel-dots(data-slide='3' data-slide-md='2' data-slide-sm='1' data-autoplay='true' data-nav='false' data-dots='true' data-space='30' data-loop='true' data-speed='800')
                         if portfolio
-                         for p in portfolio
-                          .service-item
-                            .service__img
-                                img.img-fluid(src=`${p.featuredImage}` alt=`${p.title}`)
-                            .service__content
-                                h4.service__title #{p.title}
-                                a.btn.btn__secondary.btn__link(href=`/blog/${p.slug}`)
-                                    i.icon-arrow-right.arrow-rounded
-                                    span Read More
-                            // /.service-content
-                            // /.service-item
-                        
-    section#banner4.banner.banner-4.bg-overlay.bg-overlay-gradient-2.bg-parallax.pt-120.pb-0
+                            for p in portfolio
+                                .service-item
+                                    .service__img
+                                        img.img-fluid(src=`${p.featuredImage}` alt=`${p.title}`)
+                                    .service__content
+                                        h4.service__title #{p.title}
+                                        a.btn.btn__secondary.btn__link(href=`/blog/${p.slug}`)
+                                            i.icon-arrow-right.arrow-rounded
+                                            span Read More
+                                    // /.service-content
+                                    // /.service-item
+
+    section#banner4.banner.banner-4.bg-overlay.bg-parallax.pt-120.pb-0
         .bg-img
             img(src='/static/images/bg.jpg' alt='background')
         .container
@@ -131,13 +131,13 @@ block content
                     // /.col-lg-12
                     // /.row
                     // /.container
+    if products
+        section#portfolioCarousel.portfolio-carousel.portfolio-classic.pt-90.pb-70
+            .container
+                .row
+                    .col-sm-12.col-md-12.col-lg-12
+                        .carousel.owl-carousel.carousel-arrows(data-slide='3' data-slide-md='2' data-slide-sm='1' data-autoplay='true' data-nav='true' data-dots='false' data-space='30' data-loop='true' data-speed='800')
 
-    section#portfolioCarousel.portfolio-carousel.portfolio-classic.pt-90.pb-70
-        .container
-            .row
-                .col-sm-12.col-md-12.col-lg-12
-                    .carousel.owl-carousel.carousel-arrows(data-slide='3' data-slide-md='2' data-slide-sm='1' data-autoplay='true' data-nav='true' data-dots='false' data-space='30' data-loop='true' data-speed='800')
-                        if products
                             for p in products
                                 .portfolio-item
                                     .portfolio__img
@@ -147,13 +147,12 @@ block content
                                     .portfolio__content
                                         h4.portfolio__title
                                             a(href=`/products/${p.slug}`) #{p.title}
-
-    section#clients.clients.border-top
-        .container
-            .row
-                .col-sm-12.col-md-12.col-lg-12
-                    .carousel.owl-carousel(data-slide='6' data-slide-md='4' data-slide-sm='2' data-autoplay='true' data-nav='false' data-dots='false' data-space='20' data-loop='true' data-speed='700')
-                        if clients
+    if clients
+        section#clients.clients.border-top
+            .container
+                .row
+                    .col-sm-12.col-md-12.col-lg-12
+                        .carousel.owl-carousel(data-slide='6' data-slide-md='4' data-slide-sm='2' data-autoplay='true' data-nav='false' data-dots='false' data-space='20' data-loop='true' data-speed='700')
                             for c in clients
                                 .client
                                     img(src=`${c.img}` alt=`${c.title}`)
@@ -226,7 +225,7 @@ block content
                                         // /.blog-meta
                                         h4.blog__title
                                             a(href=`/blog/${n.slug}`) #{n.title}
-    
+
     script var doLink = !{JSON.stringify(setting.catalog)}
 block scripts
     script(src="https://www.google.com/recaptcha/api.js" async defer)

@@ -101,10 +101,10 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
 }
 
 .product-tables table tr td{
-    color: #0b2653
+    color: #231f20 
 }
 .product-tables table tr td:first-child{
-    background-color: #0b2653 ;
+    background-color: #231f20 ;
     color:#fff
 }
 
@@ -181,7 +181,7 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
     box-shadow: 0 0 12px 0 rgba(40, 40, 40, 0.46);
     padding-bottom: 10px;
     border-radius: 5px;
-    background-color: #0b2653;
+    background-color: #231f20;
 }
 
 .portfolio-classic .portfolio-item .portfolio__content{
@@ -196,14 +196,30 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
 .blog-grid .blog-item{
     box-shadow: 0 0 12px 0 rgba(40, 40, 40, 0.46);
     border-radius:5px;
-    background: #0b2653;
+    background: #231f20;
 }
 .blog-grid .blog-item .blog__img{
     max-height: 300px;
     margin-bottom: 0;
 }
-.feature__title{
+.feature-item{
+    border: solid 3px #231f20;
+    overflow: hidden;
+    border-radius: 7px;
+}
+.feature-item .feature__img{
+    margin-bottom:0;
+}
+.feature__content{
+    margin:0;
+}
+.feature__content .feature__title{
     direction: rtl;
+    text-align: right;
+    background-color: #231f20;
+    color:#fff; 
+    padding:25px 15px;
+    margin:0;
 }
 .blog__content{
     padding: 36px 20px 40px 40px;
