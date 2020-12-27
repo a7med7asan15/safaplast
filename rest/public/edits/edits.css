@@ -233,3 +233,9 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
     color:#fff;
 }
 
+.contact__form-panel{
+    background-color: #231f20;
+}
+.contact__form-panel .contact__form-panel-header h4{
+    color:#fff;
+}
