@@ -6,7 +6,7 @@ var multerS3 = require('multer-s3');
 const path = require('path');
 const spacesEndpoint = new aws.Endpoint(process.env.doEndpoint);
 
-AWS.config.update({
+aws.config.update({
 
   httpOptions: {
 
