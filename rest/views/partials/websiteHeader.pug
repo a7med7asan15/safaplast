@@ -36,11 +36,11 @@ header#header.header.header-layout2
                                 li.nav__item
                                     a(href=`${setting.linkedin}` target="_blank")
                                         i(class="fa fa-linkedin-square")
-                                if setting.youtube != "#" || setting.instagram != "" 
+                                if setting.youtube != "#" && setting.youtube != '' 
                                     li.nav__item
                                         a(href=`${setting.youtube}` target="_blank")
                                             i(class="fa fa-youtube-square")
-                                if setting.instagram != "#" || setting.instagram != "" 
+                                if setting.instagram != "#" && setting.instagram != '' 
                                     li.nav__item
                                         a(href=`${setting.instagram}` target="_blank")
                                             i(class="fa fa-instagram")
