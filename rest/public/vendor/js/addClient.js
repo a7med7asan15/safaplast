@@ -10,6 +10,7 @@ $(function () {
     addRemoveLinks: true,
     maxFiles:1,
     url: "/dashboard/media/uploadimage",
+    timeout:0,
     headers: {
       'X-CSRF-TOKEN': csrf
      },
