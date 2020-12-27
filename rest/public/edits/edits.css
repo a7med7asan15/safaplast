@@ -198,6 +198,10 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
     border-radius:5px;
     background: #0b2653;
 }
+.blog-grid .blog-item .blog__img{
+    max-height: 300px;
+    margin-bottom: 0;
+}
 
 .blog__content{
     padding: 36px 20px 40px 40px;
