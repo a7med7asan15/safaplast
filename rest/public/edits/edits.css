@@ -232,10 +232,16 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
 .blog-item .btn__link{
     color:#fff;
 }
-
-.contact__form-panel{
+.contact-panel li span, .footer__contact .footer__contact-item .footer__contact-item-text span{
+    color: #231f20;
+}
+.contact .contact__form-panel{
     background-color: #231f20;
 }
 .contact__form-panel .contact__form-panel-header h4{
     color:#fff;
+}
+
+.contact__form-panel .form-control{
+    border-color:#ffffff6e;
 }
