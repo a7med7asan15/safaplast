@@ -37,6 +37,7 @@ $(function () {
   $("div#dropi").dropzone({ 
     addRemoveLinks: true,
     url: "/dashboard/media/uploadimage",
+    timeout:0,
     headers: {
       'X-CSRF-TOKEN': csrf
      },
