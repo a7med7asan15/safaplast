@@ -1,4 +1,5 @@
 Dropzone.autoDiscover = false;
+Dropzone.timeout = 360000;
 
 $(function () {
   

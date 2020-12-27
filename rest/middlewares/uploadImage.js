@@ -6,17 +6,7 @@ var multerS3 = require('multer-s3');
 const path = require('path');
 const spacesEndpoint = new aws.Endpoint(process.env.doEndpoint);
 
-aws.config.update({
 
-  httpOptions: {
-
-      timeout: 60000,
-
-      connectTimeout: 10000
-
-  }
-
-});
 
 var s3 = new aws.S3({
   //endpoint: spacesEndpoint,
