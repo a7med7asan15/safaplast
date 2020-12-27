@@ -257,7 +257,9 @@ aside.main-sidebar.sidebar-light-primary.elevation-4{
 .heading__desc{
     color:#231f20;
 }
-
+.slider-2 .slide__desc{
+    color:#636363;
+}
 .contact .contact__form-panel .form-control:focus{
     background-color: transparent;
     border-color: #f87e13;
