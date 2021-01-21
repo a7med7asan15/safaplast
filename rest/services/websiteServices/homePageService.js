@@ -37,8 +37,24 @@ const homePageService = {
         if (req.isAuthenticated()) {
             isAuthed = true;
             userType = req.user.role;
-            if(req.user.role == "admin"){
+            if(req.user.role == 1 || req.user.role == 0){
                 res.render('site/homepage', {
+                    title: 'ElsafaPlast for Electric Industries',
+                    metDescription: 'Elsafa Plast Electric',
+                    ogTitle: 'ElsafaPlast Electric',
+                    ogDomain: domainName,
+                    slides, 
+                    products, 
+                    news, 
+                    clients, 
+                    setting, 
+                    portfolio,
+                    csrfToken
+        
+                })
+        
+            }else{
+                res.render('site/coming', {
                     title: 'ElsafaPlast for Electric Industries',
                     metDescription: 'Elsafa Plast Electric',
                     ogTitle: 'ElsafaPlast Electric',
