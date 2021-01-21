@@ -15,6 +15,9 @@ const {
 const homePageService = {
 
     show: async (req, res) => {
+
+        try{
+
         
         let domainName = process.env.devDomain
         if (process.env.STATUS === "PROD") {
@@ -68,7 +71,9 @@ const homePageService = {
             })
     
         }
-
+    }catch(err){
+        console.log(err)
+    }
         
     },
 
