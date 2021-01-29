@@ -54,7 +54,7 @@ const homePageService = {
                 })
         
             }else{
-                res.render('site/coming', {
+                res.render('site/homepage', {
                     title: 'ElsafaPlast for Electric Industries',
                     metDescription: 'Elsafa Plast Electric',
                     ogTitle: 'ElsafaPlast Electric',
@@ -71,7 +71,7 @@ const homePageService = {
         
             }
         }else{
-            res.render('site/coming', {
+            res.render('site/homepage', {
                 title: 'ElsafaPlast for Electric Industries',
                 metDescription: 'Elsafa Plast Electric',
                 ogTitle: 'ElsafaPlast Electric',
