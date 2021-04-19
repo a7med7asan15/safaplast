@@ -134,7 +134,7 @@ router.get('/edit/:dataId',
 // Update ProductRoute 
 //---------------------------
 
-router.post('/edit',
+router.post('/edit/:dataId',
 
     validationBody(schemas.addProdSchema),
 

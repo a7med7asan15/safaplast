@@ -96,12 +96,17 @@ const productService = {
       htmlInfo,
       htmlTable,
     } = req.body;
+    const {
+      dataId
+  } = req.params
+
     let im = [];
     if (images) {
       im = images.split(',');
     }
     try {
-      const updateData = await ProductSchema.findById(req.query.id);
+      
+      const updateData = await ProductSchema.findById(dataId);
       let imagesLoop = [];
       if (im.length) {
         for (i = 0; i < im.length; i++) {
@@ -126,10 +131,11 @@ const productService = {
 
 
     } catch (err) {
+      console.log(err);
       req.flash('error', 'من فضلك أعد المحاولة')
       return res.json({
         err: true,
-        message: "ProductNOT Updated"
+        message: "Product NOT Updated"
       });
 
     }
