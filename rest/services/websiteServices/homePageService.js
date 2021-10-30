@@ -37,7 +37,8 @@ const homePageService = {
         if (req.isAuthenticated()) {
             isAuthed = true;
             userType = req.user.role;
-            if(req.user.role == 1 || req.user.role == 0){
+            //req.user.role == 1 || req.user.role == 0
+            if(true){
                 res.render('site/homepage', {
                     title: 'ElsafaPlast for Electric Industries',
                     metDescription: 'Elsafa Plast Electric',
