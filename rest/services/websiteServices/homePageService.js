@@ -34,7 +34,22 @@ const homePageService = {
         const clients = await ClientSchema.find()
         const setting = (await SettingSchema.find().limit(1))[0]
         let csrfToken = req.csrfToken();
-        if (req.isAuthenticated()) {
+
+        res.render('site/homepage', {
+            title: 'ElsafaPlast for Electric Industries',
+            metDescription: 'Elsafa Plast Electric',
+            ogTitle: 'ElsafaPlast Electric',
+            ogDomain: domainName,
+            slides, 
+            products, 
+            news, 
+            clients, 
+            setting, 
+            portfolio,
+            csrfToken
+
+        })
+        /*if (req.isAuthenticated()) {
             isAuthed = true;
             userType = req.user.role;
             //req.user.role == 1 || req.user.role == 0
@@ -87,7 +102,7 @@ const homePageService = {
     
             })
     
-        }
+        }*/
     }catch(err){
         console.log(err)
     }

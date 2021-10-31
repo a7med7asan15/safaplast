@@ -243,3 +243,28 @@ seedSetting()
 app.listen(process.env.STATUS === "PROD" ? process.env.PORT : 3001, () => {
   console.log(`Server is running ${process.env.STATUS === "PROD" ? process.env.PORT : 3001}`);
 });
+
+/*
+if(process.env.STATUS === "PROD"){
+  const privateKey = fs.readFileSync('/etc/letsencrypt/live/elsafaplastelec.com/privkey.pem', 'utf8');
+  const certificate = fs.readFileSync('/etc/letsencrypt/live/elsafaplastelec.com/cert.pem', 'utf8')
+  const ca = fs.readFileSync('/etc/letsencrypt/live/elsafaplastelec.com/fullchain.pem', 'utf8')
+  const credentials = {
+    key:privateKey,  
+    cert:certificate,
+    ca:ca
+  };
+  https.createServer(credentials, app).listen(443,()=>{
+    console.log('HTTPS SERVER running on port 443')
+  })
+  http.createServer(function(req,res){
+    res.writeHead(301,{"Location":"https://"+req.headers.host+req.url})
+    res.end();
+  }).listen(80)
+
+}else if(process.env.STATUS === "DEV"){
+  app.listen(3001)
+}else{
+  app.listen(3001)
+}
+*/
