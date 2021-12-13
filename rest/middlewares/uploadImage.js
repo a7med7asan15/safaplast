@@ -1,31 +1,33 @@
 const multer = require('multer');
+const fs = require('fs')
 
 const path = require('path');
 
 
 const storage = multer.diskStorage({
-  destination: './public/images/', 
+  destination:(req, file, cb)=>{
+    cb(null, 'Images')
+  }, 
   filename: function(req, file, cb){
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); 
+    console.log(file)
+    cb(null, Date.now() + path.extname(file.originalname)); 
   }, 
 })
-// const storage = multerGoogleStorage.storageEngine({
-//   acl:"publicread"
-// })
+
 
 var upload = multer({ storage: storage }); 
 
-var deleteImage = async(image)=>{
-  var params = {
-    Bucket: process.env.asBucket,
-    Key: image
-};
-  await s3.deleteObject(params, function(err, data) {
-    if (err) return err;
-    else     return true;
-  });
+var deleteImage = 
+  fs.unlink(image_path, (err) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+  
+    //file removed
+  })
 
-}
+
 
 module.exports = {
   upload,

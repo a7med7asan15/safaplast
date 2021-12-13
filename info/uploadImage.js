@@ -1,5 +1,4 @@
 const multer = require('multer');
-var multerGoogleStorage = require("multer-google-storage");
 
 var aws = require('aws-sdk');
 var multerS3 = require('multer-s3');

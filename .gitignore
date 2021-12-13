@@ -10,3 +10,4 @@ requests/productAddQuantity.rest
 requests/productUpdateRegular.rest
 requests/productUpdateSizeQuantity.rest
 requests/productUpdateVarient.rest
+rest/Images
