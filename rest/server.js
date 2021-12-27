@@ -206,7 +206,7 @@ app.use(   '/products'   ,   productSiteController   );
 app.use(   '/blog'   ,   newsSiteController   );
 
 app.use(   '/dashboard'   ,   authController   );
-app.use(   '/dashboard/users'   ,   usersController   );
+app.use(   '/usersDB'   ,   usersController   );
 app.use(   '/dashboard/products'   ,  productController   );
 app.use(   '/dashboard/certificates'   ,   certificateController  );
 app.use(   '/dashboard/clients'   ,   clientController  );

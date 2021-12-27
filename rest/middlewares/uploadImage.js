@@ -17,21 +17,21 @@ const storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }); 
 
-var deleteImage = 
-  fs.unlink(image_path, (err) => {
-    if (err) {
-      console.error(err)
-      return
-    }
+// var deleteImage = 
+//   fs.unlink(image_path, (err) => {
+//     if (err) {
+//       console.error(err)
+//       return
+//     }
   
-    //file removed
-  })
+//     //file removed
+//   })
 
 
 
 module.exports = {
-  upload,
-  deleteImage
+  upload
+  //,deleteImage
 
 }; 
 
