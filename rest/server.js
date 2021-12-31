@@ -207,7 +207,7 @@ app.use(   '/blog'   ,   newsSiteController   );
 
 app.use(   '/dashboard'   ,   authController   );
 app.use(   '/usersDB'   ,   usersController   );
-app.use(   '/productsDB'   ,  productController   );
+app.use(   '/dashboard/products'   ,  productController   );
 app.use(   '/dashboard/certificates'   ,   certificateController  );
 app.use(   '/dashboard/clients'   ,   clientController  );
 app.use(   '/dashboard/news'   ,   newsController  );
