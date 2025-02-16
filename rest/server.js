@@ -240,8 +240,8 @@ app.get('*', function (req, res) {
 seedUser()
 seedSetting()
 
-app.listen(process.env.STATUS === "PROD" ? process.env.PORT : 3001, () => {
-  console.log(`Server is running ${process.env.STATUS === "PROD" ? process.env.PORT : 3001}`);
+app.listen(process.env.STATUS === "PROD" ? process.env.PORT : 5000, () => {
+  console.log(`Server is running ${process.env.STATUS === "PROD" ? process.env.PORT : 5000}`);
 });
 
 /*
